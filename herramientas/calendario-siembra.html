@@ -257,7 +257,7 @@
   </footer>
 
   <script src="../js/data.js"></script>
-  <script src="../js/aemet.js"></script>
+  <script src="../js/municipios.js"></script>
   <script>
     const selZona  = document.getElementById('sel-zona');
     const selPlanta = document.getElementById('sel-planta');
@@ -381,15 +381,25 @@
     });
     selPlanta.addEventListener('change', render);
 
-    /* ---- Buscador AEMET ---- */
-    const inputMunicipio  = document.getElementById('input-municipio');
-    const btnBuscar       = document.getElementById('btn-buscar');
+    /* ---- Buscador local (municipios.js) ---- */
+    const inputMunicipio   = document.getElementById('input-municipio');
+    const btnBuscar        = document.getElementById('btn-buscar');
     const listaSugerencias = document.getElementById('aemet-sugerencias');
-    const estadoEl        = document.getElementById('aemet-estado');
+    const estadoEl         = document.getElementById('aemet-estado');
+
+    function norm(s) {
+      return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    }
 
     function setEstado(msg, color) {
       estadoEl.textContent = msg;
       estadoEl.style.color = color || 'var(--texto-sec)';
+    }
+
+    function buscarLocal(q) {
+      const qn = norm(q.trim());
+      if (!qn) return [];
+      return MUNICIPIOS.filter(m => norm(m.nombre).includes(qn)).slice(0, 8);
     }
 
     function mostrarSugerencias(resultados) {
@@ -401,7 +411,7 @@
       }
       resultados.forEach(m => {
         const li = document.createElement('li');
-        li.textContent = m.nombre;
+        li.textContent = `${m.nombre} (${m.provincia}) — ${m.altitud} m`;
         li.style.cssText = 'padding:10px 14px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--borde);';
         li.addEventListener('mouseenter', () => li.style.background = 'var(--fondo)');
         li.addEventListener('mouseleave', () => li.style.background = 'white');
@@ -411,45 +421,35 @@
       listaSugerencias.style.display = 'block';
     }
 
-    async function seleccionarMunicipio(m) {
+    function seleccionarMunicipio(m) {
       listaSugerencias.style.display = 'none';
-      inputMunicipio.value = m.nombre;
-      setEstado('Detectando zona climática…', 'var(--verde)');
-      btnBuscar.disabled = true;
-      try {
-        const zona = await obtenerClimaYZona(m.id);
-        selZona.value = zona;
-        const z = ZONAS[zona];
-        document.getElementById('zona-desc').textContent = z ? z.descripcion : '';
-        setEstado(`✓ Zona detectada: ${z ? z.nombre : zona} — puedes cambiarla manualmente si lo necesitas.`, 'var(--verde)');
-        render();
-      } catch (e) {
-        setEstado('Error al obtener la zona climática. Selecciónala manualmente.', '#C2410C');
-      } finally {
-        btnBuscar.disabled = false;
+      inputMunicipio.value = `${m.nombre} (${m.provincia})`;
+      const {zonaId, label} = detectarZonaClimatica(m.altitud, m.lat, m.lon);
+      selZona.value = zonaId;
+      const z = ZONAS[zonaId];
+      document.getElementById('zona-desc').textContent = z ? z.descripcion : '';
+      setEstado(`✓ ${label} → ${z ? z.nombre : zonaId} — puedes cambiarlo manualmente.`, 'var(--verde)');
+      render();
+    }
+
+    function ejecutarBusqueda() {
+      const q = inputMunicipio.value.trim();
+      if (!q) return;
+      const res = buscarLocal(q);
+      if (res.length === 1) {
+        seleccionarMunicipio(res[0]);
+      } else {
+        mostrarSugerencias(res);
+        if (res.length) setEstado('Elige tu municipio de la lista.', 'var(--texto-sec)');
       }
     }
 
-    async function ejecutarBusqueda() {
+    /* Sugerencias automáticas al escribir 3+ caracteres */
+    inputMunicipio.addEventListener('input', () => {
       const q = inputMunicipio.value.trim();
-      if (!q) return;
-      listaSugerencias.style.display = 'none';
-      setEstado('Buscando…', 'var(--verde)');
-      btnBuscar.disabled = true;
-      try {
-        const res = await buscarMunicipio(q);
-        if (res.length === 1) {
-          await seleccionarMunicipio(res[0]);
-        } else {
-          mostrarSugerencias(res);
-          setEstado(res.length ? 'Elige tu municipio de la lista.' : '', 'var(--texto-sec)');
-        }
-      } catch (e) {
-        setEstado('Error de conexión con AEMET. Selecciona la zona manualmente.', '#C2410C');
-      } finally {
-        btnBuscar.disabled = false;
-      }
-    }
+      if (q.length >= 3) mostrarSugerencias(buscarLocal(q));
+      else listaSugerencias.style.display = 'none';
+    });
 
     btnBuscar.addEventListener('click', ejecutarBusqueda);
     inputMunicipio.addEventListener('keydown', e => { if (e.key === 'Enter') ejecutarBusqueda(); });
