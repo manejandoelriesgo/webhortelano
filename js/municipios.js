@@ -27,3 +27,72 @@ function detectarZonaClimatica(altitud, lat, lon) {
     return {zonaId:'atlantica', label:'Atlántica'};
   return {zonaId:'mediterranea', label:'Mediterránea costera'};
 }
+
+/**
+ * initBuscadorMunicipio(zoneSelectId, onZoneSet)
+ * Inicializa el buscador de municipio en la página actual.
+ * Requiere que existan en el DOM: #muni-input, #muni-btn, #muni-sugerencias, #muni-estado
+ * @param {string|null} zoneSelectId - ID del <select> de zona a rellenar automáticamente (null si no hay)
+ * @param {function|null} onZoneSet  - Callback(zonaId, label, municipio) tras seleccionar
+ */
+function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
+  var muniSeleccionado = null;
+  var input  = document.getElementById('muni-input');
+  var btn    = document.getElementById('muni-btn');
+  var lista  = document.getElementById('muni-sugerencias');
+  var estado = document.getElementById('muni-estado');
+  if (!input || !btn) return;
+
+  function setEst(msg, color) {
+    if (estado) { estado.textContent = msg; estado.style.color = color || 'var(--texto-sec)'; }
+  }
+  function nm(s) {
+    return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+  function buscar(q) {
+    var qn = nm(q.trim());
+    return qn ? MUNICIPIOS.filter(function(m){ return nm(m.nombre).includes(qn); }).slice(0,8) : [];
+  }
+  function mostrar(res) {
+    lista.innerHTML = '';
+    if (!res.length) { setEst('No se encontró ningún municipio con ese nombre.','#C2410C'); lista.style.display='none'; return; }
+    res.forEach(function(m) {
+      var li = document.createElement('li');
+      li.textContent = m.nombre + ' (' + m.provincia + ') — ' + m.altitud + ' m';
+      li.style.cssText = 'padding:10px 14px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--borde);';
+      li.addEventListener('mouseenter', function(){ li.style.background='var(--fondo)'; });
+      li.addEventListener('mouseleave', function(){ li.style.background='white'; });
+      li.addEventListener('click', function(){ sel(m); });
+      lista.appendChild(li);
+    });
+    lista.style.display = 'block';
+  }
+  function sel(m) {
+    muniSeleccionado = m;
+    lista.style.display = 'none';
+    input.value = m.nombre + ' (' + m.provincia + ')';
+    var r = detectarZonaClimatica(m.altitud, m.lat, m.lon);
+    if (zoneSelectId) {
+      var s = document.getElementById(zoneSelectId);
+      if (s) s.value = r.zonaId;
+    }
+    setEst('✓ ' + r.label + ' — puedes cambiarlo manualmente.', 'var(--verde)');
+    if (onZoneSet) onZoneSet(r.zonaId, r.label, m);
+  }
+  function ejecutar() {
+    if (muniSeleccionado) { sel(muniSeleccionado); return; }
+    var q = input.value.trim();
+    if (!q) return;
+    var res = buscar(q);
+    if (res.length === 1) { sel(res[0]); }
+    else { mostrar(res); if (res.length) setEst('Elige tu municipio de la lista.','var(--texto-sec)'); }
+  }
+  input.addEventListener('input', function() {
+    muniSeleccionado = null;
+    var q = input.value.trim();
+    if (q.length >= 3) mostrar(buscar(q)); else lista.style.display='none';
+  });
+  btn.addEventListener('click', ejecutar);
+  input.addEventListener('keydown', function(e){ if (e.key==='Enter') ejecutar(); });
+  document.addEventListener('click', function(e){ if (!e.target.closest('#muni-buscador')) lista.style.display='none'; });
+}
