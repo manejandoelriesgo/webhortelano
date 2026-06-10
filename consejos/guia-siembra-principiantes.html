@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de siembra para principiantes: tu primer huerto paso a paso — HortelanoUrbano.es</title>
+  <meta name="description" content="Guía completa de siembra para quien nunca ha plantado nada: qué necesitas, cómo elegir semillas, preparar el sustrato y sembrar con éxito desde el primer día.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hortelanourbano.es/consejos/guia-siembra-principiantes">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .article-body { max-width: 760px; margin: 0 auto; }
+    .article-body h2 { margin-top: 40px; margin-bottom: 16px; }
+    .article-body h3 { margin-top: 28px; margin-bottom: 12px; font-size: 20px; }
+    .article-body p  { font-size: 16px; line-height: 1.75; margin-bottom: 18px; }
+    .article-body ul, .article-body ol { font-size: 16px; line-height: 1.75; margin-bottom: 18px; padding-left: 24px; }
+    .article-body li { margin-bottom: 6px; }
+    .tip-box { background: var(--verde-bg); border-left: 4px solid var(--verde); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0; }
+    .tip-box p { margin: 0; font-size: 15px; }
+    .afiliado-box { background: #FFFBF0; border: 1px solid #FDE68A; border-radius: var(--radio-card); padding: 16px 20px; margin: 28px 0; }
+    .afiliado-box p { margin-bottom: 8px; font-size: 15px; }
+    .afiliado-link { display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#C2410C;border:1px solid #FCA5A5;border-radius:6px;padding:6px 14px;background:#FFF7ED;text-decoration:none; }
+    .article-img { width:100%;border-radius:var(--radio-card);margin:28px 0; object-fit:cover; max-height:400px; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="../herramientas/calendario-siembra.html">Calendario</a></li>
+          <li><a href="../herramientas/planificador-huerto.html">Planificador</a></li>
+          <li><a href="../herramientas/guia-plagas.html">Plagas</a></li>
+          <li><a href="../herramientas/guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+          <li><a href="index.html">Consejos</a></li>
+        </ul>
+      </nav>
+      <!-- Botón hamburguesa solo en móvil -->
+      <button id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"
+        style="display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:201;">
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+      </button>
+    </div>
+    <!-- Menú móvil desplegable -->
+    <div id="mobile-menu" style="display:none;position:absolute;top:60px;left:0;right:0;background:var(--blanco);border-top:1px solid var(--borde);box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:200;padding:12px 0;">
+      <ul style="list-style:none;margin:0;padding:0;">
+        <li><a href="../herramientas/calendario-siembra.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Calendario</a></li>
+        <li><a href="../herramientas/planificador-huerto.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Planificador</a></li>
+        <li><a href="../index.html#herramientas" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Herramientas</a></li>
+        <li><a href="../herramientas/guia-plagas.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Plagas</a></li>
+        <li><a href="../herramientas/guia-principiantes.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">¿Cómo empezar?</a></li>
+        <li><a href="../materiales-huerto-urbano.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Materiales</a></li>
+        <li><a href="index.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--verde);text-decoration:none;">Consejos</a></li>
+      </ul>
+    </div>
+  </header>
+  <script>
+    (function(){
+      var btn = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      function isMobile(){ return window.innerWidth < 641; }
+      function syncBtn(){ btn.style.display = isMobile() ? 'flex' : 'none'; if(!isMobile()) menu.style.display='none'; }
+      syncBtn();
+      window.addEventListener('resize', syncBtn);
+      btn.addEventListener('click', function(){
+        var open = menu.style.display === 'block';
+        menu.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', function(e){
+        if(!e.target.closest('.site-header')){ menu.style.display='none'; btn.setAttribute('aria-expanded','false'); }
+      });
+    })();
+  </script>
+
+  <div class="page-header">
+    <div class="container">
+      <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Consejos</a><span>›</span><span>Guía de siembra para principiantes</span></nav>
+      <h1>Guía de siembra para principiantes: tu primer huerto paso a paso</h1>
+      <p>Si nunca has plantado nada, este artículo es tu punto de partida. Sin tecnicismos, sin material caro.</p>
+    </div>
+  </div>
+
+  <div class="adsense-header" style="margin:0;"><div class="ad-slot">Publicidad</div></div>
+
+  <section style="padding:56px 0;">
+    <div class="container">
+      <div class="article-body">
+
+        <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&auto=format&fit=crop" alt="Manos plantando semillas en tierra para el primer huerto" class="article-img">
+
+        <p>Empezar un huerto desde cero parece complicado, pero no lo es. La mayoría de la gente fracasa en su primer intento no por falta de habilidad, sino por falta de información básica: eligen mal las semillas, usan la tierra equivocada o riegan cuando no toca. Esta guía te lo explica todo en orden, para que tu primera siembra salga bien.</p>
+
+        <h2>1. Qué necesitas para empezar (y qué no)</h2>
+        <p>Lo imprescindible para sembrar por primera vez es mucho menos de lo que imaginas:</p>
+        <ul>
+          <li><strong>Un semillero o bandeja de alvéolos:</strong> bandejas de plástico con celdas individuales donde germinan las semillas antes de ir a la maceta definitiva.</li>
+          <li><strong>Sustrato de siembra:</strong> no vale cualquier tierra. El sustrato de siembra es más fino y ligero, sin grumos, para que la raíz diminuta de la semilla pueda crecer sin obstáculos.</li>
+          <li><strong>Semillas:</strong> elige variedades fáciles para empezar (más sobre esto en el punto 2).</li>
+          <li><strong>Agua y un pulverizador:</strong> para regar sin mover las semillas del sitio.</li>
+          <li><strong>Luz:</strong> la mayoría de semillas necesitan calor y luz para germinar. Un alféizar orientado al sur es suficiente.</li>
+        </ul>
+        <p>Lo que <strong>no necesitas</strong>: herramientas caras, invernadero, abonos especiales ni conocimientos previos. Con lo de arriba tienes suficiente para empezar.</p>
+
+        <div class="afiliado-box">
+          <p>💡 <strong>Kit de semillero recomendado:</strong> las bandejas de alvéolos de 40 o 60 celdas son perfectas para empezar. Algunas vienen con tapa de plástico que crea un microclima cálido y acelera la germinación.</p>
+          <a href="https://www.amazon.es/s?k=bandeja+semillero+alveolos+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="afiliado-link">Ver semilleros en Amazon →</a>
+        </div>
+
+        <h2>2. Cómo elegir las semillas: las más fáciles para principiantes</h2>
+        <p>No todas las plantas se siembran igual ni tienen el mismo nivel de dificultad. Para tu primera vez, elige plantas con alta tasa de germinación y pocas exigencias:</p>
+        <ul>
+          <li><strong>Rábanos:</strong> germinan en 3-5 días y se cosechan en 3-4 semanas. Son el cultivo más rápido que existe.</li>
+          <li><strong>Lechuga:</strong> muy fácil, resiste bien en maceta, no necesita mucho sol directo.</li>
+          <li><strong>Albahaca:</strong> aromática que crece rápido y se puede sembrar en interior.</li>
+          <li><strong>Judías verdes:</strong> germinan en pocos días y producen mucho en poco espacio.</li>
+          <li><strong>Tomate cherry:</strong> algo más lento, pero muy agradecido. Ver nuestra <a href="tomates-en-balcon.html" style="color:var(--verde);font-weight:600;">guía completa de tomates en balcón</a>.</li>
+        </ul>
+        <p>Evita para empezar: zanahorias (germinación lenta e irregular), melones y sandías (necesitan mucho espacio y calor), y alcachofas (plantas perennes que tardan meses en producir).</p>
+
+        <h2>3. Cómo preparar el sustrato de siembra</h2>
+        <p>El sustrato de siembra debe ser ligero, suelto y húmedo, pero no encharcado. Sigue estos pasos:</p>
+        <ol>
+          <li>Llena los alvéolos del semillero con sustrato de siembra, sin apretarlo demasiado.</li>
+          <li>Humedece el sustrato con el pulverizador antes de sembrar, hasta que esté uniformemente húmedo pero sin que gotee.</li>
+          <li>Haz un pequeño agujero en el centro de cada alveolo con el dedo o un lápiz. La profundidad depende del tamaño de la semilla: como norma general, entiérrala a una profundidad de 2-3 veces su diámetro.</li>
+          <li>Coloca 1-2 semillas por alveolo. Si germinan las dos, elimina la más débil cuando tengan 2-3 cm.</li>
+          <li>Cubre con una fina capa de sustrato y vuelve a pulverizar.</li>
+        </ol>
+
+        <div class="tip-box">
+          <p>🌱 <strong>Truco de germinación:</strong> cubre el semillero con una bolsa de plástico transparente o una tapa hasta que aparezcan los primeros brotes. Crea un ambiente cálido y húmedo que acelera la germinación. En cuanto salgan los primeros tallitos, retira la cubierta.</p>
+        </div>
+
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&auto=format&fit=crop" alt="Semillero con plántulas recién germinadas" class="article-img">
+
+        <h2>4. Cuándo y cómo sembrar según la época</h2>
+        <p>El principal error de los principiantes es sembrar en el momento equivocado. Cada planta tiene su época óptima de siembra, que depende de la temperatura y de tu zona climática.</p>
+        <p>Como regla general para España:</p>
+        <ul>
+          <li><strong>Primavera (marzo-mayo):</strong> época ideal para tomates, pimientos, pepinos, albahaca y la mayoría de cultivos de verano.</li>
+          <li><strong>Verano (junio-julio):</strong> siembra de judías, calabacines y algunas lechugas de verano.</li>
+          <li><strong>Otoño (agosto-octubre):</strong> perfecta para lechugas, espinacas, acelgas y rábanos.</li>
+          <li><strong>Invierno (noviembre-febrero):</strong> solo en interior o zonas muy cálidas (Canarias, costa sur).</li>
+        </ul>
+        <p>Para conocer las fechas exactas de tu zona climática, usa el <a href="../herramientas/calendario-siembra.html" style="color:var(--verde);font-weight:600;">Calendario de siembra de HortelanoUrbano.es</a>.</p>
+
+        <h2>5. Los primeros cuidados tras la siembra</h2>
+        <p>Una vez sembrado, el trabajo es sencillo pero constante:</p>
+        <ul>
+          <li><strong>Riego:</strong> mantén el sustrato húmedo pero nunca encharcado. Usa el pulverizador hasta que las plántulas tengan 5-6 cm. Después puedes usar una regadera con alcachofa fina.</li>
+          <li><strong>Luz:</strong> coloca el semillero donde reciba al menos 4-6 horas de luz al día. Si el tallo crece muy fino y estirado hacia la ventana, es señal de que necesita más luz.</li>
+          <li><strong>Temperatura:</strong> la mayoría de semillas germinan mejor entre 18-24°C. Evita corrientes de aire frío.</li>
+          <li><strong>Trasplante:</strong> cuando las plántulas tengan 2-3 pares de hojas verdaderas (no los cotiledones iniciales), están listas para trasplantarse a la maceta definitiva.</li>
+        </ul>
+
+        <h2>6. Del semillero a la maceta: el trasplante</h2>
+        <p>El trasplante es el momento más delicado. Hazlo con cuidado para no dañar las raíces:</p>
+        <ol>
+          <li>Riega el semillero unas horas antes para que el sustrato esté húmedo y la plántula salga fácil.</li>
+          <li>Sujeta la plántula por las hojas, nunca por el tallo (si se rompe una hoja, no pasa nada; si se rompe el tallo, la planta muere).</li>
+          <li>Haz un agujero en la maceta de destino, introduce la plántula y aprieta el sustrato alrededor para que no queden bolsas de aire.</li>
+          <li>Riega bien después del trasplante y coloca la maceta a la sombra 1-2 días para que la planta se adapte sin estrés por calor.</li>
+        </ol>
+
+        <div class="tip-box">
+          <p>🌱 <strong>Consejo final:</strong> no te desanimes si algo no germina o una planta se muere. Ocurre, incluso a los hortelanos con años de experiencia. Lo importante es observar qué pasó (¿demasiado riego? ¿poco sol? ¿temperatura baja?) y ajustarlo la próxima vez. Cada temporada se aprende algo nuevo.</p>
+        </div>
+
+        <p style="margin-top:40px;padding-top:24px;border-top:1px solid var(--borde);font-size:14px;color:var(--texto-sec);">
+          ← <a href="index.html" style="color:var(--verde);">Volver a Consejos</a> &nbsp;|&nbsp;
+          Herramientas relacionadas: <a href="../herramientas/calendario-siembra.html" style="color:var(--verde);">Calendario de siembra</a> · <a href="../herramientas/planificador-huerto.html" style="color:var(--verde);">Planificador de huerto</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">HortelanoUrbano.es</a>
+          <p>Herramientas gratuitas para huerto urbano en España.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul>
+            <li><a href="../herramientas/calendario-siembra.html">Calendario de siembra</a></li>
+            <li><a href="../herramientas/planificador-huerto.html">Planificador de huerto</a></li>
+            <li><a href="../herramientas/calculadora-riego.html">Calculadora de riego</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Información</h4>
+          <ul>
+            <li><a href="../aviso-legal.html">Aviso legal</a></li>
+            <li><a href="../privacidad.html">Privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 HortelanoUrbano.es</span><span>Hecho en España</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huerto urbano en un piso: cómo cultivar sin jardín ni terraza — HortelanoUrbano.es</title>
+  <meta name="description" content="Cultivar en casa sin balcón ni terraza es posible. Descubre cómo montar un huerto de interior en tu piso: luz, plantas, riego y los mejores kits para empezar.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hortelanourbano.es/consejos/huerto-urbano-en-piso">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .article-body { max-width: 760px; margin: 0 auto; }
+    .article-body h2 { margin-top: 40px; margin-bottom: 16px; }
+    .article-body h3 { margin-top: 28px; margin-bottom: 12px; font-size: 20px; }
+    .article-body p  { font-size: 16px; line-height: 1.75; margin-bottom: 18px; }
+    .article-body ul, .article-body ol { font-size: 16px; line-height: 1.75; margin-bottom: 18px; padding-left: 24px; }
+    .article-body li { margin-bottom: 6px; }
+    .tip-box { background: var(--verde-bg); border-left: 4px solid var(--verde); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0; }
+    .tip-box p { margin: 0; font-size: 15px; }
+    .afiliado-box { background: #FFFBF0; border: 1px solid #FDE68A; border-radius: var(--radio-card); padding: 16px 20px; margin: 28px 0; }
+    .afiliado-box p { margin-bottom: 8px; font-size: 15px; }
+    .afiliado-link { display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#C2410C;border:1px solid #FCA5A5;border-radius:6px;padding:6px 14px;background:#FFF7ED;text-decoration:none; }
+    .article-img { width:100%;border-radius:var(--radio-card);margin:28px 0; object-fit:cover; max-height:400px; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="../herramientas/calendario-siembra.html">Calendario</a></li>
+          <li><a href="../herramientas/planificador-huerto.html">Planificador</a></li>
+          <li><a href="../herramientas/guia-plagas.html">Plagas</a></li>
+          <li><a href="../herramientas/guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+          <li><a href="index.html">Consejos</a></li>
+        </ul>
+      </nav>
+      <!-- Botón hamburguesa solo en móvil -->
+      <button id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"
+        style="display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:201;">
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+      </button>
+    </div>
+    <!-- Menú móvil desplegable -->
+    <div id="mobile-menu" style="display:none;position:absolute;top:60px;left:0;right:0;background:var(--blanco);border-top:1px solid var(--borde);box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:200;padding:12px 0;">
+      <ul style="list-style:none;margin:0;padding:0;">
+        <li><a href="../herramientas/calendario-siembra.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Calendario</a></li>
+        <li><a href="../herramientas/planificador-huerto.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Planificador</a></li>
+        <li><a href="../index.html#herramientas" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Herramientas</a></li>
+        <li><a href="../herramientas/guia-plagas.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Plagas</a></li>
+        <li><a href="../herramientas/guia-principiantes.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">¿Cómo empezar?</a></li>
+        <li><a href="../materiales-huerto-urbano.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Materiales</a></li>
+        <li><a href="index.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--verde);text-decoration:none;">Consejos</a></li>
+      </ul>
+    </div>
+  </header>
+  <script>
+    (function(){
+      var btn = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      function isMobile(){ return window.innerWidth < 641; }
+      function syncBtn(){ btn.style.display = isMobile() ? 'flex' : 'none'; if(!isMobile()) menu.style.display='none'; }
+      syncBtn();
+      window.addEventListener('resize', syncBtn);
+      btn.addEventListener('click', function(){
+        var open = menu.style.display === 'block';
+        menu.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', function(e){
+        if(!e.target.closest('.site-header')){ menu.style.display='none'; btn.setAttribute('aria-expanded','false'); }
+      });
+    })();
+  </script>
+
+  <div class="page-header">
+    <div class="container">
+      <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Consejos</a><span>›</span><span>Huerto urbano en un piso</span></nav>
+      <h1>Huerto urbano en un piso: cómo cultivar sin jardín ni terraza</h1>
+      <p>No tener balcón no es excusa. Con un alféizar, algo de luz y las plantas correctas, puedes cultivar en casa.</p>
+    </div>
+  </div>
+
+  <div class="adsense-header" style="margin:0;"><div class="ad-slot">Publicidad</div></div>
+
+  <section style="padding:56px 0;">
+    <div class="container">
+      <div class="article-body">
+
+        <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&auto=format&fit=crop" alt="Plantas de huerto urbano creciendo en macetas dentro de un piso" class="article-img">
+
+        <p>Vivir en un piso sin balcón ni terraza parece el final del sueño del huerto. Pero no lo es. Cada año más personas cultivan aromáticas, lechugas, germinados y hasta fresas en la encimera de la cocina, en el alféizar de la ventana o bajo luces de cultivo en el salón. La clave está en adaptar las expectativas y elegir las plantas correctas.</p>
+
+        <h2>1. Aprovecha al máximo la luz natural</h2>
+        <p>La luz es el recurso más escaso en un piso. Antes de comprar nada, evalúa qué ventanas tienes y cuántas horas de sol directo reciben al día:</p>
+        <ul>
+          <li><strong>Ventana sur o suroeste con 4-6 horas de sol:</strong> la mejor opción. Puedes cultivar tomates cherry, pimientos pequeños, albahaca, fresas y lechugas.</li>
+          <li><strong>Ventana este u oeste con 2-4 horas de sol:</strong> suficiente para aromáticas (menta, perejil, cebollino), lechugas y espinacas.</li>
+          <li><strong>Ventana norte o sin sol directo:</strong> solo germinados, microvegetales y algunas plantas de sombra como la menta.</li>
+        </ul>
+        <p>Coloca las macetas lo más cerca posible del cristal. A 30 cm de una ventana, la intensidad de luz cae drásticamente respecto a estar pegado al vidrio.</p>
+
+        <h2>2. Iluminación artificial: cuándo y cómo usarla</h2>
+        <p>Si tu piso tiene poca luz natural, las <strong>luces de cultivo LED</strong> son la solución. Los modelos modernos consumen muy poca electricidad (10-20W) y pueden mantenerse encendidos 14-16 horas al día sin apenas coste.</p>
+        <p>No necesitas nada sofisticado. Un panel LED de espectro completo colocado a 20-30 cm de las plantas es suficiente para cultivar aromáticas, lechugas y germinados durante todo el año, independientemente de la orientación de tu piso.</p>
+
+        <div class="afiliado-box">
+          <p>💡 <strong>Kit de huerto interior recomendado:</strong> los kits de huerto interior incluyen la bandeja, el sustrato, las semillas y la lámpara LED en un solo pack. Perfectos para empezar sin tener que comprar cada cosa por separado.</p>
+          <a href="https://www.amazon.es/s?k=kit+huerto+interior+led+semillas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="afiliado-link">Ver kits de huerto interior en Amazon →</a>
+        </div>
+
+        <h2>3. Qué plantas funcionan mejor en interior</h2>
+        <p>No todas las plantas son aptas para interior. Estas son las que mejor se adaptan a las condiciones de un piso:</p>
+
+        <h3>Aromáticas (las más fáciles)</h3>
+        <ul>
+          <li><strong>Albahaca:</strong> crece bien en interior con buena luz. Úsala fresca en ensaladas y pizzas.</li>
+          <li><strong>Menta y hierbabuena:</strong> son agresivas, ponlas en maceta individual. Se extienden mucho si van con otras plantas.</li>
+          <li><strong>Perejil:</strong> lento para germinar, pero muy resistente una vez establecido.</li>
+          <li><strong>Cebollino:</strong> ideal para alféizar. Crece rápido y se corta y vuelve a crecer.</li>
+        </ul>
+
+        <h3>Hortalizas para interior</h3>
+        <ul>
+          <li><strong>Lechugas de hoja suelta:</strong> no necesitan tanto sol como las lechugas de cogollo. Cosecha hoja a hoja y siguen creciendo.</li>
+          <li><strong>Espinacas y rúcula:</strong> prefieren temperaturas frescas, ideales para otoño e invierno en interior.</li>
+          <li><strong>Rábanos:</strong> los más rápidos. En 3-4 semanas tienes cosecha aunque la luz sea escasa.</li>
+          <li><strong>Tomate cherry en maceta con luz LED:</strong> posible, pero necesita al menos 8-10 horas de luz intensa. Requiere más dedicación.</li>
+        </ul>
+
+        <h3>Germinados y microvegetales</h3>
+        <p>Los <strong>germinados</strong> (lentejas, alfalfa, rábano, girasol) son la opción perfecta si tienes muy poca luz. Solo necesitan agua, un bote o bandeja de germinación y humedad. En 4-7 días tienes alimento fresco rico en nutrientes, sin maceta ni sustrato.</p>
+
+        <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&auto=format&fit=crop" alt="Plantas aromáticas creciendo en el alféizar de una ventana" class="article-img">
+
+        <h2>4. Macetas y contenedores para interior</h2>
+        <p>En interior, el tamaño de la maceta importa menos que el drenaje. El mayor problema en casa es el exceso de riego: la tierra se queda húmeda mucho más tiempo que en el exterior y la raíz se pudre fácilmente.</p>
+        <ul>
+          <li>Usa siempre macetas <strong>con agujeros de drenaje</strong> y un plato debajo para recoger el agua sobrante. Vacía el plato 30 minutos después de regar.</li>
+          <li>Para aromáticas en alféizar, las jardineras alargadas aprovechan bien el espacio y permiten tener 3-4 plantas en fila.</li>
+          <li>Para lechugas, una maceta de 20-25 cm de diámetro y 15 cm de profundidad es suficiente para 2-3 plantas.</li>
+        </ul>
+
+        <h2>5. Riego en interior: menos es más</h2>
+        <p>El error número uno en el huerto de interior es regar en exceso. Sin el viento ni el sol directo del exterior, el sustrato tarda el doble en secarse. Antes de regar, introduce el dedo 2 cm en la tierra: si está fresca o húmeda, no riegues. Si está seca, es el momento.</p>
+        <p>Una regadera pequeña de cuello largo te permite regar directamente a la base de las plantas sin mojar las hojas, lo que previene hongos y manchas en el sustrato.</p>
+
+        <div class="tip-box">
+          <p>🌱 <strong>Consejo final:</strong> empieza con 2-3 aromáticas en el alféizar más soleado de tu casa. Son baratas, útiles en la cocina y casi imposibles de matar. Una vez cojas confianza, amplía con lechugas y, si tienes buena luz, con tomates cherry bajo lámpara. El huerto de interior es más pequeño que el de balcón, pero tiene una ventaja enorme: puedes cultivar los 12 meses del año.</p>
+        </div>
+
+        <p style="margin-top:40px;padding-top:24px;border-top:1px solid var(--borde);font-size:14px;color:var(--texto-sec);">
+          ← <a href="index.html" style="color:var(--verde);">Volver a Consejos</a> &nbsp;|&nbsp;
+          Herramientas relacionadas: <a href="../herramientas/calculadora-riego.html" style="color:var(--verde);">Calculadora de riego</a> · <a href="../herramientas/guia-plagas.html" style="color:var(--verde);">Guía de plagas</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">HortelanoUrbano.es</a>
+          <p>Herramientas gratuitas para huerto urbano en España.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul>
+            <li><a href="../herramientas/calendario-siembra.html">Calendario de siembra</a></li>
+            <li><a href="../herramientas/planificador-huerto.html">Planificador de huerto</a></li>
+            <li><a href="../herramientas/calculadora-riego.html">Calculadora de riego</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Información</h4>
+          <ul>
+            <li><a href="../aviso-legal.html">Aviso legal</a></li>
+            <li><a href="../privacidad.html">Privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 HortelanoUrbano.es</span><span>Hecho en España</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
