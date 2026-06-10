@@ -40,8 +40,43 @@
           <li><a href="materiales-huerto-urbano.html">Materiales</a></li>
         </ul>
       </nav>
+      <!-- Botón hamburguesa solo en móvil -->
+      <button id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"
+        style="display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:201;">
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+        <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
+      </button>
+    </div>
+    <!-- Menú móvil desplegable -->
+    <div id="mobile-menu" style="display:none;position:absolute;top:60px;left:0;right:0;background:var(--blanco);border-top:1px solid var(--borde);box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:200;padding:12px 0;">
+      <ul style="list-style:none;margin:0;padding:0;">
+        <li><a href="herramientas/calendario-siembra.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Calendario</a></li>
+        <li><a href="herramientas/planificador-huerto.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Planificador</a></li>
+        <li><a href="herramientas/guia-plagas.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Plagas</a></li>
+        <li><a href="herramientas/guia-principiantes.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">¿Cómo empezar?</a></li>
+        <li><a href="materiales-huerto-urbano.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Materiales</a></li>
+      </ul>
     </div>
   </header>
+  <script>
+    (function(){
+      var btn = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      function isMobile(){ return window.innerWidth < 641; }
+      function syncBtn(){ btn.style.display = isMobile() ? 'flex' : 'none'; if(!isMobile()) menu.style.display='none'; }
+      syncBtn();
+      window.addEventListener('resize', syncBtn);
+      btn.addEventListener('click', function(){
+        var open = menu.style.display === 'block';
+        menu.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', function(e){
+        if(!e.target.closest('.site-header')){ menu.style.display='none'; btn.setAttribute('aria-expanded','false'); }
+      });
+    })();
+  </script>
 
   <!-- ========== HERO ========== -->
   <section class="hero" style="padding:80px 0 72px;position:relative;overflow:hidden;">

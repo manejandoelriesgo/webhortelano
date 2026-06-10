@@ -138,7 +138,7 @@
 
         <!-- Buscador de municipio AEMET -->
         <div id="aemet-buscador" style="background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:var(--radio-card);padding:20px 24px;margin-bottom:24px;">
-          <p style="font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">📍 Detectar zona por municipio (AEMET)</p>
+          <p style="font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">📍 Detectar zona por municipio</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <input id="input-municipio" type="text" placeholder="Escribe tu municipio…"
               style="flex:1;min-width:180px;padding:10px 14px;border:1px solid #B7E4C7;border-radius:var(--radio-btn);font-size:14px;font-family:inherit;background:white;color:var(--texto);outline:none;"
@@ -267,7 +267,7 @@
     Object.entries(ZONAS).forEach(([id, z]) => {
       const opt = document.createElement('option');
       opt.value = id;
-      opt.textContent = z.label || z.nombre;
+      opt.textContent = z.nombre;
       selZona.appendChild(opt);
     });
 
@@ -386,6 +386,7 @@
     const btnBuscar        = document.getElementById('btn-buscar');
     const listaSugerencias = document.getElementById('aemet-sugerencias');
     const estadoEl         = document.getElementById('aemet-estado');
+    let municipioSeleccionado = null;
 
     function norm(s) {
       return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -422,6 +423,7 @@
     }
 
     function seleccionarMunicipio(m) {
+      municipioSeleccionado = m;
       listaSugerencias.style.display = 'none';
       inputMunicipio.value = `${m.nombre} (${m.provincia})`;
       const {zonaId, label} = detectarZonaClimatica(m.altitud, m.lat, m.lon);
@@ -433,6 +435,10 @@
     }
 
     function ejecutarBusqueda() {
+      if (municipioSeleccionado) {
+        seleccionarMunicipio(municipioSeleccionado);
+        return;
+      }
       const q = inputMunicipio.value.trim();
       if (!q) return;
       const res = buscarLocal(q);
@@ -446,6 +452,7 @@
 
     /* Sugerencias automáticas al escribir 3+ caracteres */
     inputMunicipio.addEventListener('input', () => {
+      municipioSeleccionado = null;
       const q = inputMunicipio.value.trim();
       if (q.length >= 3) mostrarSugerencias(buscarLocal(q));
       else listaSugerencias.style.display = 'none';
