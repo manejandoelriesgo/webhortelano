@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compatibilidad de plantas en el huerto — HortelanoUrbano.es</title>
+  <meta name="description" content="Descubre qué plantas se llevan bien y cuáles no deben estar juntas en tu huerto. Explicación del por qué para cada combinación. Gratis y sin registro.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hortelanourbano.es/compatibilidad-plantas-huerto">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Compatibilidad de plantas en el huerto",
+    "url": "https://hortelanourbano.es/compatibilidad-plantas-huerto",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Herramienta gratuita que muestra las plantas compañeras y las incompatibles para cada cultivo",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .compat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+    @media (max-width: 640px) { .compat-grid { grid-template-columns: 1fr; } }
+
+    .compat-block { border-radius: var(--radio-card); padding: 20px; }
+    .compat-block.buenas { background: #F0FDF4; border: 1px solid #86EFAC; }
+    .compat-block.malas  { background: #FFF1F2; border: 1px solid #FECDD3; }
+
+    .compat-block h4 {
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .04em; margin-bottom: 16px;
+    }
+    .compat-block.buenas h4 { color: #15803D; }
+    .compat-block.malas  h4 { color: #BE123C; }
+
+    .compat-item {
+      display: flex; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .compat-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .compat-item-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0;
+    }
+    .buenas .compat-item-icon { background: #DCFCE7; color: #15803D; }
+    .malas  .compat-item-icon { background: #FFE4E6; color: #BE123C; }
+
+    .compat-item-text h5 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .compat-item-text p  { font-size: 13px; color: var(--texto-sec); margin: 0; line-height: 1.4; }
+
+    .plant-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+    .plant-tab {
+      padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      border: 2px solid var(--borde); background: white; cursor: pointer; transition: all .15s;
+    }
+    .plant-tab.active { border-color: var(--verde); background: var(--verde-bg); color: var(--verde); }
+    .plant-tab:hover  { border-color: var(--verde-claro); }
+
+    .cat-header {
+      font-size: 12px; font-weight: 700; color: var(--texto-sec);
+      text-transform: uppercase; letter-spacing: .05em; margin: 20px 0 8px;
+    }
+    .cat-header:first-child { margin-top: 0; }
+
+    .plant-info-bar {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px; background: var(--fondo);
+      border-radius: var(--radio-card); margin-bottom: 8px; flex-wrap: wrap;
+    }
+    .plant-info-bar h3 { margin: 0; }
+
+    .dif-badge { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    .dif-facil   { background: #DCFCE7; color: #15803D; }
+    .dif-media   { background: #FEF9C3; color: #92400E; }
+    .dif-dificil { background: #FFE4E6; color: #BE123C; }
+
+    .no-datos { text-align: center; padding: 24px; color: var(--texto-sec); font-size: 14px; }
+
+    .view-tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .view-tab { padding:8px 20px; border-radius:20px; font-size:14px; font-weight:600; border:2px solid var(--borde); background:white; cursor:pointer; }
+    .view-tab.active { border-color:var(--verde); background:var(--verde-bg); color:var(--verde); }
+
+    .cmp-table { width:100%; border-collapse:collapse; margin-top:20px; font-size:14px; }
+    .cmp-table th { background:var(--fondo); padding:10px 14px; text-align:left; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--texto-sec); }
+    .cmp-table td { padding:12px 14px; border-bottom:1px solid var(--borde); vertical-align:top; }
+    .cmp-table tr:last-child td { border-bottom:none; }
+    .cmp-winner { color:var(--verde); font-weight:700; }
+    .cmp-badge-yes { background:#DCFCE7; color:#15803D; font-weight:700; padding:2px 8px; border-radius:12px; font-size:12px; }
+    .cmp-badge-no  { background:#FFE4E6; color:#BE123C; font-weight:700; padding:2px 8px; border-radius:12px; font-size:12px; }
+    .cmp-badge-neutral { background:#F3F4F6; color:#6B7280; font-weight:700; padding:2px 8px; border-radius:12px; font-size:12px; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué plantas no se pueden plantar juntas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las incompatibilidades más importantes en el huerto urbano: tomate y berenjena juntos atraen las mismas plagas y se contagian enfermedades. Cebolla y ajo inhiben el crecimiento de judías y guisantes. El hinojo es alelopático y perjudica a casi todas las plantas cercanas. Pimiento y berenjena comparten plagas y no deben compartir maceta."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿El tomate y el pimiento se pueden plantar juntos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No es recomendable. Ambos son solanáceas y comparten las mismas plagas (pulgón, araña roja, escarabajo de Colorado) y enfermedades (mildiu, oídio). Si una planta se infecta, la contigua será la siguiente. Es mejor separarlos o, si no tienes más espacio, monitorizar con más frecuencia y actuar rápido ante el primer síntoma."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la alelopatía?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Es la capacidad de algunas plantas de liberar sustancias que afectan al crecimiento de otras, de forma positiva o negativa. Por ejemplo, el ajo libera compuestos que inhiben hongos beneficiando al tomate, mientras el hinojo libera sustancias que frenan el crecimiento de casi todo a su alrededor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué la albahaca va tan bien con el tomate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La albahaca libera aceites esenciales que repelen mosca blanca, pulgones y algunas mariposas que atacan el tomate. Además, algunas investigaciones sugieren que puede mejorar el sabor de los tomates cercanos, aunque esto último es más difícil de demostrar científicamente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué no debo plantar tomate con berenjena?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Son de la misma familia botánica (solanáceas) y comparten exactamente las mismas plagas y enfermedades. En un espacio pequeño, plantarlas juntas es como poner todos los huevos en la misma cesta: si llega una plaga, afecta a ambas al mismo tiempo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Y los alliums (ajo, cebolla, puerro) con las leguminosas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los alliums liberan sustancias que inhiben la bacteria Rhizobium, responsable de que las leguminosas (judías, guisantes) fijen nitrógeno del aire. Sin esta bacteria, las leguminosas pierden su principal ventaja y crecen peor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Tengo que respetar estrictamente estas incompatibilidades?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En huertos grandes, basta con dejar 50-100 cm entre plantas incompatibles. En macetas y balcones pequeños, sí es importante respetarlas porque el espacio y el sustrato son compartidos de forma muy directa."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="calendario-siembra.html">Calendario</a></li>
+          <li><a href="planificador-huerto.html">Planificador</a></li>
+          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  
+
+  <div class="page-header">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="../index.html">Inicio</a>
+        <span>›</span>
+        <span>Compatibilidad de plantas</span>
+      </nav>
+      <h1>Compatibilidad y comparador de plantas</h1>
+      <p>Descubre qué plantas se llevan bien, cuáles no deben estar juntas, y compara dos plantas para saber cuál es mejor para tu espacio.</p>
+    </div>
+  </div>
+  <div class="adsense-header" style="margin:0;">
+    <div class="ad-slot">Publicidad</div>
+  </div>
+
+
+  <section style="padding:48px 0;">
+    <div class="container">
+      <div class="tool-wrapper">
+
+        <!-- Modo -->
+        <div class="view-tabs" style="margin-bottom:28px;">
+          <button class="view-tab active" onclick="setModo('compat',this)">Compatibilidad por planta</button>
+          <button class="view-tab" onclick="setModo('comparar',this)">Comparar dos plantas</button>
+        </div>
+
+        <!-- MODO COMPATIBILIDAD -->
+        <div id="modo-compat">
+          <div class="cat-header">Hortalizas</div>
+          <div class="plant-tabs" id="tabs-hortaliza"></div>
+          <div class="cat-header">Frutas</div>
+          <div class="plant-tabs" id="tabs-fruta"></div>
+          <div class="cat-header">Aromáticas</div>
+          <div class="plant-tabs" id="tabs-aromatica"></div>
+          <div id="resultado-compat" style="margin-top:28px;"></div>
+        </div>
+
+        <!-- MODO COMPARAR -->
+        <div id="modo-comparar" style="display:none;">
+          <p style="font-size:14px;color:var(--texto-sec);margin-bottom:20px;">Selecciona dos plantas para ver cuál encaja mejor en tu espacio, su compatibilidad entre ellas y qué necesitan para cultivarse juntas.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cmp-a">Primera planta</label>
+              <select id="cmp-a" onchange="renderComparador()"><option value="">Selecciona planta A...</option></select>
+            </div>
+            <div class="form-group">
+              <label for="cmp-b">Segunda planta</label>
+              <select id="cmp-b" onchange="renderComparador()"><option value="">Selecciona planta B...</option></select>
+            </div>
+          </div>
+          <div id="resultado-comparar" style="margin-top:24px;"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="adsense-mid container">
+    <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;text-align:center;">Publicidad — AdSense 728×90</div>
+  </div>
+
+  <section style="background:white;padding:64px 0;">
+    <div class="container" style="max-width:800px;">
+      <h2 style="margin-bottom:8px;">¿Qué es la asociación de plantas?</h2>
+      <p style="color:var(--texto-sec);">Por qué importa plantar las plantas correctas juntas.</p>
+      <div class="faq-list mt-24">
+        <div class="faq-item">
+          <h4>¿Qué plantas no se pueden plantar juntas?</h4>
+          <p>Las incompatibilidades más importantes en el huerto urbano: tomate y berenjena juntos atraen las mismas plagas y se contagian enfermedades. Cebolla y ajo inhiben el crecimiento de judías y guisantes. El hinojo es alelopático y perjudica a casi todas las plantas cercanas. Pimiento y berenjena comparten plagas y no deben compartir maceta.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿El tomate y el pimiento se pueden plantar juntos?</h4>
+          <p>No es recomendable. Ambos son solanáceas y comparten las mismas plagas (pulgón, araña roja, escarabajo de Colorado) y enfermedades (mildiu, oídio). Si una planta se infecta, la contigua será la siguiente. Es mejor separarlos o, si no tienes más espacio, monitorizar con más frecuencia y actuar rápido ante el primer síntoma.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>¿Qué es la alelopatía?</h4>
+          <p>Es la capacidad de algunas plantas de liberar sustancias que afectan al crecimiento de otras, de forma positiva o negativa. Por ejemplo, el ajo libera compuestos que inhiben hongos beneficiando al tomate, mientras el hinojo libera sustancias que frenan el crecimiento de casi todo a su alrededor.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Por qué la albahaca va tan bien con el tomate?</h4>
+          <p>La albahaca libera aceites esenciales que repelen mosca blanca, pulgones y algunas mariposas que atacan el tomate. Además, algunas investigaciones sugieren que puede mejorar el sabor de los tomates cercanos, aunque esto último es más difícil de demostrar científicamente.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Por qué no debo plantar tomate con berenjena?</h4>
+          <p>Son de la misma familia botánica (solanáceas) y comparten exactamente las mismas plagas y enfermedades. En un espacio pequeño, plantarlas juntas es como poner todos los huevos en la misma cesta: si llega una plaga, afecta a ambas al mismo tiempo.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Y los alliums (ajo, cebolla, puerro) con las leguminosas?</h4>
+          <p>Los alliums liberan sustancias que inhiben la bacteria Rhizobium, responsable de que las leguminosas (judías, guisantes) fijen nitrógeno del aire. Sin esta bacteria, las leguminosas pierden su principal ventaja y crecen peor.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Tengo que respetar estrictamente estas incompatibilidades?</h4>
+          <p>En huertos grandes, basta con dejar 50-100 cm entre plantas incompatibles. En macetas y balcones pequeños, sí es importante respetarlas porque el espacio y el sustrato son compartidos de forma muy directa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">HortelanoUrbano.es</a>
+          <p>Herramientas gratuitas para huerto urbano en España.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Herramientas</h4>
+          <ul>
+            <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
+            <li><a href="planificador-huerto.html">Planificador de huerto</a></li>
+            <li><a href="compatibilidad-plantas.html">Compatibilidad</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Información</h4>
+          <ul>
+            <li><a href="../aviso-legal.html">Aviso legal</a></li>
+            <li><a href="../privacidad.html">Privacidad</a></li>
+            <li><a href="../contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 HortelanoUrbano.es</span>
+        <span>Hecho en España</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/compatibilidad.js"></script>
+  <script>
+    function buildTabs(cat, containerId) {
+      const container = document.getElementById(containerId);
+      getPlantasPorCategoria(cat).forEach(([id]) => {
+        const p = PLANTAS[id];
+        const btn = document.createElement('button');
+        btn.className = 'plant-tab';
+        btn.textContent = p.nombre;
+        btn.dataset.id = id;
+        btn.onclick = () => seleccionarPlanta(id, btn);
+        container.appendChild(btn);
+      });
+    }
+    buildTabs('hortaliza', 'tabs-hortaliza');
+    buildTabs('fruta',     'tabs-fruta');
+    buildTabs('aromatica', 'tabs-aromatica');
+
+    function seleccionarPlanta(id, btn) {
+      document.querySelectorAll('.plant-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderCompat(id);
+    }
+
+    function renderCompat(id) {
+      const planta = PLANTAS[id];
+      const compat  = COMPATIBILIDAD[id];
+      const out     = document.getElementById('resultado-compat');
+      const difLabel = { facil:'Fácil', media:'Media', dificil:'Difícil' };
+
+      if (!compat) {
+        out.innerHTML = `<div class="no-datos">Sin datos de compatibilidad para esta planta todavía.</div>`;
+        return;
+      }
+
+      const renderItems = lista => {
+        if (!lista || lista.length === 0) return `<div class="no-datos" style="padding:16px 0;font-size:13px;">No hay incompatibilidades conocidas</div>`;
+        return lista.map(item => {
+          const p2 = PLANTAS[item.id];
+          return `<div class="compat-item">
+            <div class="compat-item-icon">${p2 ? p2.nombre.substring(0,2).toUpperCase() : '??'}</div>
+            <div class="compat-item-text">
+              <h5>${p2 ? p2.nombre : item.id}</h5>
+              <p>${item.razon}</p>
+            </div>
+          </div>`;
+        }).join('');
+      };
+
+      out.innerHTML = `
+        <div class="plant-info-bar">
+          <h3>${planta.nombre}</h3>
+          <span class="dif-badge dif-${planta.dificultad}">${difLabel[planta.dificultad]}</span>
+          <span style="font-size:13px;color:var(--texto-sec);">${planta.descripcion}</span>
+        </div>
+
+        <div class="compat-grid">
+          <div class="compat-block buenas">
+            <h4>Buenas compañeras (${compat.buenas?.length || 0})</h4>
+            ${renderItems(compat.buenas)}
+          </div>
+          <div class="compat-block malas">
+            <h4>Plantas incompatibles (${compat.malas?.length || 0})</h4>
+            ${renderItems(compat.malas)}
+          </div>
+        </div>
+
+        ${planta.rendimiento ? `
+        <div style="margin-top:20px;padding:16px 20px;background:var(--verde-bg);border-radius:var(--radio-card);">
+          <div style="font-size:12px;font-weight:700;color:var(--verde);text-transform:uppercase;margin-bottom:4px;">Rendimiento esperado</div>
+          <div style="font-size:14px;">${planta.rendimiento}</div>
+        </div>` : ''}
+
+        ${buildAfiliadosHTML(planta)}
+      `;
+    }
+
+    function buildAfiliadosHTML(planta) {
+      if (!planta?.amazon) return '';
+      const prods = Object.values(planta.amazon);
+      if (!prods.length) return '';
+      return `
+        <div style="margin-top:20px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+          <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Para empezar a cultivar ${planta.nombre.toLowerCase()}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+            ${prods.map(prod => `
+              <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+                <div style="font-size:13px;font-weight:600;margin-bottom:4px;color:var(--texto);">${prod.nombre}</div>
+                <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+                <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+                   target="_blank" rel="noopener sponsored"
+                   style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                  Ver en Amazon →
+                </a>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    document.querySelector('.plant-tab')?.click();
+
+    /* ============ COMPARADOR ============ */
+    function setModo(modo, btn) {
+      document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('modo-compat').style.display   = modo === 'compat'   ? '' : 'none';
+      document.getElementById('modo-comparar').style.display = modo === 'comparar' ? '' : 'none';
+    }
+
+    /* Poblar selects del comparador */
+    ['cmp-a','cmp-b'].forEach(id => {
+      const sel = document.getElementById(id);
+      [
+        {label:'Hortalizas', cat:'hortaliza'},
+        {label:'Frutas', cat:'fruta'},
+        {label:'Aromáticas', cat:'aromatica'}
+      ].forEach(g => {
+        const og = document.createElement('optgroup');
+        og.label = g.label;
+        getPlantasPorCategoria(g.cat).forEach(([pid, p]) => {
+          const opt = document.createElement('option');
+          opt.value = pid; opt.textContent = p.nombre;
+          og.appendChild(opt);
+        });
+        sel.appendChild(og);
+      });
+    });
+
+    function renderComparador() {
+      const idA = document.getElementById('cmp-a').value;
+      const idB = document.getElementById('cmp-b').value;
+      const out = document.getElementById('resultado-comparar');
+      if (!idA || !idB) { out.innerHTML = ''; return; }
+      if (idA === idB) { out.innerHTML = '<p style="color:var(--texto-sec);font-size:14px;">Selecciona dos plantas diferentes.</p>'; return; }
+
+      const a = PLANTAS[idA];
+      const b = PLANTAS[idB];
+      const compatA = COMPATIBILIDAD[idA];
+      const compatB = COMPATIBILIDAD[idB];
+
+      const sonCompatibles = compatA?.buenas?.some(x => x.id === idB) || compatB?.buenas?.some(x => x.id === idA);
+      const sonIncompatibles = compatA?.malas?.some(x => x.id === idB) || compatB?.malas?.some(x => x.id === idA);
+      const razonCompat = compatA?.buenas?.find(x => x.id === idB)?.razon || compatB?.buenas?.find(x => x.id === idA)?.razon || '';
+      const razonIncompat = compatA?.malas?.find(x => x.id === idB)?.razon || compatB?.malas?.find(x => x.id === idA)?.razon || '';
+
+      const difLabel = {facil:'Fácil 🟢', media:'Media 🟡', dificil:'Difícil 🔴'};
+
+      const menosEspacio = (a.espacio_min <= b.espacio_min) ? idA : idB;
+      const masRapida    = (parseInt(a.tiempo_cosecha) <= parseInt(b.tiempo_cosecha)) ? idA : idB;
+
+      const winnerEspacio = PLANTAS[menosEspacio].nombre;
+      const winnerRapida  = PLANTAS[masRapida].nombre;
+
+      const prodsA = a.amazon ? Object.values(a.amazon).slice(0,2) : [];
+      const prodsB = b.amazon ? Object.values(b.amazon).slice(0,2) : [];
+
+      out.innerHTML = `
+        <!-- Cabecera relación -->
+        <div style="text-align:center;padding:20px;background:var(--fondo);border-radius:var(--radio-card);margin-bottom:20px;">
+          <span style="font-size:18px;font-weight:700;">${a.nombre}</span>
+          <span style="margin:0 16px;font-size:20px;">vs</span>
+          <span style="font-size:18px;font-weight:700;">${b.nombre}</span>
+          <div style="margin-top:12px;">
+            ${sonCompatibles ? `<span class="cmp-badge-yes">✓ Son buenas compañeras</span>` :
+              sonIncompatibles ? `<span class="cmp-badge-no">✗ No deben estar juntas</span>` :
+              `<span class="cmp-badge-neutral">Relación neutra</span>`}
+          </div>
+          ${razonCompat ? `<p style="font-size:13px;color:var(--texto-sec);margin:10px 0 0;">${razonCompat}</p>` : ''}
+          ${razonIncompat ? `<p style="font-size:13px;color:#BE123C;margin:10px 0 0;">${razonIncompat}</p>` : ''}
+        </div>
+
+        <!-- Tabla comparativa -->
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>${a.nombre}</th>
+              <th>${b.nombre}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dificultad</strong></td>
+              <td>${difLabel[a.dificultad]}</td>
+              <td>${difLabel[b.dificultad]}</td>
+            </tr>
+            <tr>
+              <td><strong>Espacio mínimo</strong></td>
+              <td class="${menosEspacio===idA?'cmp-winner':''}">${a.espacio_min} cm ${menosEspacio===idA?'⭐':''}</td>
+              <td class="${menosEspacio===idB?'cmp-winner':''}">${b.espacio_min} cm ${menosEspacio===idB?'⭐':''}</td>
+            </tr>
+            <tr>
+              <td><strong>Tiempo de cosecha</strong></td>
+              <td class="${masRapida===idA?'cmp-winner':''}">${a.tiempo_cosecha} ${masRapida===idA?'⭐':''}</td>
+              <td class="${masRapida===idB?'cmp-winner':''}">${b.tiempo_cosecha} ${masRapida===idB?'⭐':''}</td>
+            </tr>
+            <tr>
+              <td><strong>Rendimiento</strong></td>
+              <td style="font-size:13px;">${a.rendimiento || '—'}</td>
+              <td style="font-size:13px;">${b.rendimiento || '—'}</td>
+            </tr>
+            <tr>
+              <td><strong>Descripción</strong></td>
+              <td style="font-size:13px;color:var(--texto-sec);">${a.descripcion}</td>
+              <td style="font-size:13px;color:var(--texto-sec);">${b.descripcion}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Recomendación -->
+        <div style="margin-top:20px;padding:18px 20px;background:var(--verde-bg);border-radius:var(--radio-card);">
+          <div style="font-size:12px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Recomendación</div>
+          <p style="font-size:14px;margin:0;">
+            ${sonIncompatibles
+              ? `<strong>No las plantes juntas.</strong> ${razonIncompat || 'Comparten plagas o se inhiben mutuamente.'} Si necesitas cultivar las dos, sepáralas mínimo 50–100 cm.`
+              : sonCompatibles
+              ? `<strong>Perfectas compañeras.</strong> ${razonCompat || 'Se benefician mutuamente.'} Plántalas cerca para aprovechar sus efectos positivos.`
+              : `No hay relación conocida entre estas dos plantas. Puedes cultivarlas juntas sin problema siempre que tengan el espacio necesario.`}
+          </p>
+          <p style="font-size:14px;margin-top:8px;margin-bottom:0;">
+            <strong>Mejor para espacio pequeño:</strong> <span class="cmp-winner">${winnerEspacio}</span> (${PLANTAS[menosEspacio].espacio_min} cm entre plantas).
+            <strong style="margin-left:12px;">Más rápida de cosechar:</strong> <span class="cmp-winner">${winnerRapida}</span>.
+          </p>
+        </div>
+
+        <!-- Productos para cultivarlas juntas -->
+        ${prodsA.length || prodsB.length ? `
+        <div style="margin-top:16px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+          <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Para cultivarlas en casa</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;">
+            ${[...prodsA, ...prodsB].map(prod => `
+              <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+                <div style="font-size:13px;font-weight:600;margin-bottom:4px;">${prod.nombre}</div>
+                <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+                <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+                   target="_blank" rel="noopener sponsored"
+                   style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                  Ver en Amazon →
+                </a>
+              </div>
+            `).join('')}
+          </div>
+        </div>` : ''}
+      `;
+    }
+  </script>
+</body>
+</html>

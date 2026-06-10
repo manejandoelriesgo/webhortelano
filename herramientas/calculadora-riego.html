@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de riego para el huerto — Cuánta agua necesitan tus plantas — HortelanoUrbano.es</title>
+  <meta name="description" content="Calcula cuántos litros de agua necesita cada planta de tu huerto según tu zona climática y la estación del año. Gratuito y sin registro.">
+  <link rel="canonical" href="https://hortelanourbano.es/calculadora-riego-huerto">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .resultado-riego {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-card);
+      overflow: hidden;
+      margin-top: 28px;
+    }
+    .resultado-header {
+      background: linear-gradient(135deg, #0EA5E9, #0369A1);
+      color: white;
+      padding: 24px 28px;
+    }
+    .resultado-header h3 { color:white; margin-bottom:6px; }
+    .resultado-header p  { color:rgba(255,255,255,0.8); margin:0; font-size:14px; }
+    .resultado-stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 0;
+    }
+    @media(max-width:480px) { .resultado-stats { grid-template-columns:1fr; } }
+    .resultado-stat {
+      padding: 20px 24px;
+      border-right: 1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
+      text-align: center;
+    }
+    .resultado-stat:last-child { border-right:none; }
+    .resultado-stat .val { font-size:32px; font-weight:700; color:var(--verde); display:block; }
+    .resultado-stat .lbl { font-size:12px; color:var(--texto-sec); }
+    .resultado-consejo {
+      padding: 20px 24px;
+      border-top: 1px solid var(--borde);
+      font-size:14px;
+      background: var(--fondo);
+    }
+    .resultado-consejo strong { color:var(--verde); }
+
+    .plantas-riego-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+      gap: 8px;
+      margin-top: 12px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding: 4px;
+    }
+    .planta-riego-opt {
+      border:2px solid var(--borde);
+      border-radius:8px;
+      padding:8px 6px;
+      text-align:center;
+      cursor:pointer;
+      font-size:12px;
+      font-weight:600;
+      background:white;
+      transition:all .15s;
+    }
+    .planta-riego-opt.sel { border-color:var(--verde); background:var(--verde-bg); color:var(--verde); }
+    .planta-riego-opt:hover { border-color:var(--verde-claro); }
+
+    .estacion-badge {
+      display:inline-block;
+      padding:4px 12px;
+      border-radius:20px;
+      font-size:12px;
+      font-weight:700;
+      text-transform:uppercase;
+    }
+    .est-verano   { background:#FEF9C3; color:#92400E; }
+    .est-primavera{ background:#DCFCE7; color:#15803D; }
+    .est-otono    { background:#FED7AA; color:#C2410C; }
+    .est-invierno { background:#DBEAFE; color:#1E40AF; }
+
+    .horario-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 14px;
+    }
+    .horario-box strong { color: #1D4ED8; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto hay que regar los tomates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un tomate en maceta necesita entre 1 y 2 litros de agua al día en verano, y 0,5-1 litro en primavera/otoño. La frecuencia ideal es cada 1-2 días en verano y cada 2-3 días en otras estaciones. Lo más importante es que el sustrato nunca se seque completamente ni esté encharcado."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cada cuánto se riegan las lechugas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las lechugas necesitan riego frecuente y homogéneo: cada 2-3 días en verano y cada 4-5 días en primavera/otoño. Son sensibles tanto al encharcamiento como a la falta de agua. El sustrato debe estar siempre ligeramente húmedo, especialmente en las 2-3 semanas antes de cosechar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuándo es el mejor momento para regar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En verano, al atardecer (entre las 19 y 21h). Evita el mediodía: el agua se evapora antes de llegar a las raíces y las gotas en las hojas actúan como lupas causando quemaduras. En primavera y otoño, la mañana temprana también es válida."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo sé si estoy regando demasiado o demasiado poco?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Introduce el dedo 2-3 cm en el sustrato. Si está húmedo, no riega aún. Si está seco, es hora de regar. Las hojas mustias por la tarde con sustrato húmedo indican exceso de agua (raíces asfixiadas). Las hojas caídas y crujientes con sustrato seco indican falta de agua."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es mejor riego por goteo o a mano?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El goteo es más eficiente: ahorra hasta un 70% de agua, riega a la raíz y mantiene las hojas secas (menos enfermedades fúngicas). Para un balcón pequeño con pocas macetas, el riego a mano es perfectamente válido si eres constante."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Las plantas en maceta necesitan más agua que en tierra?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, entre un 30-50% más. Las macetas tienen menos volumen de sustrato y se calientan más, aumentando la evaporación. En verano, algunas plantas en maceta necesitan riego diario."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+    <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="calendario-siembra.html">Calendario</a></li>
+          <li><a href="planificador-huerto.html">Planificador</a></li>
+          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+        </ul>
+      </nav>
+  </div>
+</header>
+
+
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Calculadora de riego</span></nav>
+    <h1>Calculadora de riego para el huerto</h1>
+    <p>Introduce tu zona climática, las plantas que cultivas y el número de ejemplares. Calcula cuánta agua necesitas cada semana.</p>
+  </div>
+</div>
+  <div class="adsense-header" style="margin:0;">
+    <div class="ad-slot">Publicidad</div>
+  </div>
+
+
+<section style="padding:48px 0;">
+  <div class="container">
+    <div class="tool-wrapper">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="r-zona">Zona climática</label>
+          <select id="r-zona" onchange="calcular()">
+            <option value="">Selecciona zona...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="r-contenedor">Tipo de cultivo</label>
+          <select id="r-contenedor" onchange="calcular()">
+            <option value="0">En tierra / huerto</option>
+            <option value="1">En maceta o contenedor</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Selecciona tus plantas (elige una para ver el detalle)</label>
+        <div class="filter-tabs" style="margin-bottom:12px;">
+          <button class="filter-tab active" onclick="filtrar(this,'todas')">Todas</button>
+          <button class="filter-tab" onclick="filtrar(this,'hortaliza')">Hortalizas</button>
+          <button class="filter-tab" onclick="filtrar(this,'fruta')">Frutas</button>
+          <button class="filter-tab" onclick="filtrar(this,'aromatica')">Aromáticas</button>
+        </div>
+        <div class="plantas-riego-grid" id="plantas-grid"></div>
+      </div>
+
+      <div class="form-row" id="num-plantas-row" style="display:none;">
+        <div class="form-group">
+          <label for="r-num">Número de plantas</label>
+          <input type="number" id="r-num" min="1" max="50" value="1" oninput="calcular()">
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-end;">
+          <span id="planta-seleccionada-label" style="font-size:14px;color:var(--texto-sec);padding-bottom:12px;"></span>
+        </div>
+      </div>
+
+      <div id="resultado-riego" class="hidden"></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="adsense-mid container">
+  <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;text-align:center;">Publicidad</div>
+</div>
+
+<section style="background:white;padding:64px 0;">
+  <div class="container" style="max-width:800px;">
+    <h2 style="margin-bottom:8px;">Guía de riego para el huerto urbano</h2>
+    <div class="faq-list mt-24">
+        <div class="faq-item">
+          <h4>¿Cuánto hay que regar los tomates?</h4>
+          <p>Un tomate en maceta necesita entre 1 y 2 litros de agua al día en verano, y 0,5-1 litro en primavera/otoño. La frecuencia ideal es cada 1-2 días en verano y cada 2-3 días en otras estaciones. Lo más importante es que el sustrato nunca se seque completamente ni esté encharcado.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Cada cuánto se riegan las lechugas?</h4>
+          <p>Las lechugas necesitan riego frecuente y homogéneo: cada 2-3 días en verano y cada 4-5 días en primavera/otoño. Son sensibles tanto al encharcamiento como a la falta de agua. El sustrato debe estar siempre ligeramente húmedo, especialmente en las 2-3 semanas antes de cosechar.</p>
+        </div>
+
+      <div class="faq-item">
+        <h4>¿Cuándo es el mejor momento para regar?</h4>
+        <p>En verano, al atardecer (entre las 19 y 21h). Evita el mediodía: el agua se evapora antes de llegar a las raíces y las gotas en las hojas actúan como lupas causando quemaduras. En primavera y otoño, la mañana temprana también es válida.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Cómo sé si estoy regando demasiado o demasiado poco?</h4>
+        <p>Introduce el dedo 2-3 cm en el sustrato. Si está húmedo, no riega aún. Si está seco, es hora de regar. Las hojas mustias por la tarde con sustrato húmedo indican exceso de agua (raíces asfixiadas). Las hojas caídas y crujientes con sustrato seco indican falta de agua.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Es mejor riego por goteo o a mano?</h4>
+        <p>El goteo es más eficiente: ahorra hasta un 70% de agua, riega a la raíz y mantiene las hojas secas (menos enfermedades fúngicas). Para un balcón pequeño con pocas macetas, el riego a mano es perfectamente válido si eres constante.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Las plantas en maceta necesitan más agua que en tierra?</h4>
+        <p>Sí, entre un 30-50% más. Las macetas tienen menos volumen de sustrato y se calientan más, aumentando la evaporación. En verano, algunas plantas en maceta necesitan riego diario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo">HortelanoUrbano.es</a><p>Herramientas gratuitas para huerto urbano en España.</p></div>
+      <div class="footer-col"><h4>Herramientas</h4><ul>
+        <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
+        <li><a href="calculadora-riego.html">Calculadora de riego</a></li>
+        <li><a href="planificador-huerto.html">Planificador</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Información</h4><ul>
+        <li><a href="../aviso-legal.html">Aviso legal</a></li>
+        <li><a href="../privacidad.html">Privacidad</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 HortelanoUrbano.es</span></div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/riego.js"></script>
+<script>
+  let plantaSeleccionada = null;
+
+  /* Zonas */
+  const selZona = document.getElementById('r-zona');
+  Object.entries(ZONAS).forEach(([id,z]) => {
+    const opt = document.createElement('option');
+    opt.value = id; opt.textContent = z.label || z.nombre;
+    selZona.appendChild(opt);
+  });
+
+  /* Grid de plantas */
+  function buildGrid(cat) {
+    const grid = document.getElementById('plantas-grid');
+    const entries = cat === 'todas' ? Object.entries(RIEGO_BASE) : Object.entries(RIEGO_BASE).filter(([id]) => PLANTAS[id]?.categoria === cat);
+    grid.innerHTML = entries.map(([id]) => {
+      const p = PLANTAS[id];
+      if (!p) return '';
+      return `<div class="planta-riego-opt ${plantaSeleccionada===id?'sel':''}" onclick="seleccionarPlanta('${id}',this)">${p.nombre}</div>`;
+    }).join('');
+  }
+
+  function filtrar(btn, cat) {
+    document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    buildGrid(cat);
+  }
+
+  function seleccionarPlanta(id, el) {
+    document.querySelectorAll('.planta-riego-opt').forEach(e=>e.classList.remove('sel'));
+    el.classList.add('sel');
+    plantaSeleccionada = id;
+    document.getElementById('num-plantas-row').style.display = '';
+    document.getElementById('planta-seleccionada-label').textContent = `Planta: ${PLANTAS[id]?.nombre}`;
+    calcular();
+  }
+
+  function calcular() {
+    if (!plantaSeleccionada || !selZona.value) { document.getElementById('resultado-riego').classList.add('hidden'); return; }
+    const zonaId    = selZona.value;
+    const numPlantas = parseInt(document.getElementById('r-num').value) || 1;
+    const esMaceta  = document.getElementById('r-contenedor').value === '1';
+    const res       = calcularRiego(plantaSeleccionada, zonaId, numPlantas, esMaceta);
+    const planta    = PLANTAS[plantaSeleccionada];
+    const zona      = ZONAS[zonaId];
+
+    const estLabel = { primavera:'Primavera', verano:'Verano', otono:'Otoño', invierno:'Invierno' };
+    const estClass = { primavera:'est-primavera', verano:'est-verano', otono:'est-otono', invierno:'est-invierno' };
+    const horario  = res.estacion === 'verano' ? '19:00–21:00h (nunca al mediodía)' : '08:00–10:00h o tarde';
+
+    const out = document.getElementById('resultado-riego');
+    out.classList.remove('hidden');
+    out.innerHTML = `
+      <div class="resultado-riego">
+        <div class="resultado-header">
+          <h3>${planta.nombre} · ${zona.nombre}</h3>
+          <p>${numPlantas} planta${numPlantas>1?'s':''} · ${esMaceta?'En maceta':'En tierra'} · <span class="estacion-badge ${estClass[res.estacion]}">${estLabel[res.estacion]}</span></p>
+        </div>
+        <div class="resultado-stats">
+          <div class="resultado-stat">
+            <span class="val">${res.litros_semana}L</span>
+            <span class="lbl">Litros por semana</span>
+          </div>
+          <div class="resultado-stat">
+            <span class="val">${res.litros_sesion}L</span>
+            <span class="lbl">Litros por sesión</span>
+          </div>
+          <div class="resultado-stat">
+            <span class="val">Cada ${res.frecuencia_dias}d</span>
+            <span class="lbl">Frecuencia de riego</span>
+          </div>
+        </div>
+        <div class="resultado-consejo">
+          <strong>Consejo:</strong> ${res.consejo}
+        </div>
+      </div>
+      <div class="horario-box mt-16">
+        <strong>Mejor horario de riego ahora:</strong> ${horario}
+      </div>
+
+      <div class="adsense-mid" style="text-align:center;margin:24px 0;">
+        <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;">Publicidad — AdSense 728×90</div>
+      </div>
+
+      ${buildAfiliadosRiego(planta)}
+    `;
+  }
+
+  const RIEGO_PRODUCTOS = [
+    { nombre: 'Kit riego por goteo balcón', desc: 'Sistema completo para macetas. Ahorra hasta 70% de agua.', q: 'kit+riego+goteo+balcon+macetas' },
+    { nombre: 'Regadera precisión pitorro largo', desc: 'Riego en la base sin mojar hojas. Reduce hongos.', q: 'regadera+pitorro+largo+precision+huerto' },
+    { nombre: 'Medidor humedad sustrato', desc: 'Evita regar de más o de menos. Lectura instantánea.', q: 'medidor+humedad+sustrato+plantas+huerto' },
+    { nombre: 'Programador de riego automático', desc: 'Riega solo aunque no estés en casa.', q: 'programador+riego+automatico+grifo' },
+  ];
+
+  function buildAfiliadosRiego(planta) {
+    const prodsPlantas = planta?.amazon ? Object.values(planta.amazon).slice(0,2) : [];
+    return `
+      <div style="margin-top:16px;padding:20px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--radio-card);">
+        <div style="font-size:12px;font-weight:700;color:#1D4ED8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Optimiza el riego de tu huerto</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+          ${RIEGO_PRODUCTOS.map(prod => `
+            <div style="background:white;border:1px solid #BFDBFE;border-radius:8px;padding:12px;">
+              <div style="font-size:13px;font-weight:600;margin-bottom:4px;color:var(--texto);">${prod.nombre}</div>
+              <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+              <a href="https://www.amazon.es/s?k=${prod.q}&tag=imagu90-21"
+                 target="_blank" rel="noopener sponsored"
+                 style="display:inline-block;font-size:11px;font-weight:700;color:#1D4ED8;text-decoration:none;border:1px solid #BFDBFE;border-radius:6px;padding:4px 10px;background:#EFF6FF;">
+                Ver en Amazon →
+              </a>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ${prodsPlantas.length ? `
+      <div style="margin-top:12px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+        <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Para cultivar ${planta.nombre.toLowerCase()} en casa</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+          ${prodsPlantas.map(prod => `
+            <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+              <div style="font-size:13px;font-weight:600;margin-bottom:4px;color:var(--texto);">${prod.nombre}</div>
+              <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+              <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+                 target="_blank" rel="noopener sponsored"
+                 style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                Ver en Amazon →
+              </a>
+            </div>
+          `).join('')}
+        </div>
+      </div>` : ''}
+    `;
+  }
+
+  buildGrid('todas');
+</script>
+</body>
+</html>

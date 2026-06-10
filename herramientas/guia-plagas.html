@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de plagas del huerto — Identificación y tratamiento — HortelanoUrbano.es</title>
+  <meta name="description" content="Identifica y trata las plagas más comunes del huerto urbano: pulgón, mosca blanca, araña roja, oídio, mildiu y más. Tratamientos ecológicos y preventivos.">
+  <link rel="canonical" href="https://hortelanourbano.es/guia-plagas-huerto">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .search-mode, .browse-mode { }
+    .view-tabs { display:flex; gap:8px; margin-bottom:24px; }
+    .view-tab { padding:8px 20px; border-radius:20px; font-size:14px; font-weight:600; border:2px solid var(--borde); background:white; cursor:pointer; }
+    .view-tab.active { border-color:var(--verde); background:var(--verde-bg); color:var(--verde); }
+
+    .plaga-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
+    .plaga-tab { padding:7px 16px; border-radius:20px; font-size:13px; font-weight:600; border:2px solid var(--borde); background:white; cursor:pointer; transition:all .15s; }
+    .plaga-tab.active { border-color:var(--verde); background:var(--verde-bg); color:var(--verde); }
+    .plaga-tab:hover  { border-color:var(--verde-claro); }
+
+    .tipo-badge { font-size:11px; font-weight:700; padding:2px 8px; border-radius:12px; text-transform:uppercase; letter-spacing:.04em; }
+    .tipo-insecto { background:#FEF9C3; color:#92400E; }
+    .tipo-acaro   { background:#FFE4E6; color:#BE123C; }
+    .tipo-hongo   { background:#EDE9FE; color:#5B21B6; }
+    .tipo-molusco { background:#DBEAFE; color:#1E40AF; }
+
+    .sintoma-list { padding-left:0; list-style:none; }
+    .sintoma-item { display:flex; gap:10px; padding:8px 0; border-bottom:1px solid var(--borde); font-size:14px; align-items:flex-start; }
+    .sintoma-item:last-child { border-bottom:none; }
+    .sintoma-dot { width:6px; height:6px; border-radius:50%; background:var(--tierra); margin-top:7px; flex-shrink:0; }
+
+    .tratamiento-card { border-radius:var(--radio-card); padding:20px; margin-bottom:12px; }
+    .tratamiento-ecologico { background:#F0FDF4; border:1px solid #86EFAC; }
+    .tratamiento-quimico   { background:#FFF7ED; border:1px solid #FED7AA; }
+    .tratamiento-card h4   { font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px; }
+    .tratamiento-ecologico h4 { color:#15803D; }
+    .tratamiento-quimico   h4 { color:#C2410C; }
+
+    .trat-item { padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.06); font-size:14px; }
+    .trat-item:last-child { border-bottom:none; }
+    .trat-item strong { display:block; font-weight:600; margin-bottom:2px; }
+
+    .prev-list { list-style:none; padding:0; }
+    .prev-item { display:flex; gap:10px; padding:8px 0; font-size:14px; border-bottom:1px solid var(--borde); align-items:flex-start; }
+    .prev-item:last-child { border-bottom:none; }
+    .prev-check { color:var(--verde); font-weight:700; flex-shrink:0; }
+
+    .planta-afectada-tag { display:inline-block; font-size:11px; font-weight:600; padding:2px 8px; border-radius:12px; background:var(--fondo); border:1px solid var(--borde); margin:2px; }
+
+    .by-planta-select { margin-bottom:20px; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cómo eliminar el pulgón de forma ecológica?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los métodos más eficaces son: 1) Jabón potásico diluido al 2% pulverizado directamente sobre las colonias, cubriendo bien el envés (repetir cada 5-7 días). 2) Aceite de neem al 0,5% con unas gotas de jabón como emulsionante. 3) Chorro de agua a presión para derribar las colonias como primer paso. 4) Introducir mariquitas como depredadores naturales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué hacer si mis plantas tienen mosca blanca?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Actúa en cuanto veas la primera nube de moscas blancas al sacudir la planta. Coloca trampas adhesivas amarillas inmediatamente. Pulveriza jabón potásico en el envés de las hojas cada 4-5 días durante 3 semanas. Si la infestación es grave, añade aceite de neem. La mosca blanca se hace resistente rápido, así que actuar pronto es clave."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo tratar el oídio en el tomate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El oídio (polvo blanco en las hojas) se trata con azufre mojable, que es el fungicida más eficaz y está autorizado en agricultura ecológica. Pulveriza preventivamente desde el inicio de la temporada. Si ya está presente, elimina las hojas afectadas, no las composts, y aplica azufre cada 7-10 días. Evita mojar las hojas al regar y asegura buena ventilación entre plantas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuándo debo tratar una plaga?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Actúa en cuanto detectes los primeros síntomas. Una infestación pequeña se controla con jabón potásico; una avanzada puede requerir tratamientos más agresivos. Revisa el envés de las hojas una vez a la semana durante la temporada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Los tratamientos ecológicos funcionan igual que los químicos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En infestaciones iniciales y con aplicación correcta, sí. La clave es la constancia: un tratamiento ecológico requiere varias aplicaciones cada 5-7 días. Los químicos actúan más rápido pero tienen plazos de seguridad y pueden eliminar insectos beneficiosos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo sé si es pulgón o mosca blanca?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El pulgón forma colonias densas inmóviles en brotes y envés; puedes verlos claramente. La mosca blanca sale volando en nubes blancas al agitar la planta. Ambas producen melaza pegajosa, pero la mosca blanca también tiene larvas blancas fijas en el envés."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿El jabón potásico es seguro para las plantas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, a las concentraciones recomendadas (1-2%). A concentraciones más altas puede quemar las hojas, especialmente en días de sol intenso. Aplica siempre al atardecer o en días nublados."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+    <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="calendario-siembra.html">Calendario</a></li>
+          <li><a href="planificador-huerto.html">Planificador</a></li>
+          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+        </ul>
+      </nav>
+  </div>
+</header>
+
+
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Guía de plagas</span></nav>
+    <h1>Guía de plagas del huerto urbano</h1>
+    <p>Identifica la plaga o enfermedad por síntomas o por planta afectada, y encuentra el tratamiento más efectivo.</p>
+  </div>
+</div>
+  <div class="adsense-header" style="margin:0;">
+    <div class="ad-slot">Publicidad</div>
+  </div>
+
+
+<section style="padding:48px 0;">
+  <div class="container">
+    <div class="tool-wrapper">
+
+      <!-- Modo: por plaga o por planta -->
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="setView('plaga',this)">Buscar por plaga</button>
+        <button class="view-tab" onclick="setView('planta',this)">Buscar por planta</button>
+      </div>
+
+      <!-- Vista: por plaga -->
+      <div id="view-plaga">
+        <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Selecciona la plaga o enfermedad que has identificado:</p>
+        <div class="plaga-tabs" id="plaga-tabs"></div>
+        <div id="resultado-plaga" style="margin-top:28px;"></div>
+      </div>
+
+      <!-- Vista: por planta -->
+      <div id="view-planta" style="display:none;">
+        <div class="by-planta-select">
+          <label for="sel-planta-plagas" style="font-size:14px;font-weight:600;display:block;margin-bottom:6px;">¿Qué planta está afectada?</label>
+          <select id="sel-planta-plagas" onchange="mostrarPlagasDePlanta(this.value)" style="max-width:400px;">
+            <option value="">Selecciona planta...</option>
+          </select>
+        </div>
+        <div id="resultado-por-planta"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="adsense-mid container">
+  <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;text-align:center;">Publicidad</div>
+</div>
+
+<section style="background:white;padding:64px 0;">
+  <div class="container" style="max-width:800px;">
+    <h2 style="margin-bottom:8px;">Preguntas frecuentes sobre plagas</h2>
+    <div class="faq-list mt-24">
+        <div class="faq-item">
+          <h4>¿Cómo eliminar el pulgón de forma ecológica?</h4>
+          <p>Los métodos más eficaces son: 1) Jabón potásico diluido al 2% pulverizado directamente sobre las colonias, cubriendo bien el envés (repetir cada 5-7 días). 2) Aceite de neem al 0,5% con unas gotas de jabón como emulsionante. 3) Chorro de agua a presión para derribar las colonias como primer paso. 4) Introducir mariquitas como depredadores naturales.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Qué hacer si mis plantas tienen mosca blanca?</h4>
+          <p>Actúa en cuanto veas la primera nube de moscas blancas al sacudir la planta. Coloca trampas adhesivas amarillas inmediatamente. Pulveriza jabón potásico en el envés de las hojas cada 4-5 días durante 3 semanas. Si la infestación es grave, añade aceite de neem. La mosca blanca se hace resistente rápido, así que actuar pronto es clave.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Cómo tratar el oídio en el tomate?</h4>
+          <p>El oídio (polvo blanco en las hojas) se trata con azufre mojable, que es el fungicida más eficaz y está autorizado en agricultura ecológica. Pulveriza preventivamente desde el inicio de la temporada. Si ya está presente, elimina las hojas afectadas, no las composts, y aplica azufre cada 7-10 días. Evita mojar las hojas al regar y asegura buena ventilación entre plantas.</p>
+        </div>
+
+      <div class="faq-item">
+        <h4>¿Cuándo debo tratar una plaga?</h4>
+        <p>Actúa en cuanto detectes los primeros síntomas. Una infestación pequeña se controla con jabón potásico; una avanzada puede requerir tratamientos más agresivos. Revisa el envés de las hojas una vez a la semana durante la temporada.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Los tratamientos ecológicos funcionan igual que los químicos?</h4>
+        <p>En infestaciones iniciales y con aplicación correcta, sí. La clave es la constancia: un tratamiento ecológico requiere varias aplicaciones cada 5-7 días. Los químicos actúan más rápido pero tienen plazos de seguridad y pueden eliminar insectos beneficiosos.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Cómo sé si es pulgón o mosca blanca?</h4>
+        <p>El pulgón forma colonias densas inmóviles en brotes y envés; puedes verlos claramente. La mosca blanca sale volando en nubes blancas al agitar la planta. Ambas producen melaza pegajosa, pero la mosca blanca también tiene larvas blancas fijas en el envés.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿El jabón potásico es seguro para las plantas?</h4>
+        <p>Sí, a las concentraciones recomendadas (1-2%). A concentraciones más altas puede quemar las hojas, especialmente en días de sol intenso. Aplica siempre al atardecer o en días nublados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo">HortelanoUrbano.es</a><p>Herramientas gratuitas para huerto urbano en España.</p></div>
+      <div class="footer-col"><h4>Herramientas</h4><ul>
+        <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
+        <li><a href="planificador-huerto.html">Planificador</a></li>
+        <li><a href="guia-plagas.html">Guía de plagas</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Información</h4><ul>
+        <li><a href="../aviso-legal.html">Aviso legal</a></li>
+        <li><a href="../privacidad.html">Privacidad</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 HortelanoUrbano.es</span></div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/plagas.js"></script>
+<script>
+  /* ---- Tabs de plagas ---- */
+  const tabsContainer = document.getElementById('plaga-tabs');
+  Object.entries(PLAGAS).forEach(([id, p]) => {
+    const btn = document.createElement('button');
+    btn.className = 'plaga-tab';
+    btn.textContent = p.nombre;
+    btn.dataset.id = id;
+    btn.onclick = () => mostrarPlaga(id, btn);
+    tabsContainer.appendChild(btn);
+  });
+
+  /* ---- Select por planta ---- */
+  const selPlanta = document.getElementById('sel-planta-plagas');
+  [
+    { label:'Hortalizas', cat:'hortaliza' },
+    { label:'Frutas',     cat:'fruta' },
+    { label:'Aromáticas', cat:'aromatica' }
+  ].forEach(g => {
+    const og = document.createElement('optgroup');
+    og.label = g.label;
+    getPlantasPorCategoria(g.cat).forEach(([id, p]) => {
+      if (PLAGAS_POR_PLANTA[id]) {
+        const opt = document.createElement('option');
+        opt.value = id; opt.textContent = p.nombre;
+        og.appendChild(opt);
+      }
+    });
+    selPlanta.appendChild(og);
+  });
+
+  /* ---- Cambiar vista ---- */
+  function setView(v, btn) {
+    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('view-plaga').style.display  = v === 'plaga'  ? '' : 'none';
+    document.getElementById('view-planta').style.display = v === 'planta' ? '' : 'none';
+  }
+
+  /* ---- Render plaga ---- */
+  const tipoLabel = { insecto:'Insecto', acaro:'Ácaro', hongo:'Hongo', molusco:'Molusco' };
+
+  function mostrarPlaga(id, btn) {
+    document.querySelectorAll('.plaga-tab').forEach(t => t.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    const p = PLAGAS[id];
+    const out = document.getElementById('resultado-plaga');
+
+    out.innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <h3 style="margin:0;">${p.nombre}</h3>
+        <span class="tipo-badge tipo-${p.tipo}">${tipoLabel[p.tipo]}</span>
+      </div>
+      <p style="font-size:15px;color:var(--texto-sec);margin-bottom:24px;">${p.descripcion}</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+        <div>
+          <h4 style="font-size:14px;font-weight:700;color:var(--texto);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em;">Síntomas</h4>
+          <ul class="sintoma-list">
+            ${p.sintomas.map(s => `<li class="sintoma-item"><span class="sintoma-dot"></span>${s}</li>`).join('')}
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:14px;font-weight:700;color:var(--texto);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em;">Plantas afectadas</h4>
+          <div>${p.plantas_afectadas.map(id2 => `<span class="planta-afectada-tag">${PLANTAS[id2]?.nombre || id2}</span>`).join('')}</div>
+        </div>
+      </div>
+
+      <div class="tratamiento-card tratamiento-ecologico">
+        <h4>Tratamientos ecológicos</h4>
+        ${p.tratamiento_ecologico.map(t => `
+          <div class="trat-item"><strong>${t.producto}</strong>${t.uso}</div>
+        `).join('')}
+      </div>
+
+      <div class="tratamiento-card tratamiento-quimico">
+        <h4>Tratamiento químico (último recurso)</h4>
+        <p style="font-size:14px;margin:0;">${p.tratamiento_quimico}</p>
+      </div>
+
+      <div style="background:var(--verde-bg);border-radius:var(--radio-card);padding:20px;margin-top:12px;">
+        <h4 style="color:var(--verde);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;">Prevención</h4>
+        <ul class="prev-list">
+          ${p.prevencion.map(pr => `<li class="prev-item"><span class="prev-check">✓</span>${pr}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="adsense-mid" style="text-align:center;margin:24px 0;">
+        <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;">Publicidad — AdSense 728×90</div>
+      </div>
+
+      ${p.amazon?.length ? `
+        <div style="margin-top:20px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+          <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Productos para tratar ${p.nombre.toLowerCase()}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+            ${p.amazon.map(prod => `
+              <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+                <div style="font-size:13px;font-weight:600;margin-bottom:4px;color:var(--texto);">${prod.nombre}</div>
+                <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+                <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+                   target="_blank" rel="noopener sponsored"
+                   style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                  Ver en Amazon →
+                </a>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  /* ---- Render por planta ---- */
+  function mostrarPlagasDePlanta(plantaId) {
+    if (!plantaId) return;
+    const ids   = PLAGAS_POR_PLANTA[plantaId] || [];
+    const out   = document.getElementById('resultado-por-planta');
+    const planta = PLANTAS[plantaId];
+    if (ids.length === 0) {
+      out.innerHTML = `<p style="color:var(--texto-sec);">No tenemos registradas plagas específicas para ${planta?.nombre}.</p>`;
+      return;
+    }
+    out.innerHTML = `
+      <p style="font-size:14px;color:var(--texto-sec);margin-bottom:20px;">
+        <strong>${planta?.nombre}</strong> puede verse afectada por ${ids.length} plaga${ids.length>1?'s':''} comunes:
+      </p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        ${ids.map(id => {
+          const p = PLAGAS[id];
+          return `<button onclick="setView('plaga', document.querySelectorAll('.view-tab')[0]); document.getElementById('view-plaga').style.display=''; document.getElementById('view-planta').style.display='none'; document.querySelectorAll('.view-tab')[0].classList.add('active'); document.querySelectorAll('.view-tab')[1].classList.remove('active'); mostrarPlaga('${id}', null);"
+            style="text-align:left;border:1px solid var(--borde);border-radius:var(--radio-card);padding:16px;background:white;cursor:pointer;transition:box-shadow .2s;"
+            onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow=''">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <strong>${p.nombre}</strong>
+              <span class="tipo-badge tipo-${p.tipo}">${tipoLabel[p.tipo]}</span>
+            </div>
+            <p style="font-size:13px;color:var(--texto-sec);margin:0;">${p.sintomas[0]}</p>
+          </button>`;
+        }).join('')}
+      </div>
+    `;
+  }
+
+
+  /* Selección inicial */
+  const primerTab = document.querySelector('.plaga-tab');
+  if (primerTab) primerTab.click();
+</script>
+</body>
+</html>

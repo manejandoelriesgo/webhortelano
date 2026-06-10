@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de temporadas del huerto mes a mes — HortelanoUrbano.es</title>
+  <meta name="description" content="Descubre qué sembrar, trasplantar y cosechar cada mes en tu huerto según tu zona climática española. Guía actualizada mes a mes con tareas y consejos prácticos.">
+  <link rel="canonical" href="https://hortelanourbano.es/guia-temporadas-huerto">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Guía de temporadas del huerto",
+    "url": "https://hortelanourbano.es/guia-temporadas-huerto",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Qué hacer en el huerto cada mes según zona climática española",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
+
+  <style>
+    .mes-tabs {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    @media(max-width:540px) { .mes-tabs { grid-template-columns: repeat(4, 1fr); } }
+
+    .mes-tab {
+      padding: 8px 4px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid var(--borde);
+      background: white;
+      cursor: pointer;
+      text-align: center;
+      transition: all .15s;
+      line-height: 1.3;
+    }
+    .mes-tab.active { border-color: var(--verde); background: var(--verde-bg); color: var(--verde); }
+    .mes-tab:hover  { border-color: var(--verde-claro); }
+
+    .actividad-section { margin-bottom: 28px; }
+    .actividad-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--borde);
+    }
+    .actividad-dot {
+      width: 14px; height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .dot-siembra    { background: #86EFAC; border: 2px solid #4ADE80; }
+    .dot-trasplante { background: #93C5FD; border: 2px solid #60A5FA; }
+    .dot-cosecha    { background: #FDE047; border: 2px solid #FACC15; }
+    .actividad-header h4 { font-size: 15px; font-weight: 700; margin: 0; }
+    .actividad-count { font-size: 12px; color: var(--texto-sec); margin-left: auto; }
+
+    .plantas-actividad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+    }
+    .planta-actividad-card {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      padding: 12px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: box-shadow .15s;
+    }
+    .planta-actividad-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .planta-actividad-card .pname { font-weight: 600; margin-bottom: 2px; }
+    .planta-actividad-card .pcat  { font-size: 11px; color: var(--texto-sec); }
+    .planta-actividad-card.siembra    { border-left: 3px solid #4ADE80; }
+    .planta-actividad-card.trasplante { border-left: 3px solid #60A5FA; }
+    .planta-actividad-card.cosecha    { border-left: 3px solid #FACC15; }
+
+    .empty-activity {
+      font-size: 13px;
+      color: var(--texto-sec);
+      padding: 12px 16px;
+      background: var(--fondo);
+      border-radius: 8px;
+      font-style: italic;
+    }
+
+    .tareas-mes {
+      background: #FFFBF0;
+      border: 1px solid #FDE68A;
+      border-radius: var(--radio-card);
+      padding: 20px 24px;
+      margin-top: 8px;
+    }
+    .tareas-mes h4 { color: #92400E; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
+    .tarea-item { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 14px; align-items: flex-start; }
+    .tarea-item:last-child { border-bottom: none; }
+    .tarea-icon { flex-shrink: 0; font-size: 16px; }
+
+    .resumen-mes {
+      background: linear-gradient(135deg, var(--verde), #1B4332);
+      color: white;
+      border-radius: var(--radio-card);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .resumen-mes h3 { color: white; margin-bottom: 6px; }
+    .resumen-mes p  { color: rgba(255,255,255,0.8); margin: 0; font-size: 14px; }
+    .resumen-stats  { display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap; }
+    .resumen-stat strong { display: block; font-size: 22px; font-weight: 700; }
+    .resumen-stat span   { font-size: 12px; color: rgba(255,255,255,0.7); }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué sembrar en primavera en España?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La primavera (marzo-mayo) es la mejor época para sembrar: tomates, pimientos, berenjenas, pepinos, calabacines, judías verdes, maíz dulce y melones. También es el momento de trasplantar lo que sembraste en semillero en invierno. Las aromáticas como la albahaca esperan a mayo cuando ya no hay riesgo de frío nocturno."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué plantar en otoño en el huerto urbano?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El otoño (agosto-octubre) es ideal para: lechugas, espinacas, acelgas, brócoli, coliflor, col, rábanos, zanahorias y guisantes (en zonas de invierno suave). Las aromáticas perennes (tomillo, romero, salvia) también se plantan bien en otoño. Es la época más productiva para zonas cálidas como la mediterránea y subtropical."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay plantas que se puedan cultivar todo el año?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En España, con las diferencias climáticas entre zonas, hay cultivos casi permanentes: las aromáticas perennes (romero, tomillo, salvia, menta) aguantan todo el año. Las lechugas se pueden escalonar para tener producción continua en zonas sin heladas. En zona subtropical (Canarias) prácticamente todos los cultivos son posibles en cualquier mes del año."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué varía tanto lo que puedo sembrar según la zona?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las heladas tardías en la zona Continental Fría pueden matar plantones de tomate en mayo, cuando en la zona Mediterránea ya llevan un mes en el exterior. La temperatura mínima del suelo es el factor determinante: el tomate no germina por debajo de 18°C en el sustrato."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué hago si no hay nada para sembrar en mi mes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los meses de invierno (enero-febrero) en zonas frías no son meses de siembra, pero sí de preparación: enmienda el sustrato, limpia los contenedores, planifica la temporada y haz los pedidos de semillas para tener todo listo en marzo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo sembrar en semillero aunque no sea la época de siembra al exterior?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. El semillero protegido (interior o invernadero) te permite adelantar 4-6 semanas. Si tienes un alféizar soleado, puedes empezar tomates y pimientos en febrero en cualquier zona, para trasplantarlos cuando llegue el buen tiempo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuándo debo empezar a preparar el sustrato para la temporada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dos meses antes de la primera siembra. En zonas Mediterráneas y Subtropicales, en febrero. En zonas Continentales y Atlánticas, en marzo. Renueva entre un 30-50% del sustrato de macetas antiguas y añade compost o abono de liberación lenta."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+    <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="calendario-siembra.html">Calendario</a></li>
+          <li><a href="planificador-huerto.html">Planificador</a></li>
+          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+        </ul>
+      </nav>
+  </div>
+</header>
+
+
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Guía de temporadas</span></nav>
+    <h1>Guía de temporadas del huerto</h1>
+    <p>Selecciona tu zona climática y el mes para ver qué sembrar, trasplantar y cosechar, más las tareas clave de ese período.</p>
+  </div>
+</div>
+  <div class="adsense-header" style="margin:0;">
+    <div class="ad-slot">Publicidad</div>
+  </div>
+
+
+<section style="padding:48px 0;">
+  <div class="container">
+    <div class="tool-wrapper">
+
+      <div class="form-row" style="margin-bottom:24px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="t-zona">Tu zona climática</label>
+          <select id="t-zona" onchange="render()">
+            <option value="">Selecciona zona...</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Mes</label>
+          <div id="mes-container"></div>
+        </div>
+      </div>
+
+      <div id="resultado-temporadas" class="hidden"></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="adsense-mid container">
+  <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;text-align:center;">Publicidad</div>
+</div>
+
+<section style="background:white;padding:64px 0;">
+  <div class="container" style="max-width:800px;">
+    <h2 style="margin-bottom:8px;">Preguntas frecuentes</h2>
+    <div class="faq-list mt-24">
+        <div class="faq-item">
+          <h4>¿Qué sembrar en primavera en España?</h4>
+          <p>La primavera (marzo-mayo) es la mejor época para sembrar: tomates, pimientos, berenjenas, pepinos, calabacines, judías verdes, maíz dulce y melones. También es el momento de trasplantar lo que sembraste en semillero en invierno. Las aromáticas como la albahaca esperan a mayo cuando ya no hay riesgo de frío nocturno.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Qué plantar en otoño en el huerto urbano?</h4>
+          <p>El otoño (agosto-octubre) es ideal para: lechugas, espinacas, acelgas, brócoli, coliflor, col, rábanos, zanahorias y guisantes (en zonas de invierno suave). Las aromáticas perennes (tomillo, romero, salvia) también se plantan bien en otoño. Es la época más productiva para zonas cálidas como la mediterránea y subtropical.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Hay plantas que se puedan cultivar todo el año?</h4>
+          <p>En España, con las diferencias climáticas entre zonas, hay cultivos casi permanentes: las aromáticas perennes (romero, tomillo, salvia, menta) aguantan todo el año. Las lechugas se pueden escalonar para tener producción continua en zonas sin heladas. En zona subtropical (Canarias) prácticamente todos los cultivos son posibles en cualquier mes del año.</p>
+        </div>
+
+      <div class="faq-item">
+        <h4>¿Por qué varía tanto lo que puedo sembrar según la zona?</h4>
+        <p>Las heladas tardías en la zona Continental Fría pueden matar plantones de tomate en mayo, cuando en la zona Mediterránea ya llevan un mes en el exterior. La temperatura mínima del suelo es el factor determinante: el tomate no germina por debajo de 18°C en el sustrato.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Qué hago si no hay nada para sembrar en mi mes?</h4>
+        <p>Los meses de invierno (enero-febrero) en zonas frías no son meses de siembra, pero sí de preparación: enmienda el sustrato, limpia los contenedores, planifica la temporada y haz los pedidos de semillas para tener todo listo en marzo.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Puedo sembrar en semillero aunque no sea la época de siembra al exterior?</h4>
+        <p>Sí. El semillero protegido (interior o invernadero) te permite adelantar 4-6 semanas. Si tienes un alféizar soleado, puedes empezar tomates y pimientos en febrero en cualquier zona, para trasplantarlos cuando llegue el buen tiempo.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Cuándo debo empezar a preparar el sustrato para la temporada?</h4>
+        <p>Dos meses antes de la primera siembra. En zonas Mediterráneas y Subtropicales, en febrero. En zonas Continentales y Atlánticas, en marzo. Renueva entre un 30-50% del sustrato de macetas antiguas y añade compost o abono de liberación lenta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo">HortelanoUrbano.es</a><p>Herramientas gratuitas para huerto urbano en España.</p></div>
+      <div class="footer-col"><h4>Herramientas</h4><ul>
+        <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
+        <li><a href="planificador-huerto.html">Planificador</a></li>
+        <li><a href="guia-temporadas.html">Guía de temporadas</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Información</h4><ul>
+        <li><a href="../aviso-legal.html">Aviso legal</a></li>
+        <li><a href="../privacidad.html">Privacidad</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 HortelanoUrbano.es</span></div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script>
+  /* ---- Constantes ---- */
+  const MESES_LABEL = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const MESES_FULL_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  let mesActual = new Date().getMonth();
+
+  /* ---- Tareas mensuales (estáticas, por estación) ---- */
+  const TAREAS_MES = {
+    0: [ // Enero
+      { icon: '📋', texto: 'Planifica la temporada: decide qué vas a cultivar y haz el pedido de semillas.' },
+      { icon: '🧹', texto: 'Limpia y desinfecta macetas, semilleros y herramientas antes de la temporada.' },
+      { icon: '🌱', texto: 'En zona Subtropical y Mediterránea: siembra en semillero protegido lechuga y espinaca.' },
+      { icon: '💧', texto: 'Reduce el riego al mínimo. La mayoría de plantas están en reposo o crecimiento lento.' },
+    ],
+    1: [ // Febrero
+      { icon: '🌱', texto: 'Empieza el semillero protegido de tomate, pimiento y berenjena (necesitan 6-8 semanas).' },
+      { icon: '🪴', texto: 'Renueva el sustrato de las macetas: reemplaza el 30-50% con sustrato fresco.' },
+      { icon: '🌿', texto: 'Planta ajo y cebolla directamente en maceta o suelo si el clima lo permite.' },
+      { icon: '🔍', texto: 'Revisa las plantas de invierno en busca de pulgón y caracoles: la humedad los favorece.' },
+    ],
+    2: [ // Marzo
+      { icon: '🌡️', texto: 'Comprueba la temperatura del suelo antes de trasplantar: mínimo 12°C para la mayoría.' },
+      { icon: '🌱', texto: 'Siembra directa de zanahoria, rábano y guisante en zonas templadas.' },
+      { icon: '🪴', texto: 'Prepara el sustrato: añade compost o abono de liberación lenta antes de sembrar.' },
+      { icon: '💧', texto: 'Aumenta progresivamente el riego según suba la temperatura.' },
+    ],
+    3: [ // Abril
+      { icon: '🍅', texto: 'Trasplanta los plantones de tomate, pimiento y berenjena si no hay riesgo de helada.' },
+      { icon: '🪲', texto: 'Primera revisión de plagas de primavera: pulgón y mosca blanca empiezan a activarse.' },
+      { icon: '🌿', texto: 'Siembra albahaca, perejil y cilantro directamente o en semillero.' },
+      { icon: '💧', texto: 'Empieza a regar con más frecuencia. Las plantas en crecimiento activo necesitan agua regular.' },
+    ],
+    4: [ // Mayo
+      { icon: '🍅', texto: 'Instala tutores y cañas para tomate, pepino y judía antes de que crezcan demasiado.' },
+      { icon: '✂️', texto: 'Empieza a podar chupones en los tomates: los brotes que salen entre el tallo y las ramas.' },
+      { icon: '🌱', texto: 'Siembra judía verde, pepino y calabacín directamente (cuando no haya heladas).' },
+      { icon: '🔍', texto: 'Vigila los pulgones en los brotes tiernos. Trata con jabón potásico a la primera señal.' },
+    ],
+    5: [ // Junio
+      { icon: '💧', texto: 'Aumenta la frecuencia de riego: en zonas semiáridas y mediterráneas puede necesitarse riego diario.' },
+      { icon: '🌞', texto: 'Riega siempre al atardecer (19-21h) para evitar evaporación y quemaduras por las gotas.' },
+      { icon: '🍓', texto: 'Primera cosecha de fresas, lechugas y rábanos. Recoge los frutos maduros para estimular producción.' },
+      { icon: '🌿', texto: 'Aplica mulching alrededor de las plantas para conservar la humedad del suelo.' },
+    ],
+    6: [ // Julio
+      { icon: '🔥', texto: 'Pico de calor: vigilar el riego diariamente. Un tomate sin agua 3 días en julio muere.' },
+      { icon: '🌿', texto: 'Aplica mulching (paja, corteza) si no lo hiciste en junio: reduce la temperatura del suelo 5-8°C.' },
+      { icon: '🍅', texto: 'Cosecha activa de tomate, pepino, calabacín y pimiento. Recoge antes de que se pasen.' },
+      { icon: '🌱', texto: 'Siembra una segunda tanda de lechuga y rábano para cosechar en septiembre.' },
+    ],
+    7: [ // Agosto
+      { icon: '🍅', texto: 'Máxima producción de verano. Cosecha cada 2-3 días para no sobrecargar las plantas.' },
+      { icon: '💧', texto: 'El riego automático es imprescindible si te vas de vacaciones. Programa o pide ayuda.' },
+      { icon: '🌱', texto: 'Siembra en semillero brócoli, coliflor y puerro para la temporada de otoño.' },
+      { icon: '✂️', texto: 'Elimina las hojas amarillas o enfermas: mejoran la ventilación y reducen los hongos.' },
+    ],
+    8: [ // Septiembre
+      { icon: '🍂', texto: 'Temperatura bajando: el momento ideal para una segunda temporada de lechuga, espinaca y acelga.' },
+      { icon: '🌱', texto: 'Trasplanta los plantones de brócoli, coliflor y puerro sembrados en agosto.' },
+      { icon: '🧄', texto: 'Prepara el terreno para la siembra de ajo en octubre: el mejor momento del año para plantarlo.' },
+      { icon: '🔍', texto: 'Revisa en busca de araña roja: el calor seco de septiembre la favorece. Trata con agua a presión.' },
+    ],
+    9: [ // Octubre
+      { icon: '🧄', texto: 'Planta los dientes de ajo directamente. Es el mejor momento del año para el ajo.' },
+      { icon: '🌱', texto: 'Siembra guisantes en zonas de invierno suave (Mediterránea, Subtropical).' },
+      { icon: '🧹', texto: 'Retira las plantas agotadas de verano. Limpia y renueva el sustrato.' },
+      { icon: '💧', texto: 'Reduce el riego progresivamente al bajar las temperaturas.' },
+    ],
+    10: [ // Noviembre
+      { icon: '🌿', texto: 'Siembra directa o trasplante de espinaca, acelga y canónigos en zonas templadas.' },
+      { icon: '🧹', texto: 'Última limpieza del año: recoge tutores, limpia macetas y guarda el material.' },
+      { icon: '🪴', texto: 'Mueve las macetas de aromáticas mediterráneas (romero, tomillo) a lugares más protegidos.' },
+      { icon: '📋', texto: 'Evalúa la temporada: qué funcionó, qué no, qué cambiarías el año próximo.' },
+    ],
+    11: [ // Diciembre
+      { icon: '🌿', texto: 'En zonas Subtropical y Mediterránea continúa la cosecha de espinaca, acelga y lechuga de invierno.' },
+      { icon: '💧', texto: 'Riego mínimo. La mayoría de plantas están en pausa. Solo riega si el sustrato está muy seco.' },
+      { icon: '🎁', texto: 'Haz tu lista de semillas para la próxima temporada. Los mejores lotes se agotan antes de febrero.' },
+      { icon: '🪴', texto: 'Protege con tela de forro polar o invernadero las plantas sensibles al frío.' },
+    ],
+  };
+
+  /* ---- Productos Amazon por estación ---- */
+  const AMAZON_TEMPORADA = {
+    primavera: [
+      { nombre: 'Kit semillas primavera', desc: 'Tomate, pimiento, pepino, calabacín', q: 'kit+semillas+primavera+huerto' },
+      { nombre: 'Sustrato para hortalizas', desc: 'Con perlita, para la renovación de macetas', q: 'sustrato+hortalizas+maceta+perlita' },
+      { nombre: 'Semilleros con tapa', desc: 'Para arrancar la temporada con buen pie', q: 'semillero+bandeja+tapa+germinacion' },
+    ],
+    verano: [
+      { nombre: 'Programador de riego', desc: 'Imprescindible para las vacaciones de verano', q: 'programador+riego+automatico+grifo' },
+      { nombre: 'Mulching / paja', desc: 'Reduce la temperatura del sustrato y el riego', q: 'mulching+paja+huerto+maceta' },
+      { nombre: 'Jabón potásico', desc: 'Contra pulgón y mosca blanca de verano', q: 'jabon+potasico+insecticida+ecologico' },
+    ],
+    otono: [
+      { nombre: 'Semillas de otoño-invierno', desc: 'Lechuga, espinaca, acelga, brócoli', q: 'semillas+otono+invierno+hortaliza' },
+      { nombre: 'Abono de liberación lenta', desc: 'Prepara el sustrato para la siguiente temporada', q: 'abono+liberacion+lenta+huerto' },
+      { nombre: 'Ajos para plantar', desc: 'Octubre es el mejor mes para plantar ajo', q: 'ajos+semilla+plantar+huerto' },
+    ],
+    invierno: [
+      { nombre: 'Tela de forro polar', desc: 'Protege las plantas de las heladas', q: 'tela+forro+polar+plantas+heladas' },
+      { nombre: 'Kit semillas temporada', desc: 'Haz el pedido ahora para tenerlo en febrero', q: 'kit+semillas+variadas+huerto+temporada' },
+      { nombre: 'Compost doméstico', desc: 'Para preparar el mejor abono durante el invierno', q: 'compostador+huerto+domestico' },
+    ],
+  };
+
+  /* ---- Poblar zonas ---- */
+  const selZona = document.getElementById('t-zona');
+  Object.entries(ZONAS).forEach(([id, z]) => {
+    const opt = document.createElement('option');
+    opt.value = id; opt.textContent = z.label || z.nombre;
+    selZona.appendChild(opt);
+  });
+
+  /* ---- Tabs de meses ---- */
+  const mesContainer = document.getElementById('mes-container');
+  const tabsDiv = document.createElement('div');
+  tabsDiv.className = 'mes-tabs';
+  MESES_LABEL.forEach((m, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'mes-tab' + (i === mesActual ? ' active' : '');
+    btn.textContent = m;
+    btn.onclick = () => { mesActual = i; document.querySelectorAll('.mes-tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); render(); };
+    tabsDiv.appendChild(btn);
+  });
+  mesContainer.appendChild(tabsDiv);
+
+  /* ---- Render principal ---- */
+  function render() {
+    const zonaId = selZona.value;
+    const out = document.getElementById('resultado-temporadas');
+    if (!zonaId) { out.classList.add('hidden'); return; }
+
+    const zona = ZONAS[zonaId];
+    const mes  = mesActual;
+
+    /* Clasificar plantas por actividad en este mes/zona */
+    const porActividad = { siembra: [], trasplante: [], cosecha: [] };
+    Object.entries(PLANTAS).forEach(([id, planta]) => {
+      const cal = getCalendarioCompleto(id, zonaId);
+      const tipo = cal[mes];
+      if (tipo && porActividad[tipo]) porActividad[tipo].push({ id, planta });
+    });
+
+    const total = porActividad.siembra.length + porActividad.trasplante.length + porActividad.cosecha.length;
+    const estacion = getEstacion(mes);
+    const tareas   = TAREAS_MES[mes] || [];
+
+    out.classList.remove('hidden');
+    out.innerHTML = `
+      <div class="resumen-mes">
+        <h3>${MESES_FULL_ES[mes]} en zona ${zona.nombre}</h3>
+        <p>${zona.descripcion}</p>
+        <div class="resumen-stats">
+          <div class="resumen-stat"><strong>${porActividad.siembra.length}</strong><span>Para sembrar</span></div>
+          <div class="resumen-stat"><strong>${porActividad.trasplante.length}</strong><span>Para trasplantar</span></div>
+          <div class="resumen-stat"><strong>${porActividad.cosecha.length}</strong><span>Para cosechar</span></div>
+        </div>
+      </div>
+
+      ${renderActividad('Sembrar en ' + MESES_LABEL[mes], porActividad.siembra, 'siembra', 'dot-siembra', 'No hay plantas para sembrar directamente este mes en esta zona.')}
+      ${renderActividad('Trasplantar en ' + MESES_LABEL[mes], porActividad.trasplante, 'trasplante', 'dot-trasplante', 'No hay trasplantes recomendados este mes.')}
+      ${renderActividad('Cosechar en ' + MESES_LABEL[mes], porActividad.cosecha, 'cosecha', 'dot-cosecha', 'No hay cosechas previstas este mes.')}
+
+      <div class="actividad-section">
+        <div class="actividad-header">
+          <span style="font-size:18px;">📋</span>
+          <h4>Tareas de ${MESES_FULL_ES[mes]}</h4>
+        </div>
+        <div class="tareas-mes">
+          <h4>Qué hacer este mes</h4>
+          ${tareas.map(t => `<div class="tarea-item"><span class="tarea-icon">${t.icon}</span><span>${t.texto}</span></div>`).join('')}
+        </div>
+      </div>
+
+      ${buildAmazonTemporada(estacion, mes)}
+    `;
+  }
+
+  function renderActividad(titulo, plantas, tipo, dotClass, mensajeVacio) {
+    return `
+      <div class="actividad-section">
+        <div class="actividad-header">
+          <div class="actividad-dot ${dotClass}"></div>
+          <h4>${titulo}</h4>
+          <span class="actividad-count">${plantas.length} planta${plantas.length !== 1 ? 's' : ''}</span>
+        </div>
+        ${plantas.length === 0
+          ? `<div class="empty-activity">${mensajeVacio}</div>`
+          : `<div class="plantas-actividad-grid">
+              ${plantas.map(({id, planta}) => `
+                <a href="calendario-siembra.html" style="text-decoration:none;color:inherit;">
+                  <div class="planta-actividad-card ${tipo}">
+                    <div class="pname">${planta.nombre}</div>
+                    <div class="pcat">${{hortaliza:'Hortaliza',fruta:'Fruta',aromatica:'Aromática'}[planta.categoria]}</div>
+                  </div>
+                </a>
+              `).join('')}
+            </div>`
+        }
+      </div>
+    `;
+  }
+
+  function getEstacion(mes) {
+    if (mes >= 2 && mes <= 4) return 'primavera';
+    if (mes >= 5 && mes <= 8) return 'verano';
+    if (mes >= 9 && mes <= 10) return 'otono';
+    return 'invierno';
+  }
+
+  function buildAmazonTemporada(estacion, mes) {
+    const prods = AMAZON_TEMPORADA[estacion] || [];
+    const labels = { primavera:'Primavera', verano:'Verano', otono:'Otoño', invierno:'Invierno' };
+    return `
+      <div style="margin-top:8px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+        <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Lo más útil en ${labels[estacion]}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+          ${prods.map(p => `
+            <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+              <div style="font-size:13px;font-weight:600;margin-bottom:4px;">${p.nombre}</div>
+              <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${p.desc}</div>
+              <a href="https://www.amazon.es/s?k=${p.q}&tag=imagu90-21" target="_blank" rel="noopener sponsored"
+                 style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                Ver en Amazon →
+              </a>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  /* Auto-seleccionar zona si solo hay una opción o seleccionar mediterránea por defecto */
+  const opts = selZona.options;
+  for (let i = 0; i < opts.length; i++) {
+    if (opts[i].value === 'mediterranea') { selZona.value = 'mediterranea'; break; }
+  }
+  render();
+</script>
+</body>
+</html>

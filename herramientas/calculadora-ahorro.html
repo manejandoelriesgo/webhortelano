@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de ahorro del huerto — Cuánto ahorras cultivando en casa — HortelanoUrbano.es</title>
+  <meta name="description" content="Calcula cuánto dinero ahorras al año cultivando tus propias hortalizas en casa vs comprarlo en el supermercado. Resultado personalizado y compartible.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hortelanourbano.es/calculadora-ahorro-huerto">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculadora de ahorro del huerto",
+    "url": "https://hortelanourbano.es/calculadora-ahorro-huerto",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Calcula cuánto ahorras al año cultivando en casa",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .planta-sel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .planta-sel-btn {
+      border: 2px solid var(--borde);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      background: white;
+      transition: all .15s;
+      user-select: none;
+    }
+    .planta-sel-btn.sel { border-color: var(--verde); background: var(--verde-bg); color: var(--verde); }
+    .planta-sel-btn:hover { border-color: var(--verde-claro); }
+    .planta-sel-btn .emoji { font-size: 20px; display: block; margin-bottom: 4px; }
+
+    .ahorro-resultado {
+      background: linear-gradient(135deg, #14532D, #166534);
+      color: white;
+      border-radius: var(--radio-card);
+      padding: 32px 28px;
+      margin-top: 28px;
+    }
+    .ahorro-resultado h3 { color: white; margin-bottom: 6px; font-size: 20px; }
+    .ahorro-resultado p  { color: rgba(255,255,255,0.75); margin-bottom: 24px; font-size: 14px; }
+
+    .ahorro-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .ahorro-stat {
+      background: rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .ahorro-stat strong { display: block; font-size: 32px; font-weight: 800; }
+    .ahorro-stat span   { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+    .ahorro-tabla { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ahorro-tabla th { text-align: left; padding: 8px 10px; color: rgba(255,255,255,0.6); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.2); font-size: 11px; text-transform: uppercase; }
+    .ahorro-tabla td { padding: 10px 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .ahorro-tabla tr:last-child td { border-bottom: none; font-weight: 700; }
+    .ahorro-tabla .val-verde { color: #86EFAC; font-weight: 700; }
+
+    .compartir-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+      margin-top: 16px;
+    }
+    .compartir-btn:hover { background: rgba(255,255,255,0.25); }
+
+    .cat-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--texto-sec); margin: 20px 0 8px;
+    }
+    .cat-label:first-of-type { margin-top: 0; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto se ahorra cultivando en casa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depende de las plantas y el espacio. Una tomatera cherry en una maceta de 15L puede producir entre 3 y 5 kg de tomates por temporada (valor aprox. 12-20€). Un balcón de 6 m² bien aprovechado con tomates, lechugas, pimientos y aromáticas puede ahorrar entre 200 y 400€ anuales frente al supermercado, descontando el coste de sustrato y semillas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es rentable económicamente tener un huerto urbano?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, especialmente con plantas de alto valor en supermercado: tomate cherry, fresas, albahaca fresca, rúcula y hierbas aromáticas. El primer año hay una inversión en macetas y sustrato (40-70€), pero desde el segundo año el ahorro neto es claro. Las aromáticas son las más rentables por m²: un tiesto de albahaca fresca cuesta 2-3€ en el super cada semana."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Merece la pena el huerto por ahorro económico o hay otras razones?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El ahorro económico es real pero no es la única razón. Cultivar en casa también aporta: productos más frescos y con más sabor (el tomate recién cogido no tiene comparación), control total sobre pesticidas, actividad relajante con beneficios demostrados para la salud mental, y conexión con el ciclo natural de los alimentos. Para muchas familias el valor total supera al puramente económico."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es realmente más barato cultivar que comprar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, especialmente a partir del segundo año cuando ya tienes el material básico (macetas, sustrato, herramientas). El primer año puedes gastar más de lo que ahorras, pero desde el segundo la relación se invierte claramente. Las aromáticas tienen el mejor retorno: una planta de albahaca de 2€ reemplaza meses de bolsas de 1€ en el súper."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta mantener el huerto al año?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Con el material ya comprado, el coste anual se limita a semillas (5–15€), sustrato de reposición (10–20€) y abono (5–15€). Total: entre 20 y 50€ al año para un huerto de balcón medio de 6–8 plantas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué no incluís el tiempo dedicado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El tiempo es subjetivo: para muchas personas el huerto es ocio, no trabajo. Si lo consideramos ocio (como leer o ver series), el ahorro es total. Si prefieres calcularlo como coste de oportunidad, descuenta unas 2–3 horas semanales en temporada activa."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+    <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="calendario-siembra.html">Calendario</a></li>
+          <li><a href="planificador-huerto.html">Planificador</a></li>
+          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+        </ul>
+      </nav>
+  </div>
+</header>
+
+
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Calculadora de ahorro</span></nav>
+    <h1>¿Cuánto ahorras cultivando en casa?</h1>
+    <p>Selecciona las plantas que quieres cultivar y calcula el ahorro real al año frente al supermercado.</p>
+  </div>
+</div>
+  <div class="adsense-header" style="margin:0;">
+    <div class="ad-slot">Publicidad</div>
+  </div>
+
+
+<section style="padding:48px 0;">
+  <div class="container">
+    <div class="tool-wrapper">
+
+      <div class="cat-label">Elige las plantas que quieres cultivar</div>
+      <div class="cat-label" style="color:var(--verde);font-size:11px;margin-top:-4px;">Puedes seleccionar varias</div>
+
+      <div class="cat-label">🥦 Hortalizas</div>
+      <div class="planta-sel-grid" id="grid-hortaliza"></div>
+
+      <div class="cat-label">🍓 Frutas</div>
+      <div class="planta-sel-grid" id="grid-fruta"></div>
+
+      <div class="cat-label">🌿 Aromáticas</div>
+      <div class="planta-sel-grid" id="grid-aromatica"></div>
+
+      <div style="margin-top:20px;" class="form-group">
+        <label for="ah-consumo">¿Con qué frecuencia consumes verdura? (personas en casa)</label>
+        <select id="ah-consumo" onchange="calcularAhorro()">
+          <option value="1">1 persona</option>
+          <option value="2" selected>2 personas</option>
+          <option value="3">3–4 personas</option>
+          <option value="5">5 o más</option>
+        </select>
+      </div>
+
+      <div id="resultado-ahorro"></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="adsense-mid container">
+  <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;text-align:center;">Publicidad</div>
+</div>
+
+<!-- FAQ SEO -->
+<section style="background:white;padding:64px 0;">
+  <div class="container" style="max-width:800px;">
+    <h2 style="margin-bottom:8px;">Preguntas frecuentes sobre el ahorro del huerto</h2>
+    <div class="faq-list mt-24">
+        <div class="faq-item">
+          <h4>¿Cuánto se ahorra cultivando en casa?</h4>
+          <p>Depende de las plantas y el espacio. Una tomatera cherry en una maceta de 15L puede producir entre 3 y 5 kg de tomates por temporada (valor aprox. 12-20€). Un balcón de 6 m² bien aprovechado con tomates, lechugas, pimientos y aromáticas puede ahorrar entre 200 y 400€ anuales frente al supermercado, descontando el coste de sustrato y semillas.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Es rentable económicamente tener un huerto urbano?</h4>
+          <p>Sí, especialmente con plantas de alto valor en supermercado: tomate cherry, fresas, albahaca fresca, rúcula y hierbas aromáticas. El primer año hay una inversión en macetas y sustrato (40-70€), pero desde el segundo año el ahorro neto es claro. Las aromáticas son las más rentables por m²: un tiesto de albahaca fresca cuesta 2-3€ en el super cada semana.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Merece la pena el huerto por ahorro económico o hay otras razones?</h4>
+          <p>El ahorro económico es real pero no es la única razón. Cultivar en casa también aporta: productos más frescos y con más sabor (el tomate recién cogido no tiene comparación), control total sobre pesticidas, actividad relajante con beneficios demostrados para la salud mental, y conexión con el ciclo natural de los alimentos. Para muchas familias el valor total supera al puramente económico.</p>
+        </div>
+
+      <div class="faq-item">
+        <h4>¿Es realmente más barato cultivar que comprar?</h4>
+        <p>Sí, especialmente a partir del segundo año cuando ya tienes el material básico (macetas, sustrato, herramientas). El primer año puedes gastar más de lo que ahorras, pero desde el segundo la relación se invierte claramente. Las aromáticas tienen el mejor retorno: una planta de albahaca de 2€ reemplaza meses de bolsas de 1€ en el súper.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Cuánto cuesta mantener el huerto al año?</h4>
+        <p>Con el material ya comprado, el coste anual se limita a semillas (5–15€), sustrato de reposición (10–20€) y abono (5–15€). Total: entre 20 y 50€ al año para un huerto de balcón medio de 6–8 plantas.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Por qué no incluís el tiempo dedicado?</h4>
+        <p>El tiempo es subjetivo: para muchas personas el huerto es ocio, no trabajo. Si lo consideramos ocio (como leer o ver series), el ahorro es total. Si prefieres calcularlo como coste de oportunidad, descuenta unas 2–3 horas semanales en temporada activa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo">HortelanoUrbano.es</a><p>Herramientas gratuitas para huerto urbano en España.</p></div>
+      <div class="footer-col"><h4>Herramientas</h4><ul>
+        <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
+        <li><a href="planificador-huerto.html">Planificador</a></li>
+        <li><a href="calculadora-ahorro.html">Calculadora de ahorro</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Información</h4><ul>
+        <li><a href="../materiales-huerto-urbano.html">¿Qué necesito?</a></li>
+        <li><a href="../aviso-legal.html">Aviso legal</a></li>
+        <li><a href="../privacidad.html">Privacidad</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 HortelanoUrbano.es</span></div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script>
+  /* -------- Precios medios supermercado España (€/kg o €/unidad) -------- */
+  const PRECIOS_SUPER = {
+    tomate:         { precio: 2.50, unidad: 'kg',  kg_planta_año: 4.5 },
+    tomate_cherry:  { precio: 4.00, unidad: 'kg',  kg_planta_año: 2.5 },
+    pimiento:       { precio: 2.80, unidad: 'kg',  kg_planta_año: 1.5 },
+    pimiento_padron:{ precio: 3.50, unidad: 'kg',  kg_planta_año: 1.2 },
+    berenjena:      { precio: 1.80, unidad: 'kg',  kg_planta_año: 2.0 },
+    calabacin:      { precio: 1.50, unidad: 'kg',  kg_planta_año: 4.0 },
+    pepino:         { precio: 1.20, unidad: 'kg',  kg_planta_año: 3.0 },
+    lechuga:        { precio: 1.20, unidad: 'ud',  kg_planta_año: 8   },
+    espinaca:       { precio: 2.80, unidad: 'kg',  kg_planta_año: 1.5 },
+    acelga:         { precio: 1.50, unidad: 'kg',  kg_planta_año: 2.5 },
+    zanahoria:      { precio: 1.00, unidad: 'kg',  kg_planta_año: 1.0 },
+    radano:         { precio: 1.50, unidad: 'manojo', kg_planta_año: 6 },
+    cebolla:        { precio: 0.90, unidad: 'kg',  kg_planta_año: 1.0 },
+    ajo:            { precio: 4.00, unidad: 'kg',  kg_planta_año: 0.5 },
+    puerro:         { precio: 1.60, unidad: 'kg',  kg_planta_año: 1.0 },
+    judia_verde:    { precio: 3.50, unidad: 'kg',  kg_planta_año: 0.8 },
+    guisante:       { precio: 3.00, unidad: 'kg',  kg_planta_año: 0.5 },
+    haba:           { precio: 2.20, unidad: 'kg',  kg_planta_año: 0.6 },
+    patata:         { precio: 0.80, unidad: 'kg',  kg_planta_año: 2.0 },
+    calabaza:       { precio: 1.20, unidad: 'kg',  kg_planta_año: 5.0 },
+    fresa:          { precio: 4.50, unidad: 'kg',  kg_planta_año: 0.8 },
+    freson:         { precio: 5.00, unidad: 'kg',  kg_planta_año: 1.0 },
+    frambuesa:      { precio: 8.00, unidad: 'kg',  kg_planta_año: 1.5 },
+    arandano:       { precio: 9.00, unidad: 'kg',  kg_planta_año: 2.0 },
+    sandia:         { precio: 0.90, unidad: 'kg',  kg_planta_año: 6.0 },
+    melon:          { precio: 1.20, unidad: 'kg',  kg_planta_año: 4.0 },
+    higo:           { precio: 4.00, unidad: 'kg',  kg_planta_año: 3.0 },
+    limon:          { precio: 1.50, unidad: 'kg',  kg_planta_año: 4.0 },
+    granada:        { precio: 3.00, unidad: 'kg',  kg_planta_año: 3.0 },
+    mora:           { precio: 7.00, unidad: 'kg',  kg_planta_año: 2.0 },
+    albahaca:       { precio: 1.20, unidad: 'bolsa', kg_planta_año: 12 },
+    perejil:        { precio: 0.90, unidad: 'bolsa', kg_planta_año: 20 },
+    cilantro:       { precio: 1.20, unidad: 'bolsa', kg_planta_año: 12 },
+    romero:         { precio: 1.00, unidad: 'bolsa', kg_planta_año: 15 },
+    tomillo:        { precio: 1.00, unidad: 'bolsa', kg_planta_año: 15 },
+    menta:          { precio: 1.20, unidad: 'bolsa', kg_planta_año: 20 },
+    hierbabuena:    { precio: 1.20, unidad: 'bolsa', kg_planta_año: 20 },
+    oregano:        { precio: 1.50, unidad: 'bolsa', kg_planta_año: 10 },
+    cebollino:      { precio: 1.20, unidad: 'bolsa', kg_planta_año: 18 },
+    laurel:         { precio: 0.80, unidad: 'bolsa', kg_planta_año: 8  },
+  };
+
+  const EMOJIS = {
+    tomate:'🍅', tomate_cherry:'🍅', pimiento:'🫑', pimiento_padron:'🫑',
+    berenjena:'🍆', calabacin:'🥒', pepino:'🥒', lechuga:'🥬', espinaca:'🥬',
+    acelga:'🥬', zanahoria:'🥕', radano:'🫚', cebolla:'🧅', ajo:'🧄',
+    puerro:'🌿', judia_verde:'🫘', guisante:'🫛', haba:'🫘', patata:'🥔',
+    calabaza:'🎃', fresa:'🍓', freson:'🍓', frambuesa:'🍇', arandano:'🫐',
+    sandia:'🍉', melon:'🍈', higo:'🌰', limon:'🍋', granada:'🍎', mora:'🍇',
+    albahaca:'🌿', perejil:'🌿', cilantro:'🌿', romero:'🌿', tomillo:'🌿',
+    menta:'🌿', hierbabuena:'🌿', oregano:'🌿', cebollino:'🌿', laurel:'🌿',
+  };
+
+  const seleccionadas = new Set();
+
+  function buildGrid(cat, containerId) {
+    const container = document.getElementById(containerId);
+    getPlantasPorCategoria(cat).forEach(([id, p]) => {
+      if (!PRECIOS_SUPER[id]) return;
+      const btn = document.createElement('div');
+      btn.className = 'planta-sel-btn';
+      btn.dataset.id = id;
+      btn.innerHTML = `<span class="emoji">${EMOJIS[id]||'🌱'}</span>${p.nombre}`;
+      btn.onclick = () => togglePlanta(id, btn);
+      container.appendChild(btn);
+    });
+  }
+
+  buildGrid('hortaliza', 'grid-hortaliza');
+  buildGrid('fruta',     'grid-fruta');
+  buildGrid('aromatica', 'grid-aromatica');
+
+  function togglePlanta(id, btn) {
+    if (seleccionadas.has(id)) {
+      seleccionadas.delete(id);
+      btn.classList.remove('sel');
+    } else {
+      seleccionadas.add(id);
+      btn.classList.add('sel');
+    }
+    calcularAhorro();
+  }
+
+  function calcularAhorro() {
+    const out = document.getElementById('resultado-ahorro');
+    if (seleccionadas.size === 0) { out.innerHTML = ''; return; }
+
+    const personas = parseInt(document.getElementById('ah-consumo').value);
+    const factor   = personas <= 1 ? 0.6 : personas <= 2 ? 1 : personas <= 4 ? 1.7 : 2.4;
+
+    const coste_semillas = seleccionadas.size * 4;
+    const coste_mantenimiento = Math.min(seleccionadas.size * 3, 45);
+
+    let totalAhorro = 0;
+    const filas = [];
+
+    seleccionadas.forEach(id => {
+      const p = PRECIOS_SUPER[id];
+      const planta = PLANTAS[id];
+      if (!p) return;
+      const ahorro_bruto = p.precio * p.kg_planta_año * factor;
+      const coste_planta = (coste_semillas + coste_mantenimiento) / seleccionadas.size;
+      const ahorro_neto  = ahorro_bruto - coste_planta;
+      totalAhorro += ahorro_neto;
+      filas.push({ nombre: planta.nombre, ahorro_bruto, coste_planta, ahorro_neto, p });
+    });
+
+    filas.sort((a,b) => b.ahorro_neto - a.ahorro_neto);
+
+    const top3Prods = [...seleccionadas]
+      .slice(0,3)
+      .flatMap(id => PLANTAS[id]?.amazon ? Object.values(PLANTAS[id].amazon).slice(0,1) : []);
+
+    out.innerHTML = `
+      <div class="ahorro-resultado">
+        <h3>Tu huerto te ahorra ${Math.round(totalAhorro)}€ al año</h3>
+        <p>${seleccionadas.size} planta${seleccionadas.size>1?'s':''} seleccionada${seleccionadas.size>1?'s':''} · ${personas} persona${personas>1?'s':''}</p>
+
+        <div class="ahorro-stats">
+          <div class="ahorro-stat">
+            <strong>${Math.round(totalAhorro)}€</strong>
+            <span>Ahorro neto/año</span>
+          </div>
+          <div class="ahorro-stat">
+            <strong>${Math.round(totalAhorro/12)}€</strong>
+            <span>Ahorro mensual</span>
+          </div>
+          <div class="ahorro-stat">
+            <strong>${coste_semillas + coste_mantenimiento}€</strong>
+            <span>Coste mantenimiento/año</span>
+          </div>
+          <div class="ahorro-stat">
+            <strong>${filas[0]?.nombre.split(' ')[0] || '—'}</strong>
+            <span>Más rentable</span>
+          </div>
+        </div>
+
+        <table class="ahorro-tabla">
+          <thead>
+            <tr>
+              <th>Planta</th>
+              <th>Valor cosecha/año</th>
+              <th>Coste cultivo</th>
+              <th>Ahorro neto</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filas.map(f => `
+              <tr>
+                <td>${f.nombre}</td>
+                <td>${f.ahorro_bruto.toFixed(0)}€ (${f.p.kg_planta_año} ${f.p.unidad} × ${f.p.precio}€)</td>
+                <td>${f.coste_planta.toFixed(0)}€</td>
+                <td class="val-verde">+${f.ahorro_neto.toFixed(0)}€</td>
+              </tr>
+            `).join('')}
+            <tr>
+              <td><strong>TOTAL</strong></td>
+              <td></td>
+              <td><strong>${(coste_semillas + coste_mantenimiento)}€</strong></td>
+              <td class="val-verde"><strong>+${Math.round(totalAhorro)}€</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="compartir-btn" onclick="compartirResultado(${Math.round(totalAhorro)})">
+          📤 Compartir resultado
+        </button>
+      </div>
+
+      ${top3Prods.length ? `
+      <div style="margin-top:16px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+        <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Lo que necesitas para empezar</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;">
+          ${top3Prods.map(prod => `
+            <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+              <div style="font-size:13px;font-weight:600;margin-bottom:4px;">${prod.nombre}</div>
+              <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+              <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+                 target="_blank" rel="noopener sponsored"
+                 style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                Ver en Amazon →
+              </a>
+            </div>
+          `).join('')}
+        </div>
+      </div>` : ''}
+    `;
+  }
+
+  function compartirResultado(ahorro) {
+    const plantas = [...seleccionadas].map(id => PLANTAS[id]?.nombre).join(', ');
+    const texto = `Mi huerto urbano me ahorra ${ahorro}€ al año cultivando: ${plantas}. Calcula el tuyo en HortelanoUrbano.es`;
+    if (navigator.share) {
+      navigator.share({ title: 'Mi ahorro del huerto', text: texto, url: 'https://hortelanourbano.es/calculadora-ahorro-huerto' });
+    } else {
+      navigator.clipboard?.writeText(texto + '\nhttps://hortelanourbano.es/calculadora-ahorro-huerto')
+        .then(() => alert('¡Resultado copiado al portapapeles!'));
+    }
+  }
+</script>
+</body>
+</html>

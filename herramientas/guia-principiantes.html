@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía para principiantes — Cómo empezar un huerto urbano desde cero — HortelanoUrbano.es</title>
+  <meta name="description" content="Guía completa para empezar tu primer huerto urbano: las 5 plantas más fáciles, cuánto cuesta arrancar, errores que evitar y un plan semana a semana para tus primeros 3 meses.">
+  <link rel="canonical" href="https://hortelanourbano.es/guia-principiantes-huerto-urbano">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Guía para principiantes — Cómo empezar un huerto urbano",
+    "url": "https://hortelanourbano.es/guia-principiantes-huerto-urbano",
+    "description": "Las 5 plantas más fáciles para empezar, calculadora de inversión inicial, plan semana a semana y errores más comunes"
+  }
+  </script>
+
+  <style>
+    /* ---- Plantas fáciles ---- */
+    .plantas-faciles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .planta-facil-card {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio-card);
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .planta-facil-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .planta-facil-header {
+      background: var(--verde-bg);
+      padding: 20px 16px 16px;
+      text-align: center;
+    }
+    .planta-facil-emoji { font-size: 40px; display: block; margin-bottom: 8px; }
+    .planta-facil-header h3 { font-size: 16px; margin-bottom: 4px; }
+    .planta-facil-dif {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 12px;
+      background: #DCFCE7; color: #15803D;
+    }
+    .planta-facil-body { padding: 16px; }
+    .planta-facil-body p { font-size: 13px; color: var(--texto-sec); margin-bottom: 12px; line-height: 1.5; }
+    .planta-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .planta-dato { background: var(--fondo); border-radius: 6px; padding: 8px; text-align: center; }
+    .planta-dato strong { display: block; font-size: 13px; font-weight: 700; }
+    .planta-dato span   { font-size: 11px; color: var(--texto-sec); }
+    .planta-razon { font-size: 12px; color: var(--verde); font-weight: 600; font-style: italic; }
+
+    /* ---- Calculadora inversión ---- */
+    .calc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media(max-width:540px) { .calc-row { grid-template-columns: 1fr; } }
+    .calc-resultado {
+      background: linear-gradient(135deg, #92400E, #B45309);
+      color: white;
+      border-radius: var(--radio-card);
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+    .calc-resultado h3 { color: white; margin-bottom: 4px; }
+    .calc-resultado p  { color: rgba(255,255,255,0.8); margin-bottom: 16px; font-size: 14px; }
+    .calc-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+    .calc-stat strong { display: block; font-size: 28px; font-weight: 700; }
+    .calc-stat span   { font-size: 12px; color: rgba(255,255,255,0.7); }
+    .calc-desglose {
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      font-size: 13px;
+    }
+    .calc-desglose div { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.15); display: flex; justify-content: space-between; }
+    .calc-desglose div:last-child { border-bottom: none; font-weight: 700; }
+
+    /* ---- Plan semana a semana ---- */
+    .plan-semanas { margin-top: 28px; }
+    .semana-bloque {
+      border-left: 3px solid var(--verde-claro);
+      padding: 0 0 28px 20px;
+      position: relative;
+    }
+    .semana-bloque:last-child { padding-bottom: 0; }
+    .semana-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--verde);
+      position: absolute;
+      left: -8px;
+      top: 4px;
+    }
+    .semana-titulo {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--verde);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 6px;
+    }
+    .semana-bloque h4 { font-size: 17px; margin-bottom: 10px; }
+    .semana-tareas { list-style: none; padding: 0; }
+    .semana-tareas li {
+      font-size: 14px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--borde);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .semana-tareas li:last-child { border-bottom: none; }
+    .tarea-check { color: var(--verde-claro); font-weight: 700; flex-shrink: 0; }
+
+    /* ---- Errores comunes ---- */
+    .errores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .error-card {
+      background: white;
+      border: 1px solid #FECDD3;
+      border-left: 4px solid #F87171;
+      border-radius: var(--radio-card);
+      padding: 18px 20px;
+    }
+    .error-card h4 { font-size: 14px; font-weight: 700; color: #BE123C; margin-bottom: 6px; }
+    .error-card p  { font-size: 13px; color: var(--texto-sec); margin: 0; line-height: 1.5; }
+    .error-num { font-size: 22px; font-weight: 700; color: #FECDD3; float: right; margin-left: 8px; }
+
+    /* ---- Kit starter ---- */
+    .kit-starter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .kit-starter-item {
+      background: white;
+      border: 1px solid #FDE68A;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .kit-starter-item .ks-icon { font-size: 24px; margin-bottom: 8px; }
+    .kit-starter-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .kit-starter-item .ks-precio { font-size: 11px; color: var(--texto-sec); margin-bottom: 8px; }
+    .kit-starter-item a {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #C2410C;
+      text-decoration: none;
+      border: 1px solid #FCA5A5;
+      border-radius: 6px;
+      padding: 4px 8px;
+      text-align: center;
+      background: #FFF7ED;
+    }
+
+    /* ---- Secciones ---- */
+    .guia-section { padding: 56px 0; border-bottom: 1px solid var(--borde); }
+    .guia-section:last-child { border-bottom: none; }
+    .section-number {
+      display: inline-block;
+      width: 32px; height: 32px;
+      background: var(--verde);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 16px;
+      text-align: center;
+      line-height: 32px;
+      margin-bottom: 12px;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué plantas son más fáciles de cultivar para principiantes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las 5 plantas más fáciles y con mayor tasa de éxito para principiantes son: 1) Rábano: germina en 3 días, cosecha en 25. 2) Lechuga: muy agradecida y visible. 3) Cebolleta: prácticamente indestructible. 4) Tomate cherry: muy productivo y satisfactorio. 5) Albahaca: aromática que se usa mucho en cocina y crece rápido. Evita al principio: melón, sandía, puerro y brócoli."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tiempo necesita un huerto urbano al día?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Con un balcón de 4-6 m² necesitas entre 10 y 20 minutos al día: regar, revisar posibles plagas y hacer alguna tarea puntual. En temporada alta (verano) puede subir a 20-30 minutos. En invierno baja a 5-10 minutos. La inversión de tiempo mayor se concentra en las siembras (1-2 horas cada 2-3 meses) y los trasplantes de temporada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el error más común al empezar un huerto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El error número 1 es regar demasiado. La mayoría de plantas de huerto mueren por exceso de agua, no por falta. El signo de que riegas demasiado es que las hojas se ponen amarillas desde abajo. Comprueba siempre si el sustrato está húmedo antes de regar: mete el dedo 2-3 cm y solo riega si está seco. El segundo error más común es usar tierra de jardín en macetas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta montar un huerto urbano desde cero?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El kit mínimo para empezar cuesta entre 40 y 70€: semillas (5-10€), sustrato (8-15€), 2-3 macetas (15-20€), regadera (8-12€) y guantes (5-8€). El segundo año el coste baja mucho porque las macetas y herramientas ya las tienes. Si tienes un balcón de 6 m² y lo aprovechas bien, puedes recuperar la inversión inicial en la primera temporada."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+    <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="calendario-siembra.html">Calendario</a></li>
+          <li><a href="planificador-huerto.html">Planificador</a></li>
+          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+        </ul>
+      </nav>
+  </div>
+</header>
+
+
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Guía para principiantes</span></nav>
+    <h1>Cómo empezar un huerto urbano desde cero</h1>
+    <p>Las 5 plantas más fáciles, cuánto cuesta arrancar, un plan semana a semana para los primeros 3 meses y los errores que comete casi todo el mundo.</p>
+  </div>
+</div>
+  <div class="adsense-header" style="margin:0;">
+    <div class="ad-slot">Publicidad</div>
+  </div>
+
+
+<div class="container" style="max-width:900px;">
+
+  <!-- ===== SECCIÓN 1: PLANTAS FÁCILES ===== -->
+  <section class="guia-section">
+    <div class="section-number">1</div>
+    <h2 style="margin-bottom:6px;">Las 5 plantas más fáciles para empezar</h2>
+    <p style="color:var(--texto-sec);font-size:16px;">Seleccionadas por su tasa de éxito alta, el poco espacio que necesitan y la rápida satisfacción que dan. Empieza con estas y luego ya amplías.</p>
+
+    <div class="plantas-faciles-grid">
+
+      <div class="planta-facil-card">
+        <div class="planta-facil-header">
+          <span class="planta-facil-emoji">🍅</span>
+          <h3>Tomate cherry</h3>
+          <span class="planta-facil-dif">Fácil</span>
+        </div>
+        <div class="planta-facil-body">
+          <p>La planta más gratificante para empezar. Produce mucho en poco espacio, los frutos se ven madurar día a día y aguanta bastante bien los descuidos.</p>
+          <div class="planta-datos">
+            <div class="planta-dato"><strong>12–15 L</strong><span>maceta mínima</span></div>
+            <div class="planta-dato"><strong>60–80 días</strong><span>hasta cosecha</span></div>
+          </div>
+          <div class="planta-razon">"Una sola planta puede dar 2–3 kg de tomates en verano"</div>
+        </div>
+      </div>
+
+      <div class="planta-facil-card">
+        <div class="planta-facil-header">
+          <span class="planta-facil-emoji">🥬</span>
+          <h3>Lechuga</h3>
+          <span class="planta-facil-dif">Muy fácil</span>
+        </div>
+        <div class="planta-facil-body">
+          <p>La más rápida de todas. En 40 días ya estás comiendo. No necesita mucho sol ni mucha profundidad de sustrato. Perfecta para balcones con poca luz.</p>
+          <div class="planta-datos">
+            <div class="planta-dato"><strong>15–20 cm</strong><span>profundidad</span></div>
+            <div class="planta-dato"><strong>30–45 días</strong><span>hasta cosecha</span></div>
+          </div>
+          <div class="planta-razon">"Puedes hacer siembras escalonadas y cosechar todo el año"</div>
+        </div>
+      </div>
+
+      <div class="planta-facil-card">
+        <div class="planta-facil-header">
+          <span class="planta-facil-emoji">🌿</span>
+          <h3>Albahaca</h3>
+          <span class="planta-facil-dif">Fácil</span>
+        </div>
+        <div class="planta-facil-body">
+          <p>La aromática más agradecida. Cabe en cualquier maceta pequeña, huele bien, es decorativa y vas cortando hojas según necesites. Ideal para el alféizar de la cocina.</p>
+          <div class="planta-datos">
+            <div class="planta-dato"><strong>1–2 L</strong><span>maceta mínima</span></div>
+            <div class="planta-dato"><strong>3–4 semanas</strong><span>primeras hojas</span></div>
+          </div>
+          <div class="planta-razon">"Cuanto más cortas, más crece. Evita que florezca"</div>
+        </div>
+      </div>
+
+      <div class="planta-facil-card">
+        <div class="planta-facil-header">
+          <span class="planta-facil-emoji">🥕</span>
+          <h3>Rábano</h3>
+          <span class="planta-facil-dif">Muy fácil</span>
+        </div>
+        <div class="planta-facil-body">
+          <p>El más rápido del huerto: de semilla a mesa en 25 días. No falla casi nunca, no necesita trasplante y los niños se emocionan viéndolo crecer tan deprisa.</p>
+          <div class="planta-datos">
+            <div class="planta-dato"><strong>15 cm</strong><span>profundidad</span></div>
+            <div class="planta-dato"><strong>20–30 días</strong><span>hasta cosecha</span></div>
+          </div>
+          <div class="planta-razon">"El mejor para ver resultados rápidos y ganar confianza"</div>
+        </div>
+      </div>
+
+      <div class="planta-facil-card">
+        <div class="planta-facil-header">
+          <span class="planta-facil-emoji">🌿</span>
+          <h3>Perejil</h3>
+          <span class="planta-facil-dif">Fácil</span>
+        </div>
+        <div class="planta-facil-body">
+          <p>Resistente, perenne y muy útil en cocina. Una vez establecido aguanta el frío, el calor y los olvidos de riego. Dura varios años en la misma maceta.</p>
+          <div class="planta-datos">
+            <div class="planta-dato"><strong>2–3 L</strong><span>maceta mínima</span></div>
+            <div class="planta-dato"><strong>4–6 semanas</strong><span>primeras hojas</span></div>
+          </div>
+          <div class="planta-razon">"Puede germinar lento (2–3 semanas). No te rindas"</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;background:var(--verde-bg);border-radius:var(--radio-card);">
+      <strong style="color:var(--verde);">Consejo:</strong> <span style="font-size:14px;">Empieza con solo 2 o 3 plantas tu primera temporada. Es mejor tener 3 plantas sanas que 10 en caos. Cuando domines el riego y los ciclos, amplía.</span>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 2: CALCULADORA INVERSIÓN ===== -->
+  <section class="guia-section">
+    <div class="section-number">2</div>
+    <h2 style="margin-bottom:6px;">¿Cuánto cuesta arrancar?</h2>
+    <p style="color:var(--texto-sec);font-size:16px;">Calcula la inversión inicial según tu espacio y el número de plantas. La mayoría se sorprende de lo barato que es empezar bien.</p>
+
+    <div style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);padding:28px;margin-top:24px;">
+      <div class="calc-row">
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="c-tipo">Tipo de espacio</label>
+          <select id="c-tipo" onchange="calcularInversion()">
+            <option value="balcon">Balcón (macetas)</option>
+            <option value="terraza">Terraza (macetas grandes)</option>
+            <option value="suelo">Huerto en suelo</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="c-plantas">Número de plantas</label>
+          <select id="c-plantas" onchange="calcularInversion()">
+            <option value="3">3 plantas (ideal para empezar)</option>
+            <option value="5" selected>5 plantas</option>
+            <option value="8">8 plantas</option>
+            <option value="12">12 plantas</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-row">
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="c-riego">¿Riego manual o automático?</label>
+          <select id="c-riego" onchange="calcularInversion()">
+            <option value="manual">Manual (regadera)</option>
+            <option value="automatico">Automático (goteo + programador)</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label for="c-herramientas">¿Ya tienes herramientas básicas?</label>
+          <select id="c-herramientas" onchange="calcularInversion()">
+            <option value="no">No, necesito comprar todo</option>
+            <option value="si">Sí, tengo lo básico</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="calc-resultado-div"></div>
+    </div>
+
+    <div style="margin-top:20px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+      <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Kit de inicio recomendado</div>
+      <div class="kit-starter-grid">
+        <div class="kit-starter-item">
+          <div class="ks-icon">🌱</div>
+          <h4>Semillas variadas</h4>
+          <div class="ks-precio">3–8 €</div>
+          <a href="https://www.amazon.es/s?k=semillas+variadas+huerto+principiante&tag=imagu90-21" target="_blank" rel="noopener sponsored">Ver en Amazon →</a>
+        </div>
+        <div class="kit-starter-item">
+          <div class="ks-icon">🪴</div>
+          <h4>Sustrato hortalizas</h4>
+          <div class="ks-precio">8–15 €</div>
+          <a href="https://www.amazon.es/s?k=sustrato+hortalizas+maceta+perlita&tag=imagu90-21" target="_blank" rel="noopener sponsored">Ver en Amazon →</a>
+        </div>
+        <div class="kit-starter-item">
+          <div class="ks-icon">🏺</div>
+          <h4>Macetas de cultivo</h4>
+          <div class="ks-precio">6–20 €</div>
+          <a href="https://www.amazon.es/s?k=maceta+cultivo+hortalizas+drenaje&tag=imagu90-21" target="_blank" rel="noopener sponsored">Ver en Amazon →</a>
+        </div>
+        <div class="kit-starter-item">
+          <div class="ks-icon">💧</div>
+          <h4>Regadera</h4>
+          <div class="ks-precio">8–18 €</div>
+          <a href="https://www.amazon.es/s?k=regadera+pitorro+largo+balcon&tag=imagu90-21" target="_blank" rel="noopener sponsored">Ver en Amazon →</a>
+        </div>
+        <div class="kit-starter-item">
+          <div class="ks-icon">🪚</div>
+          <h4>Paleta de jardín</h4>
+          <div class="ks-precio">4–10 €</div>
+          <a href="https://www.amazon.es/s?k=paleta+trasplante+jardineria&tag=imagu90-21" target="_blank" rel="noopener sponsored">Ver en Amazon →</a>
+        </div>
+        <div class="kit-starter-item">
+          <div class="ks-icon">🪣</div>
+          <h4>Semillero con tapa</h4>
+          <div class="ks-precio">4–8 €</div>
+          <a href="https://www.amazon.es/s?k=semillero+bandeja+tapa+germinacion&tag=imagu90-21" target="_blank" rel="noopener sponsored">Ver en Amazon →</a>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--texto-sec);margin-top:16px;margin-bottom:0;">Guía completa con todo el equipamiento en: <a href="../materiales-huerto-urbano.html" style="color:var(--verde);font-weight:600;">Materiales y kits →</a></p>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 3: PLAN SEMANA A SEMANA ===== -->
+  <section class="guia-section">
+    <div class="section-number">3</div>
+    <h2 style="margin-bottom:6px;">Plan semana a semana — Primeros 3 meses</h2>
+    <p style="color:var(--texto-sec);font-size:16px;">Lo que tienes que hacer exactamente cada semana para no perderte y ver resultados reales.</p>
+
+    <div class="plan-semanas" style="margin-top:32px;">
+
+      <div class="semana-bloque">
+        <div class="semana-dot"></div>
+        <div class="semana-titulo">Semana 1</div>
+        <h4>Prepara y siembra</h4>
+        <ul class="semana-tareas">
+          <li><span class="tarea-check">✓</span>Compra sustrato específico para hortalizas (no tierra de jardín genérica).</li>
+          <li><span class="tarea-check">✓</span>Llena las macetas dejando 2–3 cm hasta el borde. Riega hasta que drene por abajo.</li>
+          <li><span class="tarea-check">✓</span>Siembra rábanos directamente en la maceta: pon las semillas a 1 cm de profundidad, cada 5 cm.</li>
+          <li><span class="tarea-check">✓</span>Si es primavera-verano: siembra tomate cherry y lechuga en semillero pequeño.</li>
+          <li><span class="tarea-check">✓</span>Etiqueta cada maceta con el nombre y la fecha de siembra.</li>
+        </ul>
+      </div>
+
+      <div class="semana-bloque">
+        <div class="semana-dot"></div>
+        <div class="semana-titulo">Semana 2</div>
+        <h4>Primeras señales de vida</h4>
+        <ul class="semana-tareas">
+          <li><span class="tarea-check">✓</span>Los rábanos deberían empezar a asomar. Si no ves nada a los 7 días, comprueba que la semilla no esté muy enterrada.</li>
+          <li><span class="tarea-check">✓</span>Riega cada 2 días si el clima es suave; a diario si hace calor. Introduce el dedo 2 cm: si está húmedo, espera.</li>
+          <li><span class="tarea-check">✓</span>Revisa el envés de las primeras hojas: si hay pulgones (puntos verdes o negros), actúa ya.</li>
+          <li><span class="tarea-check">✓</span>Si sembraste en semillero, asegúrate de que tiene luz directa al menos 6 horas al día.</li>
+        </ul>
+      </div>
+
+      <div class="semana-bloque">
+        <div class="semana-dot"></div>
+        <div class="semana-titulo">Semanas 3–4</div>
+        <h4>Primeros cuidados y cosecha rápida</h4>
+        <ul class="semana-tareas">
+          <li><span class="tarea-check">✓</span>¡Primera cosecha! Los rábanos están listos cuando el bulbo asoma sobre el suelo y tiene 2–3 cm de diámetro.</li>
+          <li><span class="tarea-check">✓</span>Siembra una segunda tanda de rábanos para tener cosecha continua.</li>
+          <li><span class="tarea-check">✓</span>Las plántulas de lechuga en semillero deberían tener 2–3 hojas verdaderas: ya casi listas para trasplantar.</li>
+          <li><span class="tarea-check">✓</span>Añade una primera dosis ligera de fertilizante líquido si el sustrato lleva más de 3 semanas.</li>
+        </ul>
+      </div>
+
+      <div class="semana-bloque">
+        <div class="semana-dot"></div>
+        <div class="semana-titulo">Semanas 5–6</div>
+        <h4>Trasplanta y expande</h4>
+        <ul class="semana-tareas">
+          <li><span class="tarea-check">✓</span>Trasplanta las lechugas del semillero a su maceta definitiva. Riega bien después del trasplante.</li>
+          <li><span class="tarea-check">✓</span>Las plántulas de tomate cherry (si las sembraste) deberían tener 10–15 cm: trasplanta a maceta de 12L mínimo.</li>
+          <li><span class="tarea-check">✓</span>Instala el tutor o caña bambú al lado del tomate ahora, antes de que crezca más.</li>
+          <li><span class="tarea-check">✓</span>Compra o siembra albahaca: ponla cerca del tomate (son buenas compañeras).</li>
+        </ul>
+      </div>
+
+      <div class="semana-bloque">
+        <div class="semana-dot"></div>
+        <div class="semana-titulo">Semanas 7–8</div>
+        <h4>Crecimiento visible y primeras flores</h4>
+        <ul class="semana-tareas">
+          <li><span class="tarea-check">✓</span>Las lechugas ya se pueden empezar a cosechar hoja a hoja (sin arrancar la planta entera).</li>
+          <li><span class="tarea-check">✓</span>El tomate debería tener sus primeras flores amarillas. ¡Bien! Eso significa que viene la cosecha.</li>
+          <li><span class="tarea-check">✓</span>Poda los chupones del tomate: los brotes que salen en la axila entre el tallo principal y una rama lateral.</li>
+          <li><span class="tarea-check">✓</span>En verano: aumenta el riego. Un tomate con flores necesita agua constante o los frutos se agrietan.</li>
+        </ul>
+      </div>
+
+      <div class="semana-bloque">
+        <div class="semana-dot"></div>
+        <div class="semana-titulo">Semanas 9–12</div>
+        <h4>Primera cosecha real</h4>
+        <ul class="semana-tareas">
+          <li><span class="tarea-check">✓</span>Los primeros tomates cherry deberían estar madurando. Cosecha cuando estén bien rojos y se desprendan solos.</li>
+          <li><span class="tarea-check">✓</span>Mantén el riego regular: la irregularidad ahora provoca que los tomates se agrieten o desarrollen podredumbre apical.</li>
+          <li><span class="tarea-check">✓</span>Siembra una nueva tanda de lechuga para seguir teniendo ensalada cuando acabe la temporada del tomate.</li>
+          <li><span class="tarea-check">✓</span>Evalúa: ¿qué ha ido bien? ¿qué cambiarías? Anótalo para la próxima temporada.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 4: 5 ERRORES FATALES ===== -->
+  <section class="guia-section">
+    <div class="section-number">4</div>
+    <h2 style="margin-bottom:6px;">Los 5 errores que arruinan un huerto urbano</h2>
+    <p style="color:var(--texto-sec);font-size:16px;">Estos cinco errores matan plantas, queman dinero y hacen que la gente abandone. La solución es sencilla si la conoces antes.</p>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:28px;">
+
+      <div style="background:white;border:1px solid #FECDD3;border-left:4px solid #EF4444;border-radius:var(--radio-card);padding:20px 24px;">
+        <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;">
+            <div style="font-size:11px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">Error #1</div>
+            <h4 style="font-size:17px;margin-bottom:8px;color:#DC2626;">Regar demasiado (mata más plantas que la sequía)</h4>
+            <p style="font-size:14px;color:var(--texto-sec);margin-bottom:12px;line-height:1.6;">Las raíces asfixiadas por exceso de agua se pudren silenciosamente. La planta se ve mustia igual que si le faltara agua, así que la gente riega más… y la mata del todo.</p>
+            <div style="background:#FEF2F2;border-radius:8px;padding:12px 14px;font-size:13px;"><strong style="color:#15803D;">✓ Solución:</strong> Introduce el dedo 2–3 cm en el sustrato antes de regar. Si está húmedo, espera. Un medidor de humedad te lo dice en 1 segundo.</div>
+          </div>
+          <div style="width:160px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:8px;padding:14px;flex-shrink:0;">
+            <div style="font-size:11px;font-weight:700;color:#92400E;margin-bottom:6px;">Producto clave</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Medidor de humedad del sustrato</div>
+            <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;">Evita el error #1. 5–12€.</div>
+            <a href="https://www.amazon.es/s?k=medidor+humedad+sustrato+plantas&tag=imagu90-21" target="_blank" rel="noopener sponsored" style="display:block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:5px 8px;background:#FFF7ED;text-align:center;">Ver en Amazon →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:white;border:1px solid #FECDD3;border-left:4px solid #EF4444;border-radius:var(--radio-card);padding:20px 24px;">
+        <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;">
+            <div style="font-size:11px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">Error #2</div>
+            <h4 style="font-size:17px;margin-bottom:8px;color:#DC2626;">Usar tierra de jardín en macetas</h4>
+            <p style="font-size:14px;color:var(--texto-sec);margin-bottom:12px;line-height:1.6;">La tierra de jardín se compacta en maceta, no drena y se vuelve como cemento. Las raíces no pueden crecer y la planta se estresa desde el primer día.</p>
+            <div style="background:#FEF2F2;border-radius:8px;padding:12px 14px;font-size:13px;"><strong style="color:#15803D;">✓ Solución:</strong> Usa siempre sustrato específico para hortalizas, que incluye perlita o fibra de coco para drenar bien.</div>
+          </div>
+          <div style="width:160px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:8px;padding:14px;flex-shrink:0;">
+            <div style="font-size:11px;font-weight:700;color:#92400E;margin-bottom:6px;">Producto clave</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Sustrato hortalizas con perlita</div>
+            <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;">El correcto para macetas. 8–18€.</div>
+            <a href="https://www.amazon.es/s?k=sustrato+hortalizas+perlita+maceta&tag=imagu90-21" target="_blank" rel="noopener sponsored" style="display:block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:5px 8px;background:#FFF7ED;text-align:center;">Ver en Amazon →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:white;border:1px solid #FECDD3;border-left:4px solid #EF4444;border-radius:var(--radio-card);padding:20px 24px;">
+        <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;">
+            <div style="font-size:11px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">Error #3</div>
+            <h4 style="font-size:17px;margin-bottom:8px;color:#DC2626;">Macetas demasiado pequeñas</h4>
+            <p style="font-size:14px;color:var(--texto-sec);margin-bottom:12px;line-height:1.6;">Un tomate en una maceta de 5 litros produce poco, se estresa con el calor y hay que regar dos veces al día en verano. La maceta pequeña es el freno número uno de la producción.</p>
+            <div style="background:#FEF2F2;border-radius:8px;padding:12px 14px;font-size:13px;"><strong style="color:#15803D;">✓ Solución:</strong> Tomate/pimiento → 15–20L mínimo. Lechuga/aromáticas → 5L. Zanahoria → maceta profunda ≥30 cm.</div>
+          </div>
+          <div style="width:160px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:8px;padding:14px;flex-shrink:0;">
+            <div style="font-size:11px;font-weight:700;color:#92400E;margin-bottom:6px;">Producto clave</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Maceta 20L con drenaje</div>
+            <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;">La medida correcta. 10–20€.</div>
+            <a href="https://www.amazon.es/s?k=maceta+20+litros+cultivo+hortalizas+drenaje&tag=imagu90-21" target="_blank" rel="noopener sponsored" style="display:block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:5px 8px;background:#FFF7ED;text-align:center;">Ver en Amazon →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:white;border:1px solid #FECDD3;border-left:4px solid #EF4444;border-radius:var(--radio-card);padding:20px 24px;">
+        <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;">
+            <div style="font-size:11px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">Error #4</div>
+            <h4 style="font-size:17px;margin-bottom:8px;color:#DC2626;">No revisar el envés de las hojas</h4>
+            <p style="font-size:14px;color:var(--texto-sec);margin-bottom:12px;line-height:1.6;">El pulgón, la mosca blanca y la araña roja se instalan en el envés. Una revisión semanal de 5 minutos permite actuar cuando la plaga es pequeña y fácil de eliminar.</p>
+            <div style="background:#FEF2F2;border-radius:8px;padding:12px 14px;font-size:13px;"><strong style="color:#15803D;">✓ Solución:</strong> Al primer síntoma aplica jabón potásico al 1–2%. Es barato, ecológico y muy efectivo si actúas pronto.</div>
+          </div>
+          <div style="width:160px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:8px;padding:14px;flex-shrink:0;">
+            <div style="font-size:11px;font-weight:700;color:#92400E;margin-bottom:6px;">Producto clave</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Jabón potásico concentrado</div>
+            <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;">Insecticida ecológico. 5–10€.</div>
+            <a href="https://www.amazon.es/s?k=jabon+potasico+concentrado+huerto+ecologico&tag=imagu90-21" target="_blank" rel="noopener sponsored" style="display:block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:5px 8px;background:#FFF7ED;text-align:center;">Ver en Amazon →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:white;border:1px solid #FECDD3;border-left:4px solid #EF4444;border-radius:var(--radio-card);padding:20px 24px;">
+        <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;">
+            <div style="font-size:11px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;">Error #5</div>
+            <h4 style="font-size:17px;margin-bottom:8px;color:#DC2626;">Ignorar el calendario de siembra</h4>
+            <p style="font-size:14px;color:var(--texto-sec);margin-bottom:12px;line-height:1.6;">Sembrar tomate en noviembre o lechuga en agosto garantiza el fracaso. Las plantas tienen su ventana de tiempo y saltársela no es un error de principiante, es un error de información.</p>
+            <div style="background:#FEF2F2;border-radius:8px;padding:12px 14px;font-size:13px;"><strong style="color:#15803D;">✓ Solución:</strong> Consulta el <a href="calendario-siembra.html" style="color:var(--verde);font-weight:600;">Calendario de siembra</a> de esta web antes de sembrar. Está adaptado a tu zona climática real.</div>
+          </div>
+          <div style="width:160px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:8px;padding:14px;flex-shrink:0;">
+            <div style="font-size:11px;font-weight:700;color:#92400E;margin-bottom:6px;">Producto clave</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Semillero con tapa y termómetro</div>
+            <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;">Controla la germinación. 8–15€.</div>
+            <a href="https://www.amazon.es/s?k=semillero+bandeja+tapa+germinacion+termometro&tag=imagu90-21" target="_blank" rel="noopener sponsored" style="display:block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:5px 8px;background:#FFF7ED;text-align:center;">Ver en Amazon →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN 5: ERRORES COMUNES (lista completa) ===== -->
+  <section class="guia-section">
+    <div class="section-number">5</div>
+    <h2 style="margin-bottom:6px;">Los 8 errores que comete casi todo el mundo</h2>
+    <p style="color:var(--texto-sec);font-size:16px;">La buena noticia: todos son evitables sabiendo de antemano.</p>
+
+    <div class="errores-grid">
+
+      <div class="error-card">
+        <span class="error-num">01</span>
+        <h4>Regar demasiado</h4>
+        <p>El error más común. Las raíces asfixiadas por exceso de agua matan más plantas que la sequía. La regla: introduce el dedo 2 cm. Si está húmedo, espera.</p>
+      </div>
+
+      <div class="error-card">
+        <span class="error-num">02</span>
+        <h4>Usar tierra de jardín en macetas</h4>
+        <p>La tierra del jardín o de campo se compacta en maceta y no drena. Usa siempre sustrato específico para hortalizas con perlita o arena.</p>
+      </div>
+
+      <div class="error-card">
+        <span class="error-num">03</span>
+        <h4>Sembrar todo a la vez</h4>
+        <p>Si siembras 20 lechugas el mismo día, tendrás 20 lechugas listas a la vez y no podrás comerlas todas. Siembra en tandas cada 2–3 semanas.</p>
+      </div>
+
+      <div class="error-card">
+        <span class="error-num">04</span>
+        <h4>Macetas demasiado pequeñas</h4>
+        <p>Un tomate en una maceta de 5 litros nunca dará buena cosecha. Respeta las medidas mínimas: tomate 12–15L, pimiento 10L, lechuga 3–5L.</p>
+      </div>
+
+      <div class="error-card">
+        <span class="error-num">05</span>
+        <h4>Ignorar el calendario de siembra</h4>
+        <p>Sembrar tomate en noviembre o lechuga en agosto en plena canícula no funciona. Cada planta tiene su época óptima. Usa el calendario de siembra de esta web.</p>
+      </div>
+
+      <div class="error-card">
+        <span class="error-num">06</span>
+        <h4>No revisar el envés de las hojas</h4>
+        <p>El pulgón, la mosca blanca y la araña roja se instalan primero en el envés. Una revisión semanal de 5 minutos te permite actuar cuando la plaga es pequeña y fácil de eliminar.</p>
+      </div>
+
+      <div class="error-card">
+        <span class="error-num">07</span>
+        <h4>Regar con agua muy fría en verano</h4>
+        <p>El agua del grifo en verano puede estar a 10–15°C. El contraste térmico estresa las raíces. Deja el agua en un cubo al sol unas horas antes de regar.</p>
+      </div>
+
+      <div class="error-card">
+        <span class="error-num">08</span>
+        <h4>Abandonar tras el primer fracaso</h4>
+        <p>Se calcula que el 60% de los huerteros principiantes pierde una o varias plantas el primer año. Es parte del proceso. Lo importante es entender por qué pasó y corregirlo.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<div class="adsense-mid container">
+  <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;text-align:center;">Publicidad</div>
+</div>
+
+<!-- CTA planificador -->
+<section style="background:var(--verde-bg);padding:64px 0;">
+  <div class="container text-center">
+    <h2 style="margin-bottom:16px;">¿Listo para tu primer plan?</h2>
+    <p style="color:var(--texto-sec);font-size:18px;max-width:560px;margin:0 auto 32px;">Usa el planificador para ver exactamente qué plantas encajan en tu espacio y zona climática, con las fechas de siembra y lista de compra.</p>
+    <a href="planificador-huerto.html" class="btn btn-primary" style="font-size:17px;padding:14px 36px;">Crear mi plan de huerto gratis</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo">HortelanoUrbano.es</a><p>Herramientas gratuitas para huerto urbano en España.</p></div>
+      <div class="footer-col"><h4>Herramientas</h4><ul>
+        <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
+        <li><a href="planificador-huerto.html">Planificador</a></li>
+        <li><a href="guia-principiantes.html">Guía principiantes</a></li>
+        <li><a href="guia-plagas.html">Guía de plagas</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Información</h4><ul>
+        <li><a href="../materiales-huerto-urbano.html">Materiales y kits</a></li>
+        <li><a href="../aviso-legal.html">Aviso legal</a></li>
+        <li><a href="../privacidad.html">Privacidad</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 HortelanoUrbano.es</span></div>
+  </div>
+</footer>
+
+<script>
+  /* ---- Calculadora de inversión ---- */
+  const COSTES = {
+    balcon:   { maceta: 12, sustrato: 8,  extras: 5  },
+    terraza:  { maceta: 18, sustrato: 12, extras: 8  },
+    suelo:    { maceta: 0,  sustrato: 20, extras: 15 },
+  };
+  const HERRAMIENTAS_COSTE = 35;
+  const RIEGO = { manual: 12, automatico: 55 };
+  const SEMILLAS_POR_PLANTA = 4;
+
+  function calcularInversion() {
+    const tipo        = document.getElementById('c-tipo').value;
+    const numPlantas  = parseInt(document.getElementById('c-plantas').value);
+    const riego       = document.getElementById('c-riego').value;
+    const tieneHerr   = document.getElementById('c-herramientas').value === 'si';
+    const c = COSTES[tipo];
+
+    const coste_semillas    = numPlantas * SEMILLAS_POR_PLANTA;
+    const coste_macetas     = tipo !== 'suelo' ? Math.ceil(numPlantas / 2) * c.maceta : 0;
+    const coste_sustrato    = c.sustrato + Math.max(0, (numPlantas - 3)) * 3;
+    const coste_riego       = RIEGO[riego];
+    const coste_herramientas = tieneHerr ? 0 : HERRAMIENTAS_COSTE;
+    const coste_extras      = c.extras;
+
+    const total = coste_semillas + coste_macetas + coste_sustrato + coste_riego + coste_herramientas + coste_extras;
+    const coste_por_planta = Math.round(total / numPlantas);
+
+    const tipoLabel = { balcon:'balcón', terraza:'terraza', suelo:'huerto en suelo' };
+    const riegoLabel = { manual:'riego manual', automatico:'riego automático' };
+
+    document.getElementById('calc-resultado-div').innerHTML = `
+      <div class="calc-resultado">
+        <h3>Inversión estimada para tu huerto</h3>
+        <p>${numPlantas} plantas · ${tipoLabel[tipo]} · ${riegoLabel[riego]}</p>
+        <div class="calc-stats">
+          <div class="calc-stat"><strong>${total}€</strong><span>Total inicial</span></div>
+          <div class="calc-stat"><strong>~${coste_por_planta}€</strong><span>Por planta</span></div>
+          <div class="calc-stat"><strong>${riego === 'automatico' ? '~15€' : '~25€'}</strong><span>Mantenimiento/año</span></div>
+        </div>
+        <div class="calc-desglose">
+          <div><span>Semillas (${numPlantas} plantas)</span><span>${coste_semillas}€</span></div>
+          ${tipo !== 'suelo' ? `<div><span>Macetas</span><span>${coste_macetas}€</span></div>` : ''}
+          <div><span>Sustrato</span><span>${coste_sustrato}€</span></div>
+          <div><span>${riegoLabel[riego]}</span><span>${coste_riego}€</span></div>
+          ${!tieneHerr ? `<div><span>Herramientas básicas</span><span>${coste_herramientas}€</span></div>` : ''}
+          <div><span>Extras (etiquetas, abono inicial…)</span><span>${coste_extras}€</span></div>
+          <div><span>TOTAL</span><span>${total}€</span></div>
+        </div>
+      </div>
+    `;
+  }
+
+  calcularInversion();
+</script>
+</body>
+</html>

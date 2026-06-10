@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de espacio para el huerto — Cuántas plantas caben en tu balcón — HortelanoUrbano.es</title>
+  <meta name="description" content="Calcula cuántas plantas caben en tu balcón, terraza o huerto. Introduce las medidas de tu espacio y descubre cuántos tomates, lechugas o pimientos puedes cultivar.">
+  <link rel="canonical" href="https://hortelanourbano.es/calculadora-espacio-huerto">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculadora de espacio para el huerto",
+    "url": "https://hortelanourbano.es/calculadora-espacio-huerto",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Calcula cuántas plantas caben en tu espacio disponible según las medidas del huerto",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
+
+  <style>
+    /* ---- Selector de plantas ---- */
+    .espacio-plant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding: 4px;
+      margin-top: 8px;
+    }
+    .espacio-plant-opt {
+      border: 2px solid var(--borde);
+      border-radius: 8px;
+      padding: 8px 6px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      background: white;
+      transition: all .15s;
+      user-select: none;
+    }
+    .espacio-plant-opt:hover { border-color: var(--verde-claro); }
+    .espacio-plant-opt.sel  { border-color: var(--verde); background: var(--verde-bg); color: var(--verde); }
+    .espacio-plant-opt .p-m2 { display: block; font-size: 10px; font-weight: 400; color: var(--texto-sec); margin-top: 2px; }
+    .espacio-plant-opt.sel .p-m2 { color: var(--verde); }
+
+    /* ---- Resultado ---- */
+    .espacio-resultado {
+      border-radius: var(--radio-card);
+      overflow: hidden;
+      margin-top: 28px;
+      border: 1px solid var(--borde);
+    }
+    .espacio-res-header {
+      background: linear-gradient(135deg, var(--verde), #1B4332);
+      color: white;
+      padding: 24px 28px;
+    }
+    .espacio-res-header h3 { color: white; margin-bottom: 4px; }
+    .espacio-res-header p  { color: rgba(255,255,255,0.8); margin: 0; font-size: 14px; }
+
+    .espacio-gauge-wrap {
+      padding: 24px 28px;
+      background: white;
+      border-bottom: 1px solid var(--borde);
+    }
+    .gauge-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+    .gauge-bar   { height: 16px; background: var(--fondo); border-radius: 8px; overflow: hidden; }
+    .gauge-fill  { height: 100%; border-radius: 8px; transition: width .4s ease; }
+    .gauge-ok   { background: linear-gradient(90deg, #4ADE80, #22C55E); }
+    .gauge-warn { background: linear-gradient(90deg, #FDE047, #EAB308); }
+    .gauge-over { background: linear-gradient(90deg, #F87171, #EF4444); }
+
+    .espacio-plantas-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: white;
+    }
+    .espacio-plantas-table th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--texto-sec);
+      text-transform: uppercase;
+      padding: 10px 16px;
+      border-bottom: 2px solid var(--borde);
+    }
+    .espacio-plantas-table td { padding: 12px 16px; border-bottom: 1px solid var(--borde); vertical-align: middle; }
+    .espacio-plantas-table tr:last-child td { border-bottom: none; }
+    .num-plantas-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .num-btn {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--borde);
+      background: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .1s;
+      color: var(--verde);
+      flex-shrink: 0;
+    }
+    .num-btn:hover { background: var(--verde-bg); }
+    .num-val { font-size: 15px; font-weight: 700; width: 20px; text-align: center; }
+    .m2-badge {
+      font-size: 11px;
+      color: var(--texto-sec);
+      background: var(--fondo);
+      padding: 2px 7px;
+      border-radius: 12px;
+      margin-left: 6px;
+    }
+    .aviso-espacio {
+      background: #FFF1F2;
+      border: 1px solid #FECDD3;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #BE123C;
+      margin: 0 16px 16px;
+    }
+    .aviso-ok {
+      background: #F0FDF4;
+      border: 1px solid #86EFAC;
+      color: #15803D;
+    }
+
+    /* ---- Visualización gráfica ---- */
+    .viz-section {
+      padding: 20px 28px;
+      background: var(--fondo);
+      border-bottom: 1px solid var(--borde);
+    }
+    .viz-section h4 { font-size: 14px; font-weight: 700; color: var(--texto-sec); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 14px; }
+    .viz-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .viz-planta {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .viz-planta.cabe  { background: #DCFCE7; }
+    .viz-planta.justo { background: #FEF9C3; }
+    .viz-planta.sobra { background: #FFE4E6; opacity: 0.5; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué se puede cultivar en un balcón de 4 m²?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Con 4 m² puedes tener un huerto completo: 2-3 tomateras cherry (macetas 15L), 1 pimiento o berenjena, 6-8 lechugas, 1 mata de albahaca, 1 de perejil y 1 de tomillo. Usa macetas rectangulares en la barandilla para las aromáticas y aprovecha la verticalidad con tutores. Es espacio suficiente para tener verdura fresca durante 8-9 meses al año."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Se puede tener huerto en un balcón con sombra?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, pero adaptando las plantas. Con menos de 4 horas de sol directo olvida los tomates, pimientos y berenjenas. Las mejores opciones para sombra parcial son: lechugas (aguantan bien), espinacas, acelgas, rúcula, menta, perejil y cebolletas. Con 4-6 horas de sol puedes añadir fresas y guisantes. El factor limitante no es el espacio sino la luz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué la calculadora da menos espacio del que parece?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las medidas del espacio de cultivo útil son menores que las del balcón o terraza total. Hay que descontar pasillos de acceso (mínimo 60 cm para pasar), el espacio que ocupan las propias macetas y los márgenes contra las paredes. En un balcón de 6 m², lo aprovechable para macetas suele ser 3–4 m²."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo puedo cultivar más en el mismo espacio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La verticalidad es la clave. Una estantería de cultivo vertical triplica el espacio efectivo. También ayuda combinar plantas altas (tomate, pepino) con plantas bajas (lechuga, rábano) que aprovechan la sombra de las primeras. Las aromáticas caben en los huecos entre macetas grandes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué pasa si pongo más plantas de las que caben?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las plantas compiten por luz, agua y nutrientes. El resultado son plantas débiles, con poca producción y más susceptibles a plagas. Es mejor tener 5 plantas sanas con buena cosecha que 10 plantas raquíticas que no producen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿El espacio mínimo indicado es por planta o para toda la maceta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Es el espacio mínimo por planta en suelo o en maceta. Puedes poner varias plantas en una maceta grande si la maceta tiene suficiente sustrato: una jardinera de 60 cm × 30 cm admite 2–3 lechugas o 4–6 rábanos."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
+    <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="calendario-siembra.html">Calendario</a></li>
+          <li><a href="planificador-huerto.html">Planificador</a></li>
+          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
+          <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
+        </ul>
+      </nav>
+  </div>
+</header>
+
+
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Calculadora de espacio</span></nav>
+    <h1>Calculadora de espacio para el huerto</h1>
+    <p>Introduce las medidas de tu balcón, terraza o huerto y las plantas que quieres cultivar. Calcula cuántas caben y si tu espacio es suficiente.</p>
+  </div>
+</div>
+  <div class="adsense-header" style="margin:0;">
+    <div class="ad-slot">Publicidad</div>
+  </div>
+
+
+<section style="padding:48px 0;">
+  <div class="container">
+    <div class="tool-wrapper">
+
+      <!-- Paso 1: Medidas del espacio -->
+      <div style="margin-bottom:28px;">
+        <div style="font-size:12px;font-weight:700;color:var(--texto-sec);text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">1. Medidas de tu espacio</div>
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Modo de entrada</label>
+            <select id="modo-medida" onchange="cambiarModo(this.value)">
+              <option value="total">Introduzco los m² totales</option>
+              <option value="dim">Introduzco largo × ancho</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;" id="grupo-tipo">
+            <label for="tipo-espacio">Tipo de espacio</label>
+            <select id="tipo-espacio" onchange="calcular()">
+              <option value="balcon">Balcón</option>
+              <option value="terraza">Terraza</option>
+              <option value="huerto">Huerto en suelo</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="fila-total" class="form-row" style="margin-top:16px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="m2-total">Metros cuadrados disponibles</label>
+            <input type="number" id="m2-total" min="0.5" max="500" step="0.5" value="4" oninput="calcular()">
+          </div>
+          <div style="display:flex;align-items:flex-end;padding-bottom:12px;font-size:13px;color:var(--texto-sec);">
+            <span>Por ejemplo: un balcón típico de 6 m² deja unos 4 m² útiles para macetas.</span>
+          </div>
+        </div>
+
+        <div id="fila-dim" class="form-row" style="margin-top:16px;display:none;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="m-largo">Largo (metros)</label>
+            <input type="number" id="m-largo" min="0.5" max="50" step="0.1" value="3" oninput="calcularDesdeMetros()">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="m-ancho">Ancho (metros)</label>
+            <input type="number" id="m-ancho" min="0.3" max="20" step="0.1" value="1.5" oninput="calcularDesdeMetros()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 2: Plantas -->
+      <div style="margin-bottom:24px;">
+        <div style="font-size:12px;font-weight:700;color:var(--texto-sec);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;">2. Plantas que quieres cultivar</div>
+        <p style="font-size:13px;color:var(--texto-sec);margin-bottom:12px;">Selecciona las plantas y ajusta cuántas de cada una quieres. El cálculo se actualiza en tiempo real.</p>
+        <div class="filter-tabs" style="margin-bottom:10px;">
+          <button class="filter-tab active" onclick="filtrarPlantas(this,'todas')">Todas</button>
+          <button class="filter-tab" onclick="filtrarPlantas(this,'hortaliza')">Hortalizas</button>
+          <button class="filter-tab" onclick="filtrarPlantas(this,'fruta')">Frutas</button>
+          <button class="filter-tab" onclick="filtrarPlantas(this,'aromatica')">Aromáticas</button>
+        </div>
+        <div class="espacio-plant-grid" id="plant-grid"></div>
+      </div>
+
+      <!-- Resultado -->
+      <div id="resultado-espacio" class="hidden"></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="adsense-mid container">
+  <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;text-align:center;">Publicidad</div>
+</div>
+
+<section style="background:white;padding:64px 0;">
+  <div class="container" style="max-width:800px;">
+    <h2 style="margin-bottom:8px;">Cómo aprovechar mejor el espacio</h2>
+    <div class="faq-list mt-24">
+        <div class="faq-item">
+          <h4>¿Qué se puede cultivar en un balcón de 4 m²?</h4>
+          <p>Con 4 m² puedes tener un huerto completo: 2-3 tomateras cherry (macetas 15L), 1 pimiento o berenjena, 6-8 lechugas, 1 mata de albahaca, 1 de perejil y 1 de tomillo. Usa macetas rectangulares en la barandilla para las aromáticas y aprovecha la verticalidad con tutores. Es espacio suficiente para tener verdura fresca durante 8-9 meses al año.</p>
+        </div>
+        <div class="faq-item">
+          <h4>¿Se puede tener huerto en un balcón con sombra?</h4>
+          <p>Sí, pero adaptando las plantas. Con menos de 4 horas de sol directo olvida los tomates, pimientos y berenjenas. Las mejores opciones para sombra parcial son: lechugas (aguantan bien), espinacas, acelgas, rúcula, menta, perejil y cebolletas. Con 4-6 horas de sol puedes añadir fresas y guisantes. El factor limitante no es el espacio sino la luz.</p>
+        </div>
+
+      <div class="faq-item">
+        <h4>¿Por qué la calculadora da menos espacio del que parece?</h4>
+        <p>Las medidas del espacio de cultivo útil son menores que las del balcón o terraza total. Hay que descontar pasillos de acceso (mínimo 60 cm para pasar), el espacio que ocupan las propias macetas y los márgenes contra las paredes. En un balcón de 6 m², lo aprovechable para macetas suele ser 3–4 m².</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Cómo puedo cultivar más en el mismo espacio?</h4>
+        <p>La verticalidad es la clave. Una estantería de cultivo vertical triplica el espacio efectivo. También ayuda combinar plantas altas (tomate, pepino) con plantas bajas (lechuga, rábano) que aprovechan la sombra de las primeras. Las aromáticas caben en los huecos entre macetas grandes.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿Qué pasa si pongo más plantas de las que caben?</h4>
+        <p>Las plantas compiten por luz, agua y nutrientes. El resultado son plantas débiles, con poca producción y más susceptibles a plagas. Es mejor tener 5 plantas sanas con buena cosecha que 10 plantas raquíticas que no producen.</p>
+      </div>
+      <div class="faq-item">
+        <h4>¿El espacio mínimo indicado es por planta o para toda la maceta?</h4>
+        <p>Es el espacio mínimo por planta en suelo o en maceta. Puedes poner varias plantas en una maceta grande si la maceta tiene suficiente sustrato: una jardinera de 60 cm × 30 cm admite 2–3 lechugas o 4–6 rábanos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="logo">HortelanoUrbano.es</a><p>Herramientas gratuitas para huerto urbano en España.</p></div>
+      <div class="footer-col"><h4>Herramientas</h4><ul>
+        <li><a href="calculadora-espacio.html">Calculadora de espacio</a></li>
+        <li><a href="planificador-huerto.html">Planificador de huerto</a></li>
+        <li><a href="calculadora-riego.html">Calculadora de riego</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Información</h4><ul>
+        <li><a href="../aviso-legal.html">Aviso legal</a></li>
+        <li><a href="../privacidad.html">Privacidad</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2025 HortelanoUrbano.es</span></div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script>
+  /* ---- Estado ---- */
+  const seleccion = {}; // plantaId → numero
+  let m2Disponibles = 4;
+  let catActiva = 'todas';
+
+  /* ---- Emojis representativos por planta ---- */
+  const EMOJIS = {
+    tomate:'🍅', pimiento:'🌶️', berenjena:'🍆', calabacin:'🥒', pepino:'🥒',
+    lechuga:'🥬', espinaca:'🌿', zanahoria:'🥕', radano:'🌰', cebolla:'🧅',
+    ajo:'🧄', puerro:'🌿', brocoli:'🥦', acelga:'🌱', judia_verde:'🫘',
+    guisante:'🫛', fresa:'🍓', tomate_cherry:'🍅', arandano:'🫐',
+    albahaca:'🌿', perejil:'🌿', romero:'🌿', tomillo:'🌿', menta:'🌿', oregano:'🌿'
+  };
+
+  /* ---- Modo de entrada ---- */
+  function cambiarModo(v) {
+    document.getElementById('fila-total').style.display = v === 'total' ? '' : 'none';
+    document.getElementById('fila-dim').style.display   = v === 'dim'   ? '' : 'none';
+    calcular();
+  }
+
+  function calcularDesdeMetros() {
+    const l = parseFloat(document.getElementById('m-largo').value) || 0;
+    const a = parseFloat(document.getElementById('m-ancho').value) || 0;
+    m2Disponibles = Math.round(l * a * 10) / 10;
+    calcular();
+  }
+
+  /* ---- Construir grid de plantas ---- */
+  function buildGrid(cat) {
+    catActiva = cat;
+    const grid = document.getElementById('plant-grid');
+    grid.innerHTML = '';
+    Object.entries(PLANTAS).forEach(([id, p]) => {
+      if (cat !== 'todas' && p.categoria !== cat) return;
+      const m2 = p.m2 || 0.1;
+      const div = document.createElement('div');
+      div.className = 'espacio-plant-opt' + (seleccion[id] ? ' sel' : '');
+      div.innerHTML = `${p.nombre}<span class="p-m2">${m2} m²/planta</span>`;
+      div.onclick = () => togglePlanta(id, div);
+      grid.appendChild(div);
+    });
+  }
+
+  function filtrarPlantas(btn, cat) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    buildGrid(cat);
+  }
+
+  function togglePlanta(id, el) {
+    if (seleccion[id]) {
+      delete seleccion[id];
+      el.classList.remove('sel');
+    } else {
+      seleccion[id] = 1;
+      el.classList.add('sel');
+    }
+    calcular();
+  }
+
+  /* ---- Cálculo principal ---- */
+  function calcular() {
+    if (document.getElementById('modo-medida').value === 'total') {
+      m2Disponibles = parseFloat(document.getElementById('m2-total').value) || 0;
+    }
+
+    const out = document.getElementById('resultado-espacio');
+    const plantasIds = Object.keys(seleccion);
+
+    if (plantasIds.length === 0 || m2Disponibles <= 0) {
+      out.classList.add('hidden');
+      return;
+    }
+
+    /* Calcular m² por planta con el número actual de cada una */
+    const filas = plantasIds.map(id => {
+      const p    = PLANTAS[id];
+      const m2pp = p.m2 || 0.1;
+      const num  = seleccion[id] || 1;
+      const maxCaben = Math.floor(m2Disponibles / m2pp);
+      return { id, p, m2pp, num, maxCaben };
+    });
+
+    const m2Total = filas.reduce((s, f) => s + f.m2pp * f.num, 0);
+    const pct     = Math.min(100, Math.round((m2Total / m2Disponibles) * 100));
+    const sobra   = Math.round((m2Disponibles - m2Total) * 10) / 10;
+    const exceso  = m2Total > m2Disponibles;
+    const justo   = pct >= 85 && pct <= 100;
+
+    const gaugeClass = exceso ? 'gauge-over' : justo ? 'gauge-warn' : 'gauge-ok';
+    const tipoLabel  = { balcon:'Balcón', terraza:'Terraza', huerto:'Huerto en suelo' };
+    const tipo       = document.getElementById('tipo-espacio').value;
+
+    out.classList.remove('hidden');
+    out.innerHTML = `
+      <div class="espacio-resultado">
+        <div class="espacio-res-header">
+          <h3>${tipoLabel[tipo]} — ${m2Disponibles} m² disponibles</h3>
+          <p>${plantasIds.length} tipo${plantasIds.length !== 1 ? 's' : ''} de planta · ${filas.reduce((s,f)=>s+f.num,0)} plantas en total</p>
+        </div>
+
+        <div class="espacio-gauge-wrap">
+          <div class="gauge-label">
+            <span>Espacio utilizado</span>
+            <span style="color:${exceso?'#EF4444':justo?'#CA8A04':'#22C55E'};font-weight:700;">${Math.round(m2Total*10)/10} m² de ${m2Disponibles} m² (${pct}%)</span>
+          </div>
+          <div class="gauge-bar">
+            <div class="gauge-fill ${gaugeClass}" style="width:${pct}%"></div>
+          </div>
+          <p style="font-size:13px;margin-top:8px;color:${exceso?'#BE123C':justo?'#92400E':'#15803D'};">
+            ${exceso
+              ? `Excedes el espacio en ${Math.round((m2Total-m2Disponibles)*10)/10} m². Reduce el número de plantas o el tipo.`
+              : justo
+                ? `Espacio muy ajustado. Funciona pero no hay margen. Considera reducir 1–2 plantas.`
+                : `Te sobran ${sobra} m². Puedes añadir más plantas o dejar espacio para crecer.`
+            }
+          </p>
+        </div>
+
+        <!-- Tabla ajustable por planta -->
+        <table class="espacio-plantas-table">
+          <thead><tr>
+            <th>Planta</th>
+            <th>m²/planta</th>
+            <th>Cantidad</th>
+            <th>m² usados</th>
+            <th>Máx. que caben</th>
+          </tr></thead>
+          <tbody>
+            ${filas.map(f => `
+              <tr id="fila-${f.id}">
+                <td style="font-weight:600;">${f.p.nombre}</td>
+                <td><span class="m2-badge">${f.m2pp} m²</span></td>
+                <td>
+                  <div class="num-plantas-ctrl">
+                    <button class="num-btn" onclick="cambiarNum('${f.id}',-1)">−</button>
+                    <span class="num-val" id="num-${f.id}">${f.num}</span>
+                    <button class="num-btn" onclick="cambiarNum('${f.id}',+1)">+</button>
+                  </div>
+                </td>
+                <td style="font-weight:600;color:${f.m2pp*f.num > m2Disponibles*0.6 ? 'var(--tierra)' : 'var(--texto)'};">${Math.round(f.m2pp*f.num*10)/10} m²</td>
+                <td style="color:var(--verde);font-weight:600;">${f.maxCaben} plantas</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <!-- Visualización gráfica -->
+        <div class="viz-section">
+          <h4>Representación visual del espacio</h4>
+          <div class="viz-grid">
+            ${buildVizGrid(filas, m2Disponibles)}
+          </div>
+          <p style="font-size:12px;color:var(--texto-sec);margin-top:10px;">Cada cuadrado representa 0,1 m². Verde = cabe bien · Amarillo = justo · Rojo = no cabe.</p>
+        </div>
+
+        ${buildAfiliadosEspacio(filas)}
+      </div>
+    `;
+  }
+
+  function cambiarNum(id, delta) {
+    seleccion[id] = Math.max(1, (seleccion[id] || 1) + delta);
+    calcular();
+  }
+
+  function buildVizGrid(filas, m2Total) {
+    const totalCeldas = Math.round(m2Total / 0.1);
+    const m2Usados    = filas.reduce((s,f) => s + f.m2pp * f.num, 0);
+    const celdasUsadas = Math.round(m2Usados / 0.1);
+    const exceso = celdasUsadas > totalCeldas;
+
+    /* Distribuir emojis por celda */
+    const celdas = [];
+    filas.forEach(f => {
+      const celdasPlanta = Math.round(f.m2pp * f.num / 0.1);
+      for (let i = 0; i < celdasPlanta; i++) {
+        celdas.push({ emoji: EMOJIS[f.id] || '🌱', tipo: celdas.length < totalCeldas ? (celdasUsadas > totalCeldas*0.85 ? 'justo' : 'cabe') : 'sobra' });
+      }
+    });
+
+    /* Celdas vacías */
+    const restantes = Math.max(0, totalCeldas - celdas.length);
+    for (let i = 0; i < restantes; i++) celdas.push({ emoji: '·', tipo: 'vacio' });
+
+    /* Limitar a 80 celdas para no desbordar la UI */
+    const max = 80;
+    const mostrar = celdas.slice(0, max);
+    if (celdas.length > max) mostrar.push({ emoji: '…', tipo: 'cabe' });
+
+    return mostrar.map(c => {
+      if (c.tipo === 'vacio') return `<div class="viz-planta" style="background:var(--fondo);color:var(--borde);font-size:14px;">${c.emoji}</div>`;
+      return `<div class="viz-planta ${c.tipo}">${c.emoji}</div>`;
+    }).join('');
+  }
+
+  function buildAfiliadosEspacio(filas) {
+    /* Mostrar productos de la primera planta seleccionada que tenga amazon */
+    const conAmazon = filas.find(f => f.p.amazon);
+    if (!conAmazon) return '';
+    const prods = Object.values(conAmazon.p.amazon);
+    return `
+      <div style="padding:20px 28px;background:#FFFBF0;border-top:1px solid #FDE68A;">
+        <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Para empezar con ${conAmazon.p.nombre.toLowerCase()}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+          ${prods.map(prod => `
+            <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+              <div style="font-size:13px;font-weight:600;margin-bottom:4px;">${prod.nombre}</div>
+              <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+              <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+                 target="_blank" rel="noopener sponsored"
+                 style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                Ver en Amazon →
+              </a>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  buildGrid('todas');
+</script>
+</body>
+</html>

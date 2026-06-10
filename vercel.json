@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    { "source": "/calendario-siembra",            "destination": "/herramientas/calendario-siembra.html" },
+    { "source": "/planificador-huerto-personalizado", "destination": "/herramientas/planificador-huerto.html" },
+    { "source": "/calculadora-riego-huerto",       "destination": "/herramientas/calculadora-riego.html" },
+    { "source": "/guia-plagas-huerto",             "destination": "/herramientas/guia-plagas.html" },
+    { "source": "/calculadora-espacio-huerto",     "destination": "/herramientas/calculadora-espacio.html" },
+    { "source": "/compatibilidad-plantas",         "destination": "/herramientas/compatibilidad-plantas.html" },
+    { "source": "/guia-huerto-principiantes",      "destination": "/herramientas/guia-principiantes.html" },
+    { "source": "/guia-temporadas-siembra",        "destination": "/herramientas/guia-temporadas.html" },
+    { "source": "/materiales-huerto-urbano",       "destination": "/materiales-huerto-urbano.html" },
+    { "source": "/calculadora-ahorro-huerto",      "destination": "/herramientas/calculadora-ahorro.html" },
+    { "source": "/aviso-legal",                    "destination": "/aviso-legal.html" },
+    { "source": "/privacidad",                     "destination": "/privacidad.html" }
+  ]
+}

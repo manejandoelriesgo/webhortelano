@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hortelanourbano.es/sitemap.xml
