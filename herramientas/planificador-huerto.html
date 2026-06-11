@@ -644,10 +644,37 @@
       const {sinergias, conflictos} = getPuntajeCompatibilidad(Array.from(estado.plantas));
       const output = document.getElementById('plan-output');
 
-      /* Score entero /10 */
-      const scoreNum = Math.round(Math.min(10, Math.max(0, 7 + Math.min(sinergias.length*1.5,3) - conflictos.length*3)));
+      /* Score multifactor /10 */
+      const CAPACIDAD = { poco:40, medio:90, mucho:160 };
+      const capL = CAPACIDAD[estado.tamano] || 90;
+      const litrosTotal = plantasArr.reduce((s,p)=>s+(p.litros_maceta||10),0);
+      const ratio = litrosTotal / capL;
+
+      const fCompat = Math.min(sinergias.length, 2) - conflictos.length*2;
+      const tienesDificil = plantasArr.some(p=>p.dificultad==='dificil');
+      const todasFacil    = plantasArr.every(p=>p.dificultad==='facil');
+      const fDificultad   = tienesDificil ? 0 : todasFacil ? 2 : 1;
+      const fEspacio      = ratio<=0.6 ? 2 : ratio<=1.0 ? 1 : -1;
+
+      const scoreNum = Math.round(Math.min(10, Math.max(0, 5 + fCompat + fDificultad + fEspacio)));
       const scoreClass = scoreNum>=9?'excelente':scoreNum>=7?'buena':'mejorable';
-      const scoreLabel = scoreNum>=9?'Combinación excelente':scoreNum>=7?'Buena combinación':scoreNum>=4?'Combinación con conflictos':'Combinación problemática';
+      const scoreLabel = scoreNum>=9?'Combinación excelente':scoreNum>=7?'Buena combinación':scoreNum>=5?'Combinación correcta':scoreNum>=3?'Combinación con conflictos':'Combinación problemática';
+
+      const lineaDif = tienesDificil
+        ? '⚠ Incluye alguna planta exigente (revisa sus cuidados)'
+        : todasFacil ? '✓ Plantas fáciles, ideales para empezar'
+        : '✓ Dificultad asequible';
+      const lineaEsp = ratio>1.0
+        ? '⚠ Van muy justas para el espacio que tienes'
+        : ratio>0.6 ? '✓ Caben, aunque algo justas'
+        : '✓ Caben de sobra en tu espacio';
+      const lineaCompat = conflictos.length>0
+        ? `⚠ Hay ${conflictos.length} conflicto${conflictos.length>1?'s':''} entre plantas, míralos abajo`
+        : sinergias.length>0 ? '✓ Algunas plantas se ayudan entre sí'
+        : '✓ Conviven sin problemas (ninguna se molesta)';
+      const desgloseHTML = `<div style="margin:0 0 14px;display:flex;flex-direction:column;gap:4px;">
+        ${[lineaDif,lineaEsp,lineaCompat].map(l=>`<span style="font-size:12px;color:${l.startsWith('⚠')?'#92400E':'#15803D'};">${l}</span>`).join('')}
+      </div>`;
       const scoreDesc  = genMsgCompat(scoreNum, sinergias, conflictos);
 
       /* Texto motivador */
@@ -694,6 +721,7 @@
             <div class="compat-score-num">${scoreNum}/10</div>
             <div class="compat-score-text"><h4>${scoreLabel}</h4><p>${scoreDesc}</p></div>
           </div>
+          ${desgloseHTML}
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div><div style="font-size:11px;font-weight:700;color:#15803D;text-transform:uppercase;margin-bottom:8px;">Sinergias (${sinergias.length})</div>${sinHTML}</div>
             <div><div style="font-size:11px;font-weight:700;color:#BE123C;text-transform:uppercase;margin-bottom:8px;">Conflictos (${conflictos.length})</div>${conHTML}</div>
