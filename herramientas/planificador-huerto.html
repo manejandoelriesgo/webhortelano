@@ -708,35 +708,49 @@
       `;
     }
 
+    /* ---- Helper plural ---- */
+    function pluralNombre(nombre, cantidad) {
+      if (cantidad <= 1) return nombre.toLowerCase();
+      const n = nombre.toLowerCase();
+      const vocales = 'aeiouáéíóú';
+      return vocales.includes(n[n.length-1]) ? n+'s' : n+'es';
+    }
+
     /* ---- Bloque A: distribución ---- */
     function genBloqueA(plantas) {
       const cont = estado.contenedor;
       const tieneM = estado.tieneMacetas;
 
       if (cont==='maceta') {
-        // Agrupamos por tamaño de maceta necesaria
-        const grandes  = plantas.filter(p=>p.espacio_min>=40);
-        const medianas = plantas.filter(p=>p.espacio_min>=20&&p.espacio_min<40);
-        const pequenas = plantas.filter(p=>p.espacio_min<20);
+        const solas      = plantas.filter(p=>p.comparte_maceta===false);
+        const compartidas = plantas.filter(p=>p.comparte_maceta===true);
 
         const macetas = [];
-        // Grandes: 1-2 por maceta grande
+        // Plantas que van solas: una maceta cada una
+        solas.forEach(p=>{
+          macetas.push({ litros: p.litros_maceta||20, plantas:[p] });
+        });
+        // Plantas que comparten: agrupar de hasta 3
         let tmp=[];
-        grandes.forEach(p=>{ tmp.push(p); if(tmp.length>=2){macetas.push({tipo:'grande (20-30L)',plantas:[...tmp]});tmp=[];} });
-        if(tmp.length) macetas.push({tipo:'grande (20-30L)',plantas:tmp});
-        // Medianas: hasta 3 por maceta mediana
-        tmp=[];
-        medianas.forEach(p=>{ tmp.push(p); if(tmp.length>=3){macetas.push({tipo:'mediana (10-15L)',plantas:[...tmp]});tmp=[];} });
-        if(tmp.length) macetas.push({tipo:'mediana (10-15L)',plantas:tmp});
-        // Pequeñas: hasta 4 por jardinera
-        tmp=[];
-        pequenas.forEach(p=>{ tmp.push(p); if(tmp.length>=4){macetas.push({tipo:'jardinera alargada',plantas:[...tmp]});tmp=[];} });
-        if(tmp.length) macetas.push({tipo:'jardinera alargada',plantas:tmp});
+        compartidas.forEach((p,i)=>{
+          tmp.push(p);
+          if(tmp.length===3||i===compartidas.length-1){
+            const litros = Math.max(...tmp.map(x=>x.litros_maceta||5));
+            macetas.push({ litros, plantas:[...tmp] });
+            tmp=[];
+          }
+        });
 
         const prefix = tieneM===false
           ? '<p style="font-size:13px;color:var(--texto-sec);margin-bottom:12px;">Como todavía no tienes macetas, aquí lo que necesitas comprar:</p>'
           : '';
-        const items = macetas.map((m,i)=>`<div class="plan-distrib-item">· <strong>Maceta ${i+1} (${m.tipo}):</strong> ${m.plantas.map(p=>p.nombre).join(' + ')}</div>`).join('');
+        const items = macetas.map((m,i)=>{
+          const desc = m.plantas.map(p=>{
+            const u = p.unidades_por_maceta||1;
+            return `${u} ${pluralNombre(p.nombre, u)}`;
+          }).join(' + ');
+          return `<div class="plan-distrib-item">· <strong>Maceta ${i+1} (${m.litros}L):</strong> ${desc}</div>`;
+        }).join('');
 
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución por macetas</div>${prefix}<div>${items||'<p style="font-size:13px;color:var(--texto-sec);">Selecciona al menos una planta.</p>'}</div></div>`;
 
@@ -745,7 +759,7 @@
         const zonas = [];
         let chunk=[];
         plantas.forEach((p,i)=>{ chunk.push(p); if(chunk.length===3||i===plantas.length-1){zonas.push([...chunk]);chunk=[];} });
-        const items = zonas.map((z,i)=>`<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${z.map(p=>p.nombre).join(' + ')}</div>`).join('');
+        const items = zonas.map((z,i)=>`<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${z.map(p=>{ const u=p.unidades_por_maceta||1; return `${u} ${pluralNombre(p.nombre,u)}`; }).join(' + ')}</div>`).join('');
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div></div>`;
       }
     }
@@ -756,14 +770,35 @@
       const items = plantas.map(p=>{
         const cal = getCalendario(p.id, zonaId);
         if(!cal) return null;
-        if(cal.siembra.includes(mes))    return `<strong>${p.nombre}:</strong> siembra ahora, es el momento`;
-        if(cal.trasplante.includes(mes)) return `<strong>${p.nombre}:</strong> trasplanta ahora`;
-        if(cal.cosecha.includes(mes))    return `<strong>${p.nombre}:</strong> en cosecha este mes`;
-        const acc=[...cal.siembra.map(m=>({tipo:'siembra',mes:m})),...cal.trasplante.map(m=>({tipo:'trasplante',mes:m})),...cal.cosecha.map(m=>({tipo:'cosecha',mes:m}))];
-        const next = acc.map(a=>({...a,diff:(a.mes-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
-        if(!next) return `<strong>${p.nombre}:</strong> sin acción este mes`;
-        if(next.diff<=1) return `<strong>${p.nombre}:</strong> ${next.tipo} el mes que viene`;
-        return `<strong>${p.nombre}:</strong> ${next.tipo} en ${MESES_FULL[next.mes]}`;
+
+        if (p.perenne===true) {
+          // Plantas perennes: hablar de plantón
+          const accionAhora = cal.siembra.includes(mes)||cal.trasplante.includes(mes);
+          if (accionAhora) return `<strong>${p.nombre}:</strong> plántala ahora (busca plantón en vivero)`;
+          const opciones = [...cal.siembra.map(m=>({mes:m})),...cal.trasplante.map(m=>({mes:m}))];
+          if(!opciones.length) return `<strong>${p.nombre}:</strong> plántala con plantón de vivero cuando puedas`;
+          const next = opciones.map(a=>({...a,diff:(a.mes-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
+          return `<strong>${p.nombre}:</strong> plántala en ${MESES_FULL[next.mes]} (mejor con plantón)`;
+        }
+
+        // Plantas no perennes
+        if (cal.siembra.includes(mes))    return `<strong>${p.nombre}:</strong> siémbrala ahora, es buen momento`;
+        if (cal.trasplante.includes(mes)) return `<strong>${p.nombre}:</strong> trasplántala ahora`;
+
+        // Calcular próximo mes de siembra (solo siembra)
+        if (!cal.siembra.length) {
+          // Solo trasplante disponible
+          if (!cal.trasplante.length) return `<strong>${p.nombre}:</strong> consulta el calendario para esta zona`;
+          const nextT = cal.trasplante.map(m=>({mes:m,diff:(m-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
+          if (nextT.diff<=1) return `<strong>${p.nombre}:</strong> prepárate para trasplantarla el mes que viene (${MESES_FULL[nextT.mes]})`;
+          return `<strong>${p.nombre}:</strong> se trasplanta en ${MESES_FULL[nextT.mes]}, espera a entonces`;
+        }
+        const nextS = cal.siembra.map(m=>({mes:m,diff:(m-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
+        if (nextS.diff===0) return `<strong>${p.nombre}:</strong> vas algo tarde, pero aún puedes intentarlo este mes`;
+        if (nextS.diff===1) return `<strong>${p.nombre}:</strong> prepárate: se siembra el mes que viene (${MESES_FULL[nextS.mes]})`;
+        // Comprobar si el mes de siembra de este año ya pasó hace poco (diff grande = pasó hace poco)
+        if (nextS.diff>=11) return `<strong>${p.nombre}:</strong> vas algo tarde, pero aún puedes intentarlo este mes`;
+        return `<strong>${p.nombre}:</strong> se siembra en ${MESES_FULL[nextS.mes]}, espera a entonces`;
       }).filter(Boolean);
       return `<div class="plan-bloque"><div class="plan-bloque-titulo">B. Por dónde empezar ahora</div>
         <p style="font-size:13px;color:var(--texto-sec);margin-bottom:10px;">Estamos en ${mesNombre}.</p>
@@ -852,29 +887,22 @@
 
     /* ---- Texto motivador ---- */
     function genMotivacion(plantas, tamano, nivel, zona, sinergias, conflictos) {
-      const nombres = plantas.map(p=>p.nombre);
       const n = plantas.length;
       const esp = {balcon:'balcón',terraza:'terraza',interior:'interior',jardin:'jardín'}[estado.tipo]||'espacio';
       const tam = {poco:'poco espacio',medio:'espacio medio',mucho:'mucho espacio'}[tamano]||'tu espacio';
-      if(nivel==='principiante'&&n<=3){
-        const hay=['Tomate','Tomate cherry','Pimiento','Albahaca','Berenjena'];
-        const s=plantas.find(p=>hay.includes(p.nombre));
-        return `Empezar con ${n} planta${n>1?'s':''} (${nombres.join(', ')}) es una decisión inteligente: menos plantas, más control. ${s?`${s.nombre} es sensible al exceso de agua: riega solo cuando el sustrato esté seco al tacto.`:`${nombres[0]} es de las más agradecidas del huerto.`}`;
+      let base = `${n} planta${n===1?'':'s'} en ${tam} de ${esp}, zona ${zona?.nombre||''}.`;
+      let detalle = '';
+      if (conflictos.length>0) {
+        detalle = ` Hay ${conflictos.length} conflicto${conflictos.length>1?'s':''} que gestionar, te los detallamos abajo.`;
+        if (sinergias.length>0) detalle += ` También tienes ${sinergias.length} sinergia${sinergias.length>1?'s':''} a favor.`;
+      } else if (sinergias.length>0) {
+        detalle = ` Buena combinación: ${sinergias[0].a} y ${sinergias[0].b} se ayudan (${sinergias[0].razon}).`;
+      } else {
+        detalle = ' Es una combinación tranquila y sin conflictos, fácil de manejar.';
       }
-      if(nivel==='principiante'&&n>3){
-        const faciles=nombres.filter(n=>['Lechuga','Rábano','Albahaca','Espinaca','Perejil'].includes(n));
-        return `${n} plantas para tu primer ${esp}. Empieza sembrando ${faciles.length>0?faciles.slice(0,2).join(' y '):nombres[0]} — son las más fáciles — y añade las más exigentes cuando tengas soltura.`;
-      }
-      if(estado.tipo==='interior'){
-        return `Huerto de interior con ${n} plantas. El mayor riesgo en casa es el exceso de riego: espera a que el sustrato esté seco en los primeros 2 cm antes de volver a regar. La luz de ventana sur es suficiente para aromáticas y lechugas.`;
-      }
-      if(sinergias.length>=2){
-        return `${n} plantas con ${sinergias.length} sinergias activas en ${tam} de ${esp}. ${sinergias[0].a} y ${sinergias[0].b} se ayudan entre sí: ${sinergias[0].razon}. Con esta combinación tendrás menos plagas y mejor aprovechamiento de nutrientes.`;
-      }
-      if(conflictos.length>0){
-        return `${n} plantas en ${tam} de ${esp}, zona ${zona?.nombre||''}. Hay ${conflictos.length} conflicto${conflictos.length>1?'s':''} que gestionar — te los detallamos abajo. ${sinergias.length>0?`También tienes ${sinergias.length} sinergia${sinergias.length>1?'s':''} positiva${sinergias.length>1?'s':''}.`:''}`;
-      }
-      return `${n} plantas en ${tam} de ${esp}, zona ${zona?.nombre||''}. Sin conflictos detectados${sinergias.length>0?` y ${sinergias.length} sinergia${sinergias.length>1?'s':''} activa${sinergias.length>1?'s':''} que te ahorrarán trabajo`:''}.`;
+      let animo = '';
+      if (nivel==='principiante') animo = ' Al ser tu primera vez, ve con calma: es mejor pocas plantas bien cuidadas que muchas a medias.';
+      return base + detalle + animo;
     }
   </script>
   <script>
