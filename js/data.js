@@ -874,7 +874,7 @@ const PLANTAS = {
       abono:    { nombre: 'Abono frutos rojos', desc: 'Potasio alto para mejorar sabor y color', tag: 'imagu90-21' }
     },
     tips: {
-      general: ['Plantar tallos (canes) de otoño a primavera','El primer año solo raíces: no exigir producción','Podar los tallos que ya produjeron hasta la base','Las variedades remontantes producen en verano y otoño']
+      general: ['Plantar tallos (canes) en otoño o al final del invierno — aguantan bien el frío al estar en reposo','El primer año solo raíces: no exigir producción','Podar los tallos que ya produjeron hasta la base','Las variedades remontantes producen en verano y otoño']
     },
     calendar: {
       atlantica:         { siembra:[10,11,2,3], trasplante:[10,11,2,3], cosecha:[6,7,8,9,10] },

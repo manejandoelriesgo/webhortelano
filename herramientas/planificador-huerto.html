@@ -287,6 +287,15 @@
               </select>
             </div>
           </div>
+          <div class="form-row" id="fila-contenedor" style="display:none;">
+            <div class="form-group">
+              <label for="p-contenedor">Tipo de contenedor</label>
+              <select id="p-contenedor">
+                <option value="maceta">En macetas</option>
+                <option value="suelo">En suelo directo</option>
+              </select>
+            </div>
+          </div>
           <div class="form-row">
             <div class="form-group">
               <label for="p-m2">Metros cuadrados disponibles</label>
@@ -332,6 +341,10 @@
               <button class="filter-tab" onclick="filtrarPlantas(this,'hortaliza')">Hortalizas</button>
               <button class="filter-tab" onclick="filtrarPlantas(this,'fruta')">Frutas</button>
               <button class="filter-tab" onclick="filtrarPlantas(this,'aromatica')">Aromáticas</button>
+            </div>
+            <div id="plantas-bar" style="display:none;margin:12px 0 8px;padding:10px 14px;background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:8px;display:none;align-items:center;flex-wrap:wrap;gap:6px;">
+              <span style="font-size:12px;font-weight:700;color:var(--verde);text-transform:uppercase;margin-right:4px;">Seleccionadas:</span>
+              <span id="plantas-bar-items" style="display:inline-flex;flex-wrap:wrap;gap:6px;"></span>
             </div>
             <div class="plant-selector-grid" id="plant-grid"></div>
           </div>
@@ -431,7 +444,27 @@
   <script src="../js/data.js"></script>
   <script src="../js/compatibilidad.js"></script>
   <script>
-    const estado = { zona: '', tipo: 'balcon', m2: 0, nivel: 'principiante', plantas: new Set() };
+    const estado = { zona: '', tipo: 'balcon', contenedor: 'maceta', m2: 0, nivel: 'principiante', plantas: new Set() };
+
+    /* ---- Selector contenedor dinámico ---- */
+    const selTipoEl = document.getElementById('p-tipo');
+    const filaContenedor = document.getElementById('fila-contenedor');
+    const selContenedor = document.getElementById('p-contenedor');
+    function actualizarContenedor() {
+      const t = selTipoEl.value;
+      if (t === 'jardin') {
+        filaContenedor.style.display = 'none';
+      } else {
+        filaContenedor.style.display = '';
+        if (t === 'interior') {
+          selContenedor.innerHTML = '<option value="maceta">En macetas</option>';
+        } else {
+          selContenedor.innerHTML = '<option value="maceta">En macetas</option><option value="suelo">En suelo directo</option>';
+        }
+      }
+    }
+    selTipoEl.addEventListener('change', actualizarContenedor);
+    actualizarContenedor();
     let catActual = 'todas';
 
     /* ---- Init zonas ---- */
@@ -462,10 +495,11 @@
       const err  = document.getElementById('step1-error');
       if (!zona || !m2 || m2 <= 0) { err.style.display = 'block'; return; }
       err.style.display = 'none';
-      estado.zona  = zona;
-      estado.tipo  = document.getElementById('p-tipo').value;
-      estado.m2    = m2;
-      estado.nivel = document.getElementById('p-nivel').value;
+      estado.zona       = zona;
+      estado.tipo       = document.getElementById('p-tipo').value;
+      estado.contenedor = document.getElementById('p-contenedor').value;
+      estado.m2         = m2;
+      estado.nivel      = document.getElementById('p-nivel').value;
 
       /* Capacidad estimada */
       const capInfo = document.getElementById('capacidad-info');
@@ -519,6 +553,7 @@
       document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
       btn.classList.add('active');
       renderPlantGrid(catActual);
+      renderPlantasBar();
       actualizarCompatPreview();
       document.getElementById('plantas-count').textContent =
         `${estado.plantas.size} plantas seleccionadas`;
@@ -548,11 +583,35 @@
       renderPlantGrid(cat);
     }
 
+    function renderPlantasBar() {
+      const bar   = document.getElementById('plantas-bar');
+      const items = document.getElementById('plantas-bar-items');
+      if (estado.plantas.size === 0) { bar.style.display = 'none'; return; }
+      bar.style.display = 'flex';
+      items.innerHTML = Array.from(estado.plantas).map(id => {
+        const p = PLANTAS[id];
+        return `<span style="display:inline-flex;align-items:center;gap:3px;background:white;border:1px solid var(--verde);border-radius:12px;padding:3px 10px;font-size:12px;font-weight:600;color:var(--verde);">
+          ${p ? p.nombre : id}
+          <button onclick="quitarPlanta('${id}')" style="background:none;border:none;cursor:pointer;padding:0 0 0 3px;font-size:14px;color:var(--verde);line-height:1;">×</button>
+        </span>`;
+      }).join('');
+    }
+
+    function quitarPlanta(id) {
+      estado.plantas.delete(id);
+      document.getElementById('plantas-count').textContent =
+        `${estado.plantas.size} planta${estado.plantas.size===1?'':'s'} seleccionada${estado.plantas.size===1?'':'s'}`;
+      renderPlantGrid(catActual);
+      renderPlantasBar();
+      actualizarCompatPreview();
+    }
+
     function togglePlanta(id, el) {
       if (estado.plantas.has(id)) { estado.plantas.delete(id); el.classList.remove('selected'); }
       else { estado.plantas.add(id); el.classList.add('selected'); }
       document.getElementById('plantas-count').textContent =
         `${estado.plantas.size} planta${estado.plantas.size===1?'':'s'} seleccionada${estado.plantas.size===1?'':'s'}`;
+      renderPlantasBar();
       actualizarCompatPreview();
     }
 
@@ -590,15 +649,12 @@
       const ids        = Array.from(estado.plantas);
       const { positivos, negativos, sinergias, conflictos } = getPuntajeCompatibilidad(ids);
 
-      /* Puntuación de compatibilidad */
-      const score     = positivos - negativos;
-      const scoreClass = conflictos.length === 0 ? (score >= 3 ? 'excelente' : 'buena') : (score >= 1 ? 'buena' : 'mejorable');
-      const scoreLabel = conflictos.length === 0 ? (score >= 3 ? 'Combinación excelente' : 'Buena combinación') : (score >= 1 ? 'Combinación buena' : 'Combinación mejorable');
-      const scoreDesc  = score >= 3
-        ? 'Estas plantas se complementan muy bien. Se protegen mutuamente y aprovechan el espacio de forma eficiente.'
-        : score >= 1
-        ? 'Buena combinación en general. Hay algún conflicto puntual que te indicamos más abajo.'
-        : 'Esta combinación tiene algunos conflictos. Considera cambiar alguna planta para mejorar el resultado.';
+      /* Puntuación de compatibilidad sobre 10 */
+      const scoreRaw   = Math.min(10, Math.max(0, Math.round((5 + Math.min(sinergias.length * 1.5, 4) - conflictos.length * 2) * 10) / 10));
+      const scoreDec   = scoreRaw.toFixed(1);
+      const scoreClass = scoreRaw >= 8 ? 'excelente' : scoreRaw >= 5 ? 'buena' : 'mejorable';
+      const scoreLabel = scoreRaw >= 8 ? 'Combinación excelente' : scoreRaw >= 5 ? 'Combinación correcta' : scoreRaw >= 3 ? 'Combinación con conflictos' : 'Combinación problemática';
+      const scoreDesc  = generarMensajeCompatibilidad(scoreRaw, plantasArr, sinergias, conflictos);
 
       /* Plantas que caben según m² */
       const capacidadTotal = plantasArr.reduce((sum, p) => sum + (p.m2 || 0.2), 0);
@@ -640,7 +696,7 @@
       `).join('');
 
       /* Texto motivador según espacio y nivel */
-      const motivacion = generarTextoMotivador(plantasArr, estado.m2, estado.nivel, zona, sinergias, conflictos);
+      const motivacion = generarTextoMotivador(plantasArr, estado.m2, estado.nivel, zona, sinergias, conflictos, estado.tipo, estado.contenedor);
 
       /* Sinergias y conflictos */
       const sinListHTML = sinergias.length > 0
@@ -650,24 +706,23 @@
         ? conflictos.map(c=>`<div class="sinergia-item"><div class="sinergia-dot dot-rojo"></div><span><strong>${c.a} + ${c.b}:</strong> ${c.razon}</span></div>`).join('')
         : '<p style="font-size:13px;color:#15803D;">Sin conflictos. Buena elección.</p>';
 
-      /* Lista de compra */
-      const productosMap = new Map();
-      plantasArr.forEach(p => {
-        if (!p.amazon) return;
-        Object.entries(p.amazon).forEach(([tipo, prod]) => {
-          if (!productosMap.has(tipo)) productosMap.set(tipo, { planta: p.nombre, tipo, prod });
-        });
-      });
-      const listaCompra = Array.from(productosMap.values()).map(({ planta, tipo, prod }) => `
-        <div class="shopping-item">
-          <div class="shopping-info">
-            <h4>${prod.nombre}</h4>
-            <p>${prod.desc}</p>
+      /* Lista de compra — agrupada por planta */
+      const listaCompra = plantasArr.filter(p => p.amazon).map(p => {
+        const items = Object.values(p.amazon).map(prod => `
+          <div class="shopping-item">
+            <div class="shopping-info">
+              <h4>${prod.nombre}</h4>
+              <p>${prod.desc}</p>
+            </div>
+            <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+               target="_blank" rel="noopener sponsored" class="btn btn-amazon btn-sm">Ver en Amazon</a>
           </div>
-          <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
-             target="_blank" rel="noopener sponsored" class="btn btn-amazon btn-sm">Ver en Amazon</a>
-        </div>
-      `).join('');
+        `).join('');
+        return `<div style="margin-bottom:20px;">
+          <div style="font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.04em;padding:6px 0 8px;border-bottom:1px solid var(--borde);margin-bottom:8px;">${p.nombre}</div>
+          ${items}
+        </div>`;
+      }).join('');
 
       output.innerHTML = `
         <!-- Header del plan -->
@@ -709,7 +764,7 @@
         <div class="plan-section">
           <h4>Compatibilidad entre tus plantas</h4>
           <div class="compat-score ${scoreClass}" style="margin-bottom:20px;">
-            <div class="compat-score-num">${score >= 0 ? '+'+score : score}</div>
+            <div class="compat-score-num">${scoreDec}/10</div>
             <div class="compat-score-text">
               <h4>${scoreLabel}</h4>
               <p>${scoreDesc}</p>
@@ -795,21 +850,83 @@
       `;
     }
 
-    /* ---- Texto motivador dinámico ---- */
-    function generarTextoMotivador(plantas, m2, nivel, zona, sinergias, conflictos) {
-      const nombres = plantas.map(p => p.nombre).join(', ');
-      const nombreZona = zona.nombre;
+    /* ---- Mensaje específico de compatibilidad ---- */
+    function generarMensajeCompatibilidad(score, plantas, sinergias, conflictos) {
+      if (score >= 8) {
+        if (sinergias.length > 0) {
+          const s = sinergias[0];
+          return `Excelente elección. ${s.a} y ${s.b} se benefician mutuamente: ${s.razon}.${sinergias.length > 1 ? ` Además, ${sinergias[1].a} y ${sinergias[1].b} también se complementan bien.` : ''}`;
+        }
+        return 'Excelente combinación: sin conflictos detectados y buena distribución de necesidades entre las plantas elegidas.';
+      }
+      if (score >= 5) {
+        const consejo = conflictos.length > 0
+          ? `Para mejorarla, separa ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}.`
+          : 'Puedes mejorarla añadiendo albahaca o tomillo como compañeras aromáticas.';
+        return `Combinación correcta.${sinergias.length > 0 ? ` ${sinergias[0].a} y ${sinergias[0].b} se ayudan entre sí.` : ''} ${consejo}`;
+      }
+      if (score >= 3) {
+        if (conflictos.length > 0) {
+          const cf = conflictos[0];
+          return `Combinación con conflictos. El principal problema: ${cf.a} y ${cf.b} — ${cf.razon}. Considera cambiar ${cf.b} por otra planta compatible.`;
+        }
+        return 'Combinación con algunos problemas. Revisa las indicaciones de conflictos más abajo.';
+      }
+      if (conflictos.length > 0) {
+        const names = conflictos.slice(0, 2).map(cf => `${cf.a} y ${cf.b}`).join('; ');
+        return `Combinación problemática. Hay conflictos entre: ${names}. Te recomendamos cambiar al menos una de las plantas conflictivas antes de continuar.`;
+      }
+      return 'Combinación con problemas. Revisa la sección de conflictos para ver qué cambiar.';
+    }
 
-      if (nivel === 'principiante') {
-        return `Has elegido ${plantas.length} plantas para ${m2} m² en zona ${nombreZona}. Aunque es tu primera vez, esta combinación es manejable. ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} se protegen mutuamente, así que tendrás menos problemas de plagas desde el principio.` : ''} Recuerda: el error más común del principiante es regar demasiado. Con paciencia y siguiendo el calendario, verás resultados en pocas semanas.`;
+    /* ---- Texto motivador dinámico (8+ combinaciones distintas) ---- */
+    function generarTextoMotivador(plantas, m2, nivel, zona, sinergias, conflictos, tipo, contenedor) {
+      const nombres   = plantas.map(p => p.nombre);
+      const nPlantas  = plantas.length;
+      const nombreZona = zona.nombre;
+      tipo      = tipo      || estado.tipo;
+      contenedor = contenedor || estado.contenedor;
+      const espacioStr    = tipo === 'balcon' ? 'balcón' : tipo === 'terraza' ? 'terraza' : tipo === 'interior' ? 'interior' : 'jardín';
+      const contenedorStr = contenedor === 'maceta' ? 'en macetas' : 'en suelo directo';
+      const scoreRaw = Math.min(10, Math.max(0, Math.round((5 + Math.min(sinergias.length * 1.5, 4) - conflictos.length * 2) * 10) / 10));
+
+      if (nivel === 'principiante' && nPlantas <= 3) {
+        const primeraNombre = nombres[0];
+        const riegoSensibles = ['Tomate', 'Tomate cherry', 'Pimiento', 'Albahaca', 'Berenjena'];
+        const hayRiegoSensible = nombres.some(n => riegoSensibles.includes(n));
+        return `Empezar con ${nPlantas} planta${nPlantas > 1 ? 's' : ''} (${nombres.join(', ')}) en ${m2} m² de ${espacioStr} es una decisión inteligente: menos plantas significa más control y más aprendizaje. ${hayRiegoSensible ? `El ${primeraNombre} agradece el riego en la base y el sustrato sin encharcamiento — comprueba con el dedo antes de regar.` : `${primeraNombre} es de las más agradecidas: verás resultados rápido.`}`;
       }
+
+      if (nivel === 'principiante' && nPlantas > 3) {
+        const faciles = nombres.filter(n => ['Lechuga','Rábano','Albahaca','Espinaca','Perejil','Rabanito'].includes(n));
+        return `${nPlantas} plantas para empezar en ${m2} m² de ${espacioStr} ${contenedorStr}, zona ${nombreZona}. Es una primera vez ambiciosa — empieza sembrando ${faciles.length > 0 ? faciles.slice(0, 2).join(' y ') : nombres[0]}, que son las más fáciles, y añade las más exigentes cuando tengas soltura con el riego y el sustrato.`;
+      }
+
+      if (tipo === 'interior') {
+        const interiorDificil = nombres.filter(n => !['Lechuga','Espinaca','Albahaca','Perejil','Menta','Orégano','Rábano','Tomillo'].includes(n));
+        if (interiorDificil.length > 0) {
+          return `Huerto de interior con ${nPlantas} plantas en ${m2} m². ${interiorDificil.join(' y ')} ${interiorDificil.length === 1 ? 'necesita' : 'necesitan'} mínimo 6-8 horas de luz directa — considera una lámpara LED de espectro completo si tu ventana no llega a eso. Riega solo cuando el sustrato esté seco al tacto.`;
+        }
+        return `Selección ideal para interior en ${m2} m². ${nombres.join(', ')} ${nPlantas === 1 ? 'se adapta' : 'se adaptan'} bien a la luz de ventana. En interior el mayor riesgo es el exceso de riego: espera a que el sustrato esté seco en los primeros 2 cm antes de volver a regar.`;
+      }
+
       if (m2 <= 2) {
-        return `Con solo ${m2} m² has elegido una combinación inteligente. En espacios pequeños, la clave es la verticalidad y la compatibilidad. ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} comparten espacio eficientemente: ` + sinergias[0].razon : 'Estas plantas conviven bien en poco espacio.'} Un balcón de ${m2} m² bien aprovechado puede darte verduras frescas durante 6-8 meses al año.`;
+        return `${m2} m² de ${espacioStr} es poco, pero suficiente para ${nombres.join(', ')}. ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} comparten espacio eficientemente: ${sinergias[0].razon}.` : 'Planta en vertical siempre que puedas — jardineras de barandilla y tutores multiplican el espacio aprovechable.'} Con ${m2} m² bien gestionados puedes cosechar verduras frescas varios meses al año.`;
       }
-      if (sinergias.length >= 3) {
-        return `Excelente combinación. Tienes ${sinergias.length} sinergias activas entre tus plantas: se protegen mutuamente de plagas, se fertilizan entre sí y aprovechan el espacio en capas distintas. Esto significa menos trabajo, menos pesticidas y una cosecha más abundante. En ${m2} m² con esta combinación puedes producir verduras frescas para 2-3 personas durante varios meses.`;
+
+      if (tipo === 'jardin' && contenedor === 'suelo') {
+        return `Huerto en suelo directo, ${m2} m² de jardín, zona ${nombreZona}. ${nombres.join(', ')} ${nPlantas === 1 ? 'tendrá' : 'tendrán'} más vigor que en maceta porque la raíz puede extenderse libremente. ${sinergias.length >= 2 ? `Con ${sinergias.length} sinergias activas, planta las especies compatibles juntas para reducir plagas de forma natural.` : ''}`;
       }
-      return `Con ${plantas.length} plantas en ${m2} m² de zona ${nombreZona} tienes un huerto equilibrado. ${conflictos.length > 0 ? `Presta atención a los conflictos indicados más abajo para evitar problemas.` : 'La combinación no tiene conflictos conocidos.'} Con los cuidados básicos y siguiendo el calendario de siembra de tu zona, podrás cosechar en pocas semanas.`;
+
+      if (scoreRaw >= 8) {
+        return `Combinación de alto rendimiento para ${m2} m² de ${espacioStr} en zona ${nombreZona}. ${nombres.join(', ')} forman un ecosistema compacto: ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} se benefician mutuamente (${sinergias[0].razon})` : 'se complementan sin conflictos'}. Con este nivel de compatibilidad tendrás menos problemas de plagas y mejor aprovechamiento de nutrientes.`;
+      }
+
+      if (nivel === 'avanzado') {
+        return `Plan para ${nPlantas} plantas en ${m2} m² de ${espacioStr} ${contenedorStr}, zona ${nombreZona}. ${conflictos.length > 0 ? `Hay ${conflictos.length} conflicto${conflictos.length > 1 ? 's' : ''} a gestionar: ${conflictos[0].a} y ${conflictos[0].b} (${conflictos[0].razon}). Con tu experiencia sabrás cómo mitigarlos.` : `Sin conflictos.${sinergias.length > 0 ? ` ${sinergias.length} sinergia${sinergias.length > 1 ? 's' : ''} activa${sinergias.length > 1 ? 's' : ''} que te ahorrarán trabajo.` : ''}`}`;
+      }
+
+      return `${nPlantas} plantas en ${m2} m² de ${espacioStr} ${contenedorStr}, zona ${nombreZona}. ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} se complementan bien.` : ''} ${conflictos.length > 0 ? `Ojo con ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}.` : 'Sin conflictos detectados.'} Sigue el calendario de tu zona para las fechas exactas de siembra y cosecha.`;
     }
   </script>
   <script>
