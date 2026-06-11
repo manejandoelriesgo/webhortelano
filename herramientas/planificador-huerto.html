@@ -645,9 +645,9 @@
       const output = document.getElementById('plan-output');
 
       /* Score entero /10 */
-      const scoreNum = Math.round(Math.min(10, Math.max(0, 5 + Math.min(sinergias.length*1.5,4) - conflictos.length*2)));
-      const scoreClass = scoreNum>=8?'excelente':scoreNum>=5?'buena':'mejorable';
-      const scoreLabel = scoreNum>=8?'Combinación excelente':scoreNum>=5?'Combinación correcta':scoreNum>=3?'Con conflictos':'Combinación problemática';
+      const scoreNum = Math.round(Math.min(10, Math.max(0, 7 + Math.min(sinergias.length*1.5,3) - conflictos.length*3)));
+      const scoreClass = scoreNum>=9?'excelente':scoreNum>=7?'buena':'mejorable';
+      const scoreLabel = scoreNum>=9?'Combinación excelente':scoreNum>=7?'Buena combinación':scoreNum>=4?'Combinación con conflictos':'Combinación problemática';
       const scoreDesc  = genMsgCompat(scoreNum, sinergias, conflictos);
 
       /* Texto motivador */
@@ -716,21 +716,46 @@
       return vocales.includes(n[n.length-1]) ? n+'s' : n+'es';
     }
 
+    /* ---- Helper mes en minúscula ---- */
+    function mesMin(idx) { return MESES_FULL[idx].toLowerCase(); }
+
+    /* ---- Función compartida: etiqueta breve de cuándo actuar ---- */
+    function getAccionMes(p, zonaId, mes) {
+      const cal = getCalendario(p.id, zonaId);
+      if (!cal) return null;
+      if (p.perenne===true) {
+        const accionAhora = cal.siembra.includes(mes)||cal.trasplante.includes(mes);
+        if (accionAhora) return 'ahora';
+        const opciones = [...cal.siembra.map(m=>({mes:m})),...cal.trasplante.map(m=>({mes:m}))];
+        if (!opciones.length) return null;
+        const next = opciones.map(a=>({...a,diff:(a.mes-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
+        return `en ${mesMin(next.mes)}`;
+      }
+      if (cal.siembra.includes(mes)||cal.trasplante.includes(mes)) return 'ahora';
+      if (!cal.siembra.length) {
+        if (!cal.trasplante.length) return null;
+        const nextT = cal.trasplante.map(m=>({mes:m,diff:(m-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
+        if (nextT.diff>=11||nextT.diff===0) return 'ahora';
+        return `en ${mesMin(nextT.mes)}`;
+      }
+      const nextS = cal.siembra.map(m=>({mes:m,diff:(m-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
+      if (nextS.diff===0||nextS.diff>=11) return 'ahora';
+      return `en ${mesMin(nextS.mes)}`;
+    }
+
     /* ---- Bloque A: distribución ---- */
     function genBloqueA(plantas) {
-      const cont = estado.contenedor;
+      const cont  = estado.contenedor;
       const tieneM = estado.tieneMacetas;
+      const zonaId = estado.zona;
+      const mes    = new Date().getMonth();
 
       if (cont==='maceta') {
-        const solas      = plantas.filter(p=>p.comparte_maceta===false);
+        const solas       = plantas.filter(p=>p.comparte_maceta===false);
         const compartidas = plantas.filter(p=>p.comparte_maceta===true);
 
         const macetas = [];
-        // Plantas que van solas: una maceta cada una
-        solas.forEach(p=>{
-          macetas.push({ litros: p.litros_maceta||20, plantas:[p] });
-        });
-        // Plantas que comparten: agrupar de hasta 3
+        solas.forEach(p=>{ macetas.push({ litros: p.litros_maceta||20, plantas:[p] }); });
         let tmp=[];
         compartidas.forEach((p,i)=>{
           tmp.push(p);
@@ -747,7 +772,9 @@
         const items = macetas.map((m,i)=>{
           const desc = m.plantas.map(p=>{
             const u = p.unidades_por_maceta||1;
-            return `${u} ${pluralNombre(p.nombre, u)}`;
+            const accion = getAccionMes(p, zonaId, mes);
+            const marca = accion ? ` (${accion})` : '';
+            return `${u} ${pluralNombre(p.nombre, u)}${marca}`;
           }).join(' + ');
           return `<div class="plan-distrib-item">· <strong>Maceta ${i+1} (${m.litros}L):</strong> ${desc}</div>`;
         }).join('');
@@ -755,11 +782,15 @@
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución por macetas</div>${prefix}<div>${items||'<p style="font-size:13px;color:var(--texto-sec);">Selecciona al menos una planta.</p>'}</div></div>`;
 
       } else {
-        // Suelo: agrupar en zonas de 3
         const zonas = [];
         let chunk=[];
         plantas.forEach((p,i)=>{ chunk.push(p); if(chunk.length===3||i===plantas.length-1){zonas.push([...chunk]);chunk=[];} });
-        const items = zonas.map((z,i)=>`<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${z.map(p=>{ const u=p.unidades_por_maceta||1; return `${u} ${pluralNombre(p.nombre,u)}`; }).join(' + ')}</div>`).join('');
+        const items = zonas.map((z,i)=>`<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${z.map(p=>{
+          const u = p.unidades_por_maceta||1;
+          const accion = getAccionMes(p, zonaId, mes);
+          const marca = accion ? ` (${accion})` : '';
+          return `${u} ${pluralNombre(p.nombre,u)}${marca}`;
+        }).join(' + ')}</div>`).join('');
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div></div>`;
       }
     }
@@ -772,33 +803,28 @@
         if(!cal) return null;
 
         if (p.perenne===true) {
-          // Plantas perennes: hablar de plantón
           const accionAhora = cal.siembra.includes(mes)||cal.trasplante.includes(mes);
           if (accionAhora) return `<strong>${p.nombre}:</strong> plántala ahora (busca plantón en vivero)`;
           const opciones = [...cal.siembra.map(m=>({mes:m})),...cal.trasplante.map(m=>({mes:m}))];
           if(!opciones.length) return `<strong>${p.nombre}:</strong> plántala con plantón de vivero cuando puedas`;
           const next = opciones.map(a=>({...a,diff:(a.mes-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
-          return `<strong>${p.nombre}:</strong> plántala en ${MESES_FULL[next.mes]} (mejor con plantón)`;
+          return `<strong>${p.nombre}:</strong> plántala en ${mesMin(next.mes)} (mejor con plantón)`;
         }
 
-        // Plantas no perennes
         if (cal.siembra.includes(mes))    return `<strong>${p.nombre}:</strong> siémbrala ahora, es buen momento`;
         if (cal.trasplante.includes(mes)) return `<strong>${p.nombre}:</strong> trasplántala ahora`;
 
-        // Calcular próximo mes de siembra (solo siembra)
         if (!cal.siembra.length) {
-          // Solo trasplante disponible
           if (!cal.trasplante.length) return `<strong>${p.nombre}:</strong> consulta el calendario para esta zona`;
           const nextT = cal.trasplante.map(m=>({mes:m,diff:(m-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
-          if (nextT.diff<=1) return `<strong>${p.nombre}:</strong> prepárate para trasplantarla el mes que viene (${MESES_FULL[nextT.mes]})`;
-          return `<strong>${p.nombre}:</strong> se trasplanta en ${MESES_FULL[nextT.mes]}, espera a entonces`;
+          if (nextT.diff<=1) return `<strong>${p.nombre}:</strong> prepárate para trasplantarla el mes que viene (${mesMin(nextT.mes)})`;
+          return `<strong>${p.nombre}:</strong> se trasplanta en ${mesMin(nextT.mes)}, espera a entonces`;
         }
         const nextS = cal.siembra.map(m=>({mes:m,diff:(m-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
         if (nextS.diff===0) return `<strong>${p.nombre}:</strong> vas algo tarde, pero aún puedes intentarlo este mes`;
-        if (nextS.diff===1) return `<strong>${p.nombre}:</strong> prepárate: se siembra el mes que viene (${MESES_FULL[nextS.mes]})`;
-        // Comprobar si el mes de siembra de este año ya pasó hace poco (diff grande = pasó hace poco)
+        if (nextS.diff===1) return `<strong>${p.nombre}:</strong> prepárate: se siembra el mes que viene (${mesMin(nextS.mes)})`;
         if (nextS.diff>=11) return `<strong>${p.nombre}:</strong> vas algo tarde, pero aún puedes intentarlo este mes`;
-        return `<strong>${p.nombre}:</strong> se siembra en ${MESES_FULL[nextS.mes]}, espera a entonces`;
+        return `<strong>${p.nombre}:</strong> se siembra en ${mesMin(nextS.mes)}, espera a entonces`;
       }).filter(Boolean);
       return `<div class="plan-bloque"><div class="plan-bloque-titulo">B. Por dónde empezar ahora</div>
         <p style="font-size:13px;color:var(--texto-sec);margin-bottom:10px;">Estamos en ${mesNombre}.</p>
@@ -872,17 +898,13 @@
 
     /* ---- Mensaje compatibilidad ---- */
     function genMsgCompat(score, sinergias, conflictos) {
-      if(score>=8){
-        if(sinergias.length>0){const s=sinergias[0];return `Excelente. ${s.a} y ${s.b} se benefician mutuamente: ${s.razon}`;}
-        return 'Sin conflictos detectados y buena distribución de necesidades entre las plantas.';
-      }
-      if(score>=5){
-        const consejo=conflictos.length>0?`Separa ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}`:'Puedes mejorarla añadiendo albahaca o tomillo.';
-        return `Combinación correcta.${sinergias.length>0?` ${sinergias[0].a} y ${sinergias[0].b} se ayudan.`:''} ${consejo}`;
-      }
-      if(score>=3&&conflictos.length>0){const c=conflictos[0];return `Conflicto principal: ${c.a} y ${c.b} — ${c.razon}. Considera cambiar una de estas plantas.`;}
-      if(conflictos.length>0) return `Combinación problemática. Hay conflictos entre ${conflictos.slice(0,2).map(c=>c.a+' y '+c.b).join('; ')}.`;
-      return 'Revisa la sección de conflictos para ver qué cambiar.';
+      if (conflictos.length===0 && sinergias.length===0)
+        return 'Las plantas que has elegido conviven sin problemas. Es una base sólida y fácil de manejar.';
+      if (conflictos.length===0)
+        return `${sinergias[0].a} y ${sinergias[0].b} se ayudan: ${sinergias[0].razon}. El resto convive sin problemas.`;
+      if (conflictos.length===1)
+        return `Atención a ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}. Sepáralas o cambia una.`;
+      return `Hay varios conflictos: ${conflictos.slice(0,2).map(c=>`${c.a} y ${c.b}`).join('; ')}. Te recomiendo cambiar alguna planta.`;
     }
 
     /* ---- Texto motivador ---- */
