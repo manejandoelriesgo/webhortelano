@@ -12,10 +12,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Planificador de huerto personalizado — HortelanoUrbano.es</title>
-  <meta name="description" content="Crea tu plan de huerto personalizado: introduce tu zona climática, espacio disponible y plantas. Obtén fechas de siembra, compatibilidad entre plantas, rendimiento estimado y lista de compra.">
+  <meta name="description" content="Asistente paso a paso para crear tu plan de huerto personalizado: espacio, plantas, fechas de siembra y lista de compra por zona climática de España.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://hortelanourbano.es/planificador-huerto-personalizado">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -23,152 +22,92 @@
     "name": "Planificador de huerto personalizado",
     "url": "https://hortelanourbano.es/planificador-huerto-personalizado",
     "applicationCategory": "UtilitiesApplication",
-    "description": "Genera un plan completo de huerto con fechas, compatibilidad entre plantas, rendimiento estimado y lista de compra",
+    "description": "Asistente paso a paso que genera un plan de huerto con fechas, compatibilidad y lista de compra",
     "operatingSystem": "Any",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
   }
   </script>
-
   <link rel="stylesheet" href="../css/main.css">
   <style>
-    .preset-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
-    }
-    .preset-card {
-      border: 2px solid var(--borde);
-      border-radius: var(--radio-card);
-      padding: 20px;
-      cursor: pointer;
-      background: white;
-      transition: all .2s;
-      text-align: left;
-    }
-    .preset-card:hover  { border-color: var(--verde-claro); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .preset-card.active { border-color: var(--verde); background: var(--verde-bg); }
-    .preset-card h4 { font-size: 15px; margin-bottom: 4px; }
-    .preset-card .preset-m2 { font-size: 12px; color: var(--texto-sec); margin-bottom: 8px; }
-    .preset-card p  { font-size: 13px; color: var(--texto-sec); margin: 0; line-height: 1.4; }
-    .preset-plantas { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
-    .preset-planta-tag {
-      font-size: 11px; font-weight: 600; padding: 2px 8px;
-      border-radius: 12px; background: var(--verde-bg); color: var(--verde);
-    }
+    /* ---- Estilos existentes ---- */
+    .preset-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:16px; }
+    .preset-card { border:2px solid var(--borde);border-radius:var(--radio-card);padding:20px;cursor:pointer;background:white;transition:all .2s;text-align:left; }
+    .preset-card:hover  { border-color:var(--verde-claro);box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+    .preset-card.active { border-color:var(--verde);background:var(--verde-bg); }
+    .preset-card h4 { font-size:15px;margin-bottom:4px; }
+    .preset-card .preset-m2 { font-size:12px;color:var(--texto-sec);margin-bottom:8px; }
+    .preset-card p  { font-size:13px;color:var(--texto-sec);margin:0;line-height:1.4; }
+    .preset-plantas { display:flex;flex-wrap:wrap;gap:4px;margin:8px 0; }
+    .preset-planta-tag { font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;background:var(--verde-bg);color:var(--verde); }
+    .compat-score { display:flex;align-items:center;gap:8px;padding:12px 16px;border-radius:8px;margin-bottom:16px; }
+    .compat-score.excelente { background:#F0FDF4;border:1px solid #86EFAC; }
+    .compat-score.buena     { background:#FEFCE8;border:1px solid #FDE047; }
+    .compat-score.mejorable { background:#FFF1F2;border:1px solid #FECDD3; }
+    .compat-score-num { font-size:28px;font-weight:700; }
+    .compat-score.excelente .compat-score-num { color:#15803D; }
+    .compat-score.buena     .compat-score-num { color:#92400E; }
+    .compat-score.mejorable .compat-score-num { color:#BE123C; }
+    .compat-score-text h4 { font-size:14px;margin-bottom:2px; }
+    .compat-score-text p  { font-size:13px;color:var(--texto-sec);margin:0; }
+    .sinergia-item { display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--borde);font-size:13px; }
+    .sinergia-item:last-child { border-bottom:none; }
+    .sinergia-dot { width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0; }
+    .dot-verde { background:#22C55E; }
+    .dot-rojo  { background:#EF4444; }
+    .motivacion-box { background:linear-gradient(135deg,var(--verde),#1B4332);color:white;border-radius:var(--radio-card);padding:20px 24px;margin-bottom:20px; }
+    .motivacion-box h4 { color:white;margin-bottom:8px;font-size:15px; }
+    .motivacion-box p  { color:rgba(255,255,255,0.88);margin:0;font-size:14px;line-height:1.6; }
 
-    .compat-score {
-      display: flex; align-items: center; gap: 8px;
-      padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;
-    }
-    .compat-score.excelente { background: #F0FDF4; border: 1px solid #86EFAC; }
-    .compat-score.buena     { background: #FEFCE8; border: 1px solid #FDE047; }
-    .compat-score.mejorable { background: #FFF1F2; border: 1px solid #FECDD3; }
-    .compat-score-num { font-size: 28px; font-weight: 700; }
-    .compat-score.excelente .compat-score-num { color: #15803D; }
-    .compat-score.buena     .compat-score-num { color: #92400E; }
-    .compat-score.mejorable .compat-score-num { color: #BE123C; }
-    .compat-score-text h4 { font-size: 14px; margin-bottom: 2px; }
-    .compat-score-text p  { font-size: 13px; color: var(--texto-sec); margin: 0; }
+    /* ---- Wizard ---- */
+    .wizard-step { display:none; }
+    .wizard-step.active { display:block;animation:fadeIn .2s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+    .wizard-progress { display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:32px; }
+    .wp-dot { width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      font-size:13px;font-weight:700;border:2px solid var(--borde);background:white;color:var(--texto-sec);position:relative;z-index:1;flex-shrink:0; }
+    .wp-dot.active { border-color:var(--verde);background:var(--verde);color:white; }
+    .wp-dot.done   { border-color:var(--verde);background:var(--verde-bg);color:var(--verde); }
+    .wp-line { flex:1;height:2px;background:var(--borde);max-width:48px; }
+    .wp-line.done { background:var(--verde); }
+    .step-q   { font-size:22px;font-weight:700;margin-bottom:8px;color:var(--texto); }
+    .step-sub { font-size:14px;color:var(--texto-sec);margin-bottom:24px;line-height:1.5; }
+    .choice-grid   { display:grid;gap:12px;margin-bottom:24px; }
+    .choice-grid-2 { grid-template-columns:1fr 1fr; }
+    .choice-grid-4 { grid-template-columns:1fr 1fr; }
+    .choice-grid-3 { grid-template-columns:1fr; }
+    @media(min-width:480px){ .choice-grid-4{grid-template-columns:repeat(4,1fr);} .choice-grid-3{grid-template-columns:repeat(3,1fr);} }
+    .choice-btn { display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 12px;
+      border:2px solid var(--borde);border-radius:var(--radio-card);background:white;cursor:pointer;
+      transition:all .18s;text-align:center;font-family:inherit;width:100%; }
+    .choice-btn:hover { border-color:var(--verde-claro);box-shadow:0 2px 8px rgba(0,0,0,.08); }
+    .choice-btn.selected { border-color:var(--verde);background:var(--verde-bg); }
+    .choice-icon  { font-size:26px;line-height:1; }
+    .choice-label { font-size:15px;font-weight:700;color:var(--texto); }
+    .choice-desc  { font-size:12px;color:var(--texto-sec);line-height:1.3; }
+    .step-divider { border:none;border-top:1px solid var(--borde);margin:24px 0; }
+    .btn-back { background:none;border:none;color:var(--texto-sec);cursor:pointer;font-size:14px;padding:0;font-family:inherit;margin-top:8px; }
+    .btn-back:hover { color:var(--texto); }
 
-    .sinergia-item {
-      display: flex; gap: 10px; align-items: flex-start;
-      padding: 8px 0; border-bottom: 1px solid var(--borde); font-size: 13px;
-    }
-    .sinergia-item:last-child { border-bottom: none; }
-    .sinergia-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-    .dot-verde { background: #22C55E; }
-    .dot-rojo  { background: #EF4444; }
-
-    .rendimiento-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .rendimiento-item {
-      background: var(--fondo);
-      border-radius: 8px;
-      padding: 14px 16px;
-    }
-    .rendimiento-item h5 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .rendimiento-item p  { font-size: 13px; color: var(--texto-sec); margin: 0; line-height: 1.4; }
-
-    .motivacion-box {
-      background: linear-gradient(135deg, var(--verde), #1B4332);
-      color: white; border-radius: var(--radio-card); padding: 24px 28px;
-      margin-bottom: 24px;
-    }
-    .motivacion-box h4 { color: white; margin-bottom: 12px; }
-    .motivacion-box p  { color: rgba(255,255,255,0.85); margin: 0; font-size: 15px; line-height: 1.6; }
-
-    .capacidad-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--verde-bg); color: var(--verde);
-      font-size: 13px; font-weight: 600;
-      padding: 6px 14px; border-radius: 20px; margin-bottom: 16px;
-    }
+    /* ---- Resultado ---- */
+    .plan-bloque { border:1px solid var(--borde);border-radius:var(--radio-card);padding:20px 24px;margin-bottom:16px;background:white; }
+    .plan-bloque-titulo { font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--verde);margin-bottom:12px; }
+    .plan-bloque-aviso { background:#FFFBF0;border-color:#FDE68A; }
+    .plan-bloque-aviso .plan-bloque-titulo { color:#92400E; }
+    .plan-distrib-item { padding:7px 0;border-bottom:1px solid var(--borde);font-size:14px;line-height:1.5; }
+    .plan-distrib-item:last-child { border-bottom:none; }
+    .amazon-grid { display:grid;gap:14px; }
+    .amazon-cat { border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden; }
+    .amazon-cat-titulo { background:var(--fondo);padding:10px 16px;font-size:13px;font-weight:700;border-bottom:1px solid var(--borde); }
+    .amazon-item { display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--borde); }
+    .amazon-item:last-child { border-bottom:none; }
+    .amazon-item-info { flex:1;min-width:0; }
+    .amazon-item-nombre { font-size:13px;font-weight:600;margin-bottom:2px; }
+    .amazon-item-desc   { font-size:12px;color:var(--texto-sec); }
   </style>
-  <script type="application/ld+json">
-  {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Cuántas plantas caben en un balcón de 3 m²?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Con 3 m² disponibles puedes cultivar aproximadamente: 2-3 tomateras cherry en macetas de 15L, 6-8 plantas de lechuga, 2 pimientos, una mata de albahaca y una de perejil. La clave es usar macetas rectangulares que aprovechan el espacio del balcón, y aprovechar la verticalidad con tutores para los tomates y pepinos."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué plantas ocupan menos espacio en maceta?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Las plantas más eficientes en espacio son: rábanos (10 cm entre plantas, cosecha en 25 días), lechugas (20 cm, muy productivas por m²), cebolletas (10 cm), albahaca (20 cm), perejil (15 cm) y tomate cherry en variedades compactas. Evita en espacios pequeños: calabacín, pepino, melón y calabaza, que se expanden mucho."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Puedo cultivar en un balcón de 2 m²?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí. Con 2 m² puedes cultivar entre 4 y 6 plantas en macetas. Las mejores opciones son aromáticas, lechuga, rábano, tomate cherry y fresa."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Por qué importa la compatibilidad entre plantas?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Algunas plantas se protegen mutuamente de plagas, otras compiten por los mismos nutrientes o comparten enfermedades. Plantar bien evita problemas sin necesidad de pesticidas."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Son fiables los rendimientos estimados?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Son estimaciones orientativas en condiciones normales. El rendimiento real depende de la variedad, el riego, el abonado y el clima de tu año concreto. Úsalos como referencia para saber qué esperar."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué hago si mi balcón tiene sombra parcial?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Las aromáticas, la lechuga y las espinacas aguantan bien la semisombra. Los tomates, pimientos y berenjenas necesitan sol directo mínimo 6 horas. El planificador no filtra por luz solar todavía, pero lo añadiremos próximamente."
-      }
-    }
-  ]
-}
-  </script>
 </head>
 <body>
 
-    <header class="site-header">
+  <header class="site-header">
     <div class="container">
       <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
       <nav aria-label="Navegación principal">
@@ -181,7 +120,6 @@
           <li><a href="../consejos/index.html">Consejos</a></li>
         </ul>
       </nav>
-      <!-- Botón hamburguesa solo en móvil -->
       <button id="menu-toggle" aria-label="Abrir menú" aria-expanded="false"
         style="display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:201;">
         <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
@@ -189,7 +127,6 @@
         <span style="display:block;width:22px;height:2px;background:var(--texto);border-radius:2px;transition:all .25s;"></span>
       </button>
     </div>
-    <!-- Menú móvil desplegable -->
     <div id="mobile-menu" style="display:none;position:absolute;top:60px;left:0;right:0;background:var(--blanco);border-top:1px solid var(--borde);box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:200;padding:12px 0;">
       <ul style="list-style:none;margin:0;padding:0;">
         <li><a href="calendario-siembra.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Calendario</a></li>
@@ -204,175 +141,192 @@
   </header>
   <script>
     (function(){
-      var btn = document.getElementById('menu-toggle');
-      var menu = document.getElementById('mobile-menu');
-      function isMobile(){ return window.innerWidth < 641; }
-      function syncBtn(){ btn.style.display = isMobile() ? 'flex' : 'none'; if(!isMobile()) menu.style.display='none'; }
-      syncBtn();
-      window.addEventListener('resize', syncBtn);
-      btn.addEventListener('click', function(){
-        var open = menu.style.display === 'block';
-        menu.style.display = open ? 'none' : 'block';
-        btn.setAttribute('aria-expanded', String(!open));
-      });
-      document.addEventListener('click', function(e){
-        if(!e.target.closest('.site-header')){ menu.style.display='none'; btn.setAttribute('aria-expanded','false'); }
-      });
+      var btn=document.getElementById('menu-toggle'),menu=document.getElementById('mobile-menu');
+      function isMobile(){return window.innerWidth<641;}
+      function syncBtn(){btn.style.display=isMobile()?'flex':'none';if(!isMobile())menu.style.display='none';}
+      syncBtn();window.addEventListener('resize',syncBtn);
+      btn.addEventListener('click',function(){var o=menu.style.display==='block';menu.style.display=o?'none':'block';btn.setAttribute('aria-expanded',String(!o));});
+      document.addEventListener('click',function(e){if(!e.target.closest('.site-header')){menu.style.display='none';btn.setAttribute('aria-expanded','false');}});
     })();
   </script>
 
-  
-
   <div class="page-header">
     <div class="container">
-      <nav class="breadcrumb">
-        <a href="../index.html">Inicio</a>
-        <span>›</span>
-        <span>Planificador de huerto</span>
-      </nav>
+      <nav class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Planificador de huerto</span></nav>
       <h1>Planificador de huerto personalizado</h1>
-      <p>Introduce tu zona climática y espacio disponible. Elige plantas o usa uno de nuestros huertos recomendados. Obtendrás un plan completo con fechas, compatibilidad y lista de compra.</p>
+      <p>Responde 5 preguntas y obtén un plan concreto con distribución, fechas y lista de compra.</p>
     </div>
   </div>
-  <div class="adsense-header" style="margin:0;">
-    <div class="ad-slot">Publicidad</div>
-  </div>
-
+  <div class="adsense-header" style="margin:0;"><div class="ad-slot">Publicidad</div></div>
 
   <section style="padding:48px 0;">
     <div class="container">
       <div class="tool-wrapper">
 
-        <!-- Indicador de pasos -->
-        <div class="planner-steps" id="steps-indicator">
-          <div class="step-indicator active" id="step-ind-1">
-            <div class="step-num">1</div>
-            <span>Tu espacio</span>
-          </div>
-          <span class="step-sep">›</span>
-          <div class="step-indicator" id="step-ind-2">
-            <div class="step-num">2</div>
-            <span>Tus plantas</span>
-          </div>
-          <span class="step-sep">›</span>
-          <div class="step-indicator" id="step-ind-3">
-            <div class="step-num">3</div>
-            <span>Tu plan</span>
+        <!-- Barra de progreso (5 pasos) -->
+        <div class="wizard-progress" id="wizard-progress">
+          <div class="wp-dot active" id="wp-1">1</div>
+          <div class="wp-line" id="wl-1"></div>
+          <div class="wp-dot" id="wp-2">2</div>
+          <div class="wp-line" id="wl-2"></div>
+          <div class="wp-dot" id="wp-3">3</div>
+          <div class="wp-line" id="wl-3"></div>
+          <div class="wp-dot" id="wp-4">4</div>
+          <div class="wp-line" id="wl-4"></div>
+          <div class="wp-dot" id="wp-5">5</div>
+        </div>
+
+        <!-- PASO 1: Dónde -->
+        <div class="wizard-step active" id="wizard-1">
+          <div class="step-q">¿Dónde vas a plantar?</div>
+          <div class="step-sub">Elige el espacio que tienes disponible.</div>
+          <div class="choice-grid choice-grid-4">
+            <button class="choice-btn" data-val="balcon" onclick="elegirEspacio('balcon',this)">
+              <span class="choice-icon">🌿</span><span class="choice-label">Balcón</span>
+              <span class="choice-desc">Espacio pequeño con barandilla</span>
+            </button>
+            <button class="choice-btn" data-val="terraza" onclick="elegirEspacio('terraza',this)">
+              <span class="choice-icon">🌞</span><span class="choice-label">Terraza</span>
+              <span class="choice-desc">Espacio abierto más grande</span>
+            </button>
+            <button class="choice-btn" data-val="interior" onclick="elegirEspacio('interior',this)">
+              <span class="choice-icon">🪟</span><span class="choice-label">Interior</span>
+              <span class="choice-desc">Ventana, alféizar o salón</span>
+            </button>
+            <button class="choice-btn" data-val="jardin" onclick="elegirEspacio('jardin',this)">
+              <span class="choice-icon">🌱</span><span class="choice-label">Jardín</span>
+              <span class="choice-desc">Huerto en tierra o patio</span>
+            </button>
           </div>
         </div>
 
-        <!-- PASO 1 -->
-        <div class="planner-step-content active" id="step-1">
-          <h3 style="margin-bottom:20px;">Cuéntame sobre tu espacio</h3>
+        <!-- PASO 2: Maceta o suelo (solo balcón/terraza) -->
+        <div class="wizard-step" id="wizard-2">
+          <div class="step-q">¿En maceta o en suelo directo?</div>
+          <div class="step-sub">En balcón y terraza puedes cultivar de las dos formas.</div>
+          <div class="choice-grid choice-grid-2">
+            <button class="choice-btn" onclick="elegirContenedor('maceta',this)">
+              <span class="choice-icon">🪴</span><span class="choice-label">En macetas</span>
+              <span class="choice-desc">La opción más habitual en balcón y terraza</span>
+            </button>
+            <button class="choice-btn" onclick="elegirContenedor('suelo',this)">
+              <span class="choice-icon">🌍</span><span class="choice-label">En suelo directo</span>
+              <span class="choice-desc">Terraza con jardineras de tierra</span>
+            </button>
+          </div>
+          <button class="btn-back" onclick="irWizard(1)">← Atrás</button>
+        </div>
 
-          <!-- Buscador de municipio -->
-          <div id="muni-buscador" style="background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:var(--radio-card);padding:20px 24px;margin-bottom:20px;">
-            <p style="font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">📍 Detectar zona por municipio</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <!-- PASO 3: Tienes macetas + espacio -->
+        <div class="wizard-step" id="wizard-3">
+          <div id="w3-tiene-macetas" style="display:none;">
+            <div class="step-q">¿Ya tienes macetas?</div>
+            <div class="step-sub">Si tienes, el plan se adaptará a ellas. Si no, te indicamos qué comprar.</div>
+            <div class="choice-grid choice-grid-2">
+              <button class="choice-btn" onclick="elegirTieneMacetas(true,this)">
+                <span class="choice-icon">✅</span><span class="choice-label">Sí, ya tengo</span>
+              </button>
+              <button class="choice-btn" onclick="elegirTieneMacetas(false,this)">
+                <span class="choice-icon">🛒</span><span class="choice-label">Todavía no</span>
+              </button>
+            </div>
+            <hr class="step-divider" id="w3-divider" style="display:none;">
+          </div>
+          <div id="w3-espacio" style="display:none;">
+            <div class="step-q" id="w3-espacio-q">¿Cuánto espacio tienes?</div>
+            <div class="choice-grid choice-grid-3">
+              <button class="choice-btn" onclick="elegirTamano('poco',this)">
+                <span class="choice-icon">🌱</span><span class="choice-label">Poco</span>
+                <span class="choice-desc" id="desc-poco">Balcón pequeño · 2-3 macetas</span>
+              </button>
+              <button class="choice-btn" onclick="elegirTamano('medio',this)">
+                <span class="choice-icon">🌿</span><span class="choice-label">Medio</span>
+                <span class="choice-desc" id="desc-medio">Balcón grande o terraza · 4-6 macetas</span>
+              </button>
+              <button class="choice-btn" onclick="elegirTamano('mucho',this)">
+                <span class="choice-icon">🌳</span><span class="choice-label">Mucho</span>
+                <span class="choice-desc" id="desc-mucho">Azotea o jardín · 7+ macetas</span>
+              </button>
+            </div>
+          </div>
+          <button class="btn-back" onclick="retrocederDesde3()">← Atrás</button>
+        </div>
+
+        <!-- PASO 4: Experiencia -->
+        <div class="wizard-step" id="wizard-4">
+          <div class="step-q">¿Cuánta experiencia tienes?</div>
+          <div class="step-sub">Ajustamos las recomendaciones a tu nivel.</div>
+          <div class="choice-grid choice-grid-3">
+            <button class="choice-btn" onclick="elegirNivel('principiante',this)">
+              <span class="choice-icon">🌱</span><span class="choice-label">Primera vez</span>
+              <span class="choice-desc">Nunca he cultivado</span>
+            </button>
+            <button class="choice-btn" onclick="elegirNivel('intermedio',this)">
+              <span class="choice-icon">🌿</span><span class="choice-label">Algo de experiencia</span>
+              <span class="choice-desc">He cultivado alguna vez</span>
+            </button>
+            <button class="choice-btn" onclick="elegirNivel('avanzado',this)">
+              <span class="choice-icon">🌳</span><span class="choice-label">Experto</span>
+              <span class="choice-desc">Varios años de huerto</span>
+            </button>
+          </div>
+          <button class="btn-back" onclick="irWizard(3)">← Atrás</button>
+        </div>
+
+        <!-- PASO 5: Zona + Plantas -->
+        <div class="wizard-step" id="wizard-5">
+          <div class="step-q">Elige tus plantas</div>
+          <div style="background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:var(--radio-card);padding:16px 20px;margin-bottom:20px;">
+            <p style="font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">📍 Tu zona climática</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
               <input id="muni-input" type="text" placeholder="Escribe tu municipio…"
-                style="flex:1;min-width:180px;padding:10px 14px;border:1px solid #B7E4C7;border-radius:var(--radio-btn);font-size:14px;font-family:inherit;background:white;color:var(--texto);outline:none;"
-                autocomplete="off" aria-label="Nombre del municipio" />
+                style="flex:1;min-width:160px;padding:10px 14px;border:1px solid #B7E4C7;border-radius:var(--radio-btn);font-size:14px;font-family:inherit;background:white;color:var(--texto);outline:none;"
+                autocomplete="off" />
               <button id="muni-btn" style="padding:10px 20px;background:var(--verde);color:white;border:none;border-radius:var(--radio-btn);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;">Buscar</button>
             </div>
-            <ul id="muni-sugerencias" style="list-style:none;margin:8px 0 0;padding:0;display:none;background:white;border:1px solid var(--borde);border-radius:var(--radio-btn);overflow:hidden;box-shadow:var(--sombra);"></ul>
-            <p id="muni-estado" style="font-size:13px;color:var(--texto-sec);margin-top:10px;min-height:18px;"></p>
+            <ul id="muni-sugerencias" style="list-style:none;margin:0 0 8px;padding:0;display:none;background:white;border:1px solid var(--borde);border-radius:var(--radio-btn);overflow:hidden;box-shadow:var(--sombra);"></ul>
+            <p id="muni-estado" style="font-size:13px;color:var(--texto-sec);margin:0 0 8px;min-height:18px;"></p>
+            <label for="p-zona" style="font-size:13px;color:var(--texto-sec);">O elige directamente: </label>
+            <select id="p-zona" onchange="estado.zona=this.value" style="font-size:13px;padding:6px 10px;border:1px solid #B7E4C7;border-radius:6px;background:white;font-family:inherit;">
+              <option value="">Selecciona zona...</option>
+            </select>
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="p-zona">Zona climática</label>
-              <select id="p-zona">
-                <option value="">Selecciona zona...</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="p-tipo">Tipo de espacio</label>
-              <select id="p-tipo">
-                <option value="balcon">Balcón</option>
-                <option value="terraza">Terraza</option>
-                <option value="jardin">Jardín / Huerto</option>
-                <option value="interior">Interior (ventana con sol)</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row" id="fila-contenedor" style="display:none;">
-            <div class="form-group">
-              <label for="p-contenedor">Tipo de contenedor</label>
-              <select id="p-contenedor">
-                <option value="maceta">En macetas</option>
-                <option value="suelo">En suelo directo</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="p-m2">Metros cuadrados disponibles</label>
-              <input type="number" id="p-m2" min="0.5" max="500" step="0.5" placeholder="Ej: 4">
-            </div>
-            <div class="form-group">
-              <label for="p-nivel">Tu experiencia</label>
-              <select id="p-nivel">
-                <option value="principiante">Principiante (primera vez)</option>
-                <option value="intermedio">Intermedio (algo de experiencia)</option>
-                <option value="avanzado">Avanzado (varios años)</option>
-              </select>
-            </div>
-          </div>
-          <div id="step1-error" style="color:#DC2626;font-size:14px;margin-bottom:16px;display:none;">Por favor selecciona zona climática e introduce los metros cuadrados.</div>
-          <button class="btn btn-primary" onclick="irPaso2()">Siguiente: elegir plantas</button>
-        </div>
-
-        <!-- PASO 2 -->
-        <div class="planner-step-content" id="step-2">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
-            <h3 style="margin:0;">Elige tus plantas</h3>
-            <span id="plantas-count" style="font-size:14px;color:var(--texto-sec);">0 plantas seleccionadas</span>
-          </div>
-
-          <!-- Capacidad estimada -->
-          <div id="capacidad-info" class="capacidad-badge" style="display:none;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <span id="capacidad-texto"></span>
-          </div>
-
-          <!-- Huertos predefinidos -->
           <div style="margin-bottom:24px;">
             <h4 style="font-size:15px;margin-bottom:4px;">Huertos recomendados para tu espacio</h4>
-            <p style="font-size:13px;color:var(--texto-sec);margin-bottom:12px;">Combinaciones probadas y equilibradas. Haz clic en uno para cargarlo directamente.</p>
+            <p style="font-size:13px;color:var(--texto-sec);margin-bottom:12px;">Combinaciones probadas. Haz clic para cargar una.</p>
             <div class="preset-grid" id="preset-grid"></div>
           </div>
-
-          <div style="border-top:1px solid var(--borde);padding-top:24px;">
-            <h4 style="font-size:15px;margin-bottom:12px;">O elige tus propias plantas</h4>
-            <div class="filter-tabs" id="filter-tabs">
+          <div style="border-top:1px solid var(--borde);padding-top:20px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+              <h4 style="font-size:15px;margin:0;">O elige tus propias plantas</h4>
+              <span id="plantas-count" style="font-size:13px;color:var(--texto-sec);">0 plantas seleccionadas</span>
+            </div>
+            <div class="filter-tabs">
               <button class="filter-tab active" onclick="filtrarPlantas(this,'todas')">Todas</button>
               <button class="filter-tab" onclick="filtrarPlantas(this,'hortaliza')">Hortalizas</button>
               <button class="filter-tab" onclick="filtrarPlantas(this,'fruta')">Frutas</button>
               <button class="filter-tab" onclick="filtrarPlantas(this,'aromatica')">Aromáticas</button>
             </div>
-            <div id="plantas-bar" style="display:none;margin:12px 0 8px;padding:10px 14px;background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:8px;display:none;align-items:center;flex-wrap:wrap;gap:6px;">
+            <div id="plantas-bar" style="display:none;margin:10px 0 6px;padding:10px 14px;background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:8px;flex-wrap:wrap;gap:6px;align-items:center;">
               <span style="font-size:12px;font-weight:700;color:var(--verde);text-transform:uppercase;margin-right:4px;">Seleccionadas:</span>
               <span id="plantas-bar-items" style="display:inline-flex;flex-wrap:wrap;gap:6px;"></span>
             </div>
             <div class="plant-selector-grid" id="plant-grid"></div>
+            <div id="compat-preview" style="display:none;margin-top:12px;"></div>
           </div>
-
-          <!-- Preview de compatibilidad en tiempo real -->
-          <div id="compat-preview" style="display:none;margin-top:16px;"></div>
-
-          <div id="step2-error" style="color:#DC2626;font-size:14px;margin-bottom:16px;display:none;">Selecciona al menos una planta.</div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
-            <button class="btn btn-outline" onclick="irPaso1()">Atrás</button>
-            <button class="btn btn-primary" onclick="irPaso3()">Generar mi plan</button>
+          <div id="step5-error" style="color:#DC2626;font-size:14px;margin:12px 0;display:none;">Selecciona tu zona climática y al menos una planta.</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;align-items:center;">
+            <button class="btn btn-outline" onclick="irWizard(4)">← Atrás</button>
+            <button class="btn btn-primary" onclick="crearPlan()">Crear mi plan →</button>
           </div>
         </div>
 
-        <!-- PASO 3 -->
-        <div class="planner-step-content" id="step-3">
+        <!-- PASO 6: Resultado -->
+        <div class="wizard-step" id="wizard-6">
           <div id="plan-output"></div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
-            <button class="btn btn-outline" onclick="irPaso2()">Cambiar plantas</button>
-            <button class="btn btn-outline" onclick="irPaso1()">Empezar de nuevo</button>
+            <button class="btn btn-outline" onclick="irWizard(5)">← Cambiar plantas</button>
+            <button class="btn btn-outline" onclick="reiniciar()">Empezar de nuevo</button>
           </div>
         </div>
 
@@ -388,31 +342,16 @@
     <div class="container" style="max-width:800px;">
       <h2 style="margin-bottom:8px;">Preguntas frecuentes sobre el planificador</h2>
       <div class="faq-list mt-24">
-        <div class="faq-item">
-          <h4>¿Cuántas plantas caben en un balcón de 3 m²?</h4>
-          <p>Con 3 m² disponibles puedes cultivar aproximadamente: 2-3 tomateras cherry en macetas de 15L, 6-8 plantas de lechuga, 2 pimientos, una mata de albahaca y una de perejil. La clave es usar macetas rectangulares que aprovechan el espacio del balcón, y aprovechar la verticalidad con tutores para los tomates y pepinos.</p>
-        </div>
-        <div class="faq-item">
-          <h4>¿Qué plantas ocupan menos espacio en maceta?</h4>
-          <p>Las plantas más eficientes en espacio son: rábanos (10 cm entre plantas, cosecha en 25 días), lechugas (20 cm, muy productivas por m²), cebolletas (10 cm), albahaca (20 cm), perejil (15 cm) y tomate cherry en variedades compactas. Evita en espacios pequeños: calabacín, pepino, melón y calabaza, que se expanden mucho.</p>
-        </div>
-
-        <div class="faq-item">
-          <h4>¿Puedo cultivar en un balcón de 2 m²?</h4>
-          <p>Sí. Con 2 m² puedes cultivar entre 4 y 6 plantas en macetas. Las mejores opciones son aromáticas, lechuga, rábano, tomate cherry y fresa.</p>
-        </div>
-        <div class="faq-item">
-          <h4>¿Por qué importa la compatibilidad entre plantas?</h4>
-          <p>Algunas plantas se protegen mutuamente de plagas, otras compiten por los mismos nutrientes o comparten enfermedades. Plantar bien evita problemas sin necesidad de pesticidas.</p>
-        </div>
-        <div class="faq-item">
-          <h4>¿Son fiables los rendimientos estimados?</h4>
-          <p>Son estimaciones orientativas en condiciones normales. El rendimiento real depende de la variedad, el riego, el abonado y el clima de tu año concreto. Úsalos como referencia para saber qué esperar.</p>
-        </div>
-        <div class="faq-item">
-          <h4>¿Qué hago si mi balcón tiene sombra parcial?</h4>
-          <p>Las aromáticas, la lechuga y las espinacas aguantan bien la semisombra. Los tomates, pimientos y berenjenas necesitan sol directo mínimo 6 horas. El planificador no filtra por luz solar todavía, pero lo añadiremos próximamente.</p>
-        </div>
+        <div class="faq-item"><h4>¿Cuántas plantas caben en un balcón de 3 m²?</h4>
+          <p>Con 3 m² puedes cultivar 2-3 tomateras cherry en macetas de 15L, 6-8 lechugas, 2 pimientos, una mata de albahaca y una de perejil. Usa macetas rectangulares y aprovecha la verticalidad con tutores.</p></div>
+        <div class="faq-item"><h4>¿Qué plantas ocupan menos espacio en maceta?</h4>
+          <p>Las más eficientes: rábanos (cosecha en 25 días), lechugas, cebolletas, albahaca, perejil y tomate cherry compacto. Evita en espacios pequeños calabacín, pepino y calabaza.</p></div>
+        <div class="faq-item"><h4>¿Puedo cultivar en un balcón de 2 m²?</h4>
+          <p>Sí. Con 2 m² puedes cultivar entre 4 y 6 plantas. Las mejores opciones son aromáticas, lechuga, rábano, tomate cherry y fresa.</p></div>
+        <div class="faq-item"><h4>¿Por qué importa la compatibilidad entre plantas?</h4>
+          <p>Algunas plantas se protegen mutuamente de plagas, otras compiten por los mismos nutrientes. Plantar bien evita problemas sin necesidad de pesticidas.</p></div>
+        <div class="faq-item"><h4>¿Qué hago si mi balcón tiene sombra parcial?</h4>
+          <p>Aromáticas, lechuga y espinacas aguantan la semisombra. Tomates, pimientos y berenjenas necesitan mínimo 6 horas de sol directo.</p></div>
       </div>
     </div>
   </section>
@@ -424,26 +363,22 @@
           <a href="../index.html" class="logo">HortelanoUrbano.es</a>
           <p>Herramientas gratuitas para huerto urbano en España.</p>
         </div>
-        <div class="footer-col">
-          <h4>Herramientas</h4>
+        <div class="footer-col"><h4>Herramientas</h4>
           <ul>
             <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
             <li><a href="planificador-huerto.html">Planificador</a></li>
             <li><a href="compatibilidad-plantas.html">Compatibilidad</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <h4>Información</h4>
+        <div class="footer-col"><h4>Información</h4>
           <ul>
             <li><a href="../aviso-legal.html">Aviso legal</a></li>
             <li><a href="../privacidad.html">Privacidad</a></li>
-            <li><a href="../contacto.html">Contacto</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2025 HortelanoUrbano.es</span>
-        <span>Hecho en España</span>
+        <span>&copy; 2025 HortelanoUrbano.es</span><span>Hecho en España</span>
       </div>
     </div>
   </footer>
@@ -452,154 +387,192 @@
   <script src="../js/data.js"></script>
   <script src="../js/compatibilidad.js"></script>
   <script>
-    const estado = { zona: '', tipo: 'balcon', contenedor: 'maceta', m2: 0, nivel: 'principiante', plantas: new Set() };
-
-    /* ---- Selector contenedor dinámico ---- */
-    const selTipoEl = document.getElementById('p-tipo');
-    const filaContenedor = document.getElementById('fila-contenedor');
-    const selContenedor = document.getElementById('p-contenedor');
-    function actualizarContenedor() {
-      const t = selTipoEl.value;
-      if (t === 'jardin') {
-        filaContenedor.style.display = 'none';
-      } else {
-        filaContenedor.style.display = '';
-        if (t === 'interior') {
-          selContenedor.innerHTML = '<option value="maceta">En macetas</option>';
-        } else {
-          selContenedor.innerHTML = '<option value="maceta">En macetas</option><option value="suelo">En suelo directo</option>';
-        }
-      }
-    }
-    selTipoEl.addEventListener('change', actualizarContenedor);
-    actualizarContenedor();
+    /* ---- Estado global ---- */
+    const estado = {
+      tipo: '', contenedor: '', tieneMacetas: null,
+      tamano: '', nivel: '', zona: '', plantas: new Set()
+    };
+    const M2_TAMANO = { poco:2, medio:5, mucho:10 };
     let catActual = 'todas';
 
-    /* ---- Init zonas ---- */
-    const selZona = document.getElementById('p-zona');
-    Object.entries(ZONAS).forEach(([id, z]) => {
-      const opt = document.createElement('option');
-      opt.value = id;
-      opt.textContent = z.nombre;
-      selZona.appendChild(opt);
-    });
+    /* ---- Fallback getCalendario ---- */
+    function getCalendario(id, zonaId) { return PLANTAS[id]?.calendar?.[zonaId] || null; }
 
-    /* ---- Navegación ---- */
-    function setStep(n) {
-      [1,2,3].forEach(i => {
-        document.getElementById(`step-${i}`).classList.toggle('active', i === n);
-        const ind = document.getElementById(`step-ind-${i}`);
-        ind.classList.remove('active','done');
-        if (i === n) ind.classList.add('active');
-        else if (i < n) ind.classList.add('done');
-      });
+    /* ---- Wizard navigation ---- */
+    function irWizard(n) {
+      [1,2,3,4,5,6].forEach(i => document.getElementById('wizard-'+i).classList.toggle('active', i===n));
+      // progress bar: only steps 1-5
+      for (let i=1;i<=5;i++){
+        const dot=document.getElementById('wp-'+i);
+        dot.classList.remove('active','done');
+        if(i<n&&n<=6) dot.classList.add('done');
+        else if(i===n) dot.classList.add('active');
+      }
+      for(let i=1;i<=4;i++){
+        const ln=document.getElementById('wl-'+i);
+        ln.classList.toggle('done', i<n);
+      }
+      // Hide progress bar on result step
+      document.getElementById('wizard-progress').style.display = (n===6) ? 'none' : 'flex';
+      window.scrollTo({top:0,behavior:'smooth'});
     }
 
-    function irPaso1() { setStep(1); }
+    /* ---- Paso 1: espacio ---- */
+    function elegirEspacio(tipo, btn) {
+      estado.tipo = tipo;
+      document.querySelectorAll('#wizard-1 .choice-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      if (tipo==='interior') {
+        estado.contenedor='maceta';
+        entrarPaso3();
+        irWizard(3);
+      } else if (tipo==='jardin') {
+        estado.contenedor='suelo';
+        entrarPaso3();
+        irWizard(3);
+      } else {
+        irWizard(2);
+      }
+    }
 
-    function irPaso2() {
-      const zona = selZona.value;
-      const m2   = parseFloat(document.getElementById('p-m2').value);
-      const err  = document.getElementById('step1-error');
-      if (!zona || !m2 || m2 <= 0) { err.style.display = 'block'; return; }
-      err.style.display = 'none';
-      estado.zona       = zona;
-      estado.tipo       = document.getElementById('p-tipo').value;
-      estado.contenedor = document.getElementById('p-contenedor').value;
-      estado.m2         = m2;
-      estado.nivel      = document.getElementById('p-nivel').value;
+    /* ---- Paso 2: contenedor ---- */
+    function elegirContenedor(cont, btn) {
+      estado.contenedor = cont;
+      document.querySelectorAll('#wizard-2 .choice-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      entrarPaso3();
+      irWizard(3);
+    }
 
-      /* Capacidad estimada */
-      const capInfo = document.getElementById('capacidad-info');
-      const capTxt  = document.getElementById('capacidad-texto');
-      const capMin  = Math.max(1, Math.floor(m2 / 0.4));
-      const capMax  = Math.max(2, Math.floor(m2 / 0.06));
-      capTxt.textContent = `Con ${m2} m² caben entre ${capMin} plantas grandes y ${capMax} plantas pequeñas`;
-      capInfo.style.display = 'inline-flex';
+    /* ---- Paso 3 setup ---- */
+    function entrarPaso3() {
+      const tieneEl = document.getElementById('w3-tiene-macetas');
+      const espacioEl = document.getElementById('w3-espacio');
+      const divider = document.getElementById('w3-divider');
+      // Reset
+      document.querySelectorAll('#w3-tiene-macetas .choice-btn').forEach(b=>b.classList.remove('selected'));
+      document.querySelectorAll('#w3-espacio .choice-btn').forEach(b=>b.classList.remove('selected'));
 
+      if (estado.contenedor==='maceta') {
+        tieneEl.style.display = 'block';
+        espacioEl.style.display = 'none';
+        divider.style.display = 'none';
+        // Update descs for maceta
+        document.getElementById('desc-poco').textContent  = 'Balcón pequeño · 2-3 macetas';
+        document.getElementById('desc-medio').textContent = 'Balcón grande o terraza · 4-6 macetas';
+        document.getElementById('desc-mucho').textContent = 'Azotea o jardín · 7+ macetas';
+        document.getElementById('w3-espacio-q').textContent = '¿Cuánto espacio tienes?';
+      } else {
+        tieneEl.style.display = 'none';
+        espacioEl.style.display = 'block';
+        estado.tieneMacetas = null;
+        // Update descs for suelo
+        document.getElementById('desc-poco').textContent  = 'Huerto pequeño · hasta 20 m²';
+        document.getElementById('desc-medio').textContent = 'Huerto mediano · 20-50 m²';
+        document.getElementById('desc-mucho').textContent = 'Huerto grande · más de 50 m²';
+        document.getElementById('w3-espacio-q').textContent = '¿Cuánto espacio tienes en el huerto?';
+      }
+    }
+
+    function elegirTieneMacetas(tiene, btn) {
+      estado.tieneMacetas = tiene;
+      document.querySelectorAll('#w3-tiene-macetas .choice-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('w3-divider').style.display = 'block';
+      document.getElementById('w3-espacio').style.display = 'block';
+    }
+
+    function elegirTamano(tamano, btn) {
+      estado.tamano = tamano;
+      document.querySelectorAll('#w3-espacio .choice-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(()=>irWizard(4), 200);
+    }
+
+    function retrocederDesde3() {
+      if (estado.tipo==='interior'||estado.tipo==='jardin') irWizard(1);
+      else irWizard(2);
+    }
+
+    /* ---- Paso 4: nivel ---- */
+    function elegirNivel(nivel, btn) {
+      estado.nivel = nivel;
+      document.querySelectorAll('#wizard-4 .choice-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      // Init zona selector
+      const selZona = document.getElementById('p-zona');
+      if (selZona.options.length <= 1) {
+        Object.entries(ZONAS).forEach(([id,z]) => {
+          const opt = document.createElement('option');
+          opt.value = id; opt.textContent = z.nombre;
+          selZona.appendChild(opt);
+        });
+      }
       renderPresets();
-      renderPlantGrid(catActual);
-      setStep(2);
+      renderPlantGrid('todas');
+      setTimeout(()=>irWizard(5), 200);
     }
 
-    function irPaso3() {
-      const err = document.getElementById('step2-error');
-      if (estado.plantas.size === 0) { err.style.display = 'block'; return; }
-      err.style.display = 'none';
-      generarPlan();
-      setStep(3);
-    }
-
-    /* ---- Huertos predefinidos ---- */
+    /* ---- Presets ---- */
     function renderPresets() {
+      const m2 = M2_TAMANO[estado.tamano] || 2;
       const grid = document.getElementById('preset-grid');
       const adecuados = HUERTOS_PREDEFINIDOS.filter(h =>
-        estado.m2 >= h.m2_min &&
-        (h.tipo === estado.tipo || h.tipo === 'balcon')
+        m2 >= h.m2_min && (h.tipo===estado.tipo || h.tipo==='balcon')
       );
-      if (adecuados.length === 0) {
-        grid.innerHTML = `<p style="font-size:13px;color:var(--texto-sec);grid-column:1/-1;">No hay huertos predefinidos para este espacio. Elige tus propias plantas abajo.</p>`;
+      if (!adecuados.length) {
+        grid.innerHTML = '<p style="font-size:13px;color:var(--texto-sec);grid-column:1/-1;">No hay huertos predefinidos para este espacio. Elige tus plantas abajo.</p>';
         return;
       }
       grid.innerHTML = adecuados.map(h => `
-        <button class="preset-card" onclick="cargarPreset('${h.id}', this)">
+        <button class="preset-card" onclick="cargarPreset('${h.id}',this)">
           <h4>${h.nombre}</h4>
-          <div class="preset-m2">${h.m2_min}–${h.m2_max} m²</div>
-          <div class="preset-plantas">
-            ${h.plantas.map(id => `<span class="preset-planta-tag">${PLANTAS[id]?.nombre || id}</span>`).join('')}
-          </div>
-          <p>${h.descripcion.substring(0, 100)}...</p>
-        </button>
-      `).join('');
+          <div class="preset-plantas">${h.plantas.map(id=>`<span class="preset-planta-tag">${PLANTAS[id]?.nombre||id}</span>`).join('')}</div>
+          <p>${h.descripcion.substring(0,90)}...</p>
+        </button>`).join('');
     }
 
     function cargarPreset(id, btn) {
-      const preset = HUERTOS_PREDEFINIDOS.find(h => h.id === id);
+      const preset = HUERTOS_PREDEFINIDOS.find(h=>h.id===id);
       if (!preset) return;
       estado.plantas.clear();
-      preset.plantas.forEach(p => estado.plantas.add(p));
-      document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+      preset.plantas.forEach(p=>estado.plantas.add(p));
+      document.querySelectorAll('.preset-card').forEach(c=>c.classList.remove('active'));
       btn.classList.add('active');
       renderPlantGrid(catActual);
       renderPlantasBar();
       actualizarCompatPreview();
-      document.getElementById('plantas-count').textContent =
-        `${estado.plantas.size} plantas seleccionadas`;
+      document.getElementById('plantas-count').textContent = `${estado.plantas.size} plantas seleccionadas`;
     }
 
-    /* ---- Grid de plantas ---- */
+    /* ---- Grid plantas ---- */
     function renderPlantGrid(cat) {
       catActual = cat;
       const grid = document.getElementById('plant-grid');
-      const entries = cat === 'todas' ? Object.entries(PLANTAS) : Object.entries(PLANTAS).filter(([,p]) => p.categoria === cat);
-      const filtradas = estado.nivel === 'principiante'
-        ? entries.filter(([,p]) => p.dificultad !== 'dificil')
-        : entries;
-      const catLabel = { hortaliza:'Hortaliza', fruta:'Fruta', aromatica:'Aromática' };
-      grid.innerHTML = filtradas.map(([id, p]) => `
-        <div class="plant-option ${estado.plantas.has(id) ? 'selected' : ''}"
-             onclick="togglePlanta('${id}', this)">
-          ${p.nombre}
-          <span class="plant-cat">${catLabel[p.categoria]}</span>
-        </div>
-      `).join('');
+      const entries = cat==='todas' ? Object.entries(PLANTAS) : Object.entries(PLANTAS).filter(([,p])=>p.categoria===cat);
+      const filtradas = estado.nivel==='principiante' ? entries.filter(([,p])=>p.dificultad!=='dificil') : entries;
+      const catLabel = {hortaliza:'Hortaliza',fruta:'Fruta',aromatica:'Aromática'};
+      grid.innerHTML = filtradas.map(([id,p]) => `
+        <div class="plant-option ${estado.plantas.has(id)?'selected':''}" onclick="togglePlanta('${id}',this)">
+          ${p.nombre}<span class="plant-cat">${catLabel[p.categoria]}</span>
+        </div>`).join('');
     }
 
     function filtrarPlantas(btn, cat) {
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
       btn.classList.add('active');
       renderPlantGrid(cat);
     }
 
     function renderPlantasBar() {
-      const bar   = document.getElementById('plantas-bar');
+      const bar = document.getElementById('plantas-bar');
       const items = document.getElementById('plantas-bar-items');
-      if (estado.plantas.size === 0) { bar.style.display = 'none'; return; }
-      bar.style.display = 'flex';
+      if (estado.plantas.size===0){ bar.style.display='none'; return; }
+      bar.style.display='flex';
       items.innerHTML = Array.from(estado.plantas).map(id => {
-        const p = PLANTAS[id];
+        const p=PLANTAS[id];
         return `<span style="display:inline-flex;align-items:center;gap:3px;background:white;border:1px solid var(--verde);border-radius:12px;padding:3px 10px;font-size:12px;font-weight:600;color:var(--verde);">
-          ${p ? p.nombre : id}
+          ${p?p.nombre:id}
           <button onclick="quitarPlanta('${id}')" style="background:none;border:none;cursor:pointer;padding:0 0 0 3px;font-size:14px;color:var(--verde);line-height:1;">×</button>
         </span>`;
       }).join('');
@@ -607,334 +580,301 @@
 
     function quitarPlanta(id) {
       estado.plantas.delete(id);
-      document.getElementById('plantas-count').textContent =
-        `${estado.plantas.size} planta${estado.plantas.size===1?'':'s'} seleccionada${estado.plantas.size===1?'':'s'}`;
+      document.getElementById('plantas-count').textContent = `${estado.plantas.size} planta${estado.plantas.size===1?'':'s'} seleccionada${estado.plantas.size===1?'':'s'}`;
       renderPlantGrid(catActual);
       renderPlantasBar();
       actualizarCompatPreview();
     }
 
     function togglePlanta(id, el) {
-      if (estado.plantas.has(id)) { estado.plantas.delete(id); el.classList.remove('selected'); }
-      else { estado.plantas.add(id); el.classList.add('selected'); }
-      document.getElementById('plantas-count').textContent =
-        `${estado.plantas.size} planta${estado.plantas.size===1?'':'s'} seleccionada${estado.plantas.size===1?'':'s'}`;
+      if(estado.plantas.has(id)){estado.plantas.delete(id);el.classList.remove('selected');}
+      else{estado.plantas.add(id);el.classList.add('selected');}
+      document.getElementById('plantas-count').textContent = `${estado.plantas.size} planta${estado.plantas.size===1?'':'s'} seleccionada${estado.plantas.size===1?'':'s'}`;
       renderPlantasBar();
       actualizarCompatPreview();
     }
 
-    /* ---- Preview compatibilidad en tiempo real ---- */
+    /* ---- Preview compatibilidad ---- */
     function actualizarCompatPreview() {
       const prev = document.getElementById('compat-preview');
-      if (estado.plantas.size < 2) { prev.style.display = 'none'; return; }
-      const ids = Array.from(estado.plantas);
-      const { sinergias, conflictos } = getPuntajeCompatibilidad(ids);
-      prev.style.display = 'block';
+      if (estado.plantas.size<2){prev.style.display='none';return;}
+      const {sinergias,conflictos} = getPuntajeCompatibilidad(Array.from(estado.plantas));
+      prev.style.display='block';
       const items = [
-        ...sinergias.slice(0,3).map(s => `<div class="sinergia-item"><div class="sinergia-dot dot-verde"></div><span><strong>${s.a} + ${s.b}:</strong> ${s.razon}</span></div>`),
-        ...conflictos.slice(0,2).map(c => `<div class="sinergia-item"><div class="sinergia-dot dot-rojo"></div><span><strong>${c.a} + ${c.b}:</strong> ${c.razon}</span></div>`)
+        ...sinergias.slice(0,3).map(s=>`<div class="sinergia-item"><div class="sinergia-dot dot-verde"></div><span><strong>${s.a} + ${s.b}:</strong> ${s.razon}</span></div>`),
+        ...conflictos.slice(0,2).map(c=>`<div class="sinergia-item"><div class="sinergia-dot dot-rojo"></div><span><strong>${c.a} + ${c.b}:</strong> ${c.razon}</span></div>`)
       ];
-      prev.innerHTML = `
-        <div style="border:1px solid var(--borde);border-radius:var(--radio-card);padding:16px;">
-          <div style="font-size:13px;font-weight:700;margin-bottom:10px;">
-            Compatibilidad de tu selección:
-            ${sinergias.length > 0 ? `<span style="color:#15803D;">${sinergias.length} sinergias</span>` : ''}
-            ${conflictos.length > 0 ? `<span style="color:#BE123C;margin-left:8px;">${conflictos.length} conflictos</span>` : ''}
-          </div>
-          ${items.join('')}
-          ${(sinergias.length + conflictos.length) > 5 ? `<p style="font-size:12px;color:var(--texto-sec);margin-top:8px;margin-bottom:0;">El plan completo mostrará todos los detalles.</p>` : ''}
-        </div>
-      `;
+      prev.innerHTML = `<div style="border:1px solid var(--borde);border-radius:var(--radio-card);padding:14px 16px;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:8px;">
+          ${sinergias.length>0?`<span style="color:#15803D;">${sinergias.length} sinergias</span>`:''}
+          ${conflictos.length>0?`<span style="color:#BE123C;margin-left:8px;">${conflictos.length} conflictos</span>`:''}
+          ${sinergias.length===0&&conflictos.length===0?'<span style="color:var(--texto-sec);">Sin sinergias ni conflictos</span>':''}
+        </div>${items.join('')}</div>`;
     }
 
-    /* ---- Generar plan completo ---- */
+    /* ---- Crear plan ---- */
+    function crearPlan() {
+      const zona = document.getElementById('p-zona').value;
+      if (!zona || estado.plantas.size===0) {
+        document.getElementById('step5-error').style.display='block';
+        return;
+      }
+      document.getElementById('step5-error').style.display='none';
+      estado.zona = zona;
+      generarPlan();
+      irWizard(6);
+    }
+
+    function reiniciar() {
+      estado.tipo='';estado.contenedor='';estado.tieneMacetas=null;
+      estado.tamano='';estado.nivel='';estado.zona='';estado.plantas.clear();
+      document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));
+      document.querySelectorAll('.preset-card').forEach(b=>b.classList.remove('active'));
+      irWizard(1);
+    }
+
+    /* ====================================================
+       GENERAR PLAN
+    ==================================================== */
     function generarPlan() {
       const zonaId    = estado.zona;
       const zona      = ZONAS[zonaId];
-      const plantasArr = Array.from(estado.plantas).map(id => ({ id, ...PLANTAS[id] }));
-      const mesActual  = new Date().getMonth();
-      const output     = document.getElementById('plan-output');
-      const ids        = Array.from(estado.plantas);
-      const { positivos, negativos, sinergias, conflictos } = getPuntajeCompatibilidad(ids);
+      const plantasArr = Array.from(estado.plantas).map(id=>({id,...PLANTAS[id]}));
+      const mesActual = new Date().getMonth();
+      const {sinergias, conflictos} = getPuntajeCompatibilidad(Array.from(estado.plantas));
+      const output = document.getElementById('plan-output');
 
-      /* Puntuación de compatibilidad sobre 10 */
-      const scoreRaw   = Math.min(10, Math.max(0, Math.round((5 + Math.min(sinergias.length * 1.5, 4) - conflictos.length * 2) * 10) / 10));
-      const scoreDec   = scoreRaw.toFixed(1);
-      const scoreClass = scoreRaw >= 8 ? 'excelente' : scoreRaw >= 5 ? 'buena' : 'mejorable';
-      const scoreLabel = scoreRaw >= 8 ? 'Combinación excelente' : scoreRaw >= 5 ? 'Combinación correcta' : scoreRaw >= 3 ? 'Combinación con conflictos' : 'Combinación problemática';
-      const scoreDesc  = generarMensajeCompatibilidad(scoreRaw, plantasArr, sinergias, conflictos);
+      /* Score entero /10 */
+      const scoreNum = Math.round(Math.min(10, Math.max(0, 5 + Math.min(sinergias.length*1.5,4) - conflictos.length*2)));
+      const scoreClass = scoreNum>=8?'excelente':scoreNum>=5?'buena':'mejorable';
+      const scoreLabel = scoreNum>=8?'Combinación excelente':scoreNum>=5?'Combinación correcta':scoreNum>=3?'Con conflictos':'Combinación problemática';
+      const scoreDesc  = genMsgCompat(scoreNum, sinergias, conflictos);
 
-      /* Plantas que caben según m² */
-      const capacidadTotal = plantasArr.reduce((sum, p) => sum + (p.m2 || 0.2), 0);
-      const caben = capacidadTotal <= estado.m2;
+      /* Texto motivador */
+      const motivacion = genMotivacion(plantasArr, estado.tamano, estado.nivel, zona, sinergias, conflictos);
 
-      /* Próxima acción por planta */
-      function proximaAccion(plantaId) {
-        const cal = getCalendario(plantaId, zonaId);
-        if (!cal) return null;
-        const acciones = [
-          ...cal.siembra.map(m => ({ tipo:'Siembra', mes:m })),
-          ...cal.trasplante.map(m => ({ tipo:'Trasplante', mes:m })),
-          ...cal.cosecha.map(m => ({ tipo:'Cosecha', mes:m }))
-        ];
-        return acciones.map(a => ({ ...a, diff:(a.mes-mesActual+12)%12 })).sort((a,b)=>a.diff-b.diff)[0] || null;
-      }
+      /* Bloque A: distribución */
+      const bloqueA = genBloqueA(plantasArr);
 
-      /* Tabla de fechas */
-      const filasTabla = plantasArr.map(p => {
-        const cal  = getCalendario(p.id, zonaId);
-        const prox = proximaAccion(p.id);
-        return `<tr>
-          <td>
-            <div class="plant-name-main">${p.nombre}</div>
-            <div class="plant-name-sub">${{hortaliza:'Hortaliza',fruta:'Fruta',aromatica:'Aromática'}[p.categoria]}</div>
-          </td>
-          <td>${cal?.siembra.map(m=>MESES[m]).join(', ') || '—'}</td>
-          <td>${cal?.cosecha.map(m=>MESES[m]).join(', ') || '—'}</td>
-          <td style="font-weight:600;color:var(--verde);">${prox ? `${prox.tipo} en ${MESES_FULL[prox.mes]}` : '—'}</td>
-        </tr>`;
-      }).join('');
+      /* Bloque B: cuándo plantar */
+      const bloqueB = genBloqueB(plantasArr, zonaId, mesActual);
 
-      /* Rendimientos */
-      const rendItems = plantasArr.filter(p => p.rendimiento).map(p => `
-        <div class="rendimiento-item">
-          <h5>${p.nombre}</h5>
-          <p>${p.rendimiento}</p>
-        </div>
-      `).join('');
+      /* Bloque C: aviso */
+      const bloqueC = genBloqueC(plantasArr, sinergias, conflictos);
 
-      /* Texto motivador según espacio y nivel */
-      const motivacion = generarTextoMotivador(plantasArr, estado.m2, estado.nivel, zona, sinergias, conflictos, estado.tipo, estado.contenedor);
-
-      /* Sinergias y conflictos */
-      const sinListHTML = sinergias.length > 0
+      /* Sinergias / conflictos */
+      const sinHTML = sinergias.length>0
         ? sinergias.map(s=>`<div class="sinergia-item"><div class="sinergia-dot dot-verde"></div><span><strong>${s.a} + ${s.b}:</strong> ${s.razon}</span></div>`).join('')
-        : '<p style="font-size:13px;color:var(--texto-sec);">No hay sinergias detectadas entre estas plantas.</p>';
-      const confListHTML = conflictos.length > 0
+        : '<p style="font-size:13px;color:var(--texto-sec);">No hay sinergias entre estas plantas.</p>';
+      const conHTML = conflictos.length>0
         ? conflictos.map(c=>`<div class="sinergia-item"><div class="sinergia-dot dot-rojo"></div><span><strong>${c.a} + ${c.b}:</strong> ${c.razon}</span></div>`).join('')
         : '<p style="font-size:13px;color:#15803D;">Sin conflictos. Buena elección.</p>';
 
-      /* Lista de compra — agrupada por planta */
-      const listaCompra = plantasArr.filter(p => p.amazon).map(p => {
-        const items = Object.values(p.amazon).map(prod => `
-          <div class="shopping-item">
-            <div class="shopping-info">
-              <h4>${prod.nombre}</h4>
-              <p>${prod.desc}</p>
-            </div>
-            <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
-               target="_blank" rel="noopener sponsored" class="btn btn-amazon btn-sm">Ver en Amazon</a>
-          </div>
-        `).join('');
-        return `<div style="margin-bottom:20px;">
-          <div style="font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.04em;padding:6px 0 8px;border-bottom:1px solid var(--borde);margin-bottom:8px;">${p.nombre}</div>
-          ${items}
-        </div>`;
-      }).join('');
+      /* Amazon por categoría */
+      const amazonHTML = genAmazon(plantasArr, estado.tieneMacetas);
 
       output.innerHTML = `
-        <!-- Header del plan -->
-        <div class="plan-header-card">
-          <h3>Tu plan de huerto — ${zona.nombre}</h3>
-          <p>${estado.m2} m² · ${estado.tipo} · ${plantasArr.length} planta${plantasArr.length===1?'':'s'} · ${ZONAS[zonaId].nombre}</p>
-          <div class="plan-stats">
-            <div class="plan-stat">
-              <span class="plan-stat-value">${plantasArr.length}</span>
-              <span class="plan-stat-label">Plantas</span>
-            </div>
-            <div class="plan-stat">
-              <span class="plan-stat-value">${estado.m2} m²</span>
-              <span class="plan-stat-label">Espacio</span>
-            </div>
-            <div class="plan-stat">
-              <span class="plan-stat-value">${sinergias.length}</span>
-              <span class="plan-stat-label">Sinergias</span>
-            </div>
-            <div class="plan-stat">
-              <span class="plan-stat-value">${conflictos.length}</span>
-              <span class="plan-stat-label">Conflictos</span>
-            </div>
-          </div>
+        <div style="background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:var(--radio-card);padding:16px 20px;margin-bottom:20px;">
+          <div style="font-size:12px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Tu plan</div>
+          <div style="font-size:14px;color:var(--texto-sec);">${zonaId ? zona.nombre : ''} · ${plantasArr.length} planta${plantasArr.length===1?'':'s'} · ${estado.tipo} · ${estado.tamano}</div>
         </div>
 
-        <!-- Advertencia de espacio si no caben -->
-        ${!caben ? `<div style="background:#FFF1F2;border:1px solid #FECDD3;border-radius:8px;padding:14px 18px;margin-bottom:20px;font-size:14px;color:#BE123C;">
-          <strong>Espacio ajustado:</strong> Las plantas seleccionadas necesitan aproximadamente ${capacidadTotal.toFixed(1)} m² y tienes ${estado.m2} m². Puedes reducir el número de plantas o usar macetas en vertical.
-        </div>` : ''}
-
-        <!-- Texto motivador -->
         <div class="motivacion-box">
-          <h4>Por qué merece la pena este huerto</h4>
+          <h4>Por qué merece la pena</h4>
           <p>${motivacion}</p>
         </div>
 
-        <!-- Compatibilidad -->
-        <div class="plan-section">
-          <h4>Compatibilidad entre tus plantas</h4>
-          <div class="compat-score ${scoreClass}" style="margin-bottom:20px;">
-            <div class="compat-score-num">${scoreDec}/10</div>
-            <div class="compat-score-text">
-              <h4>${scoreLabel}</h4>
-              <p>${scoreDesc}</p>
-            </div>
+        ${bloqueA}
+        ${bloqueB}
+        ${bloqueC}
+
+        <div class="plan-bloque" style="margin-top:4px;">
+          <div class="plan-bloque-titulo">Compatibilidad entre tus plantas</div>
+          <div class="compat-score ${scoreClass}" style="margin-bottom:14px;">
+            <div class="compat-score-num">${scoreNum}/10</div>
+            <div class="compat-score-text"><h4>${scoreLabel}</h4><p>${scoreDesc}</p></div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-            <div>
-              <div style="font-size:12px;font-weight:700;color:#15803D;text-transform:uppercase;margin-bottom:10px;">Sinergias (${sinergias.length})</div>
-              ${sinListHTML}
-            </div>
-            <div>
-              <div style="font-size:12px;font-weight:700;color:#BE123C;text-transform:uppercase;margin-bottom:10px;">Conflictos (${conflictos.length})</div>
-              ${confListHTML}
-            </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><div style="font-size:11px;font-weight:700;color:#15803D;text-transform:uppercase;margin-bottom:8px;">Sinergias (${sinergias.length})</div>${sinHTML}</div>
+            <div><div style="font-size:11px;font-weight:700;color:#BE123C;text-transform:uppercase;margin-bottom:8px;">Conflictos (${conflictos.length})</div>${conHTML}</div>
           </div>
         </div>
 
-        <!-- Calendario -->
-        <div class="plan-section">
-          <h4>Calendario personalizado — ${zona.nombre}</h4>
-          <div style="overflow-x:auto;">
-            <table class="plan-table">
-              <thead><tr>
-                <th>Planta</th><th>Siembra</th><th>Cosecha</th><th>Próxima acción</th>
-              </tr></thead>
-              <tbody>${filasTabla}</tbody>
-            </table>
-          </div>
+        <div class="adsense-mid" style="text-align:center;margin:20px 0;">
+          <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;">Publicidad</div>
         </div>
 
-        <!-- Rendimientos -->
-        ${rendItems ? `
-        <div class="plan-section">
-          <h4>¿Qué puedes cosechar?</h4>
-          <p style="font-size:14px;color:var(--texto-sec);margin-bottom:4px;">Estimaciones orientativas en condiciones normales de cultivo.</p>
-          <div class="rendimiento-grid">${rendItems}</div>
-        </div>` : ''}
-
-        <!-- Recomendaciones por planta -->
-        <div class="plan-section">
-          <h4>Recomendaciones por planta</h4>
-          <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Consejos clave para el éxito de cada planta de tu huerto.</p>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;">
-            ${plantasArr.map(p => {
-              const tips = (p.tips && p.tips.general ? p.tips.general.slice(0,4) : []);
-              return `<div style="padding:16px;background:var(--fondo);border-radius:var(--radio-card);border:1px solid var(--borde);">
-                <div style="font-size:16px;font-weight:700;margin-bottom:10px;color:var(--verde);">${p.nombre}</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;font-size:12px;">
-                  <div style="background:white;border-radius:6px;padding:7px;border:1px solid var(--borde);">
-                    <div style="color:var(--texto-sec);margin-bottom:2px;">Espacio</div>
-                    <strong>${p.espacio_min} cm entre plantas</strong>
-                  </div>
-                  <div style="background:white;border-radius:6px;padding:7px;border:1px solid var(--borde);">
-                    <div style="color:var(--texto-sec);margin-bottom:2px;">Cosecha en</div>
-                    <strong>${p.tiempo_cosecha}</strong>
-                  </div>
-                </div>
-                <ul style="font-size:13px;color:var(--texto-sec);padding-left:16px;margin:0;line-height:1.6;">
-                  ${tips.map(t => `<li>${t}</li>`).join('')}
-                </ul>
-              </div>`;
-            }).join('')}
-          </div>
-        </div>
-
-        <!-- Publicidad 2 -->
-        <div class="adsense-mid" style="text-align:center;margin:24px 0;">
-          <div style="display:inline-block;width:min(728px,100%);height:90px;line-height:90px;background:#F3F4F6;border:1px dashed #D1D5DB;border-radius:4px;font-size:12px;color:#9CA3AF;">Publicidad — AdSense 728×90</div>
-        </div>
-
-        <!-- Lista de compra -->
-        ${listaCompra ? `
-        <div class="plan-section">
-          <h4>Lo que necesitas para arrancar</h4>
-          <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Semillas, macetas y sustrato específicos para las plantas de tu plan.</p>
-          <div class="shopping-list">${listaCompra}</div>
-          <div style="margin-top:20px;text-align:center;">
-            <a href="../materiales-huerto-urbano.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--verde);color:white;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:700;font-size:14px;">
-              Ver todo lo que necesitas para este huerto →
-            </a>
-          </div>
-        </div>` : ''}
+        ${amazonHTML}
       `;
     }
 
-    /* ---- Mensaje específico de compatibilidad ---- */
-    function generarMensajeCompatibilidad(score, plantas, sinergias, conflictos) {
-      if (score >= 8) {
-        if (sinergias.length > 0) {
-          const s = sinergias[0];
-          return `Excelente elección. ${s.a} y ${s.b} se benefician mutuamente: ${s.razon}.${sinergias.length > 1 ? ` Además, ${sinergias[1].a} y ${sinergias[1].b} también se complementan bien.` : ''}`;
-        }
-        return 'Excelente combinación: sin conflictos detectados y buena distribución de necesidades entre las plantas elegidas.';
+    /* ---- Bloque A: distribución ---- */
+    function genBloqueA(plantas) {
+      const cont = estado.contenedor;
+      const tieneM = estado.tieneMacetas;
+
+      if (cont==='maceta') {
+        // Agrupamos por tamaño de maceta necesaria
+        const grandes  = plantas.filter(p=>p.espacio_min>=40);
+        const medianas = plantas.filter(p=>p.espacio_min>=20&&p.espacio_min<40);
+        const pequenas = plantas.filter(p=>p.espacio_min<20);
+
+        const macetas = [];
+        // Grandes: 1-2 por maceta grande
+        let tmp=[];
+        grandes.forEach(p=>{ tmp.push(p); if(tmp.length>=2){macetas.push({tipo:'grande (20-30L)',plantas:[...tmp]});tmp=[];} });
+        if(tmp.length) macetas.push({tipo:'grande (20-30L)',plantas:tmp});
+        // Medianas: hasta 3 por maceta mediana
+        tmp=[];
+        medianas.forEach(p=>{ tmp.push(p); if(tmp.length>=3){macetas.push({tipo:'mediana (10-15L)',plantas:[...tmp]});tmp=[];} });
+        if(tmp.length) macetas.push({tipo:'mediana (10-15L)',plantas:tmp});
+        // Pequeñas: hasta 4 por jardinera
+        tmp=[];
+        pequenas.forEach(p=>{ tmp.push(p); if(tmp.length>=4){macetas.push({tipo:'jardinera alargada',plantas:[...tmp]});tmp=[];} });
+        if(tmp.length) macetas.push({tipo:'jardinera alargada',plantas:tmp});
+
+        const prefix = tieneM===false
+          ? '<p style="font-size:13px;color:var(--texto-sec);margin-bottom:12px;">Como todavía no tienes macetas, aquí lo que necesitas comprar:</p>'
+          : '';
+        const items = macetas.map((m,i)=>`<div class="plan-distrib-item">· <strong>Maceta ${i+1} (${m.tipo}):</strong> ${m.plantas.map(p=>p.nombre).join(' + ')}</div>`).join('');
+
+        return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución por macetas</div>${prefix}<div>${items||'<p style="font-size:13px;color:var(--texto-sec);">Selecciona al menos una planta.</p>'}</div></div>`;
+
+      } else {
+        // Suelo: agrupar en zonas de 3
+        const zonas = [];
+        let chunk=[];
+        plantas.forEach((p,i)=>{ chunk.push(p); if(chunk.length===3||i===plantas.length-1){zonas.push([...chunk]);chunk=[];} });
+        const items = zonas.map((z,i)=>`<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${z.map(p=>p.nombre).join(' + ')}</div>`).join('');
+        return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div></div>`;
       }
-      if (score >= 5) {
-        const consejo = conflictos.length > 0
-          ? `Para mejorarla, separa ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}.`
-          : 'Puedes mejorarla añadiendo albahaca o tomillo como compañeras aromáticas.';
-        return `Combinación correcta.${sinergias.length > 0 ? ` ${sinergias[0].a} y ${sinergias[0].b} se ayudan entre sí.` : ''} ${consejo}`;
-      }
-      if (score >= 3) {
-        if (conflictos.length > 0) {
-          const cf = conflictos[0];
-          return `Combinación con conflictos. El principal problema: ${cf.a} y ${cf.b} — ${cf.razon}. Considera cambiar ${cf.b} por otra planta compatible.`;
-        }
-        return 'Combinación con algunos problemas. Revisa las indicaciones de conflictos más abajo.';
-      }
-      if (conflictos.length > 0) {
-        const names = conflictos.slice(0, 2).map(cf => `${cf.a} y ${cf.b}`).join('; ');
-        return `Combinación problemática. Hay conflictos entre: ${names}. Te recomendamos cambiar al menos una de las plantas conflictivas antes de continuar.`;
-      }
-      return 'Combinación con problemas. Revisa la sección de conflictos para ver qué cambiar.';
     }
 
-    /* ---- Texto motivador dinámico (8+ combinaciones distintas) ---- */
-    function generarTextoMotivador(plantas, m2, nivel, zona, sinergias, conflictos, tipo, contenedor) {
-      const nombres   = plantas.map(p => p.nombre);
-      const nPlantas  = plantas.length;
-      const nombreZona = zona.nombre;
-      tipo      = tipo      || estado.tipo;
-      contenedor = contenedor || estado.contenedor;
-      const espacioStr    = tipo === 'balcon' ? 'balcón' : tipo === 'terraza' ? 'terraza' : tipo === 'interior' ? 'interior' : 'jardín';
-      const contenedorStr = contenedor === 'maceta' ? 'en macetas' : 'en suelo directo';
-      const scoreRaw = Math.min(10, Math.max(0, Math.round((5 + Math.min(sinergias.length * 1.5, 4) - conflictos.length * 2) * 10) / 10));
+    /* ---- Bloque B: cuándo empezar ---- */
+    function genBloqueB(plantas, zonaId, mes) {
+      const mesNombre = MESES_FULL[mes];
+      const items = plantas.map(p=>{
+        const cal = getCalendario(p.id, zonaId);
+        if(!cal) return null;
+        if(cal.siembra.includes(mes))    return `<strong>${p.nombre}:</strong> siembra ahora, es el momento`;
+        if(cal.trasplante.includes(mes)) return `<strong>${p.nombre}:</strong> trasplanta ahora`;
+        if(cal.cosecha.includes(mes))    return `<strong>${p.nombre}:</strong> en cosecha este mes`;
+        const acc=[...cal.siembra.map(m=>({tipo:'siembra',mes:m})),...cal.trasplante.map(m=>({tipo:'trasplante',mes:m})),...cal.cosecha.map(m=>({tipo:'cosecha',mes:m}))];
+        const next = acc.map(a=>({...a,diff:(a.mes-mes+12)%12})).sort((a,b)=>a.diff-b.diff)[0];
+        if(!next) return `<strong>${p.nombre}:</strong> sin acción este mes`;
+        if(next.diff<=1) return `<strong>${p.nombre}:</strong> ${next.tipo} el mes que viene`;
+        return `<strong>${p.nombre}:</strong> ${next.tipo} en ${MESES_FULL[next.mes]}`;
+      }).filter(Boolean);
+      return `<div class="plan-bloque"><div class="plan-bloque-titulo">B. Por dónde empezar ahora</div>
+        <p style="font-size:13px;color:var(--texto-sec);margin-bottom:10px;">Estamos en ${mesNombre}.</p>
+        <div>${items.map(i=>`<div class="plan-distrib-item">· ${i}</div>`).join('')}</div></div>`;
+    }
 
-      if (nivel === 'principiante' && nPlantas <= 3) {
-        const primeraNombre = nombres[0];
-        const riegoSensibles = ['Tomate', 'Tomate cherry', 'Pimiento', 'Albahaca', 'Berenjena'];
-        const hayRiegoSensible = nombres.some(n => riegoSensibles.includes(n));
-        return `Empezar con ${nPlantas} planta${nPlantas > 1 ? 's' : ''} (${nombres.join(', ')}) en ${m2} m² de ${espacioStr} es una decisión inteligente: menos plantas significa más control y más aprendizaje. ${hayRiegoSensible ? `El ${primeraNombre} agradece el riego en la base y el sustrato sin encharcamiento — comprueba con el dedo antes de regar.` : `${primeraNombre} es de las más agradecidas: verás resultados rápido.`}`;
+    /* ---- Bloque C: aviso ---- */
+    function genBloqueC(plantas, sinergias, conflictos) {
+      if(conflictos.length>0){
+        const c=conflictos[0];
+        return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
+          <p style="font-size:14px;"><strong>⚠ ${c.a} y ${c.b} no se llevan bien:</strong> ${c.razon} Ponlos en macetas separadas o en extremos opuestos.</p></div>`;
       }
-
-      if (nivel === 'principiante' && nPlantas > 3) {
-        const faciles = nombres.filter(n => ['Lechuga','Rábano','Albahaca','Espinaca','Perejil','Rabanito'].includes(n));
-        return `${nPlantas} plantas para empezar en ${m2} m² de ${espacioStr} ${contenedorStr}, zona ${nombreZona}. Es una primera vez ambiciosa — empieza sembrando ${faciles.length > 0 ? faciles.slice(0, 2).join(' y ') : nombres[0]}, que son las más fáciles, y añade las más exigentes cuando tengas soltura con el riego y el sustrato.`;
+      const mentaP = plantas.find(p=>p.nombre==='Menta');
+      if(mentaP){
+        return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
+          <p style="font-size:14px;"><strong>🌿 La menta es invasora:</strong> ponla siempre en una maceta propia y separada del resto. Si la plantas junto a otras, colonizará todo y ahogará las demás plantas.</p></div>`;
       }
-
-      if (tipo === 'interior') {
-        const interiorDificil = nombres.filter(n => !['Lechuga','Espinaca','Albahaca','Perejil','Menta','Orégano','Rábano','Tomillo'].includes(n));
-        if (interiorDificil.length > 0) {
-          return `Huerto de interior con ${nPlantas} plantas en ${m2} m². ${interiorDificil.join(' y ')} ${interiorDificil.length === 1 ? 'necesita' : 'necesitan'} mínimo 6-8 horas de luz directa — considera una lámpara LED de espectro completo si tu ventana no llega a eso. Riega solo cuando el sustrato esté seco al tacto.`;
-        }
-        return `Selección ideal para interior en ${m2} m². ${nombres.join(', ')} ${nPlantas === 1 ? 'se adapta' : 'se adaptan'} bien a la luz de ventana. En interior el mayor riesgo es el exceso de riego: espera a que el sustrato esté seco en los primeros 2 cm antes de volver a regar.`;
+      const sensibles=['Tomate','Tomate cherry','Pimiento','Albahaca','Berenjena'];
+      const sensiblesEleg = plantas.filter(p=>sensibles.includes(p.nombre));
+      if(estado.nivel==='principiante'&&sensiblesEleg.length>0){
+        return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
+          <p style="font-size:14px;"><strong>💧 Cuidado con el riego de ${sensiblesEleg[0].nombre}:</strong> el exceso de agua es el error más común. Antes de regar, mete el dedo 2 cm en el sustrato: si está húmedo, espera. Riega solo en la base, nunca sobre las hojas.</p></div>`;
       }
-
-      if (m2 <= 2) {
-        return `${m2} m² de ${espacioStr} es poco, pero suficiente para ${nombres.join(', ')}. ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} comparten espacio eficientemente: ${sinergias[0].razon}.` : 'Planta en vertical siempre que puedas — jardineras de barandilla y tutores multiplican el espacio aprovechable.'} Con ${m2} m² bien gestionados puedes cosechar verduras frescas varios meses al año.`;
+      const difíciles = plantas.filter(p=>p.dificultad==='dificil');
+      if(difíciles.length>0){
+        return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
+          <p style="font-size:14px;"><strong>⚠ ${difíciles[0].nombre} es exigente:</strong> ${difíciles[0].tips?.general?.[0]||'Requiere cuidados especiales antes de plantarlo.'}</p></div>`;
       }
+      return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Nota del plan</div>
+        <p style="font-size:14px;"><strong>✓ Buena selección:</strong> todas las plantas de tu huerto se llevan bien entre sí. Riega regularmente y sigue el calendario para obtener resultados en pocas semanas.</p></div>`;
+    }
 
-      if (tipo === 'jardin' && contenedor === 'suelo') {
-        return `Huerto en suelo directo, ${m2} m² de jardín, zona ${nombreZona}. ${nombres.join(', ')} ${nPlantas === 1 ? 'tendrá' : 'tendrán'} más vigor que en maceta porque la raíz puede extenderse libremente. ${sinergias.length >= 2 ? `Con ${sinergias.length} sinergias activas, planta las especies compatibles juntas para reducir plagas de forma natural.` : ''}`;
+    /* ---- Amazon por categoría ---- */
+    function genAmazon(plantas, tieneMacetas) {
+      const semillas=[], sustratos=[], macetasP=[], abonos=[];
+      const seenSust=new Set(), seenAbono=new Set();
+      plantas.forEach(p=>{
+        if(!p.amazon) return;
+        if(p.amazon.semillas) semillas.push({nombre:p.nombre,prod:p.amazon.semillas});
+        if(p.amazon.sustrato&&!seenSust.has(p.amazon.sustrato.nombre)){seenSust.add(p.amazon.sustrato.nombre);sustratos.push({nombre:p.nombre,prod:p.amazon.sustrato});}
+        if(p.amazon.maceta)   macetasP.push({nombre:p.nombre,prod:p.amazon.maceta});
+        if(p.amazon.abono&&!seenAbono.has(p.amazon.abono.nombre)){seenAbono.add(p.amazon.abono.nombre);abonos.push({nombre:p.nombre,prod:p.amazon.abono});}
+      });
+      function cat(titulo, items, max){
+        if(!items.length) return '';
+        return `<div class="amazon-cat"><div class="amazon-cat-titulo">${titulo}</div>
+          ${items.slice(0,max).map(({nombre,prod})=>`
+            <div class="amazon-item">
+              <div class="amazon-item-info">
+                <div class="amazon-item-nombre">${prod.nombre}</div>
+                <div class="amazon-item-desc">${prod.desc} — para ${nombre}</div>
+              </div>
+              <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn btn-amazon btn-sm">Amazon</a>
+            </div>`).join('')}
+        </div>`;
       }
+      const catHTML = [
+        cat('🌱 Semillas', semillas, 4),
+        cat('🪴 Sustrato', sustratos, 2),
+        tieneMacetas===false ? cat('🏺 Macetas', macetasP, 3) : '',
+        cat('🌿 Abono', abonos, 2),
+      ].filter(Boolean).join('');
+      if(!catHTML) return '';
+      return `<div class="plan-section"><h4>Lo que necesitas para empezar</h4>
+        <p style="font-size:13px;color:var(--texto-sec);margin-bottom:14px;">Productos específicos para las plantas de tu plan.</p>
+        <div class="amazon-grid">${catHTML}</div>
+        <div style="margin-top:14px;text-align:center;"><a href="../materiales-huerto-urbano.html" style="font-size:13px;color:var(--verde);">Ver todos los materiales recomendados →</a></div>
+      </div>`;
+    }
 
-      if (scoreRaw >= 8) {
-        return `Combinación de alto rendimiento para ${m2} m² de ${espacioStr} en zona ${nombreZona}. ${nombres.join(', ')} forman un ecosistema compacto: ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} se benefician mutuamente (${sinergias[0].razon})` : 'se complementan sin conflictos'}. Con este nivel de compatibilidad tendrás menos problemas de plagas y mejor aprovechamiento de nutrientes.`;
+    /* ---- Mensaje compatibilidad ---- */
+    function genMsgCompat(score, sinergias, conflictos) {
+      if(score>=8){
+        if(sinergias.length>0){const s=sinergias[0];return `Excelente. ${s.a} y ${s.b} se benefician mutuamente: ${s.razon}`;}
+        return 'Sin conflictos detectados y buena distribución de necesidades entre las plantas.';
       }
-
-      if (nivel === 'avanzado') {
-        return `Plan para ${nPlantas} plantas en ${m2} m² de ${espacioStr} ${contenedorStr}, zona ${nombreZona}. ${conflictos.length > 0 ? `Hay ${conflictos.length} conflicto${conflictos.length > 1 ? 's' : ''} a gestionar: ${conflictos[0].a} y ${conflictos[0].b} (${conflictos[0].razon}). Con tu experiencia sabrás cómo mitigarlos.` : `Sin conflictos.${sinergias.length > 0 ? ` ${sinergias.length} sinergia${sinergias.length > 1 ? 's' : ''} activa${sinergias.length > 1 ? 's' : ''} que te ahorrarán trabajo.` : ''}`}`;
+      if(score>=5){
+        const consejo=conflictos.length>0?`Separa ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}`:'Puedes mejorarla añadiendo albahaca o tomillo.';
+        return `Combinación correcta.${sinergias.length>0?` ${sinergias[0].a} y ${sinergias[0].b} se ayudan.`:''} ${consejo}`;
       }
+      if(score>=3&&conflictos.length>0){const c=conflictos[0];return `Conflicto principal: ${c.a} y ${c.b} — ${c.razon}. Considera cambiar una de estas plantas.`;}
+      if(conflictos.length>0) return `Combinación problemática. Hay conflictos entre ${conflictos.slice(0,2).map(c=>c.a+' y '+c.b).join('; ')}.`;
+      return 'Revisa la sección de conflictos para ver qué cambiar.';
+    }
 
-      return `${nPlantas} plantas en ${m2} m² de ${espacioStr} ${contenedorStr}, zona ${nombreZona}. ${sinergias.length > 0 ? `${sinergias[0].a} y ${sinergias[0].b} se complementan bien.` : ''} ${conflictos.length > 0 ? `Ojo con ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}.` : 'Sin conflictos detectados.'} Sigue el calendario de tu zona para las fechas exactas de siembra y cosecha.`;
+    /* ---- Texto motivador ---- */
+    function genMotivacion(plantas, tamano, nivel, zona, sinergias, conflictos) {
+      const nombres = plantas.map(p=>p.nombre);
+      const n = plantas.length;
+      const esp = {balcon:'balcón',terraza:'terraza',interior:'interior',jardin:'jardín'}[estado.tipo]||'espacio';
+      const tam = {poco:'poco espacio',medio:'espacio medio',mucho:'mucho espacio'}[tamano]||'tu espacio';
+      if(nivel==='principiante'&&n<=3){
+        const hay=['Tomate','Tomate cherry','Pimiento','Albahaca','Berenjena'];
+        const s=plantas.find(p=>hay.includes(p.nombre));
+        return `Empezar con ${n} planta${n>1?'s':''} (${nombres.join(', ')}) es una decisión inteligente: menos plantas, más control. ${s?`${s.nombre} es sensible al exceso de agua: riega solo cuando el sustrato esté seco al tacto.`:`${nombres[0]} es de las más agradecidas del huerto.`}`;
+      }
+      if(nivel==='principiante'&&n>3){
+        const faciles=nombres.filter(n=>['Lechuga','Rábano','Albahaca','Espinaca','Perejil'].includes(n));
+        return `${n} plantas para tu primer ${esp}. Empieza sembrando ${faciles.length>0?faciles.slice(0,2).join(' y '):nombres[0]} — son las más fáciles — y añade las más exigentes cuando tengas soltura.`;
+      }
+      if(estado.tipo==='interior'){
+        return `Huerto de interior con ${n} plantas. El mayor riesgo en casa es el exceso de riego: espera a que el sustrato esté seco en los primeros 2 cm antes de volver a regar. La luz de ventana sur es suficiente para aromáticas y lechugas.`;
+      }
+      if(sinergias.length>=2){
+        return `${n} plantas con ${sinergias.length} sinergias activas en ${tam} de ${esp}. ${sinergias[0].a} y ${sinergias[0].b} se ayudan entre sí: ${sinergias[0].razon}. Con esta combinación tendrás menos plagas y mejor aprovechamiento de nutrientes.`;
+      }
+      if(conflictos.length>0){
+        return `${n} plantas en ${tam} de ${esp}, zona ${zona?.nombre||''}. Hay ${conflictos.length} conflicto${conflictos.length>1?'s':''} que gestionar — te los detallamos abajo. ${sinergias.length>0?`También tienes ${sinergias.length} sinergia${sinergias.length>1?'s':''} positiva${sinergias.length>1?'s':''}.`:''}`;
+      }
+      return `${n} plantas en ${tam} de ${esp}, zona ${zona?.nombre||''}. Sin conflictos detectados${sinergias.length>0?` y ${sinergias.length} sinergia${sinergias.length>1?'s':''} activa${sinergias.length>1?'s':''} que te ahorrarán trabajo`:''}.`;
     }
   </script>
   <script>
