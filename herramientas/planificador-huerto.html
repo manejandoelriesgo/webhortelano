@@ -657,7 +657,7 @@
       const fEspacio      = ratio<=0.6 ? 2 : ratio<=1.0 ? 1 : -1;
 
       const scoreNum = Math.round(Math.min(10, Math.max(0, 5 + fCompat + fDificultad + fEspacio)));
-      const scoreClass = scoreNum>=9?'excelente':scoreNum>=7?'buena':'mejorable';
+      const scoreClass = scoreNum>=7?'excelente':scoreNum>=5?'buena':'mejorable';
       const scoreLabel = scoreNum>=9?'Combinación excelente':scoreNum>=7?'Buena combinación':scoreNum>=5?'Combinación correcta':scoreNum>=3?'Combinación con conflictos':'Combinación problemática';
 
       const lineaDif = tienesDificil
@@ -779,46 +779,35 @@
       const mes    = new Date().getMonth();
 
       if (cont==='maceta') {
-        const solas       = plantas.filter(p=>p.comparte_maceta===false);
-        const compartidas = plantas.filter(p=>p.comparte_maceta===true);
-
-        const macetas = [];
-        solas.forEach(p=>{ macetas.push({ litros: p.litros_maceta||20, plantas:[p] }); });
-        let tmp=[];
-        compartidas.forEach((p,i)=>{
-          tmp.push(p);
-          if(tmp.length===3||i===compartidas.length-1){
-            const litros = Math.max(...tmp.map(x=>x.litros_maceta||5));
-            macetas.push({ litros, plantas:[...tmp] });
-            tmp=[];
-          }
-        });
-
         const prefix = tieneM===false
           ? '<p style="font-size:13px;color:var(--texto-sec);margin-bottom:12px;">Como todavía no tienes macetas, aquí lo que necesitas comprar:</p>'
           : '';
-        const items = macetas.map((m,i)=>{
-          const desc = m.plantas.map(p=>{
-            const u = p.unidades_por_maceta||1;
-            const accion = getAccionMes(p, zonaId, mes);
-            const marca = accion ? ` (${accion})` : '';
-            return `${u} ${pluralNombre(p.nombre, u)}${marca}`;
-          }).join(' + ');
-          return `<div class="plan-distrib-item">· <strong>Maceta ${i+1} (${m.litros}L):</strong> ${desc}</div>`;
+
+        const items = plantas.map((p,i)=>{
+          const litros = p.litros_maceta||10;
+          const u = p.unidades_por_maceta||1;
+          const recipiente = u === 1 ? `Maceta de ${litros}L` : `Jardinera de ${litros}L`;
+          const accion = getAccionMes(p, zonaId, mes);
+          const marca = accion ? ` (${accion})` : '';
+          return `<div class="plan-distrib-item">· <strong>${recipiente}:</strong> ${u} ${pluralNombre(p.nombre, u)}${marca}</div>`;
         }).join('');
 
-        return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución por macetas</div>${prefix}<div>${items||'<p style="font-size:13px;color:var(--texto-sec);">Selecciona al menos una planta.</p>'}</div></div>`;
+        const hayCompartidas = plantas.filter(p=>p.comparte_maceta===true).length >= 2;
+        const consejo = hayCompartidas
+          ? '<p style="font-size:13px;color:var(--texto-sec);margin-top:10px;">Consejo: si te falta espacio, las aromáticas pequeñas (como albahaca, perejil u orégano) pueden compartir una jardinera grande.</p>'
+          : '';
+
+        const notaSiembra = '<p style="font-size:12px;color:var(--texto-sec);margin-top:12px;line-height:1.5;">Las cantidades son plantas adultas. Si siembras semilla, pon 3-4 por hueco y deja solo la más fuerte; o usa plantón y planta directamente esa cantidad.</p>';
+
+        return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución por macetas</div>${prefix}<div>${items||'<p style="font-size:13px;color:var(--texto-sec);">Selecciona al menos una planta.</p>'}</div>${consejo}${notaSiembra}</div>`;
 
       } else {
-        const zonas = [];
-        let chunk=[];
-        plantas.forEach((p,i)=>{ chunk.push(p); if(chunk.length===3||i===plantas.length-1){zonas.push([...chunk]);chunk=[];} });
-        const items = zonas.map((z,i)=>`<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${z.map(p=>{
+        const items = plantas.map((p,i)=>{
           const u = p.unidades_por_maceta||1;
           const accion = getAccionMes(p, zonaId, mes);
           const marca = accion ? ` (${accion})` : '';
-          return `${u} ${pluralNombre(p.nombre,u)}${marca}`;
-        }).join(' + ')}</div>`).join('');
+          return `<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${u} ${pluralNombre(p.nombre,u)}${marca}</div>`;
+        }).join('');
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div></div>`;
       }
     }

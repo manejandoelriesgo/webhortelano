@@ -189,7 +189,7 @@ const PLANTAS = {
     descripcion: 'Rápido y refrescante. Ideal para el verano.',
     espacio_min: 30,
     tiempo_cosecha: '50-65 días desde siembra',
-    litros_maceta: 18, perenne: false, comparte_maceta: false, unidades_por_maceta: 2,
+    litros_maceta: 18, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
       semillas: { nombre: 'Semillas pepino variado', desc: 'Pepino largo, corto y para encurtir', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta con soporte trepadora', desc: 'Incluye red de escalada', tag: 'imagu90-21' },
@@ -216,7 +216,7 @@ const PLANTAS = {
     descripcion: 'Perfecta para principiantes. Rápida y sin complicaciones.',
     espacio_min: 20,
     tiempo_cosecha: '45-60 días',
-    litros_maceta: 6, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
+    litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 3,
     amazon: {
       semillas: { nombre: 'Semillas lechuga mix', desc: '5 variedades: romana, batavia, lollo...', tag: 'imagu90-21' },
       maceta:   { nombre: 'Jardinera balcón 60cm', desc: 'Ideal para lechugas en fila', tag: 'imagu90-21' },
@@ -243,7 +243,7 @@ const PLANTAS = {
     descripcion: 'Planta de temporada fría. Siembra en otoño e invierno.',
     espacio_min: 15,
     tiempo_cosecha: '40-50 días',
-    litros_maceta: 6, perenne: false, comparte_maceta: true, unidades_por_maceta: 6,
+    litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
     amazon: {
       semillas: { nombre: 'Semillas espinaca gigante', desc: 'Variedad de hoja grande muy productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta rectangular 40cm', desc: 'Perfecta para espinacas en ventana', tag: 'imagu90-21' },
@@ -270,7 +270,7 @@ const PLANTAS = {
     descripcion: 'Raíz de cultivo directo. Exige suelo suelto y profundo.',
     espacio_min: 10,
     tiempo_cosecha: '70-80 días',
-    litros_maceta: 10, perenne: false, comparte_maceta: true, unidades_por_maceta: 10,
+    litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 8,
     amazon: {
       semillas: { nombre: 'Semillas zanahoria Nantesa', desc: 'Variedad clásica dulce y productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta profunda 40cm', desc: 'Mínimo 30cm de profundidad para raíces', tag: 'imagu90-21' },
@@ -297,7 +297,7 @@ const PLANTAS = {
     descripcion: 'El más rápido del huerto. Listo en 25 días.',
     espacio_min: 8,
     tiempo_cosecha: '25-35 días',
-    litros_maceta: 5, perenne: false, comparte_maceta: true, unidades_por_maceta: 12,
+    litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 10,
     amazon: {
       semillas: { nombre: 'Semillas rábano Cherry Belle', desc: 'Redondo, rojísimo y muy rápido', tag: 'imagu90-21' },
       maceta:   { nombre: 'Jardinera poco profunda 30cm', desc: 'Los rábanos son superficiales', tag: 'imagu90-21' },
@@ -324,7 +324,7 @@ const PLANTAS = {
     descripcion: 'Cultivo imprescindible. Se puede plantar de bulbillo o de semilla.',
     espacio_min: 10,
     tiempo_cosecha: '90-120 días',
-    litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 6,
+    litros_maceta: 10, perenne: false, comparte_maceta: true, unidades_por_maceta: 5,
     amazon: {
       semillas: { nombre: 'Bulbillos de cebolla blanca', desc: 'Fácil de plantar, resultados seguros', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta rectangular larga', desc: 'Espacio para varias cebollas en fila', tag: 'imagu90-21' },
@@ -351,7 +351,7 @@ const PLANTAS = {
     descripcion: 'Se planta en otoño y se cosecha en primavera. Muy sencillo.',
     espacio_min: 10,
     tiempo_cosecha: '150-180 días',
-    litros_maceta: 6, perenne: false, comparte_maceta: true, unidades_por_maceta: 6,
+    litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 5,
     amazon: {
       semillas: { nombre: 'Cabezas ajo blanco para siembra', desc: 'Ajo local de calidad, muy productivo', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta profunda para ajos', desc: 'Profundidad mínima 20cm', tag: 'imagu90-21' },
@@ -378,7 +378,7 @@ const PLANTAS = {
     descripcion: 'Cultivo de temporada fría. Lento pero muy sabroso.',
     espacio_min: 15,
     tiempo_cosecha: '120-150 días',
-    litros_maceta: 10, perenne: false, comparte_maceta: true, unidades_por_maceta: 6,
+    litros_maceta: 10, perenne: false, comparte_maceta: true, unidades_por_maceta: 5,
     amazon: {
       semillas: { nombre: 'Semillas puerro gigante Carentan', desc: 'Variedad tradicional muy resistente', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta alta 40cm profundidad', desc: 'El puerro necesita mucha profundidad', tag: 'imagu90-21' },
@@ -432,7 +432,7 @@ const PLANTAS = {
     descripcion: 'Muy resistente y productiva. Aguanta calor y frío.',
     espacio_min: 25,
     tiempo_cosecha: '50-60 días',
-    litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 3,
+    litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 3,
     amazon: {
       semillas: { nombre: 'Semillas acelga arcoíris mix', desc: 'Tallos rojos, amarillos y blancos', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta 20L para hortalizas', desc: 'Tamaño ideal para acelgas', tag: 'imagu90-21' },
@@ -459,7 +459,7 @@ const PLANTAS = {
     descripcion: 'Muy productiva en verano. De mata baja o enrame.',
     espacio_min: 20,
     tiempo_cosecha: '55-70 días',
-    litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
+    litros_maceta: 15, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
     amazon: {
       semillas: { nombre: 'Semillas judía verde Bobby', desc: 'Mata baja, sin hilos, muy productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta 15L con sustrato', desc: 'Tamaño perfecto para judías de mata', tag: 'imagu90-21' },
@@ -486,7 +486,7 @@ const PLANTAS = {
     descripcion: 'Planta de temporada fría. Se siembra en otoño o primavera.',
     espacio_min: 10,
     tiempo_cosecha: '60-80 días',
-    litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
+    litros_maceta: 15, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
     amazon: {
       semillas: { nombre: 'Semillas guisante tirabeque', desc: 'Se come la vaina entera, muy dulce', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta con red para trepar', desc: 'Los guisantes son trepadores', tag: 'imagu90-21' },
@@ -514,7 +514,7 @@ const PLANTAS = {
     descripcion: 'Perfecta para macetas. Produce en primavera y otoño.',
     espacio_min: 20,
     tiempo_cosecha: '30-40 días tras flor',
-    litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 3,
+    litros_maceta: 10, perenne: true, comparte_maceta: true, unidades_por_maceta: 3,
     amazon: {
       semillas: { nombre: 'Plantas de fresa remontante', desc: 'Produce dos veces al año', tag: 'imagu90-21' },
       maceta:   { nombre: 'Macetero vertical fresas', desc: 'Cultivo en vertical ahorra espacio', tag: 'imagu90-21' },
@@ -596,7 +596,7 @@ const PLANTAS = {
     descripcion: 'La aromática del verano. Necesita calor y sol.',
     espacio_min: 15,
     tiempo_cosecha: '30-40 días desde siembra',
-    litros_maceta: 5, perenne: false, comparte_maceta: true, unidades_por_maceta: 2,
+    litros_maceta: 5, perenne: false, comparte_maceta: true, unidades_por_maceta: 1,
     amazon: {
       semillas: { nombre: 'Semillas albahaca genovesa', desc: 'La variedad más aromática para cocina', tag: 'imagu90-21' },
       maceta:   { nombre: 'Kit hierbas aromáticas 3 macetas', desc: 'Para albahaca, perejil y cilantro', tag: 'imagu90-21' },
@@ -623,7 +623,7 @@ const PLANTAS = {
     descripcion: 'Bienal muy resistente. Crece en casi cualquier condición.',
     espacio_min: 10,
     tiempo_cosecha: '70-90 días desde siembra',
-    litros_maceta: 5, perenne: false, comparte_maceta: true, unidades_por_maceta: 3,
+    litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 2,
     amazon: {
       semillas: { nombre: 'Semillas perejil rizado', desc: 'Variedad clásica muy aromática', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta cerámica 15cm', desc: 'Ideal para ventana o balcón', tag: 'imagu90-21' },
@@ -677,7 +677,7 @@ const PLANTAS = {
     descripcion: 'Muy resistente y aromático. Mínimo mantenimiento.',
     espacio_min: 20,
     tiempo_cosecha: 'Perenne: cosechar todo el año',
-    litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 2,
+    litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 1,
     amazon: {
       semillas: { nombre: 'Planta tomillo común', desc: 'Listo para cocina, ya grande', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta terracota pequeña', desc: 'El tomillo no necesita mucho espacio', tag: 'imagu90-21' },
@@ -731,7 +731,7 @@ const PLANTAS = {
     descripcion: 'Perenne de bajo mantenimiento. Ideal para balcones.',
     espacio_min: 20,
     tiempo_cosecha: 'Perenne',
-    litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 2,
+    litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 1,
     amazon: {
       semillas: { nombre: 'Planta orégano griego', desc: 'El más aromático para pizza y pasta', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta cerámica 18cm', desc: 'Tamaño ideal para orégano', tag: 'imagu90-21' },
@@ -787,7 +787,7 @@ const PLANTAS = {
     descripcion: 'Legumbre de invierno. Se siembra en otoño y cosecha en primavera.',
     espacio_min: 20,
     tiempo_cosecha: '90-120 días',
-    litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
+    litros_maceta: 15, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
     amazon: {
       semillas: { nombre: 'Semillas haba Aguadulce', desc: 'Variedad clásica española muy productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta alta 20L', desc: 'Las habas necesitan algo de profundidad', tag: 'imagu90-21' },
@@ -814,7 +814,7 @@ const PLANTAS = {
     descripcion: 'Se cultiva en sacos o macetas grandes. Cosecha sorprendente.',
     espacio_min: 30,
     tiempo_cosecha: '70-120 días según variedad',
-    litros_maceta: 30, perenne: false, comparte_maceta: false, unidades_por_maceta: 3,
+    litros_maceta: 30, perenne: false, comparte_maceta: false, unidades_por_maceta: 2,
     amazon: {
       semillas: { nombre: 'Patatas de siembra certificadas', desc: 'Variedades tempranas para maceta', tag: 'imagu90-21' },
       maceta:   { nombre: 'Saco de cultivo patatas 50L', desc: 'Diseñado con ventana de cosecha lateral', tag: 'imagu90-21' },
@@ -870,7 +870,7 @@ const PLANTAS = {
     descripcion: 'Fruto grande y dulce. Se planta en otoño y cosecha en primavera.',
     espacio_min: 25,
     tiempo_cosecha: '30-40 días tras floración',
-    litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 3,
+    litros_maceta: 10, perenne: true, comparte_maceta: true, unidades_por_maceta: 3,
     amazon: {
       semillas: { nombre: 'Plantas fresón en maceta', desc: 'Variedad Camarosa de gran fruto', tag: 'imagu90-21' },
       maceta:   { nombre: 'Macetero vertical fresas y fresones', desc: 'Cultivo en vertical ahorra espacio', tag: 'imagu90-21' },
@@ -1088,7 +1088,7 @@ const PLANTAS = {
     descripcion: 'Aromática de temporada fría. Se espiga rápido con el calor.',
     espacio_min: 10,
     tiempo_cosecha: '30-45 días desde siembra',
-    litros_maceta: 5, perenne: false, comparte_maceta: true, unidades_por_maceta: 3,
+    litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 2,
     amazon: {
       semillas: { nombre: 'Semillas cilantro lento a boltar', desc: 'Variedad de siembra escalonada', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta cerámica 20cm', desc: 'Ideal para cilantro en ventana', tag: 'imagu90-21' },
@@ -1142,7 +1142,7 @@ const PLANTAS = {
     descripcion: 'Perenne fácil. Corta y vuelve a crecer indefinidamente.',
     espacio_min: 10,
     tiempo_cosecha: '60-90 días; perenne tras primer año',
-    litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 4,
+    litros_maceta: 8, perenne: true, comparte_maceta: true, unidades_por_maceta: 3,
     amazon: {
       semillas: { nombre: 'Semillas cebollino fino', desc: 'El clásico para ensaladas y tortillas', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta cerámica 15cm', desc: 'Compacto, ideal para ventana de cocina', tag: 'imagu90-21' },
