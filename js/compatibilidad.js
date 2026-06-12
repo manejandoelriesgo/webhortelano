@@ -406,5 +406,32 @@ const HUERTOS_PREDEFINIDOS = [
     plantas: ['tomate_cherry', 'lechuga', 'radano', 'albahaca'],
     descripcion: 'Cuatro plantas infalibles para quien nunca ha cultivado nada. El rábano estará listo en 25 días (verás resultados rápido), la lechuga en 6 semanas, y el tomate cherry en verano. La albahaca protege todo el conjunto. Una combinación pensada para motivar y no decepcionar.',
     beneficios: ['Primer resultado en solo 25 días (rábanos)', 'Todas son fáciles o muy fáciles de cultivar', 'Bajo riesgo de fracaso para el principiante', 'La albahaca protege las otras plantas naturalmente']
+  },
+  {
+    id: 'jardin_basico',
+    nombre: 'Huerto familiar básico',
+    m2_min: 5,
+    tipo: 'jardin',
+    plantas: ['tomate', 'pimiento', 'lechuga', 'zanahoria', 'cebolla', 'perejil'],
+    descripcion: 'Frutos, hojas y raíces que cubren las verduras de temporada para una familia. El tomate y el pimiento dan el volumen de verano, la lechuga y zanahoria se cogen escalonadas, la cebolla y el perejil protegen el conjunto de plagas.',
+    beneficios: ['Producción continua de primavera a otoño', 'Cebolla y perejil protegen el entorno naturalmente', 'Combinación probada para huertos en tierra de 5-15 m²', 'Cosecha escalonada: lechugas y zanahorias mientras esperan los tomates']
+  },
+  {
+    id: 'jardin_verano',
+    nombre: 'Huerto de verano en tierra',
+    m2_min: 10,
+    tipo: 'jardin',
+    plantas: ['tomate', 'pimiento', 'pepino', 'calabacin', 'albahaca', 'ajo'],
+    descripcion: 'El huerto de verano clásico en tierra: máxima producción de frutos con protección natural. Un solo calabacín produce durante 3-4 meses seguidos; el pepino da cosechas semanales. El ajo y la albahaca mantienen las plagas a raya sin pesticidas.',
+    beneficios: ['Producción de frutos durante todo el verano', 'Ajo y albahaca como protección natural sin productos químicos', 'Calabacín y pepino: los más productivos por m² de huerto', 'Ideal para huertos de 10-25 m²']
+  },
+  {
+    id: 'jardin_cuatro_estaciones',
+    nombre: 'Huerto 4 estaciones en tierra',
+    m2_min: 20,
+    tipo: 'jardin',
+    plantas: ['tomate', 'pimiento', 'lechuga', 'espinaca', 'zanahoria', 'cebolla', 'ajo', 'perejil'],
+    descripcion: 'El huerto completo para cosechar todo el año: frutos de verano, hojas en otoño e invierno, raíces y bulbos en primavera. El ajo protege fresas y tomates, las espinacas y lechugas ocupan el espacio en los meses fríos que los frutos dejan vacío.',
+    beneficios: ['Cosecha los 12 meses sin dejar tierra vacía', 'Ajo y cebolla protegen el conjunto de plagas y hongos', 'Rotación natural de cultivos incorporada al diseño', 'Para huertos de 20 m² o más con experiencia media']
   }
 ];

@@ -393,6 +393,7 @@
       tamano: '', nivel: '', zona: '', plantas: new Set()
     };
     const M2_TAMANO = { poco:2, medio:5, mucho:10 };
+    const M2_TAMANO_HUERTO = { poco:10, medio:25, mucho:50 };
     let catActual = 'todas';
 
     /* ---- Fallback getCalendario ---- */
@@ -515,11 +516,15 @@
 
     /* ---- Presets ---- */
     function renderPresets() {
-      const m2 = M2_TAMANO[estado.tamano] || 2;
+      const esHuerto = estado.contenedor === 'suelo' || estado.tipo === 'jardin';
+      const m2 = esHuerto ? (M2_TAMANO_HUERTO[estado.tamano] || 10) : (M2_TAMANO[estado.tamano] || 2);
       const grid = document.getElementById('preset-grid');
-      const adecuados = HUERTOS_PREDEFINIDOS.filter(h =>
-        m2 >= h.m2_min && (h.tipo===estado.tipo || h.tipo==='balcon')
-      );
+      const adecuados = HUERTOS_PREDEFINIDOS.filter(h => {
+        const tipoOk = h.tipo === estado.tipo
+          || (estado.tipo === 'terraza' && h.tipo === 'balcon')
+          || (estado.tipo === 'jardin' && (h.tipo === 'jardin' || h.tipo === 'terraza'));
+        return m2 >= (h.m2_min || 0) && tipoOk;
+      });
       if (!adecuados.length) {
         grid.innerHTML = '<p style="font-size:13px;color:var(--texto-sec);grid-column:1/-1;">No hay huertos predefinidos para este espacio. Elige tus plantas abajo.</p>';
         return;
@@ -562,6 +567,7 @@
       document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
       btn.classList.add('active');
       renderPlantGrid(cat);
+      renderPlantasBar();
     }
 
     function renderPlantasBar() {
@@ -658,7 +664,11 @@
 
       const scoreNum = Math.round(Math.min(10, Math.max(0, 5 + fCompat + fDificultad + fEspacio)));
       const scoreClass = scoreNum>=7?'excelente':scoreNum>=5?'buena':'mejorable';
-      const scoreLabel = scoreNum>=9?'Combinación excelente':scoreNum>=7?'Buena combinación':scoreNum>=5?'Combinación correcta':scoreNum>=3?'Combinación con conflictos':'Combinación problemática';
+      const scoreLabel = conflictos.length > 1 ? 'Combinación con conflictos'
+        : conflictos.length === 1 ? 'Atención: hay un conflicto'
+        : scoreNum >= 9 ? 'Combinación excelente'
+        : scoreNum >= 7 ? 'Buena combinación'
+        : 'Combinación correcta';
 
       const lineaDif = tienesDificil
         ? '⚠ Incluye alguna planta exigente (revisa sus cuidados)'
@@ -785,7 +795,8 @@
 
         const items = plantas.map((p,i)=>{
           const litros = p.litros_maceta||10;
-          const u = p.unidades_por_maceta||1;
+          let u = p.unidades_por_maceta||1;
+          if (estado.nivel==='principiante' && u > 2) u = Math.max(1, Math.ceil(u * 0.6));
           const recipiente = u === 1 ? `Maceta de ${litros}L` : `Jardinera de ${litros}L`;
           const accion = getAccionMes(p, zonaId, mes);
           const marca = accion ? ` (${accion})` : '';
@@ -802,13 +813,24 @@
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución por macetas</div>${prefix}<div>${items||'<p style="font-size:13px;color:var(--texto-sec);">Selecciona al menos una planta.</p>'}</div>${consejo}${notaSiembra}</div>`;
 
       } else {
+        const totalM2 = M2_TAMANO_HUERTO[estado.tamano] || 10;
+        const areaZona = plantas.length > 0 ? totalM2 / plantas.length : totalM2;
         const items = plantas.map((p,i)=>{
-          const u = p.unidades_por_maceta||1;
+          let u;
+          if (p.m2 && p.m2 > 0) {
+            const raw = Math.floor(areaZona / p.m2);
+            const cap = p.m2 >= 0.5 ? 6 : p.m2 >= 0.2 ? 12 : p.m2 >= 0.05 ? 25 : 50;
+            u = Math.min(Math.max(1, raw), cap);
+          } else {
+            u = p.unidades_por_maceta || 1;
+          }
+          if (estado.nivel==='principiante') u = Math.max(1, Math.ceil(u * 0.5));
           const accion = getAccionMes(p, zonaId, mes);
           const marca = accion ? ` (${accion})` : '';
-          return `<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${u} ${pluralNombre(p.nombre,u)}${marca}</div>`;
+          return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${u} ${pluralNombre(p.nombre,u)}${marca}</div>`;
         }).join('');
-        return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div></div>`;
+        const notaHuerto = `<p style="font-size:12px;color:var(--texto-sec);margin-top:12px;line-height:1.5;">Cantidades estimadas para ${totalM2} m² divididos entre ${plantas.length} zona${plantas.length===1?'':'s'}. Ajusta según el marco de plantación real de tu suelo.</p>`;
+        return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div>${notaHuerto}</div>`;
       }
     }
 
@@ -853,7 +875,7 @@
       if(conflictos.length>0){
         const c=conflictos[0];
         return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
-          <p style="font-size:14px;"><strong>⚠ ${c.a} y ${c.b} no se llevan bien:</strong> ${c.razon} Ponlos en macetas separadas o en extremos opuestos.</p></div>`;
+          <p style="font-size:14px;"><strong>⚠ ${c.a} y ${c.b} no se llevan bien:</strong> ${c.razon.replace(/\.\s*$/,'')}. Ponlos en macetas separadas o en extremos opuestos.</p></div>`;
       }
       const mentaP = plantas.find(p=>p.nombre==='Menta');
       if(mentaP){
@@ -900,9 +922,9 @@
         </div>`;
       }
       const catHTML = [
-        cat('🌱 Semillas', semillas, 4),
+        cat('🌱 Semillas', semillas, semillas.length),
         cat('🪴 Sustrato', sustratos, 2),
-        tieneMacetas===false ? cat('🏺 Macetas', macetasP, 3) : '',
+        tieneMacetas===false ? cat('🏺 Macetas', macetasP, macetasP.length) : '',
         cat('🌿 Abono', abonos, 2),
       ].filter(Boolean).join('');
       if(!catHTML) return '';
@@ -920,7 +942,7 @@
       if (conflictos.length===0)
         return `${sinergias[0].a} y ${sinergias[0].b} se ayudan: ${sinergias[0].razon}. El resto convive sin problemas.`;
       if (conflictos.length===1)
-        return `Atención a ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon}. Sepáralas o cambia una.`;
+        return `Atención a ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon.replace(/\.\s*$/,'')}. Sepáralas o cambia una.`;
       return `Hay varios conflictos: ${conflictos.slice(0,2).map(c=>`${c.a} y ${c.b}`).join('; ')}. Te recomiendo cambiar alguna planta.`;
     }
 
@@ -929,19 +951,22 @@
       const n = plantas.length;
       const esp = {balcon:'balcón',terraza:'terraza',interior:'interior',jardin:'jardín'}[estado.tipo]||'espacio';
       const tam = {poco:'poco espacio',medio:'espacio medio',mucho:'mucho espacio'}[tamano]||'tu espacio';
-      let base = `${n} planta${n===1?'':'s'} en ${tam} de ${esp}, zona ${zona?.nombre||''}.`;
+      // Planta destacada: la más productiva con rendimiento conocido
+      const destacada = plantas.find(p=>p.rendimiento && p.dificultad!=='dificil') || plantas[0];
+      const rendText = destacada?.rendimiento ? ` Referencia de producción — ${destacada.nombre}: ${destacada.rendimiento}` : '';
       let detalle = '';
       if (conflictos.length>0) {
         detalle = ` Hay ${conflictos.length} conflicto${conflictos.length>1?'s':''} que gestionar, te los detallamos abajo.`;
         if (sinergias.length>0) detalle += ` También tienes ${sinergias.length} sinergia${sinergias.length>1?'s':''} a favor.`;
       } else if (sinergias.length>0) {
-        detalle = ` Buena combinación: ${sinergias[0].a} y ${sinergias[0].b} se ayudan (${sinergias[0].razon}).`;
+        detalle = ` ${sinergias[0].a} y ${sinergias[0].b} se ayudan entre sí: ${sinergias[0].razon.replace(/\.\s*$/,'')}.`;
       } else {
-        detalle = ' Es una combinación tranquila y sin conflictos, fácil de manejar.';
+        detalle = ' Combinación sin conflictos, tranquila y fácil de manejar.';
       }
       let animo = '';
-      if (nivel==='principiante') animo = ' Al ser tu primera vez, ve con calma: es mejor pocas plantas bien cuidadas que muchas a medias.';
-      return base + detalle + animo;
+      if (nivel==='principiante') animo = ' Al ser tu primera vez, empieza con pocas plantas y ve añadiendo según ganas confianza: mejor tres plantas bien cuidadas que diez a medias.';
+      else if (nivel==='avanzado') animo = ' Con tu experiencia puedes experimentar con la rotación de cultivos y combinaciones más ambiciosas.';
+      return `${n} planta${n===1?'':'s'} en ${tam} de ${esp}${zona?.nombre?', zona '+zona.nombre:''}.${rendText}${detalle}${animo}`;
     }
   </script>
   <script>
