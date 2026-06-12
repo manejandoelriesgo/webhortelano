@@ -747,11 +747,8 @@
     }
 
     /* ---- Helper plural ---- */
-    function pluralNombre(nombre, cantidad) {
-      if (cantidad <= 1) return nombre.toLowerCase();
-      const n = nombre.toLowerCase();
-      const vocales = 'aeiouáéíóú';
-      return vocales.includes(n[n.length-1]) ? n+'s' : n+'es';
+    function plantasDeNombre(n, nombre) {
+      return `${n} ${n===1?'planta':'plantas'} de ${nombre.toLowerCase()}`;
     }
 
     /* ---- Helper mes en minúscula ---- */
@@ -800,7 +797,7 @@
           const recipiente = u === 1 ? `Maceta de ${litros}L` : `Jardinera de ${litros}L`;
           const accion = getAccionMes(p, zonaId, mes);
           const marca = accion ? ` (${accion})` : '';
-          return `<div class="plan-distrib-item">· <strong>${recipiente}:</strong> ${u} ${pluralNombre(p.nombre, u)}${marca}</div>`;
+          return `<div class="plan-distrib-item">· <strong>${recipiente}:</strong> ${plantasDeNombre(u, p.nombre)}${marca}</div>`;
         }).join('');
 
         const hayCompartidas = plantas.filter(p=>p.comparte_maceta===true).length >= 2;
@@ -821,18 +818,17 @@
           const marca = accion ? ` (${accion})` : '';
           if (modo === 'mata') {
             const u = p.unidades_sugeridas || 1;
-            return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${u} ${pluralNombre(p.nombre,u)}${marca}</div>`;
+            return `<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${plantasDeNombre(u, p.nombre)}${marca}</div>`;
           }
           if (modo === 'hilera') {
             const densidad = p.densidad || 10;
-            const total = Math.round(densidad * areaZona);
-            return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> siembra en hileras, ~${total} plantas${marca}</div>`;
+            return `<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${p.nombre.toLowerCase()} en hilera o a chorrillo (~${densidad} plantas por m²). Con dedicar 1–2 m² tienes de sobra para una familia${marca}.</div>`;
           }
           // modo 'unidad' (default)
           const densidad = p.densidad || 3;
           let u = Math.max(1, Math.round(densidad * areaZona));
           if (estado.nivel === 'principiante') u = Math.max(1, Math.ceil(u * 0.5));
-          return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${u} ${pluralNombre(p.nombre,u)}${marca}</div>`;
+          return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${plantasDeNombre(u, p.nombre)}${marca}</div>`;
         }).join('');
         const notaHuerto = `<p style="font-size:12px;color:var(--texto-sec);margin-top:12px;line-height:1.5;">Cantidades estimadas para ${totalM2} m² divididos entre ${plantas.length} zona${plantas.length===1?'':'s'}. Ajusta según el marco de plantación de cada cultivo.</p>`;
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div>${notaHuerto}</div>`;
@@ -945,7 +941,7 @@
       if (conflictos.length===0 && sinergias.length===0)
         return 'Las plantas que has elegido conviven sin problemas. Es una base sólida y fácil de manejar.';
       if (conflictos.length===0)
-        return `${sinergias[0].a} y ${sinergias[0].b} se ayudan: ${sinergias[0].razon}. El resto convive sin problemas.`;
+        return `${sinergias[0].a} y ${sinergias[0].b} se ayudan: ${sinergias[0].razon.replace(/\.\s*$/,'')}. El resto convive sin problemas.`;
       if (conflictos.length===1)
         return `Atención a ${conflictos[0].a} y ${conflictos[0].b}: ${conflictos[0].razon.replace(/\.\s*$/,'')}. Sepáralas o cambia una.`;
       return `Hay varios conflictos: ${conflictos.slice(0,2).map(c=>`${c.a} y ${c.b}`).join('; ')}. Te recomiendo cambiar alguna planta.`;
