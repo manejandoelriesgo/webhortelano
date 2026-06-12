@@ -816,20 +816,25 @@
         const totalM2 = M2_TAMANO_HUERTO[estado.tamano] || 10;
         const areaZona = plantas.length > 0 ? totalM2 / plantas.length : totalM2;
         const items = plantas.map((p,i)=>{
-          let u;
-          if (p.m2 && p.m2 > 0) {
-            const raw = Math.floor(areaZona / p.m2);
-            const cap = p.m2 >= 0.5 ? 6 : p.m2 >= 0.2 ? 12 : p.m2 >= 0.05 ? 25 : 50;
-            u = Math.min(Math.max(1, raw), cap);
-          } else {
-            u = p.unidades_por_maceta || 1;
-          }
-          if (estado.nivel==='principiante') u = Math.max(1, Math.ceil(u * 0.5));
+          const modo = p.modo_siembra || 'unidad';
           const accion = getAccionMes(p, zonaId, mes);
           const marca = accion ? ` (${accion})` : '';
+          if (modo === 'mata') {
+            const u = p.unidades_sugeridas || 1;
+            return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${u} ${pluralNombre(p.nombre,u)}${marca}</div>`;
+          }
+          if (modo === 'hilera') {
+            const densidad = p.densidad || 10;
+            const total = Math.round(densidad * areaZona);
+            return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> siembra en hileras, ~${total} plantas${marca}</div>`;
+          }
+          // modo 'unidad' (default)
+          const densidad = p.densidad || 3;
+          let u = Math.max(1, Math.round(densidad * areaZona));
+          if (estado.nivel === 'principiante') u = Math.max(1, Math.ceil(u * 0.5));
           return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${u} ${pluralNombre(p.nombre,u)}${marca}</div>`;
         }).join('');
-        const notaHuerto = `<p style="font-size:12px;color:var(--texto-sec);margin-top:12px;line-height:1.5;">Cantidades estimadas para ${totalM2} m² divididos entre ${plantas.length} zona${plantas.length===1?'':'s'}. Ajusta según el marco de plantación real de tu suelo.</p>`;
+        const notaHuerto = `<p style="font-size:12px;color:var(--texto-sec);margin-top:12px;line-height:1.5;">Cantidades estimadas para ${totalM2} m² divididos entre ${plantas.length} zona${plantas.length===1?'':'s'}. Ajusta según el marco de plantación de cada cultivo.</p>`;
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div>${notaHuerto}</div>`;
       }
     }
