@@ -14,13 +14,13 @@
   <title>Calculadora de ahorro del huerto — Cuánto ahorras cultivando en casa — HortelanoUrbano.es</title>
   <meta name="description" content="Calcula cuánto dinero ahorras al año cultivando tus propias hortalizas en casa vs comprarlo en el supermercado. Resultado personalizado y compartible.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://hortelanourbano.es/calculadora-ahorro-huerto">
+  <link rel="canonical" href="https://www.hortelanourbano.es/calculadora-ahorro-huerto">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Calculadora de ahorro del huerto",
-    "url": "https://hortelanourbano.es/calculadora-ahorro-huerto",
+    "url": "https://www.hortelanourbano.es/calculadora-ahorro-huerto",
     "applicationCategory": "UtilitiesApplication",
     "description": "Calcula cuánto ahorras al año cultivando en casa",
     "operatingSystem": "Any",
@@ -514,9 +514,9 @@
     const plantas = [...seleccionadas].map(id => PLANTAS[id]?.nombre).join(', ');
     const texto = `Mi huerto urbano me ahorra ${ahorro}€ al año cultivando: ${plantas}. Calcula el tuyo en HortelanoUrbano.es`;
     if (navigator.share) {
-      navigator.share({ title: 'Mi ahorro del huerto', text: texto, url: 'https://hortelanourbano.es/calculadora-ahorro-huerto' });
+      navigator.share({ title: 'Mi ahorro del huerto', text: texto, url: 'https://www.hortelanourbano.es/calculadora-ahorro-huerto' });
     } else {
-      navigator.clipboard?.writeText(texto + '\nhttps://hortelanourbano.es/calculadora-ahorro-huerto')
+      navigator.clipboard?.writeText(texto + '\nhttps://www.hortelanourbano.es/calculadora-ahorro-huerto')
         .then(() => alert('¡Resultado copiado al portapapeles!'));
     }
   }
