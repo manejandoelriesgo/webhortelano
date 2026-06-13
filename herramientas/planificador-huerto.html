@@ -945,13 +945,15 @@
       const esp = {balcon:'balcón',terraza:'terraza',interior:'interior',jardin:'jardín'}[estado.tipo]||'espacio';
       const tam = {poco:'poco espacio',medio:'espacio medio',mucho:'mucho espacio'}[tamano]||'tu espacio';
       const destacada = plantas.find(p=>p.rendimiento && p.dificultad!=='dificil') || plantas[0];
-      const rendText = destacada?.rendimiento ? ` Referencia de producción — ${destacada.nombre}: ${destacada.rendimiento}` : '';
+      let rend = destacada?.rendimiento || '';
+      rend = rend.split(/\.\s*/)[0];
+      const rendText = rend ? ` Referencia de producción — ${destacada.nombre}: ${rend}.` : '';
       let detalle = '';
       if (conflictos.length>0) {
         detalle = ` Hay ${conflictos.length} conflicto${conflictos.length>1?'s':''} que gestionar, te los detallamos abajo.`;
         if (sinergias.length>0) detalle += ` También tienes ${sinergias.length} sinergia${sinergias.length>1?'s':''} a favor.`;
       } else if (sinergias.length>0) {
-        detalle = ` ${sinergias[0].a} y ${sinergias[0].b} se ayudan entre sí: ${sinergias[0].razon.replace(/\.\s*$/,'')}.`;
+        detalle = ` ${sinergias[0].a} y ${sinergias[0].b} son buenas compañeras: ${sinergias[0].razon.replace(/\.\s*$/,'').replace(/se dice que /gi,'')}.`;
       } else {
         detalle = ' Combinación sin conflictos, tranquila y fácil de manejar.';
       }
