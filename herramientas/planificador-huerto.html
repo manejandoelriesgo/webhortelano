@@ -163,7 +163,7 @@
     <div class="container">
       <div class="tool-wrapper">
 
-        <!-- Barra de progreso (5 pasos) -->
+        <!-- Barra de progreso (4 pasos) -->
         <div class="wizard-progress" id="wizard-progress">
           <div class="wp-dot active" id="wp-1">1</div>
           <div class="wp-line" id="wl-1"></div>
@@ -172,8 +172,6 @@
           <div class="wp-dot" id="wp-3">3</div>
           <div class="wp-line" id="wl-3"></div>
           <div class="wp-dot" id="wp-4">4</div>
-          <div class="wp-line" id="wl-4"></div>
-          <div class="wp-dot" id="wp-5">5</div>
         </div>
 
         <!-- PASO 1: Dónde -->
@@ -252,29 +250,8 @@
           <button class="btn-back" onclick="retrocederDesde3()">← Atrás</button>
         </div>
 
-        <!-- PASO 4: Experiencia -->
+        <!-- PASO 4: Zona + Plantas -->
         <div class="wizard-step" id="wizard-4">
-          <div class="step-q">¿Cuánta experiencia tienes?</div>
-          <div class="step-sub">Ajustamos las recomendaciones a tu nivel.</div>
-          <div class="choice-grid choice-grid-3">
-            <button class="choice-btn" onclick="elegirNivel('principiante',this)">
-              <span class="choice-icon">🌱</span><span class="choice-label">Primera vez</span>
-              <span class="choice-desc">Nunca he cultivado</span>
-            </button>
-            <button class="choice-btn" onclick="elegirNivel('intermedio',this)">
-              <span class="choice-icon">🌿</span><span class="choice-label">Algo de experiencia</span>
-              <span class="choice-desc">He cultivado alguna vez</span>
-            </button>
-            <button class="choice-btn" onclick="elegirNivel('avanzado',this)">
-              <span class="choice-icon">🌳</span><span class="choice-label">Experto</span>
-              <span class="choice-desc">Varios años de huerto</span>
-            </button>
-          </div>
-          <button class="btn-back" onclick="irWizard(3)">← Atrás</button>
-        </div>
-
-        <!-- PASO 5: Zona + Plantas -->
-        <div class="wizard-step" id="wizard-5">
           <div class="step-q">Elige tus plantas</div>
           <div style="background:var(--verde-bg);border:1px solid #B7E4C7;border-radius:var(--radio-card);padding:16px 20px;margin-bottom:20px;">
             <p style="font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">📍 Tu zona climática</p>
@@ -316,16 +293,16 @@
           </div>
           <div id="step5-error" style="color:#DC2626;font-size:14px;margin:12px 0;display:none;">Selecciona tu zona climática y al menos una planta.</div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;align-items:center;">
-            <button class="btn btn-outline" onclick="irWizard(4)">← Atrás</button>
+            <button class="btn btn-outline" onclick="irWizard(3)">← Atrás</button>
             <button class="btn btn-primary" onclick="crearPlan()">Crear mi plan →</button>
           </div>
         </div>
 
-        <!-- PASO 6: Resultado -->
-        <div class="wizard-step" id="wizard-6">
+        <!-- PASO 5: Resultado -->
+        <div class="wizard-step" id="wizard-5">
           <div id="plan-output"></div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
-            <button class="btn btn-outline" onclick="irWizard(5)">← Cambiar plantas</button>
+            <button class="btn btn-outline" onclick="irWizard(4)">← Cambiar plantas</button>
             <button class="btn btn-outline" onclick="reiniciar()">Empezar de nuevo</button>
           </div>
         </div>
@@ -390,7 +367,7 @@
     /* ---- Estado global ---- */
     const estado = {
       tipo: '', contenedor: '', tieneMacetas: null,
-      tamano: '', nivel: '', zona: '', plantas: new Set()
+      tamano: '', zona: '', plantas: new Set()
     };
     const M2_TAMANO = { poco:2, medio:5, mucho:10 };
     const M2_TAMANO_HUERTO = { poco:10, medio:25, mucho:50 };
@@ -401,20 +378,20 @@
 
     /* ---- Wizard navigation ---- */
     function irWizard(n) {
-      [1,2,3,4,5,6].forEach(i => document.getElementById('wizard-'+i).classList.toggle('active', i===n));
-      // progress bar: only steps 1-5
-      for (let i=1;i<=5;i++){
+      [1,2,3,4,5].forEach(i => document.getElementById('wizard-'+i).classList.toggle('active', i===n));
+      // progress bar: steps 1-4
+      for (let i=1;i<=4;i++){
         const dot=document.getElementById('wp-'+i);
         dot.classList.remove('active','done');
-        if(i<n&&n<=6) dot.classList.add('done');
+        if(i<n&&n<=5) dot.classList.add('done');
         else if(i===n) dot.classList.add('active');
       }
-      for(let i=1;i<=4;i++){
+      for(let i=1;i<=3;i++){
         const ln=document.getElementById('wl-'+i);
         ln.classList.toggle('done', i<n);
       }
       // Hide progress bar on result step
-      document.getElementById('wizard-progress').style.display = (n===6) ? 'none' : 'flex';
+      document.getElementById('wizard-progress').style.display = (n===5) ? 'none' : 'flex';
       window.scrollTo({top:0,behavior:'smooth'});
     }
 
@@ -487,19 +464,6 @@
       estado.tamano = tamano;
       document.querySelectorAll('#w3-espacio .choice-btn').forEach(b=>b.classList.remove('selected'));
       btn.classList.add('selected');
-      setTimeout(()=>irWizard(4), 200);
-    }
-
-    function retrocederDesde3() {
-      if (estado.tipo==='interior'||estado.tipo==='jardin') irWizard(1);
-      else irWizard(2);
-    }
-
-    /* ---- Paso 4: nivel ---- */
-    function elegirNivel(nivel, btn) {
-      estado.nivel = nivel;
-      document.querySelectorAll('#wizard-4 .choice-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
       // Init zona selector
       const selZona = document.getElementById('p-zona');
       if (selZona.options.length <= 1) {
@@ -511,7 +475,12 @@
       }
       renderPresets();
       renderPlantGrid('todas');
-      setTimeout(()=>irWizard(5), 200);
+      setTimeout(()=>irWizard(4), 200);
+    }
+
+    function retrocederDesde3() {
+      if (estado.tipo==='interior'||estado.tipo==='jardin') irWizard(1);
+      else irWizard(2);
     }
 
     /* ---- Presets ---- */
@@ -554,8 +523,7 @@
     function renderPlantGrid(cat) {
       catActual = cat;
       const grid = document.getElementById('plant-grid');
-      const entries = cat==='todas' ? Object.entries(PLANTAS) : Object.entries(PLANTAS).filter(([,p])=>p.categoria===cat);
-      const filtradas = estado.nivel==='principiante' ? entries.filter(([,p])=>p.dificultad!=='dificil') : entries;
+      const filtradas = cat==='todas' ? Object.entries(PLANTAS) : Object.entries(PLANTAS).filter(([,p])=>p.categoria===cat);
       const catLabel = {hortaliza:'Hortaliza',fruta:'Fruta',aromatica:'Aromática'};
       grid.innerHTML = filtradas.map(([id,p]) => `
         <div class="plant-option ${estado.plantas.has(id)?'selected':''}" onclick="togglePlanta('${id}',this)">
@@ -628,12 +596,12 @@
       document.getElementById('step5-error').style.display='none';
       estado.zona = zona;
       generarPlan();
-      irWizard(6);
+      irWizard(5);
     }
 
     function reiniciar() {
       estado.tipo='';estado.contenedor='';estado.tieneMacetas=null;
-      estado.tamano='';estado.nivel='';estado.zona='';estado.plantas.clear();
+      estado.tamano='';estado.zona='';estado.plantas.clear();
       document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));
       document.querySelectorAll('.preset-card').forEach(b=>b.classList.remove('active'));
       irWizard(1);
@@ -688,13 +656,16 @@
       const scoreDesc  = genMsgCompat(scoreNum, sinergias, conflictos);
 
       /* Texto motivador */
-      const motivacion = genMotivacion(plantasArr, estado.tamano, estado.nivel, zona, sinergias, conflictos);
+      const motivacion = genMotivacion(plantasArr, estado.tamano, zona, sinergias, conflictos);
 
       /* Bloque A: distribución */
       const bloqueA = genBloqueA(plantasArr);
 
       /* Bloque B: cuándo plantar */
       const bloqueB = genBloqueB(plantasArr, zonaId, mesActual);
+
+      /* Bloque D: cómo sembrar */
+      const bloqueD = genBloqueD(plantasArr);
 
       /* Bloque C: aviso */
       const bloqueC = genBloqueC(plantasArr, sinergias, conflictos);
@@ -723,6 +694,7 @@
 
         ${bloqueA}
         ${bloqueB}
+        ${bloqueD}
         ${bloqueC}
 
         <div class="plan-bloque" style="margin-top:4px;">
@@ -793,7 +765,6 @@
         const items = plantas.map((p,i)=>{
           const litros = p.litros_maceta||10;
           let u = p.unidades_por_maceta||1;
-          if (estado.nivel==='principiante' && u > 2) u = Math.max(1, Math.ceil(u * 0.6));
           const recipiente = u === 1 ? `Maceta de ${litros}L` : `Jardinera de ${litros}L`;
           const accion = getAccionMes(p, zonaId, mes);
           const marca = accion ? ` (${accion})` : '';
@@ -826,8 +797,7 @@
           }
           // modo 'unidad' (default)
           const densidad = p.densidad || 3;
-          let u = Math.max(1, Math.round(densidad * areaZona));
-          if (estado.nivel === 'principiante') u = Math.max(1, Math.ceil(u * 0.5));
+          const u = Math.max(1, Math.round(densidad * areaZona));
           return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${plantasDeNombre(u, p.nombre)}${marca}</div>`;
         }).join('');
         const notaHuerto = `<p style="font-size:12px;color:var(--texto-sec);margin-top:12px;line-height:1.5;">Cantidades estimadas para ${totalM2} m² divididos entre ${plantas.length} zona${plantas.length===1?'':'s'}. Ajusta según el marco de plantación de cada cultivo.</p>`;
@@ -885,17 +855,39 @@
       }
       const sensibles=['Tomate','Tomate cherry','Pimiento','Albahaca','Berenjena'];
       const sensiblesEleg = plantas.filter(p=>sensibles.includes(p.nombre));
-      if(estado.nivel==='principiante'&&sensiblesEleg.length>0){
-        return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
-          <p style="font-size:14px;"><strong>💧 Cuidado con el riego de ${sensiblesEleg[0].nombre}:</strong> el exceso de agua es el error más común. Antes de regar, mete el dedo 2 cm en el sustrato: si está húmedo, espera. Riega solo en la base, nunca sobre las hojas.</p></div>`;
-      }
       const difíciles = plantas.filter(p=>p.dificultad==='dificil');
       if(difíciles.length>0){
         return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
           <p style="font-size:14px;"><strong>⚠ ${difíciles[0].nombre} es exigente:</strong> ${difíciles[0].tips?.general?.[0]||'Requiere cuidados especiales antes de plantarlo.'}</p></div>`;
       }
       return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Nota del plan</div>
-        <p style="font-size:14px;"><strong>✓ Buena selección:</strong> todas las plantas de tu huerto se llevan bien entre sí. Riega regularmente y sigue el calendario para obtener resultados en pocas semanas.</p></div>`;
+        <p style="font-size:14px;"><strong>✓ Buena selección:</strong> todas las plantas de tu huerto se llevan bien entre sí. Riega regularmente y sigue el <a href="calendario-siembra.html" style="color:var(--verde);font-weight:600;">calendario</a> para obtener resultados en pocas semanas.</p></div>`;
+    }
+
+    /* ---- Bloque D: cómo sembrar ---- */
+    function genBloqueD(plantas) {
+      const items = plantas.map(p => {
+        const m = p.metodo || 'directo';
+        const prof = p.profundidad_cm;
+        const germ = p.germinacion_dias;
+        let texto;
+        if (m === 'semillero') {
+          texto = `Siembra en semillero a ${prof} cm de profundidad. Germina en ~${germ} días. Trasplanta cuando tenga 4 hojas verdaderas (~6 semanas).`;
+        } else if (m === 'directo') {
+          texto = `Siembra directamente en su sitio definitivo a ${prof} cm de profundidad. Germina en ~${germ} días.`;
+        } else if (m === 'bulbo') {
+          texto = `Planta el diente/bulbo directamente a ${prof} cm de profundidad, con el brote hacia arriba. Brota en ~${germ} días.`;
+        } else if (m === 'esqueje') {
+          texto = `Se planta como esqueje o planta joven, no desde semilla. Cómprala en vivero y plántala directamente en su sitio.`;
+        } else if (m === 'patata') {
+          texto = `Planta el tubérculo o trozo con brote a ${prof} cm de profundidad. Brota en ~${germ} días.`;
+        } else {
+          texto = `Consulta las instrucciones específicas de siembra para esta planta.`;
+        }
+        return `<div class="plan-distrib-item"><strong>${p.nombre}:</strong> ${texto}</div>`;
+      }).join('');
+      const enlace = `<p style="font-size:13px;color:var(--texto-sec);margin-top:14px;">📅 Consulta el <a href="calendario-siembra.html" style="color:var(--verde);font-weight:600;">calendario de siembra</a> para saber el momento exacto de cada planta →</p>`;
+      return `<div class="plan-bloque"><div class="plan-bloque-titulo">D. Cómo sembrar cada planta</div><div>${items}</div>${enlace}</div>`;
     }
 
     /* ---- Amazon por categoría ---- */
@@ -948,11 +940,10 @@
     }
 
     /* ---- Texto motivador ---- */
-    function genMotivacion(plantas, tamano, nivel, zona, sinergias, conflictos) {
+    function genMotivacion(plantas, tamano, zona, sinergias, conflictos) {
       const n = plantas.length;
       const esp = {balcon:'balcón',terraza:'terraza',interior:'interior',jardin:'jardín'}[estado.tipo]||'espacio';
       const tam = {poco:'poco espacio',medio:'espacio medio',mucho:'mucho espacio'}[tamano]||'tu espacio';
-      // Planta destacada: la más productiva con rendimiento conocido
       const destacada = plantas.find(p=>p.rendimiento && p.dificultad!=='dificil') || plantas[0];
       const rendText = destacada?.rendimiento ? ` Referencia de producción — ${destacada.nombre}: ${destacada.rendimiento}` : '';
       let detalle = '';
@@ -964,10 +955,7 @@
       } else {
         detalle = ' Combinación sin conflictos, tranquila y fácil de manejar.';
       }
-      let animo = '';
-      if (nivel==='principiante') animo = ' Al ser tu primera vez, empieza con pocas plantas y ve añadiendo según ganas confianza: mejor tres plantas bien cuidadas que diez a medias.';
-      else if (nivel==='avanzado') animo = ' Con tu experiencia puedes experimentar con la rotación de cultivos y combinaciones más ambiciosas.';
-      return `${n} planta${n===1?'':'s'} en ${tam} de ${esp}${zona?.nombre?', zona '+zona.nombre:''}.${rendText}${detalle}${animo}`;
+      return `${n} planta${n===1?'':'s'} en ${tam} de ${esp}${zona?.nombre?', zona '+zona.nombre:''}.${rendText}${detalle}`;
     }
   </script>
   <script>
