@@ -105,7 +105,7 @@ p:last-child { margin-bottom: 0; }
 
 .nav-links {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   list-style: none;
 }
 .nav-links a {
