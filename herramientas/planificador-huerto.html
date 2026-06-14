@@ -480,15 +480,6 @@
       estado.tamano = tamano;
       document.querySelectorAll('#w3-espacio .choice-btn').forEach(b=>b.classList.remove('selected'));
       btn.classList.add('selected');
-      // Init zona selector
-      const selZona = document.getElementById('p-zona');
-      if (selZona.options.length <= 1) {
-        Object.entries(ZONAS).forEach(([id,z]) => {
-          const opt = document.createElement('option');
-          opt.value = id; opt.textContent = z.nombre;
-          selZona.appendChild(opt);
-        });
-      }
       renderPresets();
       renderPlantGrid('todas');
       setTimeout(()=>irWizard(4), 200);
@@ -604,12 +595,13 @@
 
     /* ---- Crear plan ---- */
     function crearPlan() {
-      const zona = document.getElementById('p-zona').value;
-      if (!zona || estado.plantas.size===0) {
+      const zona = document.getElementById('p-zona').value || 'mediterranea';
+      if (estado.plantas.size===0) {
         document.getElementById('step5-error').style.display='block';
         return;
       }
       document.getElementById('step5-error').style.display='none';
+      document.getElementById('p-zona').value = zona;
       estado.zona = zona;
       generarPlan();
       irWizard(5);
