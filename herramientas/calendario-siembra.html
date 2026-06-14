@@ -217,14 +217,9 @@
           <p id="aemet-estado" style="font-size:13px;color:var(--texto-sec);margin-top:10px;min-height:18px;"></p>
         </div>
 
-        <!-- Controles manuales -->
+        <select id="sel-zona" style="display:none;"></select>
         <div class="form-row">
-          <div class="form-group" style="margin-bottom:0;">
-            <label for="sel-zona">Tu zona climática</label>
-            <select id="sel-zona">
-              <option value="">Selecciona zona climática...</option>
-            </select>
-          </div>
+          <div class="form-group" style="margin-bottom:0;display:none;"></div>
           <div class="form-group" style="margin-bottom:0;">
             <label for="sel-planta">Planta</label>
             <select id="sel-planta">
@@ -495,7 +490,7 @@
       selZona.value = zonaId;
       const z = ZONAS[zonaId];
       document.getElementById('zona-desc').textContent = z ? z.descripcion : '';
-      setEstado(`✓ ${label} → ${z ? z.nombre : zonaId} — puedes cambiarlo manualmente.`, 'var(--verde)');
+      setEstado(`✓ Tu zona climática: ${label}`, 'var(--verde)');
       render();
     }
 

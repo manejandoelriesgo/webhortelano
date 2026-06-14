@@ -76,7 +76,7 @@ function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
       var s = document.getElementById(zoneSelectId);
       if (s) s.value = r.zonaId;
     }
-    setEst('✓ ' + r.label + ' — puedes cambiarlo manualmente.', 'var(--verde)');
+    setEst('✓ Tu zona climática: ' + r.label, 'var(--verde)');
     if (onZoneSet) onZoneSet(r.zonaId, r.label, m);
   }
   function ejecutar() {

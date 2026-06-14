@@ -282,10 +282,7 @@
             </div>
             <ul id="muni-sugerencias" style="list-style:none;margin:0 0 8px;padding:0;display:none;background:white;border:1px solid var(--borde);border-radius:var(--radio-btn);overflow:hidden;box-shadow:var(--sombra);"></ul>
             <p id="muni-estado" style="font-size:13px;color:var(--texto-sec);margin:0 0 8px;min-height:18px;"></p>
-            <label for="p-zona" style="font-size:13px;color:var(--texto-sec);">O elige directamente: </label>
-            <select id="p-zona" onchange="estado.zona=this.value" style="font-size:13px;padding:6px 10px;border:1px solid #B7E4C7;border-radius:6px;background:white;font-family:inherit;">
-              <option value="">Selecciona zona...</option>
-            </select>
+            <input type="hidden" id="p-zona" value="">
           </div>
           <div style="margin-bottom:24px;">
             <h4 style="font-size:15px;margin-bottom:4px;">Huertos recomendados para tu espacio</h4>
@@ -980,7 +977,7 @@
     }
   </script>
   <script>
-    initBuscadorMunicipio('p-zona', null);
+    initBuscadorMunicipio('p-zona', function(z){ estado.zona = z; });
   </script>
   <script>
     (function(){
