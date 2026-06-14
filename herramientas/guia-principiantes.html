@@ -240,11 +240,20 @@
     <div class="container">
       <a href="../index.html" class="logo">Hortelano<span>Urbano</span>.es</a>
       <nav aria-label="Navegación principal">
-        <ul class="nav-links">
+                <ul class="nav-links">
           <li><a href="calendario-siembra.html">Calendario</a></li>
           <li><a href="planificador-huerto.html">Planificador</a></li>
-          <li><a href="../index.html#herramientas">Herramientas</a></li>
-          <li><a href="guia-plagas.html">Plagas</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">Herramientas <span class="dd-arrow" aria-hidden="true" style="font-size:11px;transition:transform .2s;">▾</span></button>
+            <ul class="nav-dropdown-menu" role="menu">
+              <li><a href="calculadora-riego.html">Calculadora de riego</a></li>
+              <li><a href="calculadora-espacio.html">Calculadora de espacio</a></li>
+              <li><a href="calculadora-ahorro.html">Calculadora de ahorro</a></li>
+              <li><a href="compatibilidad-plantas.html">Compatibilidad de plantas</a></li>
+              <li><a href="guia-temporadas.html">Guía de temporadas</a></li>
+              <li><a href="guia-plagas.html">Guía de plagas</a></li>
+            </ul>
+          </li>
           <li><a href="guia-principiantes.html">¿Cómo empezar?</a></li>
           <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
           <li><a href="../consejos/index.html">Consejos</a></li>
@@ -259,12 +268,21 @@
       </button>
     </div>
     <!-- Menú móvil desplegable -->
-    <div id="mobile-menu" style="display:none;position:absolute;top:60px;left:0;right:0;background:var(--blanco);border-top:1px solid var(--borde);box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:200;padding:12px 0;">
+        <div id="mobile-menu" style="display:none;position:absolute;top:60px;left:0;right:0;background:var(--blanco);border-top:1px solid var(--borde);box-shadow:0 4px 12px rgba(0,0,0,.08);z-index:200;padding:12px 0;">
       <ul style="list-style:none;margin:0;padding:0;">
         <li><a href="calendario-siembra.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Calendario</a></li>
         <li><a href="planificador-huerto.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Planificador</a></li>
-        <li><a href="../index.html#herramientas" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Herramientas</a></li>
-        <li><a href="guia-plagas.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Plagas</a></li>
+        <li>
+          <button class="mob-dropdown-btn" aria-expanded="false" style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);background:none;border:none;cursor:pointer;text-align:left;">Herramientas <span class="mob-dd-arrow" aria-hidden="true" style="font-size:11px;transition:transform .2s;">▾</span></button>
+          <ul style="display:none;list-style:none;margin:0;padding:0;background:var(--fondo);">
+            <li><a href="calculadora-riego.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Calculadora de riego</a></li>
+            <li><a href="calculadora-espacio.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Calculadora de espacio</a></li>
+            <li><a href="calculadora-ahorro.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Calculadora de ahorro</a></li>
+            <li><a href="compatibilidad-plantas.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Compatibilidad de plantas</a></li>
+            <li><a href="guia-temporadas.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Guía de temporadas</a></li>
+            <li><a href="guia-plagas.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Guía de plagas</a></li>
+          </ul>
+        </li>
         <li><a href="guia-principiantes.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">¿Cómo empezar?</a></li>
         <li><a href="../materiales-huerto-urbano.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Materiales</a></li>
         <li><a href="../consejos/index.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--verde);text-decoration:none;">Consejos</a></li>
