@@ -237,5 +237,45 @@
     </div>
   </footer>
 
+  <script>
+    (function(){
+      // Dropdown escritorio: clic + Escape + cerrar fuera
+      document.querySelectorAll('.nav-dropdown-btn').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          var dd = btn.closest('.nav-dropdown');
+          var open = dd.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
+          var arrow = btn.querySelector('.dd-arrow');
+          if(arrow) arrow.style.transform = open ? 'rotate(180deg)' : '';
+        });
+      });
+      document.addEventListener('click', function(){
+        document.querySelectorAll('.nav-dropdown.open').forEach(function(dd){
+          dd.classList.remove('open');
+          var b = dd.querySelector('.nav-dropdown-btn');
+          if(b){ b.setAttribute('aria-expanded','false'); var a=b.querySelector('.dd-arrow'); if(a) a.style.transform=''; }
+        });
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key==='Escape') document.querySelectorAll('.nav-dropdown.open').forEach(function(dd){
+          dd.classList.remove('open');
+          var b=dd.querySelector('.nav-dropdown-btn');
+          if(b){ b.setAttribute('aria-expanded','false'); var a=b.querySelector('.dd-arrow'); if(a) a.style.transform=''; }
+        });
+      });
+      // Móvil acordeón
+      document.querySelectorAll('.mob-dropdown-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var sub = btn.nextElementSibling;
+          var open = sub.style.display === 'block';
+          sub.style.display = open ? 'none' : 'block';
+          btn.setAttribute('aria-expanded', String(!open));
+          var arr = btn.querySelector('.mob-dd-arrow');
+          if(arr) arr.style.transform = open ? '' : 'rotate(180deg)';
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
