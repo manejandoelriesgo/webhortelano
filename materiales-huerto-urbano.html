@@ -121,15 +121,16 @@
     <div class="ad-slot">Publicidad</div>
   </div>
 
-<!-- NAVEGACIÓN INTERNA -->
+<!-- NAVEGACIÓN POR CATEGORÍAS -->
 <div style="background:var(--fondo);border-bottom:1px solid var(--borde);position:sticky;top:60px;z-index:10;">
   <div class="container">
-    <div class="kit-nav">
-      <a href="#kit-basico">Kit básico</a>
-      <a href="#por-espacio">Por tipo de espacio</a>
-      <a href="#por-planta">Por planta</a>
-      <a href="#herramientas">Herramientas esenciales</a>
-      <a href="#riego-automatico">Riego automático</a>
+    <div class="espacio-tabs" style="overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;">
+      <button class="espacio-tab active" onclick="mostrarCategoria('kit-basico',this)">Kit básico</button>
+      <button class="espacio-tab" onclick="mostrarCategoria('macetas',this)">Macetas</button>
+      <button class="espacio-tab" onclick="mostrarCategoria('sustrato',this)">Sustrato y abono</button>
+      <button class="espacio-tab" onclick="mostrarCategoria('herramientas',this)">Herramientas</button>
+      <button class="espacio-tab" onclick="mostrarCategoria('riego',this)">Riego</button>
+      <button class="espacio-tab" onclick="mostrarCategoria('plagas',this)">Plagas</button>
     </div>
   </div>
 </div>
@@ -137,10 +138,10 @@
 <main style="background:var(--fondo);">
 
   <!-- ========== KIT BÁSICO ========== -->
-  <section class="kit-section" id="kit-basico">
+  <section class="kit-section" id="cat-kit-basico">
     <div class="container">
       <h2>Kit básico para empezar</h2>
-      <p class="kit-desc">Si no tienes nada todavía, esto es lo mínimo que necesitas. Coste estimado: 40–70€ para empezar bien.</p>
+      <p class="kit-desc">Si no tienes nada todavía, esto es lo mínimo para empezar bien. Coste estimado: 40–70€.</p>
 
       <div class="kit-highlight">
         <div class="kit-highlight-icon">💡</div>
@@ -150,284 +151,165 @@
         </div>
       </div>
 
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;">
+        <span style="background:var(--verde-bg);color:var(--verde);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid #BBF7D0;">Maceta textil 50L</span>
+        <span style="background:var(--verde-bg);color:var(--verde);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid #BBF7D0;">Sustrato con perlita</span>
+        <span style="background:var(--verde-bg);color:var(--verde);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid #BBF7D0;">Paleta de trasplante</span>
+        <span style="background:var(--verde-bg);color:var(--verde);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid #BBF7D0;">Regadera con pitorro fino</span>
+        <span style="background:var(--verde-bg);color:var(--verde);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid #BBF7D0;">Pack semillas hortalizas</span>
+        <span style="background:var(--verde-bg);color:var(--verde);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid #BBF7D0;">Guantes de jardinería</span>
+      </div>
+
+      <a href="https://www.amazon.es/s?k=kit+huerto+urbano&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn btn-primary" style="background:#2f6e2f;border-color:#2f6e2f;font-size:16px;padding:14px 32px;">Ver el kit completo en Amazon →</a>
+    </div>
+  </section>
+
+  <!-- ========== MACETAS ========== -->
+  <section class="kit-section" id="cat-macetas" style="display:none;background:white;">
+    <div class="container">
+      <h2>Macetas, jardineras y contenedores</h2>
+      <p class="kit-desc">El tamaño mínimo para hortalizas es 30 cm de profundidad. Más grande siempre es mejor.</p>
+
       <div class="kit-grid">
 
         <div class="kit-item">
-          <div class="kit-item-icon">🌱</div>
-          <h4>Semillas de hortalizas</h4>
-          <div class="kit-precio">Desde 3€/sobre · 50–100 semillas</div>
-          <p>Empieza con tomate cherry, lechuga y rábano: germinan rápido, dan satisfacción pronto y no fallan. Evita comprar plantones la primera vez: son más caros y no aprendes el proceso completo.</p>
-          <a href="https://www.amazon.es/s?k=semillas+tomate+cherry+lechuga+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <h4>Maceta textil HORTOSOL 50L</h4>
+          <div class="kit-precio">5,95€ · 4,5★ · 179 reseñas</div>
+          <p>Las raíces se airean solas y no hay riesgo de encharcamiento. La mejor opción para tomates, pimientos y pepinos en balcón.</p>
+          <a href="https://amzn.to/4fM5lsh" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🪴</div>
-          <h4>Sustrato para huerto en maceta</h4>
-          <div class="kit-precio">8–15€ por saco de 20–50L</div>
-          <p>Busca uno que diga "para hortalizas" o "con perlita". La perlita (granulos blancos) mejora el drenaje y evita el encharcamiento. No uses tierra de jardín: se compacta y las raíces se asfixian.</p>
-          <a href="https://www.amazon.es/s?k=sustrato+huerto+maceta+perlita+hortalizas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <h4>Maceta rígida TECHZOCO 40 cm</h4>
+          <div class="kit-precio">~12€ · 4,7★ · 391 reseñas</div>
+          <p>Con plato incluido. La más recomendada para balcón por su relación calidad-precio. Aguanta bien el exterior.</p>
+          <a href="https://amzn.to/3QpLfcZ" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🏺</div>
-          <h4>Maceta o contenedor de cultivo</h4>
-          <div class="kit-precio">6–20€ según tamaño</div>
-          <p>Mínimo 30 cm de profundidad para hortalizas. Las rectangulares aprovechan mejor el espacio en balcón. Asegúrate de que tienen agujeros de drenaje y pon plato debajo si es balcón.</p>
-          <a href="https://www.amazon.es/s?k=maceta+rectangular+balcon+huerto+cultivo&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <h4>Maceta autorriego Lechuza</h4>
+          <div class="kit-precio">~25€</div>
+          <p>Depósito de agua en la base. Para quien viaja o se olvida de regar con frecuencia. Se riega sola durante días.</p>
+          <a href="https://amzn.to/4v7OHrR" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">💧</div>
-          <h4>Regadera con pitorro fino</h4>
-          <div class="kit-precio">8–18€</div>
-          <p>El pitorro largo y fino te permite regar en la base de la planta sin mojar las hojas. Las hojas húmedas favorecen los hongos. Capacidad de 5–8L es suficiente para un balcón.</p>
-          <a href="https://www.amazon.es/s?k=regadera+pitorro+largo+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <h4>Jardinera de barandilla</h4>
+          <div class="kit-precio">8–20€</div>
+          <p>Se engancha a la barandilla sin ocupar suelo. Ideal para aromáticas colgantes: albahaca, perejil, tomillo.</p>
+          <a href="https://amzn.to/4vu8lyJ" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🧤</div>
-          <h4>Guantes de jardinería</h4>
-          <div class="kit-precio">5–12€</div>
-          <p>Con recubrimiento de látex en los dedos para sentir bien el sustrato y trabajar sin lastimarte. Los de tela sola se mojan rápido. Los completamente de goma son incómodos para trabajo fino.</p>
-          <a href="https://www.amazon.es/s?k=guantes+jardineria+latex+horticultura&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <h4>Estantería de cultivo vertical</h4>
+          <div class="kit-precio">25–60€</div>
+          <p>Multiplica x3 el espacio cultivable en balcones pequeños. Busca una con bandejas de recogida en cada nivel.</p>
+          <a href="https://www.amazon.es/s?k=estanteria+cultivo+vertical+macetas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SUSTRATO Y ABONO ========== -->
+  <section class="kit-section" id="cat-sustrato" style="display:none;">
+    <div class="container">
+      <h2>Sustrato y abono</h2>
+      <p class="kit-desc">La base de todo. Un mal sustrato mata las plantas aunque hagas todo lo demás bien.</p>
+
+      <div class="kit-grid">
+
+        <div class="kit-item">
+          <h4>Sustrato para huerto con perlita</h4>
+          <div class="kit-precio">8–15€ saco 20–50L</div>
+          <p>Busca uno que diga "para hortalizas" o "con perlita". La perlita mejora el drenaje y evita que las raíces se asfixien. No uses tierra de jardín.</p>
+          <a href="https://www.amazon.es/s?k=sustrato+huerto+maceta+perlita&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🌿</div>
-          <h4>Fertilizante orgánico</h4>
+          <h4>Fertilizante orgánico liberación lenta</h4>
           <div class="kit-precio">7–14€</div>
-          <p>El sustrato nuevo dura 4–6 semanas antes de agotarse. A partir de ahí necesitas abonar. El orgánico de liberación lenta es el más sencillo: uno cada mes y punto. Evita el exceso, quema las raíces.</p>
-          <a href="https://www.amazon.es/s?k=fertilizante+organico+huerto+maceta+liberacion+lenta&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Se mezcla con el sustrato al plantar y dura toda la temporada. No hace falta abonar cada semana.</p>
+          <a href="https://www.amazon.es/s?k=fertilizante+organico+liberacion+lenta+plantas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🪣</div>
-          <h4>Semillero o bandeja de germinación</h4>
-          <div class="kit-precio">4–10€</div>
-          <p>Para germinar semillas antes de trasplantar. Las bandejas con tapa crean el efecto invernadero que acelera la germinación. Una bandeja de 50 celdas es suficiente para empezar la temporada.</p>
-          <a href="https://www.amazon.es/s?k=semillero+bandeja+germinacion+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-        </div>
-
-        <div class="kit-item">
-          <div class="kit-item-icon">🏷️</div>
-          <h4>Etiquetas y rotulador</h4>
-          <div class="kit-precio">2–5€</div>
-          <p>Parece una tontería hasta que tienes 10 macetas de aspecto similar y no recuerdas qué es qué. Las etiquetas de madera o plástico van clavadas en el sustrato y aguantan el agua.</p>
-          <a href="https://www.amazon.es/s?k=etiquetas+jardin+madera+plantas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <h4>Humus de lombriz</h4>
+          <div class="kit-precio">5–10€</div>
+          <p>El mejor abono ecológico. Mejora la estructura del sustrato y aporta microorganismos beneficiosos.</p>
+          <a href="https://www.amazon.es/s?k=humus+lombriz+plantas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ========== POR TIPO DE ESPACIO ========== -->
-  <section class="kit-section" id="por-espacio" style="background:white;">
-    <div class="container">
-      <h2>Kits por tipo de espacio</h2>
-      <p class="kit-desc">Cada espacio tiene sus condiciones. Aquí tienes lo específico para cada situación.</p>
-
-      <div class="espacio-tabs">
-        <button class="espacio-tab active" onclick="mostrarEspacio('balcon',this)">Balcón pequeño (hasta 4 m²)</button>
-        <button class="espacio-tab" onclick="mostrarEspacio('terraza',this)">Terraza (4–15 m²)</button>
-        <button class="espacio-tab" onclick="mostrarEspacio('suelo',this)">Huerto en suelo</button>
-      </div>
-
-      <div id="espacio-balcon">
-        <div class="kit-highlight">
-          <div class="kit-highlight-icon">🌿</div>
-          <div>
-            <h3>Balcón pequeño: aprovecha cada centímetro</h3>
-            <p>En un balcón de menos de 4 m² la clave es la verticalidad y las plantas compactas. Tomate cherry, aromáticas y lechuga son tus mejores aliados. Evita calabacín, pepino o melón: se comen todo el espacio.</p>
-            <a href="herramientas/planificador-huerto.html" class="btn btn-primary btn-sm">Planificar mi balcón</a>
-          </div>
-        </div>
-        <div class="kit-grid">
-          <div class="kit-item">
-            <div class="kit-item-icon">🏗️</div>
-            <h4>Estantería de cultivo vertical</h4>
-            <div class="kit-precio">25–60€</div>
-            <p>Multiplica x3 el espacio cultivable. Plástico o metal tratado para exterior. Busca que tenga bandejas de recogida de agua en cada nivel.</p>
-            <a href="https://www.amazon.es/s?k=estanteria+cultivo+vertical+balcon+macetas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">🌱</div>
-            <h4>Macetero de barandilla</h4>
-            <div class="kit-precio">8–20€ c/u</div>
-            <p>Se engancha a la barandilla y no ocupa suelo. Ideal para aromáticas: albahaca, perejil, tomillo. Las variedades colgantes quedan muy decorativas.</p>
-            <a href="https://www.amazon.es/s?k=macetero+barandilla+balcon+exterior&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">🍅</div>
-            <h4>Maceta tomate cherry 15L</h4>
-            <div class="kit-precio">10–18€</div>
-            <p>Mínimo 12–15L para un tomate cherry. Con un soporte de tutor incluido o comprado aparte. En un balcón soleado, una sola planta da para todo el verano.</p>
-            <a href="https://www.amazon.es/s?k=maceta+15+litros+tomate+balcon&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">☀️</div>
-            <h4>Tela de sombreado 30%</h4>
-            <div class="kit-precio">8–20€</div>
-            <p>En balcones muy soleados con orientación sur, el sol directo de verano quema las plantas. Una malla del 30% reduce la temperatura sin quitar demasiada luz.</p>
-            <a href="https://www.amazon.es/s?k=malla+sombreado+30+balcon+plantas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-        </div>
-      </div>
-
-      <div id="espacio-terraza" style="display:none;">
-        <div class="kit-highlight">
-          <div class="kit-highlight-icon">🌳</div>
-          <div>
-            <h3>Terraza: variedad y planificación</h3>
-            <p>Con 4–15 m² ya puedes tener un huerto serio. La clave es organizarlo bien desde el principio: plantas altas al norte para no dar sombra a las bajas. Un sistema de riego automático te cambia la vida.</p>
-            <a href="herramientas/planificador-huerto.html" class="btn btn-primary btn-sm">Planificar mi terraza</a>
-          </div>
-        </div>
-        <div class="kit-grid">
-          <div class="kit-item">
-            <div class="kit-item-icon">🌊</div>
-            <h4>Riego automático por goteo</h4>
-            <div class="kit-precio">25–60€ kit completo</div>
-            <p>Para una terraza con 6+ macetas, el goteo te libera de regar a diario en verano. Conectado a un programador de riego de 10€ es automático. Recupera la inversión en 1 temporada de vacaciones.</p>
-            <a href="https://www.amazon.es/s?k=kit+riego+goteo+macetas+terraza&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">📦</div>
-            <h4>Jardineras grandes 60–80 cm</h4>
-            <div class="kit-precio">15–35€</div>
-            <p>Tomate, pimiento y berenjenas necesitan mínimo 40 cm de profundidad. Las jardineras largas de 60–80 cm permiten poner 2–3 plantas juntas y comparten el riego.</p>
-            <a href="https://www.amazon.es/s?k=jardinera+profunda+60cm+huerto+hortalizas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">🔩</div>
-            <h4>Tutores y cañas bambú</h4>
-            <div class="kit-precio">5–12€ pack</div>
-            <p>Tomates, pepinos y judías necesitan soporte. Las cañas de bambú de 1,5 m son suficientes para la mayoría. Para tomates indeterminados, usa cañas de 2 m.</p>
-            <a href="https://www.amazon.es/s?k=tutor+cana+bambu+huerto+tomate&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">🌡️</div>
-            <h4>Termómetro de suelo</h4>
-            <div class="kit-precio">10–20€</div>
-            <p>Para saber cuándo la temperatura del sustrato es suficiente para germinar. El tomate no germina por debajo de 18°C en el sustrato. Te ahorra muchos fracasos de siembra temprana.</p>
-            <a href="https://www.amazon.es/s?k=termometro+suelo+huerto+jardin&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-        </div>
-      </div>
-
-      <div id="espacio-suelo" style="display:none;">
-        <div class="kit-highlight">
-          <div class="kit-highlight-icon">🌍</div>
-          <div>
-            <h3>Huerto en suelo: preparación es todo</h3>
-            <p>En suelo el mayor trabajo es al principio: acondicionar la tierra. Un suelo bien preparado con compost y buen drenaje te da cosechas abundantes durante años. Después el mantenimiento es mínimo.</p>
-            <a href="herramientas/planificador-huerto.html" class="btn btn-primary btn-sm">Planificar mi huerto</a>
-          </div>
-        </div>
-        <div class="kit-grid">
-          <div class="kit-item">
-            <div class="kit-item-icon">⛏️</div>
-            <h4>Azada y paleta de jardinería</h4>
-            <div class="kit-precio">15–30€</div>
-            <p>Para remover la tierra y hacer surcos. La azada de mano es suficiente para un huerto pequeño. Si el suelo es muy duro, necesitarás una azada normal de mango largo.</p>
-            <a href="https://www.amazon.es/s?k=azada+paleta+jardineria+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">♻️</div>
-            <h4>Compostador doméstico</h4>
-            <div class="kit-precio">30–60€</div>
-            <p>Si tienes espacio, el compostador te da el mejor abono gratis con los restos de cocina y jardín. En 3–6 meses tienes compost maduro. Vale la inversión si tienes huerto en suelo.</p>
-            <a href="https://www.amazon.es/s?k=compostador+exterior+huerto+doméstico&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">🌾</div>
-            <h4>Malla anti-hierbas</h4>
-            <div class="kit-precio">8–20€</div>
-            <p>Cubre los pasillos entre cultivos para evitar que crezcan malas hierbas. Permeable al agua. Te ahorra horas de escarda. Las hierbas compiten con tus plantas por nutrientes y agua.</p>
-            <a href="https://www.amazon.es/s?k=malla+antihierbas+huerto+jardin&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-          <div class="kit-item">
-            <div class="kit-item-icon">💦</div>
-            <h4>Sistema de riego por goteo subterráneo</h4>
-            <div class="kit-precio">40–90€</div>
-            <p>Para huertos de suelo, el goteo enterrado a 10–15 cm llega directamente a las raíces, ahorra hasta el 70% de agua y elimina el riesgo de hongos. Conectado a programador es completamente autónomo.</p>
-            <a href="https://www.amazon.es/s?k=riego+goteo+enterrado+huerto+programador&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========== POR PLANTA (DINÁMICO) ========== -->
-  <section class="kit-section" id="por-planta">
-    <div class="container">
-      <h2>Todo lo que necesitas por planta</h2>
-      <p class="kit-desc">Las 41 plantas de nuestra base de datos con sus productos específicos. Semillas, maceta del tamaño correcto, sustrato y abono.</p>
-
-      <!-- Acordeón generado por JS desde data.js -->
-      <div id="por-planta-acordeon">
-        <p style="color:var(--texto-sec);font-size:14px;">Cargando plantas…</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== HERRAMIENTAS ESENCIALES ========== -->
-  <section class="kit-section" id="herramientas" style="background:white;">
+  <!-- ========== HERRAMIENTAS ========== -->
+  <section class="kit-section" id="cat-herramientas" style="display:none;background:white;">
     <div class="container">
       <h2>Herramientas esenciales</h2>
-      <p class="kit-desc">No necesitas mucho. Estas 5 herramientas cubren el 95% de lo que harás en tu huerto urbano.</p>
+      <p class="kit-desc">No necesitas mucho. Estas 7 herramientas cubren el 95% de lo que harás en tu huerto urbano.</p>
 
       <div class="kit-grid">
 
         <div class="kit-item">
-          <div class="kit-item-icon">🪚</div>
           <h4>Paleta de trasplante</h4>
           <div class="kit-precio">4–10€</div>
-          <p>La más usada de todas. Para hacer hoyos de siembra, mezclar sustrato y trasplantar. Elige una con regla de profundidad grabada: te indica a qué profundidad sembrar cada semilla.</p>
-          <a href="https://www.amazon.es/s?k=paleta+trasplante+jardineria+medidas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>La más usada. Para siembra, mezclar sustrato y trasplantar. Elige una con escala de profundidad grabada.</p>
+          <a href="https://www.amazon.es/s?k=paleta+trasplante+jardineria&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">✂️</div>
-          <h4>Tijeras de poda</h4>
+          <h4>Tijeras de bypass (poda)</h4>
           <div class="kit-precio">8–20€</div>
-          <p>Para podar chupones del tomate, cosechar aromáticas y cortar ramas. Las de bypass (dos cuchillas que se cruzan) hacen un corte más limpio que las de yunque. No uses tijeras normales: aplastan y raspan.</p>
-          <a href="https://www.amazon.es/s?k=tijeras+poda+bypass+jardineria+hortalizas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Para podar chupones del tomate, cosechar aromáticas y cortar ramas. Corte limpio sin aplastar el tallo.</p>
+          <a href="https://www.amazon.es/s?k=tijeras+bypass+poda+jardineria&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🔍</div>
-          <h4>Pulverizador de mano</h4>
+          <h4>Pulverizador de mano 1L</h4>
           <div class="kit-precio">5–12€</div>
-          <p>Para aplicar tratamientos ecológicos (jabón potásico, neem) directamente en las hojas. También para humedecer el semillero sin encharcarlo. Uno de 1L es suficiente para un balcón o terraza.</p>
-          <a href="https://www.amazon.es/s?k=pulverizador+manual+plantas+1+litro&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Para aplicar tratamientos ecológicos directamente en las hojas. Un litro es suficiente para un balcón o terraza.</p>
+          <a href="https://www.amazon.es/s?k=pulverizador+mano+1+litro+jardineria&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">📏</div>
-          <h4>Medidor pH y humedad</h4>
+          <h4>Medidor pH, humedad y luz (3 en 1)</h4>
           <div class="kit-precio">8–18€</div>
-          <p>Para saber si el sustrato está demasiado ácido o básico (el pH ideal para hortalizas es 6–7) y si necesita riego. Los de 3 en 1 (pH, humedad, luz) son los más prácticos para principiantes.</p>
-          <a href="https://www.amazon.es/s?k=medidor+ph+humedad+suelo+plantas&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Para saber si el sustrato está demasiado ácido o si necesita riego. El 3 en 1 es el más práctico para principiantes.</p>
+          <a href="https://www.amazon.es/s?k=medidor+ph+humedad+luz+plantas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🪣</div>
-          <h4>Cuba o bidón de agua</h4>
-          <div class="kit-precio">15–40€</div>
-          <p>Para almacenar agua y dejarla atemperar antes de regar. El agua fría directa del grifo en pleno verano puede estresar las plantas. También permite recoger agua de lluvia.</p>
-          <a href="https://www.amazon.es/s?k=deposito+agua+lluvia+jardin+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <h4>Guantes de jardinería</h4>
+          <div class="kit-precio">5–12€</div>
+          <p>Con recubrimiento de látex en los dedos para trabajar sin lastimarte. Los de goma pura son incómodos para trabajo fino.</p>
+          <a href="https://www.amazon.es/s?k=guantes+jardineria+latex+dedos&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
+          <h4>Semillero con tapa</h4>
+          <div class="kit-precio">4–10€</div>
+          <p>La tapa crea efecto invernadero y acelera la germinación. Imprescindible si germinas semillas en casa antes de trasplantar.</p>
+          <a href="https://www.amazon.es/s?k=semillero+con+tapa+germinacion&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
+          <h4>Etiquetas y rotulador</h4>
+          <div class="kit-precio">2–5€</div>
+          <p>Parece una tontería hasta que tienes 10 macetas similares y no recuerdas qué sembraste en cada una.</p>
+          <a href="https://www.amazon.es/s?k=etiquetas+plantas+jardin+rotulador&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ========== RIEGO AUTOMÁTICO ========== -->
-  <section class="kit-section" id="riego-automatico">
+  <!-- ========== RIEGO ========== -->
+  <section class="kit-section" id="cat-riego" style="display:none;">
     <div class="container">
-      <h2>Sistemas de riego automático</h2>
-      <p class="kit-desc">El riego automático es la mejor inversión si te vas de vacaciones o tienes más de 5 macetas. Se amortiza en la primera temporada.</p>
+      <h2>Riego y agua</h2>
+      <p class="kit-desc">El riego automático es la mejor inversión si te vas de vacaciones o tienes más de 5 macetas.</p>
 
       <div class="kit-highlight">
         <div class="kit-highlight-icon">🏖️</div>
@@ -440,38 +322,98 @@
       <div class="kit-grid">
 
         <div class="kit-item">
-          <div class="kit-item-icon">⏱️</div>
+          <h4>Regadera con pitorro fino</h4>
+          <div class="kit-precio">8–18€</div>
+          <p>El pitorro largo y fino permite regar en la base sin mojar las hojas. Las hojas húmedas favorecen los hongos. Capacidad 5–8L es suficiente para un balcón.</p>
+          <a href="https://www.amazon.es/s?k=regadera+pitorro+largo+fino+jardin&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
           <h4>Programador de riego</h4>
           <div class="kit-precio">10–25€</div>
-          <p>Se conecta al grifo y abre/cierra el agua a las horas que programes. Los de pantalla LCD son los más fáciles de configurar. Busca uno con batería de repuesto accesible.</p>
-          <a href="https://www.amazon.es/s?k=programador+riego+automatico+grifo+balcon&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Se conecta al grifo y riega solo a la hora que programes. Imprescindible si te vas de vacaciones en verano.</p>
+          <a href="https://www.amazon.es/s?k=programador+riego+automatico+grifo&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">💧</div>
-          <h4>Kit goteo para macetas</h4>
+          <h4>Kit de goteo para macetas</h4>
           <div class="kit-precio">20–50€</div>
-          <p>Incluye manguera, goteros y conectores para distribuir el agua a cada maceta. Para 6–10 macetas hay kits completos con todo incluido. La instalación lleva 30 minutos.</p>
-          <a href="https://www.amazon.es/s?k=kit+riego+goteo+macetas+balcon+terraza&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Tuberías y goteros para conectar al programador. Se amortiza en la primera temporada si tienes más de 5 macetas.</p>
+          <a href="https://www.amazon.es/s?k=kit+riego+goteo+macetas+balcon&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">🌿</div>
-          <h4>Goteros ajustables</h4>
+          <h4>Goteros ajustables pack 10</h4>
           <div class="kit-precio">8–15€ pack 10 ud</div>
-          <p>Permiten regular el caudal para cada maceta: las plantas grandes reciben más agua que las pequeñas. Los de flecha se clavan directamente en el sustrato y son los más fáciles de usar.</p>
-          <a href="https://www.amazon.es/s?k=goteros+ajustables+macetas+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Regulan el caudal por maceta. Cada planta tiene su propio ritmo de consumo de agua.</p>
+          <a href="https://www.amazon.es/s?k=goteros+ajustables+riego+macetas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
         <div class="kit-item">
-          <div class="kit-item-icon">📱</div>
           <h4>Riego inteligente WiFi</h4>
           <div class="kit-precio">30–70€</div>
-          <p>Se controla desde el móvil. Algunos tienen sensor de lluvia para no regar si ya ha llovido. Más caro que el programador simple, pero puedes controlarlo desde cualquier lugar.</p>
-          <a href="https://www.amazon.es/s?k=programador+riego+wifi+smart+huerto&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn-amazon">Ver en Amazon</a>
+          <p>Controlas desde el móvil aunque estés fuera. Para quien tiene muchas macetas o viaja con frecuencia.</p>
+          <a href="https://www.amazon.es/s?k=riego+inteligente+wifi+movil&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
+          <h4>Tela de sombreo 30%</h4>
+          <div class="kit-precio">8–20€</div>
+          <p>Para balcones muy soleados orientación sur. El sol directo de verano quema las plantas. Una malla del 30% reduce la temperatura sin quitar demasiada luz.</p>
+          <a href="https://www.amazon.es/s?k=tela+malla+sombreo+30+por+ciento&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- ========== PLAGAS ========== -->
+  <section class="kit-section" id="cat-plagas" style="display:none;background:white;">
+    <div class="container">
+      <h2>Plagas y tratamientos</h2>
+      <p class="kit-desc">Todos los tratamientos son ecológicos y aptos para consumo. Aplicar siempre de tarde, nunca con sol directo.</p>
+      <p style="margin-bottom:28px;"><a href="herramientas/guia-plagas.html" style="color:var(--verde);font-weight:700;">→ Ver la guía de plagas completa</a></p>
+
+      <div class="kit-grid">
+
+        <div class="kit-item">
+          <h4>Jabón potásico concentrado</h4>
+          <div class="kit-precio">5–12€</div>
+          <p>Para pulgones y mosca blanca. Se diluye en agua y se pulveriza sobre las hojas afectadas. Apto para agricultura ecológica.</p>
+          <a href="https://www.amazon.es/s?k=jabon+potasico+concentrado+plantas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
+          <h4>Aceite de neem</h4>
+          <div class="kit-precio">6–15€</div>
+          <p>Repelente natural de amplio espectro. Protege contra pulgones, ácaros y mosca blanca. Aplicar de tarde para no quemar las hojas.</p>
+          <a href="https://www.amazon.es/s?k=aceite+neem+plantas+ecologico&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
+          <h4>Trampas cromáticas amarillas</h4>
+          <div class="kit-precio">4–8€</div>
+          <p>Atrapan mosca blanca, minador y trips. Sirven también para detectar plagas antes de ver daños visibles en las hojas.</p>
+          <a href="https://www.amazon.es/s?k=trampas+cromaticas+amarillas+insectos&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
+          <h4>Bacillus thuringiensis (Bt)</h4>
+          <div class="kit-precio">8–20€</div>
+          <p>Bacteria natural contra orugas y larvas. Autorizado en agricultura ecológica. Sin residuos en el fruto.</p>
+          <a href="https://www.amazon.es/s?k=bacillus+thuringiensis+orugas+plantas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+        <div class="kit-item">
+          <h4>Malla anti-insectos</h4>
+          <div class="kit-precio">8–20€</div>
+          <p>Prevención física: cubre las macetas e impide que los insectos lleguen a poner huevos en la tierra o en las hojas.</p>
+          <a href="https://www.amazon.es/s?k=malla+anti+insectos+huerto+macetas&tag=imagu90-21" target="_blank" rel="nofollow sponsored" class="btn-amazon" style="background:#2f6e2f;border-color:#2f6e2f;">Ver en Amazon</a>
+        </div>
+
+      </div>
+
+      <p class="aviso-afiliado" style="margin-top:40px;padding:14px 18px;background:var(--fondo);border-radius:8px;font-size:13px;color:var(--texto-sec);border:1px solid var(--borde);">Como afiliado de Amazon recibo una pequeña comisión si compras a través de estos enlaces, sin coste adicional para ti.</p>
     </div>
   </section>
 
@@ -534,193 +476,17 @@
 </footer>
 
 <script>
-  function mostrarEspacio(tipo, btn) {
-    document.querySelectorAll('.espacio-tab').forEach(t => t.classList.remove('active'));
+  var CATS = ['kit-basico','macetas','sustrato','herramientas','riego','plagas'];
+  function mostrarCategoria(cat, btn) {
+    document.querySelectorAll('.espacio-tab').forEach(function(t){ t.classList.remove('active'); });
     btn.classList.add('active');
-    ['balcon','terraza','suelo'].forEach(id => {
-      document.getElementById('espacio-' + id).style.display = id === tipo ? '' : 'none';
+    CATS.forEach(function(id){
+      var el = document.getElementById('cat-' + id);
+      if (el) el.style.display = id === cat ? '' : 'none';
     });
   }
 </script>
 
-<script src="js/data.js"></script>
-<style>
-  /* ---- Acordeón por categoría ---- */
-  .cat-acordeon { margin-bottom: 12px; border: 1px solid var(--borde); border-radius: var(--radio-card); overflow: hidden; }
-  .cat-acordeon-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px; background: var(--verde-bg); cursor: pointer;
-    user-select: none;
-  }
-  .cat-acordeon-header:hover { background: #DCFCE7; }
-  .cat-acordeon-header h3 { margin: 0; font-size: 17px; color: var(--verde); }
-  .cat-acordeon-header .cat-count { font-size: 12px; color: var(--texto-sec); font-weight: 600; background: white; padding: 2px 10px; border-radius: 12px; }
-  .cat-acordeon-arrow { font-size: 18px; color: var(--verde); transition: transform .2s; flex-shrink: 0; margin-left: 12px; }
-  .cat-acordeon-body { display: none; padding: 20px; background: white; }
-  .cat-acordeon-body.open { display: block; }
-
-  /* ---- Grid de plantas dentro del acordeón ---- */
-  .plantas-acordeon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-  }
-
-  /* ---- Cada planta es también un mini-acordeón ---- */
-  .planta-item { border: 1px solid var(--borde); border-radius: 10px; overflow: hidden; }
-  .planta-item-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 14px; background: var(--fondo); cursor: pointer;
-    user-select: none;
-  }
-  .planta-item-header:hover { background: #F0FDF4; }
-  .planta-nombre { font-size: 14px; font-weight: 700; color: var(--texto); }
-  .planta-dif {
-    font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 8px;
-  }
-  .dif-facil   { background: #DCFCE7; color: #15803D; }
-  .dif-media   { background: #FEF9C3; color: #92400E; }
-  .dif-dificil { background: #FFE4E6; color: #BE123C; }
-  .planta-arrow { font-size: 14px; color: var(--texto-sec); transition: transform .2s; }
-  .planta-item-body { display: none; padding: 12px 14px 14px; border-top: 1px solid var(--borde); background: white; }
-  .planta-item-body.open { display: block; }
-  .planta-desc-small { font-size: 12px; color: var(--texto-sec); margin-bottom: 10px; line-height: 1.4; }
-
-  /* ---- Links Amazon dentro de cada planta ---- */
-  .planta-amazon-list { display: flex; flex-direction: column; gap: 7px; }
-  .planta-amazon-link {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 10px; background: var(--fondo); border-radius: 7px;
-    font-size: 12px; color: var(--texto); text-decoration: none;
-    border: 1px solid var(--borde); transition: border-color .15s;
-  }
-  .planta-amazon-link:hover { border-color: #FCA5A5; background: #FFF7ED; }
-  .planta-amazon-link .az-label { font-weight: 700; color: #C2410C; white-space: nowrap; margin-left: 8px; }
-  .planta-amazon-link .az-tipo { color: var(--texto-sec); font-size: 11px; }
-</style>
-
-<script>
-(function() {
-  const CATS = {
-    hortaliza: { label: 'Hortalizas', emoji: '🥦' },
-    fruta:     { label: 'Frutas',     emoji: '🍓' },
-    aromatica: { label: 'Aromáticas', emoji: '🌿' }
-  };
-
-  const TIPOS_AMAZON = {
-    semillas: 'Semillas',
-    maceta:   'Maceta',
-    sustrato: 'Sustrato',
-    abono:    'Abono'
-  };
-
-  function buildLink(tipo, prod, nombrePlanta) {
-    const search = prod ? encodeURIComponent(prod) : encodeURIComponent(nombrePlanta + ' ' + tipo);
-    return `https://www.amazon.es/s?k=${search}&tag=imagu90-21`;
-  }
-
-  function togglePlanta(bodyEl, arrowEl) {
-    const isOpen = bodyEl.classList.contains('open');
-    bodyEl.classList.toggle('open', !isOpen);
-    arrowEl.style.transform = isOpen ? '' : 'rotate(180deg)';
-  }
-
-  function toggleCat(bodyEl, arrowEl) {
-    const isOpen = bodyEl.classList.contains('open');
-    bodyEl.classList.toggle('open', !isOpen);
-    arrowEl.style.transform = isOpen ? '' : 'rotate(180deg)';
-  }
-
-  function buildPorPlanta() {
-    const wrap = document.getElementById('por-planta-acordeon');
-    if (!wrap || typeof PLANTAS === 'undefined') return;
-
-    // Agrupar por categoría
-    const grupos = { hortaliza: [], fruta: [], aromatica: [] };
-    Object.entries(PLANTAS).forEach(([id, p]) => {
-      if (grupos[p.categoria]) grupos[p.categoria].push([id, p]);
-    });
-    // Orden alfabético dentro de cada categoría
-    Object.values(grupos).forEach(arr => arr.sort((a,b) => a[1].nombre.localeCompare(b[1].nombre, 'es')));
-
-    let html = '';
-
-    Object.entries(CATS).forEach(([cat, meta], catIdx) => {
-      const plantas = grupos[cat] || [];
-      if (!plantas.length) return;
-
-      const catId = `cat-body-${cat}`;
-      const arrowId = `cat-arrow-${cat}`;
-      // Primera categoría abierta por defecto
-      const openClass = catIdx === 0 ? 'open' : '';
-      const arrowStyle = catIdx === 0 ? 'transform:rotate(180deg)' : '';
-
-      let plantasHtml = '';
-      plantas.forEach(([id, p]) => {
-        const bodyId = `pb-${id}`;
-        const arrowPId = `pa-${id}`;
-        const dif = { facil:'Fácil', media:'Media', dificil:'Difícil' }[p.dificultad] || '';
-        const difCls = `dif-${p.dificultad}`;
-
-        // Amazon links: semillas, maceta, sustrato, abono
-        let amazonLinks = '';
-        if (p.amazon) {
-          ['semillas','maceta','sustrato','abono'].forEach(tipo => {
-            if (!p.amazon[tipo]) return;
-            const prod = p.amazon[tipo];
-            const href = buildLink(tipo, prod, p.nombre);
-            amazonLinks += `<a href="${href}" target="_blank" rel="noopener sponsored" class="planta-amazon-link">
-              <span><span class="az-tipo">${TIPOS_AMAZON[tipo]}</span> — ${prod}</span>
-              <span class="az-label">Amazon →</span>
-            </a>`;
-          });
-        }
-        if (!amazonLinks) {
-          amazonLinks = `<a href="https://www.amazon.es/s?k=${encodeURIComponent(p.nombre + ' huerto')}&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="planta-amazon-link">
-            <span>Buscar productos para ${p.nombre}</span>
-            <span class="az-label">Amazon →</span>
-          </a>`;
-        }
-
-        plantasHtml += `<div class="planta-item">
-          <div class="planta-item-header" onclick="togglePlanta(document.getElementById('${bodyId}'),document.getElementById('${arrowPId}'))">
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span class="planta-nombre">${p.nombre}</span>
-              <span class="planta-dif ${difCls}">${dif}</span>
-            </div>
-            <span class="planta-arrow" id="${arrowPId}">▼</span>
-          </div>
-          <div class="planta-item-body" id="${bodyId}">
-            <p class="planta-desc-small">${p.descripcion || ''}</p>
-            <div class="planta-amazon-list">${amazonLinks}</div>
-          </div>
-        </div>`;
-      });
-
-      html += `<div class="cat-acordeon">
-        <div class="cat-acordeon-header" onclick="toggleCat(document.getElementById('${catId}'),document.getElementById('${arrowId}'))">
-          <h3>${meta.emoji} ${meta.label}</h3>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="cat-count">${plantas.length} plantas</span>
-            <span class="cat-acordeon-arrow" id="${arrowId}" style="${arrowStyle}">▼</span>
-          </div>
-        </div>
-        <div class="cat-acordeon-body ${openClass}" id="${catId}">
-          <div class="plantas-acordeon-grid">${plantasHtml}</div>
-        </div>
-      </div>`;
-    });
-
-    wrap.innerHTML = html;
-  }
-
-  // Exponer togglePlanta y toggleCat al scope global
-  window.togglePlanta = togglePlanta;
-  window.toggleCat = toggleCat;
-
-  document.addEventListener('DOMContentLoaded', buildPorPlanta);
-})();
-</script>
   <script>
     (function(){
       // Dropdown escritorio: clic + Escape + cerrar fuera
