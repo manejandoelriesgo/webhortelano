@@ -41,7 +41,7 @@ function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
   var btn    = document.getElementById('muni-btn');
   var lista  = document.getElementById('muni-sugerencias');
   var estado = document.getElementById('muni-estado');
-  if (!input || !btn) return;
+  if (!input) return;
 
   function setEst(msg, color) {
     if (estado) { estado.textContent = msg; estado.style.color = color || 'var(--texto-sec)'; }
@@ -92,7 +92,7 @@ function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
     var q = input.value.trim();
     if (q.length >= 3) mostrar(buscar(q)); else lista.style.display='none';
   });
-  btn.addEventListener('click', ejecutar);
+  if (btn) { btn.addEventListener('click', ejecutar); }
   input.addEventListener('keydown', function(e){ if (e.key==='Enter') ejecutar(); });
   document.addEventListener('click', function(e){ if (!e.target.closest('#muni-buscador')) lista.style.display='none'; });
 }
