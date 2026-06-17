@@ -35,6 +35,12 @@ function detectarZonaClimatica(altitud, lat, lon) {
  * @param {string|null} zoneSelectId - ID del <select> de zona a rellenar automáticamente (null si no hay)
  * @param {function|null} onZoneSet  - Callback(zonaId, label, municipio) tras seleccionar
  */
+function nombreNatural(nombre) {
+  var m = nombre.match(/^(.+)\s+\((La|El|Los|Las|L'|Els|Les|A|O|Es|As|Sa|Ses|Os|la|el|els|les|a|o|es|as|sa|ses|os)\)$/);
+  if (m) return m[2].charAt(0).toUpperCase() + m[2].slice(1) + ' ' + m[1];
+  return nombre;
+}
+
 function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
   var muniSeleccionado = null;
   var input  = document.getElementById('muni-input');
@@ -51,14 +57,14 @@ function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
   }
   function buscar(q) {
     var qn = nm(q.trim());
-    return qn ? MUNICIPIOS.filter(function(m){ return nm(m.nombre).includes(qn); }).slice(0,8) : [];
+    return qn ? MUNICIPIOS.filter(function(m){ return nm(m.nombre).includes(qn) || nm(nombreNatural(m.nombre)).includes(qn); }).slice(0,8) : [];
   }
   function mostrar(res) {
     lista.innerHTML = '';
     if (!res.length) { setEst('No se encontró ningún municipio con ese nombre.','#C2410C'); lista.style.display='none'; return; }
     res.forEach(function(m) {
       var li = document.createElement('li');
-      li.textContent = m.nombre + ' (' + m.provincia + ') — ' + m.altitud + ' m';
+      li.textContent = nombreNatural(m.nombre) + ' (' + m.provincia + ') — ' + m.altitud + ' m';
       li.style.cssText = 'padding:10px 14px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--borde);';
       li.addEventListener('mouseenter', function(){ li.style.background='var(--fondo)'; });
       li.addEventListener('mouseleave', function(){ li.style.background='white'; });
@@ -70,7 +76,7 @@ function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
   function sel(m) {
     muniSeleccionado = m;
     lista.style.display = 'none';
-    input.value = m.nombre + ' (' + m.provincia + ')';
+    input.value = nombreNatural(m.nombre) + ' (' + m.provincia + ')';
     var r = detectarZonaClimatica(m.altitud, m.lat, m.lon);
     if (zoneSelectId) {
       var s = document.getElementById(zoneSelectId);
