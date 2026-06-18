@@ -31,7 +31,8 @@
     .afiliado-box { background: #FFFBF0; border: 1px solid #FDE68A; border-radius: var(--radio-card); padding: 16px 20px; margin: 28px 0; }
     .afiliado-box p { margin-bottom: 8px; font-size: 15px; }
     .afiliado-link { display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#C2410C;border:1px solid #FCA5A5;border-radius:6px;padding:6px 14px;background:#FFF7ED;text-decoration:none; }
-    .article-img { width:100%;border-radius:var(--radio-card);margin:28px 0; object-fit:cover; max-height:400px; }
+    .article-img { width:100%;height:360px;border-radius:var(--radio-card);margin:28px 0;object-fit:cover;object-position:center;display:block; }
+    @media (max-width:640px) { .article-img { height:220px; } }
     .zona-table { width:100%; border-collapse:collapse; margin:24px 0; font-size:15px; }
     .zona-table th { background:var(--verde); color:white; padding:10px 14px; text-align:left; }
     .zona-table td { padding:10px 14px; border-bottom:1px solid var(--borde); vertical-align:top; }
@@ -153,7 +154,7 @@
     <div class="container">
       <div class="article-body">
 
-        <img src="img/que-plantar-agosto.jpg" alt="Semilleros de hortalizas regados en agosto" class="article-img">
+        <img src="../img/que-plantar-agosto.jpg" alt="Semilleros de hortalizas regados en agosto" class="article-img">
 
         <p>Agosto es un mes raro para el huerto. Hace calor, parece que no toca sembrar nada… y sin embargo es uno de los meses más importantes del año. Lo que plantes ahora es lo que comerás en otoño. Si esperas a septiembre, para muchos cultivos llegas tarde.</p>
 
@@ -207,15 +208,19 @@
 
         <h2>¿No sabes qué se da bien en tu zona?</h2>
         <p>El clima de agosto no es igual en la costa que en el interior. Estas dos herramientas gratuitas te dicen exactamente qué sembrar según tu municipio y zona climática:</p>
-        <div class="afiliado-box" style="background:var(--verde-bg);border-color:var(--verde);">
-          <h3 style="margin-top:0;">🗓️ Calendario de siembra por zona climática</h3>
-          <p>Introduce tu pueblo y te muestra qué plantar cada mes según tu altitud y clima real.</p>
-          <a href="../herramientas/calendario-siembra.html" class="btn-amazon" style="background:var(--verde);border-color:var(--verde);">Ver el calendario</a>
-        </div>
-        <div class="afiliado-box" style="background:var(--verde-bg);border-color:var(--verde);">
-          <h3 style="margin-top:0;">🪴 Planificador de huerto</h3>
-          <p>Dinos tu espacio y qué quieres cultivar, y te montamos un plan de huerto adaptado a tu balcón o terraza.</p>
-          <a href="../herramientas/planificador-huerto.html" class="btn-amazon" style="background:var(--verde);border-color:var(--verde);">Planificar mi huerto</a>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:32px 0;">
+          <div style="background:#ffffff;border:1px solid #e8eadf;border-radius:16px;padding:26px 22px;text-align:center;box-shadow:0 3px 14px rgba(0,0,0,.06);">
+            <div style="font-size:42px;line-height:1;margin-bottom:10px;">🗓️</div>
+            <h3 style="margin:0 0 8px;font-size:18px;color:var(--texto);">Calendario de siembra</h3>
+            <p style="font-size:14px;color:var(--texto-sec);line-height:1.6;margin-bottom:20px;">Pon tu pueblo y descubre qué plantar cada mes según tu altitud y clima real.</p>
+            <a href="../herramientas/calendario-siembra.html" style="display:inline-block;background:#3aa856;color:#fff;font-weight:700;font-size:15px;padding:13px 26px;border-radius:10px;text-decoration:none;box-shadow:0 2px 8px rgba(58,168,86,.35);">Ver el calendario →</a>
+          </div>
+          <div style="background:#ffffff;border:1px solid #e8eadf;border-radius:16px;padding:26px 22px;text-align:center;box-shadow:0 3px 14px rgba(0,0,0,.06);">
+            <div style="font-size:42px;line-height:1;margin-bottom:10px;">🪴</div>
+            <h3 style="margin:0 0 8px;font-size:18px;color:var(--texto);">Planificador de huerto</h3>
+            <p style="font-size:14px;color:var(--texto-sec);line-height:1.6;margin-bottom:20px;">Dinos tu espacio y qué quieres cultivar y te montamos un plan a medida.</p>
+            <a href="../herramientas/planificador-huerto.html" style="display:inline-block;background:#3aa856;color:#fff;font-weight:700;font-size:15px;padding:13px 26px;border-radius:10px;text-decoration:none;box-shadow:0 2px 8px rgba(58,168,86,.35);">Planificar mi huerto →</a>
+          </div>
         </div>
 
         <p style="margin-top:40px;padding-top:24px;border-top:1px solid var(--borde);font-size:14px;color:var(--texto-sec);">
