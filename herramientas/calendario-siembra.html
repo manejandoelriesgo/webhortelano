@@ -211,10 +211,6 @@
             <input id="input-municipio" type="text" placeholder="Escribe tu municipio…"
               style="flex:1;min-width:180px;padding:10px 14px;border:1px solid #B7E4C7;border-radius:var(--radio-btn);font-size:14px;font-family:inherit;background:white;color:var(--texto);outline:none;"
               autocomplete="off" aria-label="Nombre del municipio" />
-            <button id="btn-buscar"
-              style="padding:10px 20px;background:var(--verde);color:white;border:none;border-radius:var(--radio-btn);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;">
-              Buscar
-            </button>
           </div>
           <ul id="aemet-sugerencias" style="list-style:none;margin:8px 0 0;padding:0;display:none;background:white;border:1px solid var(--borde);border-radius:var(--radio-btn);overflow:hidden;box-shadow:var(--sombra);"></ul>
           <p id="aemet-estado" style="font-size:13px;color:var(--texto-sec);margin-top:10px;min-height:18px;"></p>
@@ -456,7 +452,6 @@
 
     /* ---- Buscador local (municipios.js) ---- */
     const inputMunicipio   = document.getElementById('input-municipio');
-    const btnBuscar        = document.getElementById('btn-buscar');
     const listaSugerencias = document.getElementById('aemet-sugerencias');
     const estadoEl         = document.getElementById('aemet-estado');
     let municipioSeleccionado = null;
@@ -531,7 +526,6 @@
       else listaSugerencias.style.display = 'none';
     });
 
-    btnBuscar.addEventListener('click', ejecutarBusqueda);
     inputMunicipio.addEventListener('keydown', e => { if (e.key === 'Enter') ejecutarBusqueda(); });
 
     document.addEventListener('click', e => {
