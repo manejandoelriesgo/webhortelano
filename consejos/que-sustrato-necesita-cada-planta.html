@@ -35,8 +35,8 @@
     .afiliado-box p { margin-bottom: 12px; font-size: 15px; }
     .btn-amazon { display:inline-block;padding:10px 20px;background:#2f6e2f;border:1px solid #2f6e2f;color:white;font-size:14px;font-weight:700;border-radius:8px;text-decoration:none;transition:opacity .15s; }
     .btn-amazon:hover { opacity:.88; }
-    .article-img { width:100%;height:360px;border-radius:var(--radio-card);margin:28px 0;object-fit:cover;object-position:center;display:block; }
-    @media (max-width:640px) { .article-img { height:220px; } }
+    .article-img { width:100%;height:auto;max-height:520px;border-radius:var(--radio-card);margin:28px 0;object-fit:contain;object-position:center;display:block;background:var(--verde-bg, #f5f0e8); }
+    @media (max-width:640px) { .article-img { max-height:320px; } }
   </style>
 
 <script type="application/ld+json">
