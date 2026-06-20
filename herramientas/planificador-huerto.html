@@ -201,20 +201,12 @@
           <div class="step-q">¿Dónde vas a plantar?</div>
           <div class="step-sub">Elige el espacio que tienes disponible.</div>
           <div class="choice-grid choice-grid-4">
-            <button class="choice-btn" data-val="balcon" onclick="elegirEspacio('balcon',this)">
-              <span class="choice-icon">🌿</span><span class="choice-label">Balcón</span>
-              <span class="choice-desc">Espacio pequeño con barandilla</span>
-            </button>
             <button class="choice-btn" data-val="terraza" onclick="elegirEspacio('terraza',this)">
-              <span class="choice-icon">🌞</span><span class="choice-label">Terraza</span>
-              <span class="choice-desc">Espacio abierto más grande</span>
-            </button>
-            <button class="choice-btn" data-val="interior" onclick="elegirEspacio('interior',this)">
-              <span class="choice-icon">🪟</span><span class="choice-label">Interior</span>
-              <span class="choice-desc">Ventana, alféizar o salón</span>
+              <span class="choice-icon">🌞</span><span class="choice-label">Balcón o terraza</span>
+              <span class="choice-desc">Espacio con macetas, pequeño o grande</span>
             </button>
             <button class="choice-btn" data-val="jardin" onclick="elegirEspacio('jardin',this)">
-              <span class="choice-icon">🌱</span><span class="choice-label">Jardín</span>
+              <span class="choice-icon">🌱</span><span class="choice-label">Jardín o terreno</span>
               <span class="choice-desc">Huerto en tierra o patio</span>
             </button>
           </div>
@@ -433,11 +425,7 @@
       estado.tipo = tipo;
       document.querySelectorAll('#wizard-1 .choice-btn').forEach(b=>b.classList.remove('selected'));
       btn.classList.add('selected');
-      if (tipo==='interior') {
-        estado.contenedor='maceta';
-        entrarPaso3();
-        irWizard(3);
-      } else if (tipo==='jardin') {
+      if (tipo==='jardin') {
         estado.contenedor='suelo';
         entrarPaso3();
         irWizard(3);
@@ -504,7 +492,7 @@
     }
 
     function retrocederDesde3() {
-      if (estado.tipo==='interior'||estado.tipo==='jardin') irWizard(1);
+      if (estado.tipo==='jardin') irWizard(1);
       else irWizard(2);
     }
 
@@ -986,7 +974,7 @@
     /* ---- Texto motivador ---- */
     function genMotivacion(plantas, tamano, zona, sinergias, conflictos) {
       const n = plantas.length;
-      const esp = {balcon:'balcón',terraza:'terraza',interior:'interior',jardin:'jardín'}[estado.tipo]||'espacio';
+      const esp = {balcon:'balcón',terraza:'balcón o terraza',jardin:'jardín'}[estado.tipo]||'espacio';
       const tam = {poco:'poco espacio',medio:'espacio medio',mucho:'mucho espacio'}[tamano]||'tu espacio';
       const destacada = plantas.find(p=>p.rendimiento && p.dificultad!=='dificil') || plantas[0];
       let rend = destacada?.rendimiento || '';
