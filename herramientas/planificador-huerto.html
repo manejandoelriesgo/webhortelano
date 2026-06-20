@@ -658,7 +658,8 @@
 
       const scoreNum = Math.round(Math.min(10, Math.max(0, 5 + fCompat + fDificultad + fEspacio)));
       const scoreClass = scoreNum>=7?'excelente':scoreNum>=5?'buena':'mejorable';
-      const scoreLabel = conflictos.length > 1 ? 'Combinación con conflictos'
+      const scoreLabel = plantasArr.length === 1 ? 'Planta bien elegida'
+        : conflictos.length > 1 ? 'Combinación con conflictos'
         : conflictos.length === 1 ? 'Atención: hay un conflicto'
         : scoreNum >= 9 ? 'Combinación excelente'
         : scoreNum >= 7 ? 'Buena combinación'
@@ -702,7 +703,9 @@
         : '<p style="font-size:13px;color:var(--texto-sec);">No hay sinergias entre estas plantas.</p>';
       const conHTML = conflictos.length>0
         ? conflictos.map(c=>`<div class="sinergia-item"><div class="sinergia-dot dot-rojo"></div><span><strong>${c.a} + ${c.b}:</strong> ${c.razon}</span></div>`).join('')
-        : '<p style="font-size:13px;color:#15803D;">Sin conflictos. Buena elección.</p>';
+        : plantasArr.length === 1
+          ? '<p style="font-size:13px;color:var(--texto-sec);">Solo tienes una planta seleccionada, no hay nada que comparar.</p>'
+          : '<p style="font-size:13px;color:#15803D;">Sin conflictos. Buena elección.</p>';
 
       /* Amazon por categoría */
       const amazonHTML = genAmazon(plantasArr, estado.tieneMacetas);
@@ -975,7 +978,9 @@
       rend = rend.split(/\.\s*/)[0];
       const rendText = rend ? ` Referencia de producción — ${destacada.nombre}: ${rend}.` : '';
       let detalle = '';
-      if (conflictos.length>0) {
+      if (n === 1) {
+        detalle = ' Planta fácil de cuidar, no necesita combinarse con nada para salir bien.';
+      } else if (conflictos.length>0) {
         detalle = ` Hay ${conflictos.length} conflicto${conflictos.length>1?'s':''} que gestionar, te los detallamos abajo.`;
         if (sinergias.length>0) detalle += ` También tienes ${sinergias.length} sinergia${sinergias.length>1?'s':''} a favor.`;
       } else if (sinergias.length>0) {
