@@ -1021,7 +1021,7 @@ const PLANTAS = {
       continental_calida:{ siembra:[3,4], trasplante:[4,5], cosecha:[10,11,0,1,2] },
       mediterranea:      { siembra:[2,3,4], trasplante:[3,4,5], cosecha:[10,11,0,1,2,3] },
       semiarida:         { siembra:[2,3], trasplante:[3,4], cosecha:[0,1,2,3,10,11] },
-      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[] }
+      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[9,10,11,0,1] }
     }
   },
 
