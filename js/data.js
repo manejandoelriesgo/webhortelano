@@ -661,12 +661,12 @@ const PLANTAS = {
       general: ['No regar en exceso: prefiere la sequía','Cuanto peor el sustrato, más aromático','Podar tras la floración para compactar la planta','Resistente a heladas ligeras (hasta -10°C algunas variedades)']
     },
     calendar: {
-      atlantica:         { siembra:[2,3,4], trasplante:[4,5], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      continental_fria:  { siembra:[3,4,5], trasplante:[5,6], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      continental_calida:{ siembra:[2,3,4], trasplante:[4,5], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      mediterranea:      { siembra:[2,3,4,9,10], trasplante:[3,4,10], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      semiarida:         { siembra:[2,3,9,10], trasplante:[3,4,10], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      atlantica:         { siembra:[2,3,4], trasplante:[4,5], cosecha:[6,7,8,9,10,11] },
+      continental_fria:  { siembra:[3,4,5], trasplante:[5,6], cosecha:[2,7,8,9,10,11] },
+      continental_calida:{ siembra:[2,3,4], trasplante:[4,5], cosecha:[6,7,8,9,10,11] },
+      mediterranea:      { siembra:[2,3,4,9,10], trasplante:[3,4,10], cosecha:[5,6,7,8,11] },
+      semiarida:         { siembra:[2,3,9,10], trasplante:[3,4,10], cosecha:[5,6,7,8,11] },
+      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[4,5,6,7,8] }
     }
   },
 
@@ -688,12 +688,12 @@ const PLANTAS = {
       general: ['Casi indestructible si drena bien','Excelente compañero de tomates: repele plagas','Podar en primavera para renovar la planta','Soporta sequías prolongadas']
     },
     calendar: {
-      atlantica:         { siembra:[3,4], trasplante:[4,5], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      continental_fria:  { siembra:[3,4,5], trasplante:[5,6], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      continental_calida:{ siembra:[2,3,4], trasplante:[4,5], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      mediterranea:      { siembra:[2,3,4,9,10], trasplante:[3,4,10], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      semiarida:         { siembra:[2,3,9,10], trasplante:[3,4,10], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      atlantica:         { siembra:[3,4], trasplante:[4,5], cosecha:[2,6,7,8,9,10,11] },
+      continental_fria:  { siembra:[3,4,5], trasplante:[5,6], cosecha:[2,7,8,9,10,11] },
+      continental_calida:{ siembra:[2,3,4], trasplante:[4,5], cosecha:[6,7,8,9,10,11] },
+      mediterranea:      { siembra:[2,3,4,9,10], trasplante:[3,4,10], cosecha:[5,6,7,8,11] },
+      semiarida:         { siembra:[2,3,9,10], trasplante:[3,4,10], cosecha:[5,6,7,8,11] },
+      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[4,5,6,7,8] }
     }
   },
 
@@ -720,7 +720,7 @@ const PLANTAS = {
       continental_calida:{ siembra:[2,3,4], trasplante:[3,4,5], cosecha:[4,5,6,7,8,9,10] },
       mediterranea:      { siembra:[2,3,4], trasplante:[3,4,5], cosecha:[3,4,5,6,7,8,9,10,11] },
       semiarida:         { siembra:[2,3,9], trasplante:[3,4,10], cosecha:[3,4,5,6,7,8,9,10] },
-      subtropical:       { siembra:[0,1,2,9,10], trasplante:[2,3,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      subtropical:       { siembra:[0,1,2,9,10], trasplante:[2,3,10,11], cosecha:[4,5,6,7,8] }
     }
   },
 
@@ -747,7 +747,7 @@ const PLANTAS = {
       continental_calida:{ siembra:[3,4], trasplante:[4,5], cosecha:[5,6,7,8,9] },
       mediterranea:      { siembra:[2,3,4], trasplante:[3,4,5], cosecha:[4,5,6,7,8,9,10] },
       semiarida:         { siembra:[2,3], trasplante:[3,4], cosecha:[4,5,6,7,8,9] },
-      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[4,5,6,7,8] }
     }
   },
 
@@ -1021,7 +1021,7 @@ const PLANTAS = {
       continental_calida:{ siembra:[3,4], trasplante:[4,5], cosecha:[10,11,0,1,2] },
       mediterranea:      { siembra:[2,3,4], trasplante:[3,4,5], cosecha:[10,11,0,1,2,3] },
       semiarida:         { siembra:[2,3], trasplante:[3,4], cosecha:[0,1,2,3,10,11] },
-      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[] }
     }
   },
 
@@ -1131,7 +1131,7 @@ const PLANTAS = {
       continental_calida:{ siembra:[2,3,4], trasplante:[3,4,5], cosecha:[4,5,6,7,8,9,10] },
       mediterranea:      { siembra:[2,3,4], trasplante:[3,4,5], cosecha:[3,4,5,6,7,8,9,10,11] },
       semiarida:         { siembra:[2,3,9], trasplante:[3,4,10], cosecha:[3,4,5,6,7,8,9,10] },
-      subtropical:       { siembra:[0,1,2,9,10], trasplante:[2,3,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      subtropical:       { siembra:[0,1,2,9,10], trasplante:[2,3,10,11], cosecha:[4,5,6,7,8] }
     }
   },
 
@@ -1158,7 +1158,7 @@ const PLANTAS = {
       continental_calida:{ siembra:[2,3,4,8,9], trasplante:[], cosecha:[3,4,5,6,7,8,9,10,11] },
       mediterranea:      { siembra:[1,2,3,8,9,10], trasplante:[], cosecha:[3,4,5,6,7,8,9,10,11] },
       semiarida:         { siembra:[1,2,3,9,10], trasplante:[], cosecha:[3,4,5,6,7,8,9,10] },
-      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[], cosecha:[3,4,5,6,7,8] }
     }
   },
 
@@ -1180,12 +1180,12 @@ const PLANTAS = {
       general: ['Las hojas secas son más aromáticas que las frescas','Resistente a la sequía y al frío moderado','Podar en primavera para mantener la forma','Se puede topierar en formas geométricas decorativas']
     },
     calendar: {
-      atlantica:         { siembra:[2,3,4], trasplante:[3,4,5], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      continental_fria:  { siembra:[3,4,5], trasplante:[4,5,6], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      continental_calida:{ siembra:[2,3,4], trasplante:[3,4,5], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      mediterranea:      { siembra:[2,3,4,9,10], trasplante:[3,4,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      semiarida:         { siembra:[2,3,9,10], trasplante:[3,4,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] },
-      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[0,1,2,3,4,5,6,7,8,9,10,11] }
+      atlantica:         { siembra:[2,3,4], trasplante:[3,4,5], cosecha:[6,7,8,9,10,11] },
+      continental_fria:  { siembra:[3,4,5], trasplante:[4,5,6], cosecha:[2,7,8,9,10,11] },
+      continental_calida:{ siembra:[2,3,4], trasplante:[3,4,5], cosecha:[6,7,8,9,10,11] },
+      mediterranea:      { siembra:[2,3,4,9,10], trasplante:[3,4,10,11], cosecha:[5,6,7,8] },
+      semiarida:         { siembra:[2,3,9,10], trasplante:[3,4,10,11], cosecha:[5,6,7,8] },
+      subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[4,5,6,7,8] }
     }
   }
 };
