@@ -825,14 +825,21 @@
             return `<div class="plan-distrib-item">· <strong>Zona ${i+1}:</strong> ${p.nombre.toLowerCase()} en hilera o a chorrillo (~${densidad} plantas por m²). Con dedicar 1–2 m² tienes de sobra para una familia${marca}.</div>`;
           }
           // modo 'unidad' (default)
-          let u;
+          const recomendada = p.cantidad_recomendada || 2;
+          let maxPosible;
           if (p.m2 && p.m2 > 0) {
-            u = Math.max(1, Math.round(areaZona / p.m2));
+            maxPosible = Math.max(1, Math.round(areaZona / p.m2));
           } else {
             const densidad = p.densidad || 3;
-            u = Math.max(1, Math.round(densidad * areaZona));
+            maxPosible = Math.max(1, Math.round(densidad * areaZona));
           }
-          return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m²):</strong> ${plantasDeNombre(u, p.nombre)}${marca}</div>`;
+          const u = Math.min(recomendada, maxPosible);
+          const espacioUsado = p.m2 ? (u * p.m2) : null;
+          const sobraEspacio = espacioUsado !== null && (areaZona - espacioUsado) > 1;
+          const notaSobra = sobraEspacio
+            ? ` Te sobra espacio (~${(areaZona - espacioUsado).toFixed(1)} m²) para añadir otras plantas.`
+            : '';
+          return `<div class="plan-distrib-item">· <strong>Zona ${i+1} (~${areaZona.toFixed(1)} m² disponibles):</strong> ${plantasDeNombre(u, p.nombre)} — cantidad recomendada para uso doméstico habitual.${notaSobra}${marca}</div>`;
         }).join('');
         const notaHuerto = `<p style="font-size:12px;color:var(--texto-sec);margin-top:12px;line-height:1.5;">Cantidades estimadas para ${totalM2} m² divididos entre ${plantas.length} zona${plantas.length===1?'':'s'}. Ajusta según el marco de plantación de cada cultivo.</p>`;
         return `<div class="plan-bloque"><div class="plan-bloque-titulo">A. Tu distribución en el huerto</div><div>${items}</div>${notaHuerto}</div>`;
