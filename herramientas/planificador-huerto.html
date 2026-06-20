@@ -200,7 +200,7 @@
         <div class="wizard-step active" id="wizard-1">
           <div class="step-q">¿Dónde vas a plantar?</div>
           <div class="step-sub">Elige el espacio que tienes disponible.</div>
-          <div class="choice-grid choice-grid-4">
+          <div class="choice-grid choice-grid-2">
             <button class="choice-btn" data-val="terraza" onclick="elegirEspacio('terraza',this)">
               <span class="choice-icon">🌞</span><span class="choice-label">Balcón o terraza</span>
               <span class="choice-desc">Espacio con macetas, pequeño o grande</span>
@@ -231,19 +231,6 @@
 
         <!-- PASO 3: Tienes macetas + espacio -->
         <div class="wizard-step" id="wizard-3">
-          <div id="w3-tiene-macetas" style="display:none;">
-            <div class="step-q">¿Ya tienes macetas?</div>
-            <div class="step-sub">Si tienes, el plan se adaptará a ellas. Si no, te indicamos qué comprar.</div>
-            <div class="choice-grid choice-grid-2">
-              <button class="choice-btn" onclick="elegirTieneMacetas(true,this)">
-                <span class="choice-icon">✅</span><span class="choice-label">Sí, ya tengo</span>
-              </button>
-              <button class="choice-btn" onclick="elegirTieneMacetas(false,this)">
-                <span class="choice-icon">🛒</span><span class="choice-label">Todavía no</span>
-              </button>
-            </div>
-            <hr class="step-divider" id="w3-divider" style="display:none;">
-          </div>
           <div id="w3-espacio" style="display:none;">
             <div class="step-q" id="w3-espacio-q">¿Cuánto espacio tienes?</div>
             <div class="choice-grid choice-grid-3">
@@ -445,41 +432,22 @@
 
     /* ---- Paso 3 setup ---- */
     function entrarPaso3() {
-      const tieneEl = document.getElementById('w3-tiene-macetas');
       const espacioEl = document.getElementById('w3-espacio');
-      const divider = document.getElementById('w3-divider');
-      // Reset
-      document.querySelectorAll('#w3-tiene-macetas .choice-btn').forEach(b=>b.classList.remove('selected'));
       document.querySelectorAll('#w3-espacio .choice-btn').forEach(b=>b.classList.remove('selected'));
+      espacioEl.style.display = 'block';
+      estado.tieneMacetas = false;
 
       if (estado.contenedor==='maceta') {
-        tieneEl.style.display = 'block';
-        espacioEl.style.display = 'none';
-        divider.style.display = 'none';
-        // Update descs for maceta
         document.getElementById('desc-poco').textContent  = 'Balcón pequeño · 2-3 macetas';
         document.getElementById('desc-medio').textContent = 'Balcón grande o terraza · 4-6 macetas';
         document.getElementById('desc-mucho').textContent = 'Azotea o jardín · 7+ macetas';
         document.getElementById('w3-espacio-q').textContent = '¿Cuánto espacio tienes?';
       } else {
-        tieneEl.style.display = 'none';
-        espacioEl.style.display = 'block';
-        estado.tieneMacetas = null;
-        // Update descs for suelo
         document.getElementById('desc-poco').textContent  = 'Huerto pequeño · hasta 20 m²';
         document.getElementById('desc-medio').textContent = 'Huerto mediano · 20-50 m²';
         document.getElementById('desc-mucho').textContent = 'Huerto grande · más de 50 m²';
         document.getElementById('w3-espacio-q').textContent = '¿Cuánto espacio tienes en el huerto?';
       }
-    }
-
-    function elegirTieneMacetas(tiene, btn) {
-      estado.tieneMacetas = tiene;
-      document.querySelectorAll('#w3-tiene-macetas .choice-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      document.getElementById('w3-divider').style.display = 'block';
-      document.getElementById('w3-espacio').style.display = 'block';
-      setTimeout(function(){ document.getElementById('w3-espacio-q').scrollIntoView({behavior:'smooth', block:'center'}); }, 100);
     }
 
     function elegirTamano(tamano, btn) {
