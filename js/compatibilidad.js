@@ -304,6 +304,164 @@ const COMPATIBILIDAD = {
       { id: 'calabacin',   razon: 'El orégano atrae polinizadores esenciales para la fructificación del calabacín.' }
     ],
     malas: []
+  },
+
+  calabaza: {
+    buenas: [
+      { id: 'judia_verde', razon: 'La judía fija nitrógeno en el suelo que la calabaza necesita en grandes cantidades.' },
+      { id: 'cebolla',     razon: 'La cebolla repele plagas que suelen afectar a las cucurbitáceas.' }
+    ],
+    malas: [
+      { id: 'patata',      razon: 'Ambas son muy exigentes en nutrientes; compitiendo por ellos, ninguna de las dos rinde bien.' },
+      { id: 'pepino',      razon: 'Misma familia (cucurbitáceas), comparten plagas y enfermedades específicas.' }
+    ]
+  },
+
+  cebollino: {
+    buenas: [
+      { id: 'zanahoria',   razon: 'El cebollino repele la mosca de la zanahoria, una de sus plagas más dañinas.' },
+      { id: 'tomate',      razon: 'Ayuda a mantener alejados pulgones y otros insectos del tomate.' },
+      { id: 'fresa',       razon: 'Mejora el crecimiento de la fresa y la protege de algunas plagas comunes.' }
+    ],
+    malas: [
+      { id: 'haba',        razon: 'Las aliáceas como el cebollino pueden inhibir el crecimiento de las leguminosas cercanas.' }
+    ]
+  },
+
+  cilantro: {
+    buenas: [
+      { id: 'tomate',      razon: 'Atrae insectos beneficiosos que controlan plagas comunes del tomate.' },
+      { id: 'espinaca',    razon: 'Ambas prefieren suelos frescos y no compiten por los mismos nutrientes.' },
+      { id: 'pepino',      razon: 'El aroma del cilantro confunde a algunas plagas que afectan al pepino.' }
+    ],
+    malas: []
+  },
+
+  frambuesa: {
+    buenas: [
+      { id: 'ajo',         razon: 'El ajo ayuda a repeler insectos y reduce el riesgo de hongos en la frambuesa.' }
+    ],
+    malas: [
+      { id: 'patata',      razon: 'Ambas son propensas a enfermedades fúngicas del suelo que pueden transmitirse entre sí.' },
+      { id: 'tomate',      razon: 'Comparten susceptibilidad a hongos como la verticilosis, que se transmite fácilmente entre ambas.' }
+    ]
+  },
+
+  freson: {
+    buenas: [
+      { id: 'ajo',         razon: 'El ajo protege al fresón de plagas y hongos comunes en el suelo.' },
+      { id: 'cebolla',     razon: 'La cebolla repele insectos que afectan al fresón sin competir por espacio.' },
+      { id: 'espinaca',    razon: 'Cubre el suelo entre las plantas de fresón sin competir por luz ni nutrientes.' }
+    ],
+    malas: [
+      { id: 'brocoli',     razon: 'Las coles agotan el suelo de nutrientes que el fresón necesita para producir bien.' }
+    ]
+  },
+
+  granada: {
+    buenas: [
+      { id: 'albahaca',    razon: 'La albahaca cercana ayuda a repeler insectos sin competir por espacio, al ser la granada un árbol.' }
+    ],
+    malas: []
+  },
+
+  haba: {
+    buenas: [
+      { id: 'patata',      razon: 'La haba fija nitrógeno en el suelo que beneficia directamente a la patata.' },
+      { id: 'zanahoria',   razon: 'No compiten por el mismo espacio de raíz y se benefician mutuamente del nitrógeno fijado.' },
+      { id: 'lechuga',     razon: 'La lechuga aprovecha la sombra parcial de la haba sin competir por nutrientes.' }
+    ],
+    malas: [
+      { id: 'ajo',         razon: 'Las aliáceas como el ajo inhiben el crecimiento de las leguminosas como la haba.' },
+      { id: 'cebolla',     razon: 'Igual que el ajo, la cebolla puede frenar el desarrollo de la haba si están muy cerca.' }
+    ]
+  },
+
+  hierbabuena: {
+    buenas: [
+      { id: 'fresa',       razon: 'La hierbabuena ayuda a repeler plagas de la fresa, aunque debe mantenerse en maceta propia.' },
+      { id: 'tomate',      razon: 'Repele algunos insectos que afectan al tomate cuando se mantiene en un recipiente separado.' }
+    ],
+    malas: []
+  },
+
+  higo: {
+    buenas: [],
+    malas: []
+  },
+
+  laurel: {
+    buenas: [
+      { id: 'tomate',      razon: 'El laurel ayuda a repeler polillas y otros insectos sin competir por espacio, al ser un arbusto aparte.' }
+    ],
+    malas: []
+  },
+
+  limon: {
+    buenas: [],
+    malas: []
+  },
+
+  melon: {
+    buenas: [
+      { id: 'cebolla',     razon: 'La cebolla repele algunas plagas comunes del melón sin competir por espacio en superficie.' },
+      { id: 'lechuga',     razon: 'Cubre el suelo entre las matas de melón mientras estas ocupan poco espacio en sus primeras semanas.' }
+    ],
+    malas: [
+      { id: 'patata',      razon: 'Ambas son muy exigentes en nutrientes y compiten fuertemente por ellos.' },
+      { id: 'pepino',      razon: 'Misma familia (cucurbitáceas), comparten plagas y enfermedades específicas.' }
+    ]
+  },
+
+  mora: {
+    buenas: [
+      { id: 'ajo',         razon: 'El ajo ayuda a mantener alejados insectos y reduce el riesgo de hongos en la mora.' }
+    ],
+    malas: [
+      { id: 'patata',      razon: 'Ambas son propensas a enfermedades fúngicas del suelo que pueden transmitirse entre sí.' },
+      { id: 'tomate',      razon: 'Comparten susceptibilidad a hongos del suelo que se transmiten fácilmente entre ambas.' }
+    ]
+  },
+
+  patata: {
+    buenas: [
+      { id: 'haba',        razon: 'La haba fija nitrógeno en el suelo que la patata necesita en grandes cantidades.' },
+      { id: 'zanahoria',   razon: 'No compiten por el mismo espacio de raíz y se benefician del nitrógeno fijado por leguminosas cercanas.' },
+      { id: 'judia_verde', razon: 'Las judías fijan nitrógeno y favorecen el desarrollo de la patata sin competir por espacio.' },
+      { id: 'puerro',      razon: 'El puerro ayuda a repeler plagas sin competir por los mismos nutrientes en profundidad.' },
+      { id: 'radano',      razon: 'El rábano ocupa poco espacio y se cosecha rápido, sin interferir con el desarrollo de la patata.' }
+    ],
+    malas: [
+      { id: 'tomate',      razon: 'Comparten familia (solanáceas) y son propensas a las mismas plagas y enfermedades del suelo.' },
+      { id: 'pepino',      razon: 'Compiten fuertemente por agua y nutrientes, y ambas son susceptibles al mismo tipo de hongos.' },
+      { id: 'calabaza',    razon: 'Ambas son muy exigentes en nutrientes; plantadas juntas, ninguna rinde bien.' },
+      { id: 'melon',       razon: 'Compiten por los mismos nutrientes y espacio en el suelo de forma agresiva.' },
+      { id: 'sandia',      razon: 'Ambas necesitan mucho espacio y nutrientes, compitiendo directamente entre sí.' },
+      { id: 'pimiento',    razon: 'Comparten familia (solanáceas) y enfermedades fúngicas del suelo.' }
+    ]
+  },
+
+  pimiento_padron: {
+    buenas: [
+      { id: 'albahaca',    razon: 'La albahaca repele mosca blanca y pulgón, beneficiando también al pimiento padrón.' },
+      { id: 'cebollino',   razon: 'El cebollino ayuda a mantener alejadas las plagas más comunes del pimiento padrón.' }
+    ],
+    malas: [
+      { id: 'patata',      razon: 'Comparten familia (solanáceas) y enfermedades fúngicas del suelo.' },
+      { id: 'tomate',      razon: 'Misma familia; en espacios pequeños es mejor no mezclarlos para evitar plagas compartidas.' }
+    ]
+  },
+
+  sandia: {
+    buenas: [
+      { id: 'cebollino',   razon: 'El cebollino ayuda a repeler plagas comunes de la sandía sin competir por espacio en superficie.' }
+    ],
+    malas: [
+      { id: 'patata',      razon: 'Ambas necesitan mucho espacio y nutrientes, compitiendo directamente entre sí.' },
+      { id: 'pepino',      razon: 'Misma familia (cucurbitáceas), comparten plagas y enfermedades específicas.' },
+      { id: 'melon',       razon: 'Misma familia, mejor no mezclarlas para evitar competencia y plagas compartidas.' },
+      { id: 'calabaza',    razon: 'Misma familia (cucurbitáceas), compiten por espacio y comparten plagas.' }
+    ]
   }
 
 };
