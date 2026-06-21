@@ -841,9 +841,13 @@
     /* ---- Bloque C: aviso ---- */
     function genBloqueC(plantas, sinergias, conflictos) {
       if(conflictos.length>0){
-        const c=conflictos[0];
-        return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">C. Aviso importante</div>
-          <p style="font-size:14px;"><strong>⚠ ${c.a} y ${c.b} no se llevan bien:</strong> ${c.razon.replace(/\.\s*$/,'')}. Ponlos en macetas separadas o en extremos opuestos.</p></div>`;
+        const itemsConflicto = conflictos.map(c =>
+          `<p style="font-size:14px;margin-top:8px;"><strong>⚠ ${c.a} y ${c.b} no se llevan bien:</strong> ${c.razon.replace(/\.\s*$/,'')}. Ponlos en macetas separadas o en extremos opuestos.</p>`
+        ).join('');
+        const tituloAviso = conflictos.length > 1
+          ? `C. Avisos importantes (${conflictos.length})`
+          : 'C. Aviso importante';
+        return `<div class="plan-bloque plan-bloque-aviso"><div class="plan-bloque-titulo">${tituloAviso}</div>${itemsConflicto}</div>`;
       }
       const mentaP = plantas.find(p=>p.nombre==='Menta');
       if(mentaP){
