@@ -56,8 +56,17 @@ function initBuscadorMunicipio(zoneSelectId, onZoneSet) {
     return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   }
   function buscar(q) {
-    var qn = nm(q.trim());
-    return qn ? MUNICIPIOS.filter(function(m){ return nm(m.nombre).includes(qn) || nm(nombreNatural(m.nombre)).includes(qn); }).slice(0,8) : [];
+    var qOriginal = q.trim();
+    var qn = nm(qOriginal);
+    // Si la query empieza con artículo, prueba también la versión con el artículo movido al final
+    var match = qOriginal.match(/^(la|el|los|las)\s+(.+)$/i);
+    var qnAlt = match ? nm(match[2] + ' (' + match[1] + ')') : null;
+    return qn ? MUNICIPIOS.filter(function(m){
+      var nombreNorm = nm(m.nombre);
+      var nombreNatNorm = nm(nombreNatural(m.nombre));
+      return nombreNorm.includes(qn) || nombreNatNorm.includes(qn) ||
+             (qnAlt && (nombreNorm.includes(qnAlt) || nombreNatNorm.includes(qnAlt)));
+    }).slice(0,8) : [];
   }
   function mostrar(res) {
     lista.innerHTML = '';

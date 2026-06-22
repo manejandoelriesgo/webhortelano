@@ -470,8 +470,8 @@
 
   /* ---- Emojis representativos por planta ---- */
   const EMOJIS = {
-    tomate:'🍅', pimiento:'🌶️', berenjena:'🍆', calabacin:'🥒', pepino:'🥒',
-    lechuga:'🥬', espinaca:'🌿', zanahoria:'🥕', radano:'🌰', cebolla:'🧅',
+    tomate:'🍅', pimiento:'🌶️', berenjena:'🍆', calabacin:'🎃', pepino:'🥒',
+    lechuga:'🥬', rucula:'🌿', espinaca:'🌿', zanahoria:'🥕', radano:'🌰', cebolla:'🧅',
     ajo:'🧄', puerro:'🌿', brocoli:'🥦', acelga:'🌱', judia_verde:'🫘',
     guisante:'🫛', fresa:'🍓', tomate_cherry:'🍅', arandano:'🫐',
     albahaca:'🌿', perejil:'🌿', romero:'🌿', tomillo:'🌿', menta:'🌿', oregano:'🌿'
@@ -614,6 +614,7 @@
         <!-- Visualización gráfica -->
         <div class="viz-section">
           <h4>Representación visual del espacio</h4>
+          <p style="font-size:12px;color:var(--texto-sec);margin:-4px 0 10px;">Cada icono representa 0,1 m² de superficie, no una planta individual — varias casillas pueden corresponder a una sola planta grande.</p>
           <div class="viz-grid">
             ${buildVizGrid(filas, m2Disponibles)}
           </div>

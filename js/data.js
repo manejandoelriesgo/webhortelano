@@ -230,7 +230,7 @@ const PLANTAS = {
       atlantica:         { siembra:[0,1,2,3,7,8,9,10], trasplante:[2,3,8,9], cosecha:[3,4,5,10,11] },
       continental_fria:  { siembra:[1,2,3,7,8,9], trasplante:[3,4,8,9], cosecha:[4,5,10,11] },
       continental_calida:{ siembra:[0,1,2,8,9,10,11], trasplante:[2,3,9,10], cosecha:[3,4,5,10,11,0] },
-      mediterranea:      { siembra:[0,1,2,8,9,10,11], trasplante:[2,9,10], cosecha:[3,4,5,10,11,0] },
+      mediterranea:      { siembra:[0,1,2,6,7,8,9,10,11], trasplante:[2,9,10], cosecha:[3,4,5,7,8,10,11,0] },
       semiarida:         { siembra:[0,1,2,8,9,10,11], trasplante:[1,2,9,10], cosecha:[2,3,4,10,11,0] },
       subtropical:       { siembra:[0,1,2,3,8,9,10,11], trasplante:[1,2,9,10], cosecha:[2,3,4,5,10,11,0] }
     }
@@ -1187,6 +1187,30 @@ const PLANTAS = {
       semiarida:         { siembra:[2,3,9,10], trasplante:[3,4,10,11], cosecha:[5,6,7,8] },
       subtropical:       { siembra:[0,1,2,9,10,11], trasplante:[2,3,10,11], cosecha:[4,5,6,7,8] }
     }
+  },
+
+  rucula: {
+    nombre: 'Rúcula',
+    categoria: 'hortaliza',
+    dificultad: 'facil',
+    rendimiento: 'Cosecha continua cortando hojas exteriores. Lista en 20-30 días desde la siembra.',
+    perenne: false,
+    metodo: 'directo',
+    profundidad_cm: 0.5,
+    germinacion_dias: 6,
+    litros_maceta: 5,
+    comparte_maceta: true,
+    unidades_por_maceta: 8,
+    modo_siembra: 'hilera',
+    densidad: 16,
+    calendar: {
+      atlantica:         { siembra:[1,2,3,4,5,6,7,8,9], trasplante:[], cosecha:[2,3,4,5,6,7,8,9,10] },
+      continental_fria:  { siembra:[2,3,4,5,6,7,8], trasplante:[], cosecha:[3,4,5,6,7,8,9] },
+      continental_calida:{ siembra:[1,2,3,4,8,9], trasplante:[], cosecha:[2,3,4,5,9,10] },
+      mediterranea:      { siembra:[0,1,2,3,6,7,8,9,10], trasplante:[], cosecha:[1,2,3,4,7,8,9,10,11] },
+      semiarida:         { siembra:[1,2,3,9,10], trasplante:[], cosecha:[2,3,4,10,11] },
+      subtropical:       { siembra:[0,1,2,3,9,10,11], trasplante:[], cosecha:[1,2,3,4,10,11,0] }
+    }
   }
 };
 
@@ -1234,7 +1258,8 @@ const PLANTA_EXTRA = {
   cilantro:      { m2: 0.03, rendimiento: 'Hojas frescas en 30 días. Sembrar en tandas para cosecha continua.', modo_siembra: 'mata', unidades_sugeridas: 3, metodo: 'directo', profundidad_cm: 0.5, germinacion_dias: 10, cantidad_recomendada: 3 },
   hierbabuena:   { m2: 0.10, rendimiento: 'Muy productiva: hojas frescas de primavera a otoño cada año.', modo_siembra: 'mata', unidades_sugeridas: 1, metodo: 'esqueje', profundidad_cm: 0, germinacion_dias: 0, cantidad_recomendada: 1 },
   cebollino:     { m2: 0.03, rendimiento: 'Cortar y vuelve a crecer: cosecha continua durante toda la temporada.', modo_siembra: 'mata', unidades_sugeridas: 2, metodo: 'directo', profundidad_cm: 0.5, germinacion_dias: 14, cantidad_recomendada: 2 },
-  laurel:        { m2: 0.25, rendimiento: 'Perenne: hojas disponibles todo el año durante décadas.', modo_siembra: 'mata', unidades_sugeridas: 1, metodo: 'esqueje', profundidad_cm: 0, germinacion_dias: 0, cantidad_recomendada: 1 }
+  laurel:        { m2: 0.25, rendimiento: 'Perenne: hojas disponibles todo el año durante décadas.', modo_siembra: 'mata', unidades_sugeridas: 1, metodo: 'esqueje', profundidad_cm: 0, germinacion_dias: 0, cantidad_recomendada: 1 },
+  rucula:        { m2: 0.025, rendimiento: 'Cosecha continua cortando hojas exteriores. Lista en 20-30 días.', modo_siembra: 'hilera', densidad: 16, metodo: 'directo', profundidad_cm: 0.5, germinacion_dias: 6 }
 };
 
 Object.entries(PLANTA_EXTRA).forEach(([id, extra]) => {
