@@ -537,16 +537,32 @@
       // Recomendación de espacio conjunto (toma el máximo espacio_min del grupo)
       const espacioMax = Math.max(...seleccionadas.map(id => PLANTAS[id].espacio_min));
 
-      // Aviso de incompatibilidad en el grupo (arriba de todo)
+      // Recoger razones reales de los pares para mostrarlas en el aviso superior
+      const razonesIncompat = pares
+        .map(([idA, idB]) => {
+          const compatA = COMPATIBILIDAD[idA], compatB = COMPATIBILIDAD[idB];
+          return compatA?.malas?.find(x => x.id === idB)?.razon || compatB?.malas?.find(x => x.id === idA)?.razon || null;
+        })
+        .filter(Boolean);
+      const razonesCompat = pares
+        .map(([idA, idB]) => {
+          const compatA = COMPATIBILIDAD[idA], compatB = COMPATIBILIDAD[idB];
+          return compatA?.buenas?.find(x => x.id === idB)?.razon || compatB?.buenas?.find(x => x.id === idA)?.razon || null;
+        })
+        .filter(Boolean);
+
+      // Aviso de incompatibilidad/compatibilidad en el grupo (arriba de todo), con las razones reales
       const avisoHTML = hayIncompatibilidad
         ? `<div style="padding:14px 18px;background:#FFF1F2;border:1px solid #FECDD3;border-radius:var(--radio-card);margin-bottom:16px;">
             <strong style="color:#BE123C;font-size:14px;">⚠ Hay al menos una pareja incompatible en este grupo.</strong>
-            <span style="font-size:13px;color:var(--texto-sec);"> Revisa los detalles abajo y sepáralas si puedes.</span>
+            <span style="font-size:13px;color:var(--texto-sec);"> Sepáralas mínimo 50–100 cm si puedes.</span>
+            ${razonesIncompat.length ? `<ul style="margin:8px 0 0;padding-left:20px;font-size:13px;color:var(--texto-sec);">${razonesIncompat.map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
           </div>`
         : hayCompatibilidad
         ? `<div style="padding:14px 18px;background:var(--verde-bg);border-radius:var(--radio-card);margin-bottom:16px;">
-            <strong style="color:var(--verde);font-size:14px;">✓ Puedes cultivarlas juntas.</strong>
+            <strong style="color:var(--verde);font-size:14px;">✓ Son buenas compañeras.</strong>
             <span style="font-size:13px;color:var(--texto-sec);"> Espacio mínimo recomendado entre ellas: ${espacioMax} cm.</span>
+            ${razonesCompat.length ? `<ul style="margin:8px 0 0;padding-left:20px;font-size:13px;color:var(--texto-sec);">${razonesCompat.map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
           </div>`
         : `<div style="padding:14px 18px;background:var(--fondo);border-radius:var(--radio-card);margin-bottom:16px;">
             <span style="font-size:13px;color:var(--texto-sec);">No hay relaciones conocidas (ni buenas ni malas) entre estas plantas. Puedes cultivarlas juntas con normalidad respetando ${espacioMax} cm entre ellas.</span>
