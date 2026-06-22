@@ -188,10 +188,10 @@
           <li class="nav-dropdown">
             <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">Herramientas <span class="dd-arrow" aria-hidden="true" style="font-size:11px;transition:transform .2s;">▾</span></button>
             <ul class="nav-dropdown-menu" role="menu">
+              <li><a href="compatibilidad-plantas.html">Compatibilidad de plantas</a></li>
               <li><a href="calculadora-riego.html">Calculadora de riego</a></li>
               <li><a href="calculadora-espacio.html">Calculadora de espacio</a></li>
               <li><a href="calculadora-ahorro.html">Calculadora de ahorro</a></li>
-              <li><a href="compatibilidad-plantas.html">Compatibilidad de plantas</a></li>
               <li><a href="guia-temporadas.html">Guía de temporadas</a></li>
               <li><a href="guia-plagas.html">Guía de plagas</a></li>
             </ul>
@@ -217,10 +217,10 @@
         <li>
           <button class="mob-dropdown-btn" aria-expanded="false" style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);background:none;border:none;cursor:pointer;text-align:left;">Herramientas <span class="mob-dd-arrow" aria-hidden="true" style="font-size:11px;transition:transform .2s;">▾</span></button>
           <ul style="display:none;list-style:none;margin:0;padding:0;background:var(--fondo);">
+            <li><a href="compatibilidad-plantas.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Compatibilidad de plantas</a></li>
             <li><a href="calculadora-riego.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Calculadora de riego</a></li>
             <li><a href="calculadora-espacio.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Calculadora de espacio</a></li>
             <li><a href="calculadora-ahorro.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Calculadora de ahorro</a></li>
-            <li><a href="compatibilidad-plantas.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Compatibilidad de plantas</a></li>
             <li><a href="guia-temporadas.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Guía de temporadas</a></li>
             <li><a href="guia-plagas.html" style="display:block;padding:10px 24px 10px 40px;font-size:14px;font-weight:500;color:var(--texto);text-decoration:none;">Guía de plagas</a></li>
           </ul>
@@ -286,6 +286,7 @@
           <div class="plant-tabs" id="tabs-fruta"></div>
           <div class="cat-header">Aromáticas</div>
           <div class="plant-tabs" id="tabs-aromatica"></div>
+          <p style="font-size:13px;color:var(--texto-sec);margin:12px 0 0;">Selecciona hasta 3 plantas para ver su compatibilidad entre ellas.</p>
           <div id="resultado-compat" style="margin-top:28px;"></div>
         </div>
 
@@ -363,10 +364,10 @@
         <ul>
           <li><a href="planificador-huerto.html">Planifica tu huerto</a></li>
           <li><a href="calendario-siembra.html">Calendario de siembra</a></li>
+          <li><a href="compatibilidad-plantas.html">Compatibilidad de plantas</a></li>
           <li><a href="calculadora-riego.html">Calculadora de riego</a></li>
           <li><a href="calculadora-espacio.html">Calculadora de espacio</a></li>
           <li><a href="calculadora-ahorro.html">Calculadora de ahorro</a></li>
-          <li><a href="compatibilidad-plantas.html">Compatibilidad de plantas</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -396,6 +397,8 @@
   <script src="../js/data.js"></script>
   <script src="../js/compatibilidad.js"></script>
   <script>
+    let seleccionadas = [];
+
     function buildTabs(cat, containerId) {
       const container = document.getElementById(containerId);
       getPlantasPorCategoria(cat).forEach(([id]) => {
@@ -404,7 +407,7 @@
         btn.className = 'plant-tab';
         btn.textContent = p.nombre;
         btn.dataset.id = id;
-        btn.onclick = () => seleccionarPlanta(id, btn);
+        btn.onclick = () => togglePlanta(id, btn);
         container.appendChild(btn);
       });
     }
@@ -412,62 +415,115 @@
     buildTabs('fruta',     'tabs-fruta');
     buildTabs('aromatica', 'tabs-aromatica');
 
-    function seleccionarPlanta(id, btn) {
-      document.querySelectorAll('.plant-tab').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-      renderCompat(id);
+    function togglePlanta(id, btn) {
+      const yaActiva = seleccionadas.includes(id);
+      if (yaActiva) {
+        seleccionadas = seleccionadas.filter(x => x !== id);
+        btn.classList.remove('active');
+      } else {
+        if (seleccionadas.length >= 3) {
+          const out = document.getElementById('resultado-compat');
+          out.insertAdjacentHTML('afterbegin', '<p style="color:#BE123C;font-size:13px;margin-bottom:12px;">Máximo 3 plantas. Quita una para añadir otra.</p>');
+          setTimeout(() => { const w = out.querySelector('p'); if (w) w.remove(); }, 2500);
+          return;
+        }
+        seleccionadas.push(id);
+        btn.classList.add('active');
+      }
+      renderCompat();
     }
 
-    function renderCompat(id) {
-      const planta = PLANTAS[id];
-      const compat  = COMPATIBILIDAD[id];
-      const out     = document.getElementById('resultado-compat');
+    function renderCompat() {
+      const out = document.getElementById('resultado-compat');
       const difLabel = { facil:'Fácil', media:'Media', dificil:'Difícil' };
 
-      if (!compat) {
-        out.innerHTML = `<div class="no-datos">Sin datos de compatibilidad para esta planta todavía.</div>`;
+      if (seleccionadas.length === 0) {
+        out.innerHTML = `<div class="no-datos">Selecciona una o varias plantas arriba para ver su compatibilidad.</div>`;
         return;
       }
 
-      const renderItems = lista => {
-        if (!lista || lista.length === 0) return `<div class="no-datos" style="padding:16px 0;font-size:13px;">No hay incompatibilidades conocidas</div>`;
-        return lista.map(item => {
-          const p2 = PLANTAS[item.id];
-          return `<div class="compat-item">
-            <div class="compat-item-icon">${p2 ? p2.nombre.substring(0,2).toUpperCase() : '??'}</div>
-            <div class="compat-item-text">
-              <h5>${p2 ? p2.nombre : item.id}</h5>
-              <p>${item.razon}</p>
+      if (seleccionadas.length === 1) {
+        const id = seleccionadas[0];
+        const planta = PLANTAS[id];
+        const compat = COMPATIBILIDAD[id];
+        if (!compat) {
+          out.innerHTML = `<div class="no-datos">Sin datos de compatibilidad para esta planta todavía.</div>`;
+          return;
+        }
+        const renderItems = lista => {
+          if (!lista || lista.length === 0) return `<div class="no-datos" style="padding:16px 0;font-size:13px;">No hay incompatibilidades conocidas</div>`;
+          return lista.map(item => {
+            const p2 = PLANTAS[item.id];
+            return `<div class="compat-item">
+              <div class="compat-item-icon">${p2 ? p2.nombre.substring(0,2).toUpperCase() : '??'}</div>
+              <div class="compat-item-text">
+                <h5>${p2 ? p2.nombre : item.id}</h5>
+                <p>${item.razon}</p>
+              </div>
+            </div>`;
+          }).join('');
+        };
+        out.innerHTML = `
+          <div class="plant-info-bar">
+            <h3>${planta.nombre}</h3>
+            <span class="dif-badge dif-${planta.dificultad}">${difLabel[planta.dificultad]}</span>
+            <span style="font-size:13px;color:var(--texto-sec);">${planta.descripcion}</span>
+          </div>
+          <div class="compat-grid">
+            <div class="compat-block buenas">
+              <h4>Buenas compañeras (${compat.buenas?.length || 0})</h4>
+              ${renderItems(compat.buenas)}
             </div>
-          </div>`;
-        }).join('');
-      };
+            <div class="compat-block malas">
+              <h4>Plantas incompatibles (${compat.malas?.length || 0})</h4>
+              ${renderItems(compat.malas)}
+            </div>
+          </div>
+          ${planta.rendimiento ? `
+          <div style="margin-top:20px;padding:16px 20px;background:var(--verde-bg);border-radius:var(--radio-card);">
+            <div style="font-size:12px;font-weight:700;color:var(--verde);text-transform:uppercase;margin-bottom:4px;">Rendimiento esperado</div>
+            <div style="font-size:14px;">${planta.rendimiento}</div>
+          </div>` : ''}
+          ${buildAfiliadosHTML(planta)}
+        `;
+        return;
+      }
+
+      // 2 o 3 plantas: mostrar compatibilidad cruzada por pares
+      const pares = [];
+      for (let i = 0; i < seleccionadas.length; i++) {
+        for (let j = i + 1; j < seleccionadas.length; j++) {
+          pares.push([seleccionadas[i], seleccionadas[j]]);
+        }
+      }
+
+      const filasHTML = pares.map(([idA, idB]) => {
+        const a = PLANTAS[idA], b = PLANTAS[idB];
+        const compatA = COMPATIBILIDAD[idA], compatB = COMPATIBILIDAD[idB];
+        const buenas = compatA?.buenas?.some(x => x.id === idB) || compatB?.buenas?.some(x => x.id === idA);
+        const malas = compatA?.malas?.some(x => x.id === idB) || compatB?.malas?.some(x => x.id === idA);
+        const razon = compatA?.buenas?.find(x => x.id === idB)?.razon || compatB?.buenas?.find(x => x.id === idA)?.razon
+                   || compatA?.malas?.find(x => x.id === idB)?.razon || compatB?.malas?.find(x => x.id === idA)?.razon || '';
+        const badge = buenas ? '<span class="cmp-badge-yes">✓ Compatibles</span>'
+                    : malas ? '<span class="cmp-badge-no">✗ Incompatibles</span>'
+                    : '<span class="cmp-badge-neutral">Relación neutra</span>';
+        return `<div class="compat-item" style="align-items:center;">
+          <div class="compat-item-text" style="flex:1;">
+            <h5>${a.nombre} + ${b.nombre}</h5>
+            ${razon ? `<p>${razon}</p>` : ''}
+          </div>
+          ${badge}
+        </div>`;
+      }).join('');
 
       out.innerHTML = `
         <div class="plant-info-bar">
-          <h3>${planta.nombre}</h3>
-          <span class="dif-badge dif-${planta.dificultad}">${difLabel[planta.dificultad]}</span>
-          <span style="font-size:13px;color:var(--texto-sec);">${planta.descripcion}</span>
+          <h3>${seleccionadas.map(id => PLANTAS[id].nombre).join(' + ')}</h3>
         </div>
-
-        <div class="compat-grid">
-          <div class="compat-block buenas">
-            <h4>Buenas compañeras (${compat.buenas?.length || 0})</h4>
-            ${renderItems(compat.buenas)}
-          </div>
-          <div class="compat-block malas">
-            <h4>Plantas incompatibles (${compat.malas?.length || 0})</h4>
-            ${renderItems(compat.malas)}
-          </div>
+        <div class="compat-block" style="background:var(--fondo);border:1px solid var(--borde);">
+          <h4 style="color:var(--texto-sec);">Compatibilidad entre las plantas elegidas</h4>
+          ${filasHTML}
         </div>
-
-        ${planta.rendimiento ? `
-        <div style="margin-top:20px;padding:16px 20px;background:var(--verde-bg);border-radius:var(--radio-card);">
-          <div style="font-size:12px;font-weight:700;color:var(--verde);text-transform:uppercase;margin-bottom:4px;">Rendimiento esperado</div>
-          <div style="font-size:14px;">${planta.rendimiento}</div>
-        </div>` : ''}
-
-        ${buildAfiliadosHTML(planta)}
       `;
     }
 
@@ -494,8 +550,6 @@
         </div>
       `;
     }
-
-    document.querySelector('.plant-tab')?.click();
 
     /* ============ COMPARADOR ============ */
     function setModo(modo, btn) {
