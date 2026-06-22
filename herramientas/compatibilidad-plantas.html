@@ -489,13 +489,17 @@
         return;
       }
 
-      // 2 o 3 plantas: mostrar compatibilidad cruzada por pares
+      // 2 o 3 plantas: mostrar compatibilidad cruzada por pares + ficha enriquecida
+      const difLabel2 = { facil:'Fácil', media:'Media', dificil:'Difícil' };
       const pares = [];
       for (let i = 0; i < seleccionadas.length; i++) {
         for (let j = i + 1; j < seleccionadas.length; j++) {
           pares.push([seleccionadas[i], seleccionadas[j]]);
         }
       }
+
+      let hayIncompatibilidad = false;
+      let hayCompatibilidad = false;
 
       const filasHTML = pares.map(([idA, idB]) => {
         const a = PLANTAS[idA], b = PLANTAS[idB];
@@ -504,6 +508,8 @@
         const malas = compatA?.malas?.some(x => x.id === idB) || compatB?.malas?.some(x => x.id === idA);
         const razon = compatA?.buenas?.find(x => x.id === idB)?.razon || compatB?.buenas?.find(x => x.id === idA)?.razon
                    || compatA?.malas?.find(x => x.id === idB)?.razon || compatB?.malas?.find(x => x.id === idA)?.razon || '';
+        if (malas) hayIncompatibilidad = true;
+        if (buenas) hayCompatibilidad = true;
         const badge = buenas ? '<span class="cmp-badge-yes">✓ Compatibles</span>'
                     : malas ? '<span class="cmp-badge-no">✗ Incompatibles</span>'
                     : '<span class="cmp-badge-neutral">Relación neutra</span>';
@@ -516,14 +522,76 @@
         </div>`;
       }).join('');
 
+      // Mini-fichas de cada planta elegida
+      const fichasHTML = seleccionadas.map(id => {
+        const p = PLANTAS[id];
+        return `<div style="background:white;border:1px solid var(--borde);border-radius:8px;padding:12px 14px;flex:1;min-width:140px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <strong style="font-size:14px;">${p.nombre}</strong>
+            <span class="dif-badge dif-${p.dificultad}" style="font-size:11px;">${difLabel2[p.dificultad]}</span>
+          </div>
+          <div style="font-size:12px;color:var(--texto-sec);">Espacio: ${p.espacio_min} cm · Cosecha: ${p.tiempo_cosecha}</div>
+        </div>`;
+      }).join('');
+
+      // Recomendación de espacio conjunto (toma el máximo espacio_min del grupo)
+      const espacioMax = Math.max(...seleccionadas.map(id => PLANTAS[id].espacio_min));
+
+      // Aviso de incompatibilidad en el grupo (arriba de todo)
+      const avisoHTML = hayIncompatibilidad
+        ? `<div style="padding:14px 18px;background:#FFF1F2;border:1px solid #FECDD3;border-radius:var(--radio-card);margin-bottom:16px;">
+            <strong style="color:#BE123C;font-size:14px;">⚠ Hay al menos una pareja incompatible en este grupo.</strong>
+            <span style="font-size:13px;color:var(--texto-sec);"> Revisa los detalles abajo y sepáralas si puedes.</span>
+          </div>`
+        : hayCompatibilidad
+        ? `<div style="padding:14px 18px;background:var(--verde-bg);border-radius:var(--radio-card);margin-bottom:16px;">
+            <strong style="color:var(--verde);font-size:14px;">✓ Puedes cultivarlas juntas.</strong>
+            <span style="font-size:13px;color:var(--texto-sec);"> Espacio mínimo recomendado entre ellas: ${espacioMax} cm.</span>
+          </div>`
+        : `<div style="padding:14px 18px;background:var(--fondo);border-radius:var(--radio-card);margin-bottom:16px;">
+            <span style="font-size:13px;color:var(--texto-sec);">No hay relaciones conocidas (ni buenas ni malas) entre estas plantas. Puedes cultivarlas juntas con normalidad respetando ${espacioMax} cm entre ellas.</span>
+          </div>`;
+
+      // Productos Amazon combinados de las plantas elegidas
+      const prodsCombinados = seleccionadas.flatMap(id => {
+        const p = PLANTAS[id];
+        return p.amazon ? Object.values(p.amazon).slice(0, 2) : [];
+      });
+      const amazonHTML = prodsCombinados.length ? `
+        <div style="margin-top:16px;padding:20px;background:#FFFBF0;border:1px solid #FDE68A;border-radius:var(--radio-card);">
+          <div style="font-size:12px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;">Para cultivarlas en casa</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;">
+            ${prodsCombinados.map(prod => `
+              <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
+                <div style="font-size:13px;font-weight:600;margin-bottom:4px;">${prod.nombre}</div>
+                <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
+                <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21"
+                   target="_blank" rel="noopener sponsored"
+                   style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
+                  Ver en Amazon →
+                </a>
+              </div>
+            `).join('')}
+          </div>
+        </div>` : '';
+
       out.innerHTML = `
         <div class="plant-info-bar">
           <h3>${seleccionadas.map(id => PLANTAS[id].nombre).join(' + ')}</h3>
         </div>
+
+        ${avisoHTML}
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+          ${fichasHTML}
+        </div>
+
         <div class="compat-block" style="background:var(--fondo);border:1px solid var(--borde);">
           <h4 style="color:var(--texto-sec);">Compatibilidad entre las plantas elegidas</h4>
           ${filasHTML}
         </div>
+
+        ${amazonHTML}
       `;
     }
 
