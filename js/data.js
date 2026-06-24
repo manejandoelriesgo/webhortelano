@@ -92,7 +92,7 @@ const PLANTAS = {
       general: ['Necesita mínimo 6 horas de sol directo al día','Entutora las ramas cuando alcance 30 cm','Elimina los brotes laterales (chupones) cada semana','Riega por la base, nunca sobre las hojas']
     },
     calendar: {
-      atlantica:         { siembra:[1,2], trasplante:[3,4], cosecha:[6,7,8,9] },
+      atlantica:         { siembra:[1,2], trasplante:[4,5], cosecha:[6,7,8,9] },
       continental_fria:  { siembra:[2,3], trasplante:[4,5], cosecha:[7,8,9] },
       continental_calida:{ siembra:[1,2,3], trasplante:[3,4], cosecha:[6,7,8,9] },
       mediterranea:      { siembra:[1,2,3], trasplante:[3,4], cosecha:[6,7,8,9] },
@@ -525,12 +525,12 @@ const PLANTAS = {
       general: ['Las variedades remontantes producen primavera y otoño','Enterrar solo las raíces: la corona (base de hojas) debe quedar visible','Regar en la base para evitar podredumbre del fruto','Los estolones (tallos rastreros) producen plantas nuevas gratis']
     },
     calendar: {
-      atlantica:         { siembra:[7,8], trasplante:[8,9], cosecha:[4,5,6,9,10] },
-      continental_fria:  { siembra:[7,8], trasplante:[8,9], cosecha:[5,6,10] },
-      continental_calida:{ siembra:[7,8], trasplante:[8,9], cosecha:[3,4,5,9,10] },
-      mediterranea:      { siembra:[7,8], trasplante:[8,9], cosecha:[3,4,5,9,10] },
-      semiarida:         { siembra:[7,8,9], trasplante:[9,10], cosecha:[2,3,4,9,10] },
-      subtropical:       { siembra:[8,9], trasplante:[9,10], cosecha:[1,2,3,10,11] }
+      atlantica:         { siembra:[9,10], trasplante:[10,11], cosecha:[3,4,5,6,9,10] },
+      continental_fria:  { siembra:[9,10], trasplante:[10,11], cosecha:[4,5,6] },
+      continental_calida:{ siembra:[8,9], trasplante:[9,10], cosecha:[2,3,4,9,10] },
+      mediterranea:      { siembra:[8,9], trasplante:[9,10], cosecha:[2,3,4,9,10] },
+      semiarida:         { siembra:[8,9,10], trasplante:[9,10,11], cosecha:[1,2,3,9,10] },
+      subtropical:       { siembra:[9,10], trasplante:[10,11], cosecha:[0,1,2,10,11] }
     }
   },
 
