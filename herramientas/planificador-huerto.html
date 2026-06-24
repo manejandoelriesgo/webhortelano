@@ -914,7 +914,7 @@
                 <div class="amazon-item-nombre">${prod.nombre}</div>
                 <div class="amazon-item-desc">${prod.desc} — para ${nombre}</div>
               </div>
-              <a href="https://www.amazon.es/s?k=${encodeURIComponent(prod.nombre)}&tag=imagu90-21" target="_blank" rel="noopener sponsored" class="btn btn-amazon btn-sm">Amazon</a>
+              <a href="${prod.url || ('https://www.amazon.es/s?k=' + encodeURIComponent(prod.nombre) + '&tag=imagu90-21')}" target="_blank" rel="noopener sponsored" class="btn btn-amazon btn-sm">Amazon</a>
             </div>`).join('')}
         </div>`;
       }
