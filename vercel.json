@@ -11,6 +11,20 @@
     { "source": "/materiales-huerto-urbano",       "destination": "/materiales-huerto-urbano.html" },
     { "source": "/calculadora-ahorro-huerto",      "destination": "/herramientas/calculadora-ahorro.html" },
     { "source": "/aviso-legal",                    "destination": "/aviso-legal.html" },
-    { "source": "/privacidad",                     "destination": "/privacidad.html" }
+    { "source": "/privacidad",                     "destination": "/privacidad.html" },
+    { "source": "/consejos/aprovechar-balcon-pequeno",      "destination": "/consejos/aprovechar-balcon-pequeno.html" },
+    { "source": "/consejos/calendario-siembra-espana",      "destination": "/consejos/calendario-siembra-espana.html" },
+    { "source": "/consejos/guia-siembra-principiantes",     "destination": "/consejos/guia-siembra-principiantes.html" },
+    { "source": "/consejos/huerto-urbano-en-piso",          "destination": "/consejos/huerto-urbano-en-piso.html" },
+    { "source": "/consejos/mejores-macetas-tomate-balcon",  "destination": "/consejos/mejores-macetas-tomate-balcon.html" },
+    { "source": "/consejos/plantas-faciles-huerto-urbano",  "destination": "/consejos/plantas-faciles-huerto-urbano.html" },
+    { "source": "/consejos/que-plantar-en-julio",           "destination": "/consejos/que-plantar-en-julio.html" },
+    { "source": "/consejos/que-plantar-en-junio",           "destination": "/consejos/que-plantar-en-junio.html" },
+    { "source": "/consejos/riego-por-goteo-balcon",         "destination": "/consejos/riego-por-goteo-balcon.html" },
+    { "source": "/consejos/sustratos-huerto-urbano",        "destination": "/consejos/sustratos-huerto-urbano.html" },
+    { "source": "/consejos/tomates-en-balcon",              "destination": "/consejos/tomates-en-balcon.html" },
+    { "source": "/consejos/que-plantar-agosto",             "destination": "/consejos/que-plantar-agosto.html" },
+    { "source": "/consejos/que-sustrato-necesita-cada-planta", "destination": "/consejos/que-sustrato-necesita-cada-planta.html" },
+    { "source": "/consejos/regar-plantas-vacaciones",       "destination": "/consejos/regar-plantas-vacaciones.html" }
   ]
 }
