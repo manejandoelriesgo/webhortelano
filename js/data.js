@@ -1010,7 +1010,7 @@ const PLANTAS = {
       semillas: { nombre: 'Limonero en maceta 3L', desc: 'Variedad Verna, la más común en España', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta 40L para cítricos', desc: 'Con buen drenaje inferior', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
       sustrato:  { nombre: 'Sustrato específico cítricos', desc: 'pH 5.5-6.5 y muy drenante', tag: 'imagu90-21', url: 'https://amzn.to/4xN9xym' },
-      abono:    { nombre: 'Abono cítricos con hierro quelado', desc: 'Previene la clorosis tan común en limoneros', tag: 'imagu90-21' }
+      abono:    { nombre: 'Abono cítricos con hierro quelado', desc: 'Previene la clorosis tan común en limoneros', tag: 'imagu90-21', url: 'https://amazon.es/dp/B01IDLUBHO' }
     },
     tips: {
       general: ['Meter en casa cuando baje de 5 °C en zonas frías','El exceso de agua es el principal problema: drenaje imprescindible','Abono con hierro quelado si las hojas amarillean con venas verdes','En maceta produce menos que en tierra pero durante décadas']

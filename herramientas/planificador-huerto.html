@@ -912,7 +912,7 @@
             <div class="amazon-item">
               <div class="amazon-item-info">
                 <div class="amazon-item-nombre">${prod.nombre}</div>
-                <div class="amazon-item-desc">${prod.desc} — para ${nombre}</div>
+                <div class="amazon-item-desc">${prod.desc}${nombre ? ' — para ' + nombre : ''}</div>
               </div>
               <a href="${prod.url || ('https://www.amazon.es/s?k=' + encodeURIComponent(prod.nombre) + '&tag=imagu90-21')}" target="_blank" rel="noopener sponsored" class="btn btn-amazon btn-sm">Amazon</a>
             </div>`).join('')}
@@ -923,6 +923,7 @@
         cat('🪴 Sustrato', sustratos, 2),
         tieneMacetas===false ? cat('🏺 Macetas', macetasP, macetasP.length) : '',
         cat('🌿 Abono', abonos, 2),
+        cat('🌱 Semillero', [{ nombre: '', prod: { nombre: 'Semillero con tapa', desc: 'Acelera la germinación si siembras desde semilla', url: 'https://amzn.to/4f2sFAf' } }], 1),
       ].filter(Boolean).join('');
       if(!catHTML) return '';
       return `<div class="plan-section"><h4>Lo que necesitas para empezar</h4>
