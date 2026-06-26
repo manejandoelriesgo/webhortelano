@@ -25,6 +25,7 @@
     { "source": "/consejos/tomates-en-balcon",              "destination": "/consejos/tomates-en-balcon.html" },
     { "source": "/consejos/que-plantar-agosto",             "destination": "/consejos/que-plantar-agosto.html" },
     { "source": "/consejos/que-sustrato-necesita-cada-planta", "destination": "/consejos/que-sustrato-necesita-cada-planta.html" },
-    { "source": "/consejos/regar-plantas-vacaciones",       "destination": "/consejos/regar-plantas-vacaciones.html" }
+    { "source": "/consejos/regar-plantas-vacaciones",       "destination": "/consejos/regar-plantas-vacaciones.html" },
+    { "source": "/consejos/abono-huerto-urbano",            "destination": "/consejos/abono-huerto-urbano.html" }
   ]
 }
