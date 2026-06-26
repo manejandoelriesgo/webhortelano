@@ -83,7 +83,7 @@ const PLANTAS = {
     tiempo_cosecha: '60-80 días desde trasplante',
     litros_maceta: 20, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas de tomate variado', desc: 'Pack con 10 variedades de tomate', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas de tomate variado', desc: 'Pack con 10 variedades de tomate', tag: 'imagu90-21', url: 'https://amzn.to/4wxh7Mv' },
       maceta:   { nombre: 'Maceta de 30L', desc: 'Ideal para tomates en terraza', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
       sustrato:  { nombre: 'Sustrato para hortalizas', desc: 'Mezcla especial con perlita', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono tomates y pimientos', desc: 'Fórmula específica para frutos', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
@@ -110,7 +110,7 @@ const PLANTAS = {
     tiempo_cosecha: '70-90 días desde trasplante',
     litros_maceta: 15, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas de pimiento variado', desc: 'Dulces, picantes y de asar', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas de pimiento variado', desc: 'Dulces, picantes y de asar', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta 25L con sistema riego', desc: 'Incluye reserva de agua', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
       sustrato:  { nombre: 'Sustrato premium hortalizas', desc: 'pH equilibrado para pimientos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono líquido pimiento', desc: 'Rico en potasio para frutos', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
@@ -137,7 +137,7 @@ const PLANTAS = {
     tiempo_cosecha: '70-80 días desde trasplante',
     litros_maceta: 20, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas berenjena negra', desc: 'Variedad listada tradicional española', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas berenjena negra', desc: 'Variedad listada tradicional española', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Maceta 30L rectangular', desc: 'Perfecta para terrazas', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
       sustrato:  { nombre: 'Sustrato universal con perlita', desc: 'Excelente drenaje garantizado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono granulado humus de lombriz', desc: 'Natural y de liberación lenta', tag: 'imagu90-21' }
@@ -164,7 +164,7 @@ const PLANTAS = {
     tiempo_cosecha: '45-55 días desde siembra directa',
     litros_maceta: 25, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas calabacín verde', desc: 'Alta germinación garantizada', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas calabacín verde', desc: 'Alta germinación garantizada', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta cuadrada 50L', desc: 'Amplio espacio para raíces', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
       sustrato:  { nombre: 'Sustrato con abono incorporado', desc: 'Listo para usar desde el primer día', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado líquido', desc: 'Estimula el crecimiento rápido', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
@@ -191,7 +191,7 @@ const PLANTAS = {
     tiempo_cosecha: '50-65 días desde siembra',
     litros_maceta: 18, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas pepino variado', desc: 'Pepino largo, corto y para encurtir', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas pepino variado', desc: 'Pepino largo, corto y para encurtir', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Tutor espiral para trepadoras', desc: 'Guía el crecimiento sin atar la planta', tag: 'imagu90-21', url: 'https://amzn.to/4gB7Iyr' },
       sustrato:  { nombre: 'Sustrato ligero bien drenado', desc: 'Mezcla óptima para cucurbitáceas', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono para cucurbitáceas', desc: 'Fórmula específica para pepino', tag: 'imagu90-21' }
@@ -218,7 +218,7 @@ const PLANTAS = {
     tiempo_cosecha: '45-60 días',
     litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 3,
     amazon: {
-      semillas: { nombre: 'Semillas lechuga mix', desc: '5 variedades: romana, batavia, lollo...', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas lechuga mix', desc: '5 variedades: romana, batavia, lollo...', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Jardinera balcón 60cm', desc: 'Ideal para lechugas en fila', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
       sustrato:  { nombre: 'Sustrato para hortalizas de hoja', desc: 'Ligero y con buena retención', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado hoja verde', desc: 'Para lechugas y hojas en general', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -245,7 +245,7 @@ const PLANTAS = {
     tiempo_cosecha: '40-50 días',
     litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
     amazon: {
-      semillas: { nombre: 'Semillas espinaca gigante', desc: 'Variedad de hoja grande muy productiva', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas espinaca gigante', desc: 'Variedad de hoja grande muy productiva', tag: 'imagu90-21', url: 'https://amzn.to/4eyDLOm' },
       maceta:   { nombre: 'Maceta rectangular 40cm', desc: 'Perfecta para espinacas en ventana', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
       sustrato:  { nombre: 'Sustrato hortalizas de hoja', desc: 'Rico en nitrógeno orgánico', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Humus de lombriz granulado', desc: 'Abono natural para hoja verde', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -272,7 +272,7 @@ const PLANTAS = {
     tiempo_cosecha: '70-80 días',
     litros_maceta: 12, perenne: false, comparte_maceta: true, unidades_por_maceta: 8,
     amazon: {
-      semillas: { nombre: 'Semillas zanahoria Nantesa', desc: 'Variedad clásica dulce y productiva', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas zanahoria Nantesa', desc: 'Variedad clásica dulce y productiva', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta profunda 40cm', desc: 'Mínimo 30cm de profundidad para raíces', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
       sustrato:  { nombre: 'Sustrato sin piedras para raíces', desc: 'Textura fina, ideal para zanahorias', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono bajo en nitrógeno', desc: 'Exceso de N bifurca las raíces', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -299,7 +299,7 @@ const PLANTAS = {
     tiempo_cosecha: '25-35 días',
     litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 10,
     amazon: {
-      semillas: { nombre: 'Semillas rábano Cherry Belle', desc: 'Redondo, rojísimo y muy rápido', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas rábano Cherry Belle', desc: 'Redondo, rojísimo y muy rápido', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Jardinera poco profunda 30cm', desc: 'Los rábanos son superficiales', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
       sustrato:  { nombre: 'Sustrato fino y ligero', desc: 'Para que los rábanos crezcan sin obstáculos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Compost casero en pastilla', desc: 'Enriquece cualquier sustrato', tag: 'imagu90-21' }
@@ -326,7 +326,7 @@ const PLANTAS = {
     tiempo_cosecha: '90-120 días',
     litros_maceta: 10, perenne: false, comparte_maceta: true, unidades_por_maceta: 5,
     amazon: {
-      semillas: { nombre: 'Bulbillos de cebolla blanca', desc: 'Fácil de plantar, resultados seguros', tag: 'imagu90-21' },
+      semillas: { nombre: 'Bulbillos de cebolla blanca', desc: 'Fácil de plantar, resultados seguros', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta rectangular larga', desc: 'Espacio para varias cebollas en fila', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
       sustrato:  { nombre: 'Sustrato hortalizas con drenaje', desc: 'No aguanta el encharcamiento', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono fosfórico para bulbos', desc: 'Engorda los bulbos subterráneos', tag: 'imagu90-21', url: 'https://amzn.to/4xHBCY9' }
@@ -353,7 +353,7 @@ const PLANTAS = {
     tiempo_cosecha: '150-180 días',
     litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 5,
     amazon: {
-      semillas: { nombre: 'Cabezas ajo blanco para siembra', desc: 'Ajo local de calidad, muy productivo', tag: 'imagu90-21' },
+      semillas: { nombre: 'Cabezas ajo blanco para siembra', desc: 'Ajo local de calidad, muy productivo', tag: 'imagu90-21', url: 'https://amzn.to/4w4Gfd8' },
       maceta:   { nombre: 'Maceta profunda para ajos', desc: 'Profundidad mínima 20cm', tag: 'imagu90-21', url: 'https://amzn.to/4oO8iej' },
       sustrato:  { nombre: 'Sustrato con buena aireación', desc: 'Fundamental para bulbos sanos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono de otoño para bulbos', desc: 'Abonado de fondo en la plantación', tag: 'imagu90-21', url: 'https://amzn.to/4xHBCY9' }
@@ -380,7 +380,7 @@ const PLANTAS = {
     tiempo_cosecha: '120-150 días',
     litros_maceta: 10, perenne: false, comparte_maceta: true, unidades_por_maceta: 5,
     amazon: {
-      semillas: { nombre: 'Semillas puerro gigante Carentan', desc: 'Variedad tradicional muy resistente', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas puerro gigante Carentan', desc: 'Variedad tradicional muy resistente', tag: 'imagu90-21', url: 'https://amzn.to/4eyDLOm' },
       maceta:   { nombre: 'Maceta alta 40cm profundidad', desc: 'El puerro necesita mucha profundidad', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
       sustrato:  { nombre: 'Sustrato enriquecido con compost', desc: 'Alta fertilidad para cultivos lentos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono orgánico lenta liberación', desc: 'Ideal para cultivos de larga duración', tag: 'imagu90-21', url: 'https://amzn.to/4xHBCY9' }
@@ -488,7 +488,7 @@ const PLANTAS = {
     tiempo_cosecha: '60-80 días',
     litros_maceta: 15, perenne: false, comparte_maceta: true, unidades_por_maceta: 4,
     amazon: {
-      semillas: { nombre: 'Semillas guisante tirabeque', desc: 'Se come la vaina entera, muy dulce', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas guisante tirabeque', desc: 'Se come la vaina entera, muy dulce', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Tutor espiral para trepadoras', desc: 'Guía el crecimiento sin atar la planta', tag: 'imagu90-21', url: 'https://amzn.to/4gB7Iyr' },
       sustrato:  { nombre: 'Sustrato fresco y nutritivo', desc: 'Le gusta el fresco primaveral', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono fosfórico y potásico', desc: 'Para favorecer la floración y fruto', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -543,7 +543,7 @@ const PLANTAS = {
     tiempo_cosecha: '50-65 días desde trasplante',
     litros_maceta: 15, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas tomate cherry mix', desc: 'Amarillo, naranja, rojo y negro', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas tomate cherry mix', desc: 'Amarillo, naranja, rojo y negro', tag: 'imagu90-21', url: 'https://amzn.to/4wxh7Mv' },
       maceta:   { nombre: 'Maceta 20L con soporte', desc: 'Con tutor incluido para el tallo', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
       sustrato:  { nombre: 'Sustrato tomates y frutas', desc: 'Alta fertilidad para producciones', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono tomate líquido', desc: 'Aplicar cada 15 días en floración', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
@@ -598,7 +598,7 @@ const PLANTAS = {
     tiempo_cosecha: '30-40 días desde siembra',
     litros_maceta: 5, perenne: false, comparte_maceta: true, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas albahaca genovesa', desc: 'La variedad más aromática para cocina', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas albahaca genovesa', desc: 'La variedad más aromática para cocina', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Kit hierbas aromáticas 3 macetas', desc: 'Para albahaca, perejil y cilantro', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato aromáticas y hierbas', desc: 'Drenaje excelente, poco abonado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono líquido aromáticas', desc: 'Solo en verano, dosis baja', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -625,7 +625,7 @@ const PLANTAS = {
     tiempo_cosecha: '70-90 días desde siembra',
     litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 2,
     amazon: {
-      semillas: { nombre: 'Semillas perejil rizado', desc: 'Variedad clásica muy aromática', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas perejil rizado', desc: 'Variedad clásica muy aromática', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta cerámica 15cm', desc: 'Ideal para ventana o balcón', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato hierbas aromáticas', desc: 'Ligero y bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado suave', desc: 'Para hojas más grandes y verdes', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -652,7 +652,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne: cosechar durante todo el año',
     litros_maceta: 10, perenne: true, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta romero en maceta 15cm', desc: 'Lista para usar, ya crecida', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta romero en maceta 15cm', desc: 'Lista para usar, ya crecida', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta terracota 25cm', desc: 'El barro favorece el drenaje del romero', tag: 'imagu90-21', url: 'https://amzn.to/4oO8iej' },
       sustrato:  { nombre: 'Sustrato pobre con arena', desc: 'Mezclar con arena 30% para drenaje, mezclar con sustrato universal + esta perlita', tag: 'imagu90-21', url: 'https://amzn.to/4oORowf' },
       abono:    { nombre: 'Abono para mediterráneas', desc: 'Poco abono: se estresa con exceso', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -679,7 +679,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne: cosechar todo el año',
     litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta tomillo común', desc: 'Listo para cocina, ya grande', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta tomillo común', desc: 'Listo para cocina, ya grande', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta terracota pequeña', desc: 'El tomillo no necesita mucho espacio', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato drenante mediterráneo', desc: 'Arena y piedra pómez incluidas, mezclar con sustrato universal + esta perlita', tag: 'imagu90-21', url: 'https://amzn.to/4oORowf' },
       abono:    { nombre: 'Abono mínimo para perennes', desc: 'Solo en primavera, dosis baja', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -706,7 +706,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne desde primavera',
     litros_maceta: 8, perenne: true, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta menta piperita', desc: 'La más aromática para infusiones', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta menta piperita', desc: 'La más aromática para infusiones', tag: 'imagu90-21', url: 'https://amzn.to/43ZYc0n' },
       maceta:   { nombre: 'Maceta 20cm con plato', desc: 'Contener la menta es obligatorio', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato húmedo para menta', desc: 'Le gusta más humedad que otras aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado hojas', desc: 'Para hojas más grandes y jugosas', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -733,7 +733,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne',
     litros_maceta: 5, perenne: true, comparte_maceta: true, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta orégano griego', desc: 'El más aromático para pizza y pasta', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta orégano griego', desc: 'El más aromático para pizza y pasta', tag: 'imagu90-21', url: 'https://amzn.to/4oV6H6K' },
       maceta:   { nombre: 'Maceta cerámica 18cm', desc: 'Tamaño ideal para orégano', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato drenante mediterráneo', desc: 'No le gusta la humedad excesiva, mezclar con sustrato universal + esta perlita', tag: 'imagu90-21', url: 'https://amzn.to/4oORowf' },
       abono:    { nombre: 'Abono orgánico suave aromáticas', desc: 'Solo en primavera', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -762,7 +762,7 @@ const PLANTAS = {
     tiempo_cosecha: '65-80 días desde trasplante',
     litros_maceta: 15, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas pimiento de Padrón', desc: 'Variedad original gallega certificada', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas pimiento de Padrón', desc: 'Variedad original gallega certificada', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta 25L para pimientos', desc: 'Ideal para terraza y balcón', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
       sustrato:  { nombre: 'Sustrato premium hortalizas', desc: 'pH equilibrado para pimientos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono líquido pimiento', desc: 'Rico en potasio para frutos', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
@@ -843,7 +843,7 @@ const PLANTAS = {
     tiempo_cosecha: '90-120 días',
     litros_maceta: 40, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas calabaza cacahuete', desc: 'Variedad Butternut, muy sabrosa', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas calabaza cacahuete', desc: 'Variedad Butternut, muy sabrosa', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Contenedor grande 60L', desc: 'La calabaza necesita mucho sustrato', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
       sustrato:  { nombre: 'Sustrato con abono incorporado', desc: 'Muy nutritivo para cucurbitáceas grandes', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado líquido', desc: 'Estimula el crecimiento vigoroso', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
@@ -926,7 +926,7 @@ const PLANTAS = {
     tiempo_cosecha: '80-100 días desde siembra',
     litros_maceta: 40, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas sandía mini Sugar Baby', desc: 'Frutos pequeños, perfectos para maceta', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas sandía mini Sugar Baby', desc: 'Frutos pequeños, perfectos para maceta', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Contenedor 50L con drenaje', desc: 'Para variedades mini en terraza', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
       sustrato:  { nombre: 'Sustrato rico cucurbitáceas', desc: 'Mezcla nutritiva para frutos grandes', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono potásico para melón y sandía', desc: 'Aumenta el dulzor del fruto', tag: 'imagu90-21', url: 'https://amzn.to/44qRmBb' }
@@ -953,7 +953,7 @@ const PLANTAS = {
     tiempo_cosecha: '80-100 días desde siembra',
     litros_maceta: 40, perenne: false, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Semillas melón piel de sapo', desc: 'La variedad española más fácil y dulce', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas melón piel de sapo', desc: 'La variedad española más fácil y dulce', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Contenedor 40L rectangular', desc: 'Espacio mínimo para melón en terraza', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
       sustrato:  { nombre: 'Sustrato nutritivo cucurbitáceas', desc: 'Alta fertilidad para frutos grandes', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono potásico dulzor melón', desc: 'Aumenta el azúcar en el fruto', tag: 'imagu90-21', url: 'https://amzn.to/44qRmBb' }
@@ -980,7 +980,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne: cosecha en verano y otoño',
     litros_maceta: 50, perenne: true, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta higuera en maceta', desc: 'Lista para plantar, variedad Brown Turkey', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta higuera en maceta', desc: 'Lista para plantar, variedad Brown Turkey', tag: 'imagu90-21', url: 'https://amzn.to/4oLYAck' },
       maceta:   { nombre: 'Maceta 50L para árboles frutales', desc: 'Tamaño mínimo para higuera en terraza', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
       sustrato:  { nombre: 'Sustrato frutal con perlita', desc: 'Buen drenaje para árboles en maceta', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono frutal de lenta liberación', desc: 'Una aplicación al año en primavera', tag: 'imagu90-21', url: 'https://amzn.to/3QFLPU5' }
@@ -1007,7 +1007,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne: florece y fructifica todo el año',
     litros_maceta: 50, perenne: true, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Limonero en maceta 3L', desc: 'Variedad Verna, la más común en España', tag: 'imagu90-21' },
+      semillas: { nombre: 'Limonero en maceta 3L', desc: 'Variedad Verna, la más común en España', tag: 'imagu90-21', url: 'https://amzn.to/4wdva9G' },
       maceta:   { nombre: 'Maceta 40L para cítricos', desc: 'Con buen drenaje inferior', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
       sustrato:  { nombre: 'Sustrato específico cítricos', desc: 'pH 5.5-6.5 y muy drenante', tag: 'imagu90-21', url: 'https://amzn.to/4xN9xym' },
       abono:    { nombre: 'Abono cítricos con hierro quelado', desc: 'Previene la clorosis tan común en limoneros', tag: 'imagu90-21', url: 'https://amazon.es/dp/B01IDLUBHO' }
@@ -1034,7 +1034,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne: cosecha en otoño',
     litros_maceta: 50, perenne: true, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta granado en maceta', desc: 'Variedad Mollar de Elche, la más dulce', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta granado en maceta', desc: 'Variedad Mollar de Elche, la más dulce', tag: 'imagu90-21', url: 'https://amzn.to/4xScmOU' },
       maceta:   { nombre: 'Maceta 40L para arbustos frutales', desc: 'Tamaño adecuado para granado', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
       sustrato:  { nombre: 'Sustrato frutal mediterráneo', desc: 'Bien drenado y con cal', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono frutal primaveral', desc: 'Una aplicación al inicio de la temporada', tag: 'imagu90-21', url: 'https://amzn.to/3QFLPU5' }
@@ -1090,7 +1090,7 @@ const PLANTAS = {
     tiempo_cosecha: '30-45 días desde siembra',
     litros_maceta: 8, perenne: false, comparte_maceta: true, unidades_por_maceta: 2,
     amazon: {
-      semillas: { nombre: 'Semillas cilantro lento a boltar', desc: 'Variedad de siembra escalonada', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas cilantro lento a boltar', desc: 'Variedad de siembra escalonada', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta cerámica 20cm', desc: 'Ideal para cilantro en ventana', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato ligero aromáticas', desc: 'Drenaje excelente para cilantro', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado suave hojas', desc: 'Potencia el crecimiento de hojas', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -1117,7 +1117,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne desde primavera',
     litros_maceta: 8, perenne: true, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta hierbabuena en maceta', desc: 'Lista para usar, aroma suave y fresco', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta hierbabuena en maceta', desc: 'Lista para usar, aroma suave y fresco', tag: 'imagu90-21', url: 'https://amzn.to/43ZYc0n' },
       maceta:   { nombre: 'Maceta 20cm con plato', desc: 'Contener la expansión es obligatorio', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato húmedo para mentas', desc: 'Le gusta más humedad que otras aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado hojas', desc: 'Para hojas más grandes y aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -1144,7 +1144,7 @@ const PLANTAS = {
     tiempo_cosecha: '60-90 días; perenne tras primer año',
     litros_maceta: 8, perenne: true, comparte_maceta: true, unidades_por_maceta: 3,
     amazon: {
-      semillas: { nombre: 'Semillas cebollino fino', desc: 'El clásico para ensaladas y tortillas', tag: 'imagu90-21' },
+      semillas: { nombre: 'Semillas cebollino fino', desc: 'El clásico para ensaladas y tortillas', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta cerámica 15cm', desc: 'Compacto, ideal para ventana de cocina', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
       sustrato:  { nombre: 'Sustrato aromáticas y hierbas', desc: 'Ligero y bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono nitrogenado líquido suave', desc: 'Aplicar cada mes en primavera-verano', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
@@ -1171,7 +1171,7 @@ const PLANTAS = {
     tiempo_cosecha: 'Perenne: cosechar hojas todo el año',
     litros_maceta: 30, perenne: true, comparte_maceta: false, unidades_por_maceta: 1,
     amazon: {
-      semillas: { nombre: 'Planta laurel en maceta 20cm', desc: 'Lista para usar, hojas ya aromáticas', tag: 'imagu90-21' },
+      semillas: { nombre: 'Planta laurel en maceta 20cm', desc: 'Lista para usar, hojas ya aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/44tqzUW' },
       maceta:   { nombre: 'Maceta 30L para laurel', desc: 'El laurel crece bastante: maceta generosa', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
       sustrato:  { nombre: 'Sustrato universal bien drenado', desc: 'Al laurel no le gustan los pies húmedos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
       abono:    { nombre: 'Abono anual plantas perennes', desc: 'Una aplicación en primavera es suficiente', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }

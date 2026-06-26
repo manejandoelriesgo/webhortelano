@@ -900,7 +900,7 @@
       const seenSust=new Set(), seenAbono=new Set();
       plantas.forEach(p=>{
         if(!p.amazon) return;
-        if(p.amazon.semillas) semillas.push({nombre:p.nombre,prod:p.amazon.semillas});
+        if(p.amazon.semillas && p.amazon.semillas.url) semillas.push({nombre:p.nombre,prod:p.amazon.semillas});
         if(p.amazon.sustrato&&!seenSust.has(p.amazon.sustrato.nombre)){seenSust.add(p.amazon.sustrato.nombre);sustratos.push({nombre:p.nombre,prod:p.amazon.sustrato});}
         if(p.amazon.maceta)   macetasP.push({nombre:p.nombre,prod:p.amazon.maceta});
         if(p.amazon.abono&&!seenAbono.has(p.amazon.abono.nombre)){seenAbono.add(p.amazon.abono.nombre);abonos.push({nombre:p.nombre,prod:p.amazon.abono});}
