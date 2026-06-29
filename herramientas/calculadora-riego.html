@@ -264,15 +264,6 @@
       </div>
 
       <select id="r-zona" style="display:none;"></select>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="r-contenedor">Tipo de cultivo</label>
-          <select id="r-contenedor" onchange="calcular()">
-            <option value="0">En tierra / huerto</option>
-            <option value="1">En maceta o contenedor</option>
-          </select>
-        </div>
-      </div>
 
       <div class="form-group">
         <label>Selecciona tus plantas (elige una para ver el detalle)</label>
@@ -424,8 +415,7 @@
     if (!plantaSeleccionada || !selZona.value) { document.getElementById('resultado-riego').classList.add('hidden'); return; }
     const zonaId    = selZona.value;
     const numPlantas = parseInt(document.getElementById('r-num').value) || 1;
-    const esMaceta  = document.getElementById('r-contenedor').value === '1';
-    const res       = calcularRiego(plantaSeleccionada, zonaId, numPlantas, esMaceta);
+    const res       = calcularRiego(plantaSeleccionada, zonaId, numPlantas);
     const planta    = PLANTAS[plantaSeleccionada];
     const zona      = ZONAS[zonaId];
 
@@ -439,7 +429,7 @@
       <div class="resultado-riego">
         <div class="resultado-header">
           <h3>${planta.nombre} · ${zona.nombre}</h3>
-          <p>${numPlantas} planta${numPlantas>1?'s':''} · ${esMaceta?'En maceta':'En tierra'} · <span class="estacion-badge ${estClass[res.estacion]}">${estLabel[res.estacion]}</span></p>
+          <p>${numPlantas} planta${numPlantas>1?'s':''} · <span class="estacion-badge ${estClass[res.estacion]}">${estLabel[res.estacion]}</span></p>
         </div>
         <div class="resultado-stats">
           <div class="resultado-stat">
@@ -454,6 +444,9 @@
             <span class="val">Cada ${res.frecuencia_dias}d</span>
             <span class="lbl">Frecuencia de riego</span>
           </div>
+        </div>
+        <div class="resultado-ejemplo" style="background:#f0f7f0;border-radius:10px;padding:14px 18px;margin:16px 0;font-size:15px;line-height:1.5;">
+          💡 Si tu maceta de <strong>${planta.nombre.toLowerCase()}</strong> es de <strong>${res.litros_maceta}L</strong> (el tamaño típico recomendado), cada vez que riegues échale aproximadamente <strong>${res.litros_sesion_por_planta}L</strong> de agua (~${res.pct_maceta}% del volumen de la maceta, ajustado a tu zona y la estación actual).
         </div>
         <div class="resultado-consejo">
           <strong>Consejo:</strong> ${res.consejo}
@@ -472,10 +465,10 @@
   }
 
   const RIEGO_PRODUCTOS = [
-    { nombre: 'Kit riego por goteo balcón', desc: 'Sistema completo para macetas. Ahorra hasta 70% de agua.', q: 'kit+riego+goteo+balcon+macetas' },
-    { nombre: 'Regadera precisión pitorro largo', desc: 'Riego en la base sin mojar hojas. Reduce hongos.', q: 'regadera+pitorro+largo+precision+huerto' },
-    { nombre: 'Medidor humedad sustrato', desc: 'Evita regar de más o de menos. Lectura instantánea.', q: 'medidor+humedad+sustrato+plantas+huerto' },
-    { nombre: 'Programador de riego automático', desc: 'Riega solo aunque no estés en casa.', q: 'programador+riego+automatico+grifo' },
+    { nombre: 'Kit riego por goteo balcón', desc: 'Sistema completo para macetas. Ahorra hasta 70% de agua.', url: 'https://amzn.to/3SKPwsf' },
+    { nombre: 'Regadera precisión pitorro largo', desc: 'Riego en la base sin mojar hojas. Reduce hongos.', url: 'https://amzn.to/4g1OLoC' },
+    { nombre: 'Medidor humedad sustrato', desc: 'Evita regar de más o de menos. Lectura instantánea.', url: 'https://amzn.to/4esd8KY' },
+    { nombre: 'Programador de riego automático', desc: 'Riega solo aunque no estés en casa.', url: 'https://amzn.to/4uFXzE7' },
   ];
 
   function buildAfiliadosRiego(planta) {
@@ -488,8 +481,8 @@
             <div style="background:white;border:1px solid #BFDBFE;border-radius:8px;padding:12px;">
               <div style="font-size:13px;font-weight:600;margin-bottom:4px;color:var(--texto);">${prod.nombre}</div>
               <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${prod.desc}</div>
-              <a href="https://www.amazon.es/s?k=${prod.q}&tag=imagu90-21"
-                 target="_blank" rel="noopener sponsored"
+              <a href="${prod.url}"
+                 target="_blank" rel="nofollow sponsored"
                  style="display:inline-block;font-size:11px;font-weight:700;color:#1D4ED8;text-decoration:none;border:1px solid #BFDBFE;border-radius:6px;padding:4px 10px;background:#EFF6FF;">
                 Ver en Amazon →
               </a>
