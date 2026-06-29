@@ -462,6 +462,18 @@ const COMPATIBILIDAD = {
       { id: 'melon',       razon: 'Misma familia, mejor no mezclarlas para evitar competencia y plagas compartidas.' },
       { id: 'calabaza',    razon: 'Misma familia (cucurbitáceas), compiten por espacio y comparten plagas.' }
     ]
+  },
+
+  rucula: {
+    buenas: [
+      { id: 'tomate',      razon: 'No comparten familia ni plagas, y el tomate da sombra parcial que beneficia a la rúcula en los meses más calurosos.' },
+      { id: 'pimiento',    razon: 'Sin competencia por nutrientes ni plagas comunes, hay buen aprovechamiento del espacio bajo el pimiento.' },
+      { id: 'berenjena',   razon: 'Misma lógica que con tomate y pimiento: sin solapamiento de plagas ni necesidades nutricionales.' },
+      { id: 'calabacin',   razon: 'Cubre el suelo y la rúcula crece rápido entre sus primeras fases, antes de que ocupe todo el espacio.' }
+    ],
+    malas: [
+      { id: 'radano',      razon: 'Ambas son crucíferas: compiten por los mismos nutrientes y son susceptibles a las mismas plagas, como la pulguilla.' }
+    ]
   }
 
 };
