@@ -486,17 +486,17 @@
   const AMAZON_TEMPORADA = {
     primavera: [
       { nombre: 'Kit semillas primavera', desc: 'Tomate, pimiento, pepino, calabacín', q: 'kit+semillas+primavera+huerto' },
-      { nombre: 'Sustrato para hortalizas', desc: 'Con perlita, para la renovación de macetas', q: 'sustrato+hortalizas+maceta+perlita' },
-      { nombre: 'Semilleros con tapa', desc: 'Para arrancar la temporada con buen pie', q: 'semillero+bandeja+tapa+germinacion' },
+      { nombre: 'Sustrato para hortalizas', desc: 'Con perlita, para la renovación de macetas', url: 'https://amzn.to/4w2949X' },
+      { nombre: 'Semilleros con tapa', desc: 'Para arrancar la temporada con buen pie', url: 'https://amzn.to/4f2sFAf' },
     ],
     verano: [
-      { nombre: 'Programador de riego', desc: 'Imprescindible para las vacaciones de verano', q: 'programador+riego+automatico+grifo' },
+      { nombre: 'Programador de riego', desc: 'Imprescindible para las vacaciones de verano', url: 'https://amzn.to/4uFXzE7' },
       { nombre: 'Mulching / paja', desc: 'Reduce la temperatura del sustrato y el riego', q: 'mulching+paja+huerto+maceta' },
-      { nombre: 'Jabón potásico', desc: 'Contra pulgón y mosca blanca de verano', q: 'jabon+potasico+insecticida+ecologico' },
+      { nombre: 'Jabón potásico', desc: 'Contra pulgón y mosca blanca de verano', url: 'https://amzn.to/4xLx7vB' },
     ],
     otono: [
       { nombre: 'Semillas de otoño-invierno', desc: 'Lechuga, espinaca, acelga, brócoli', q: 'semillas+otono+invierno+hortaliza' },
-      { nombre: 'Abono de liberación lenta', desc: 'Prepara el sustrato para la siguiente temporada', q: 'abono+liberacion+lenta+huerto' },
+      { nombre: 'Abono de liberación lenta', desc: 'Prepara el sustrato para la siguiente temporada', url: 'https://amzn.to/3QFLPU5' },
       { nombre: 'Ajos para plantar', desc: 'Octubre es el mejor mes para plantar ajo', q: 'ajos+semilla+plantar+huerto' },
     ],
     invierno: [
@@ -622,7 +622,7 @@
             <div style="background:white;border:1px solid #FDE68A;border-radius:8px;padding:12px;">
               <div style="font-size:13px;font-weight:600;margin-bottom:4px;">${p.nombre}</div>
               <div style="font-size:12px;color:var(--texto-sec);margin-bottom:10px;line-height:1.4;">${p.desc}</div>
-              <a href="https://www.amazon.es/s?k=${p.q}&tag=imagu90-21" target="_blank" rel="noopener sponsored"
+              <a href="${p.url || ('https://www.amazon.es/s?k=' + p.q + '&tag=imagu90-21')}" target="_blank" rel="nofollow sponsored"
                  style="display:inline-block;font-size:11px;font-weight:700;color:#C2410C;text-decoration:none;border:1px solid #FCA5A5;border-radius:6px;padding:4px 10px;background:#FFF7ED;">
                 Ver en Amazon →
               </a>
