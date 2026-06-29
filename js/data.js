@@ -1203,6 +1203,12 @@ const PLANTAS = {
     unidades_por_maceta: 8,
     modo_siembra: 'hilera',
     densidad: 16,
+    amazon: {
+      semillas: { nombre: 'Semillas de rúcula', desc: 'Variedad estándar de hoja ciclo corto', tag: 'imagu90-21' },
+      maceta:   { nombre: 'Jardinera balcón 60cm', desc: 'Ideal para rúcula en fila, raíz superficial', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
+      sustrato:  { nombre: 'Sustrato para hortalizas de hoja', desc: 'Ligero y con buena retención', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      abono:    { nombre: 'Abono nitrogenado hoja verde', desc: 'Para rúcula y hojas en general', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
+    },
     calendar: {
       atlantica:         { siembra:[1,2,3,4,5,6,7,8,9], trasplante:[], cosecha:[2,3,4,5,6,7,8,9,10] },
       continental_fria:  { siembra:[2,3,4,5,6,7,8], trasplante:[], cosecha:[3,4,5,6,7,8,9] },
