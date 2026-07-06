@@ -518,7 +518,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Plantas de fresa remontante', desc: 'Produce dos veces al año', tag: 'imagu90-21' },
       maceta:   { nombre: 'Macetero vertical fresas', desc: 'Cultivo en vertical ahorra espacio', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
-      sustrato:  { nombre: 'Sustrato específico fresas', desc: 'pH ligeramente ácido ideal', tag: 'imagu90-21', url: 'https://amzn.to/4vrvUYB' },
+      sustrato:  { nombre: 'Sustrato específico fresas', desc: 'pH ligeramente ácido ideal', tag: 'imagu90-21', url: 'https://amzn.to/44xKF0x' },
       abono:    { nombre: 'Abono fresas y aromáticas', desc: 'Potencia el sabor y la producción', tag: 'imagu90-21', url: 'https://amzn.to/4gAjQjd' }
     },
     tips: {
@@ -572,7 +572,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta arándano azul en maceta', desc: 'Lista para plantar, 2 años de edad', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta 30L para arándanos', desc: 'Con orificio de drenaje amplio', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato ácido para arándanos', desc: 'pH 4.5-5.5 imprescindible', tag: 'imagu90-21', url: 'https://amzn.to/4vrvUYB' },
+      sustrato:  { nombre: 'Sustrato ácido para arándanos', desc: 'pH 4.5-5.5 imprescindible', tag: 'imagu90-21', url: 'https://amzn.to/44xKF0x' },
       abono:    { nombre: 'Abono acidificante arándanos', desc: 'Mantiene el pH bajo necesario', tag: 'imagu90-21', url: 'https://amzn.to/4gAjQjd' }
     },
     tips: {
@@ -874,7 +874,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Plantas fresón en maceta', desc: 'Variedad Camarosa de gran fruto', tag: 'imagu90-21' },
       maceta:   { nombre: 'Macetero vertical fresas y fresones', desc: 'Cultivo en vertical ahorra espacio', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
-      sustrato:  { nombre: 'Sustrato específico fresas', desc: 'pH ligeramente ácido ideal', tag: 'imagu90-21', url: 'https://amzn.to/4vrvUYB' },
+      sustrato:  { nombre: 'Sustrato específico fresas', desc: 'pH ligeramente ácido ideal', tag: 'imagu90-21', url: 'https://amzn.to/44xKF0x' },
       abono:    { nombre: 'Abono fresas y fresones', desc: 'Potencia el sabor y el tamaño del fruto', tag: 'imagu90-21', url: 'https://amzn.to/4gAjQjd' }
     },
     tips: {
@@ -901,7 +901,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta frambuesa Heritage', desc: 'Variedad remontante, dos cosechas al año', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta 30L profunda', desc: 'Las frambuesas necesitan profundidad', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato ácido para frutos rojos', desc: 'pH 5.5-6.5 ideal para frambuesas', tag: 'imagu90-21', url: 'https://amzn.to/4vrvUYB' },
+      sustrato:  { nombre: 'Sustrato ácido para frutos rojos', desc: 'pH 5.5-6.5 ideal para frambuesas', tag: 'imagu90-21', url: 'https://amzn.to/44xKF0x' },
       abono:    { nombre: 'Abono frutos rojos', desc: 'Potasio alto para mejorar sabor y color', tag: 'imagu90-21', url: 'https://amzn.to/4gAjQjd' }
     },
     tips: {
@@ -1063,7 +1063,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta mora sin espinas Chester', desc: 'Variedad sin espinas, muy productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Tutor espiral para trepadoras', desc: 'Guía el crecimiento sin atar la planta', tag: 'imagu90-21', url: 'https://amzn.to/4gB7Iyr' },
-      sustrato:  { nombre: 'Sustrato frutos rojos ácido', desc: 'pH ligeramente ácido, bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/4vrvUYB' },
+      sustrato:  { nombre: 'Sustrato frutos rojos ácido', desc: 'pH ligeramente ácido, bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/44xKF0x' },
       abono:    { nombre: 'Abono frutos rojos NPK', desc: 'Estimula la producción de frutos', tag: 'imagu90-21', url: 'https://amzn.to/4gAjQjd' }
     },
     tips: {
