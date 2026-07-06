@@ -85,7 +85,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas de tomate variado', desc: 'Pack con 10 variedades de tomate', tag: 'imagu90-21', url: 'https://amzn.to/4wxh7Mv' },
       maceta:   { nombre: 'Maceta de 30L', desc: 'Ideal para tomates en terraza', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato para hortalizas', desc: 'Mezcla especial con perlita', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato para hortalizas', desc: 'Mezcla especial con perlita', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono tomates y pimientos', desc: 'Fórmula específica para frutos', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
     },
     tips: {
@@ -112,7 +112,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas de pimiento variado', desc: 'Dulces, picantes y de asar', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta 25L con sistema riego', desc: 'Incluye reserva de agua', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
-      sustrato:  { nombre: 'Sustrato premium hortalizas', desc: 'pH equilibrado para pimientos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato premium hortalizas', desc: 'pH equilibrado para pimientos', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono líquido pimiento', desc: 'Rico en potasio para frutos', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
     },
     tips: {
@@ -139,7 +139,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas berenjena negra', desc: 'Variedad listada tradicional española', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Maceta 30L rectangular', desc: 'Perfecta para terrazas', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
-      sustrato:  { nombre: 'Sustrato universal con perlita', desc: 'Excelente drenaje garantizado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato universal con perlita', desc: 'Excelente drenaje garantizado', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono granulado humus de lombriz', desc: 'Natural y de liberación lenta', tag: 'imagu90-21' }
     },
     tips: {
@@ -166,7 +166,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas calabacín verde', desc: 'Alta germinación garantizada', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta cuadrada 50L', desc: 'Amplio espacio para raíces', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato con abono incorporado', desc: 'Listo para usar desde el primer día', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato con abono incorporado', desc: 'Listo para usar desde el primer día', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado líquido', desc: 'Estimula el crecimiento rápido', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
     },
     tips: {
@@ -193,7 +193,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas pepino variado', desc: 'Pepino largo, corto y para encurtir', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Tutor espiral para trepadoras', desc: 'Guía el crecimiento sin atar la planta', tag: 'imagu90-21', url: 'https://amzn.to/4gB7Iyr' },
-      sustrato:  { nombre: 'Sustrato ligero bien drenado', desc: 'Mezcla óptima para cucurbitáceas', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato ligero bien drenado', desc: 'Mezcla óptima para cucurbitáceas', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono para cucurbitáceas', desc: 'Fórmula específica para pepino', tag: 'imagu90-21' }
     },
     tips: {
@@ -220,7 +220,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas lechuga mix', desc: '5 variedades: romana, batavia, lollo...', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Jardinera balcón 60cm', desc: 'Ideal para lechugas en fila', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
-      sustrato:  { nombre: 'Sustrato para hortalizas de hoja', desc: 'Ligero y con buena retención', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato para hortalizas de hoja', desc: 'Ligero y con buena retención', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado hoja verde', desc: 'Para lechugas y hojas en general', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -247,7 +247,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas espinaca gigante', desc: 'Variedad de hoja grande muy productiva', tag: 'imagu90-21', url: 'https://amzn.to/4eyDLOm' },
       maceta:   { nombre: 'Maceta rectangular 40cm', desc: 'Perfecta para espinacas en ventana', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato hortalizas de hoja', desc: 'Rico en nitrógeno orgánico', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato hortalizas de hoja', desc: 'Rico en nitrógeno orgánico', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Humus de lombriz granulado', desc: 'Abono natural para hoja verde', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -274,7 +274,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas zanahoria Nantesa', desc: 'Variedad clásica dulce y productiva', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta profunda 40cm', desc: 'Mínimo 30cm de profundidad para raíces', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato sin piedras para raíces', desc: 'Textura fina, ideal para zanahorias', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato sin piedras para raíces', desc: 'Textura fina, ideal para zanahorias', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono bajo en nitrógeno', desc: 'Exceso de N bifurca las raíces', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -301,7 +301,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas rábano Cherry Belle', desc: 'Redondo, rojísimo y muy rápido', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Jardinera poco profunda 30cm', desc: 'Los rábanos son superficiales', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
-      sustrato:  { nombre: 'Sustrato fino y ligero', desc: 'Para que los rábanos crezcan sin obstáculos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato fino y ligero', desc: 'Para que los rábanos crezcan sin obstáculos', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Compost casero en pastilla', desc: 'Enriquece cualquier sustrato', tag: 'imagu90-21' }
     },
     tips: {
@@ -328,7 +328,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Bulbillos de cebolla blanca', desc: 'Fácil de plantar, resultados seguros', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta rectangular larga', desc: 'Espacio para varias cebollas en fila', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
-      sustrato:  { nombre: 'Sustrato hortalizas con drenaje', desc: 'No aguanta el encharcamiento', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato hortalizas con drenaje', desc: 'No aguanta el encharcamiento', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono fosfórico para bulbos', desc: 'Engorda los bulbos subterráneos', tag: 'imagu90-21', url: 'https://amzn.to/4xHBCY9' }
     },
     tips: {
@@ -355,7 +355,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Cabezas ajo blanco para siembra', desc: 'Ajo local de calidad, muy productivo', tag: 'imagu90-21', url: 'https://amzn.to/4w4Gfd8' },
       maceta:   { nombre: 'Maceta profunda para ajos', desc: 'Profundidad mínima 20cm', tag: 'imagu90-21', url: 'https://amzn.to/4oO8iej' },
-      sustrato:  { nombre: 'Sustrato con buena aireación', desc: 'Fundamental para bulbos sanos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato con buena aireación', desc: 'Fundamental para bulbos sanos', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono de otoño para bulbos', desc: 'Abonado de fondo en la plantación', tag: 'imagu90-21', url: 'https://amzn.to/4xHBCY9' }
     },
     tips: {
@@ -382,7 +382,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas puerro gigante Carentan', desc: 'Variedad tradicional muy resistente', tag: 'imagu90-21', url: 'https://amzn.to/4eyDLOm' },
       maceta:   { nombre: 'Maceta alta 40cm profundidad', desc: 'El puerro necesita mucha profundidad', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato enriquecido con compost', desc: 'Alta fertilidad para cultivos lentos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato enriquecido con compost', desc: 'Alta fertilidad para cultivos lentos', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono orgánico lenta liberación', desc: 'Ideal para cultivos de larga duración', tag: 'imagu90-21', url: 'https://amzn.to/4xHBCY9' }
     },
     tips: {
@@ -409,7 +409,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas brócoli Calabrese', desc: 'Variedad italiana muy productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta grande 40L', desc: 'El brócoli necesita espacio', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato rico en calcio', desc: 'Esencial para las crucíferas', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato rico en calcio', desc: 'Esencial para las crucíferas', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono para crucíferas', desc: 'Equilibrado para col, brócoli y coliflor', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -436,7 +436,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas acelga arcoíris mix', desc: 'Tallos rojos, amarillos y blancos', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta 20L para hortalizas', desc: 'Tamaño ideal para acelgas', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
-      sustrato:  { nombre: 'Sustrato con buen drenaje', desc: 'No le gusta el encharcamiento', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato con buen drenaje', desc: 'No le gusta el encharcamiento', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono orgánico pellets', desc: 'Lenta liberación para cultivos largos', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -463,7 +463,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas judía verde Bobby', desc: 'Mata baja, sin hilos, muy productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta 15L con sustrato', desc: 'Tamaño perfecto para judías de mata', tag: 'imagu90-21', url: 'https://amzn.to/4oO8iej' },
-      sustrato:  { nombre: 'Sustrato ligero para leguminosas', desc: 'Bien aireado y drenante', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato ligero para leguminosas', desc: 'Bien aireado y drenante', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono bajo en nitrógeno', desc: 'Las leguminosas fijan su propio N', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -490,7 +490,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas guisante tirabeque', desc: 'Se come la vaina entera, muy dulce', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Tutor espiral para trepadoras', desc: 'Guía el crecimiento sin atar la planta', tag: 'imagu90-21', url: 'https://amzn.to/4gB7Iyr' },
-      sustrato:  { nombre: 'Sustrato fresco y nutritivo', desc: 'Le gusta el fresco primaveral', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato fresco y nutritivo', desc: 'Le gusta el fresco primaveral', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono fosfórico y potásico', desc: 'Para favorecer la floración y fruto', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -545,7 +545,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas tomate cherry mix', desc: 'Amarillo, naranja, rojo y negro', tag: 'imagu90-21', url: 'https://amzn.to/4wxh7Mv' },
       maceta:   { nombre: 'Maceta 20L con soporte', desc: 'Con tutor incluido para el tallo', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
-      sustrato:  { nombre: 'Sustrato tomates y frutas', desc: 'Alta fertilidad para producciones', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato tomates y frutas', desc: 'Alta fertilidad para producciones', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono tomate líquido', desc: 'Aplicar cada 15 días en floración', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
     },
     tips: {
@@ -600,7 +600,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas albahaca genovesa', desc: 'La variedad más aromática para cocina', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Kit hierbas aromáticas 3 macetas', desc: 'Para albahaca, perejil y cilantro', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
-      sustrato:  { nombre: 'Sustrato aromáticas y hierbas', desc: 'Drenaje excelente, poco abonado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato aromáticas y hierbas', desc: 'Drenaje excelente, poco abonado', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono líquido aromáticas', desc: 'Solo en verano, dosis baja', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -627,7 +627,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas perejil rizado', desc: 'Variedad clásica muy aromática', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta cerámica 15cm', desc: 'Ideal para ventana o balcón', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
-      sustrato:  { nombre: 'Sustrato hierbas aromáticas', desc: 'Ligero y bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato hierbas aromáticas', desc: 'Ligero y bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado suave', desc: 'Para hojas más grandes y verdes', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -708,7 +708,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta menta piperita', desc: 'La más aromática para infusiones', tag: 'imagu90-21', url: 'https://amzn.to/43ZYc0n' },
       maceta:   { nombre: 'Maceta 20cm con plato', desc: 'Contener la menta es obligatorio', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
-      sustrato:  { nombre: 'Sustrato húmedo para menta', desc: 'Le gusta más humedad que otras aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato húmedo para menta', desc: 'Le gusta más humedad que otras aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado hojas', desc: 'Para hojas más grandes y jugosas', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -764,7 +764,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas pimiento de Padrón', desc: 'Variedad original gallega certificada', tag: 'imagu90-21', url: 'https://amzn.to/4xHGMTQ' },
       maceta:   { nombre: 'Maceta 25L para pimientos', desc: 'Ideal para terraza y balcón', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
-      sustrato:  { nombre: 'Sustrato premium hortalizas', desc: 'pH equilibrado para pimientos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato premium hortalizas', desc: 'pH equilibrado para pimientos', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono líquido pimiento', desc: 'Rico en potasio para frutos', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
     },
     tips: {
@@ -791,7 +791,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas haba Aguadulce', desc: 'Variedad clásica española muy productiva', tag: 'imagu90-21' },
       maceta:   { nombre: 'Maceta alta 20L', desc: 'Las habas necesitan algo de profundidad', tag: 'imagu90-21', url: 'https://amzn.to/4g4Qycw' },
-      sustrato:  { nombre: 'Sustrato nutritivo para leguminosas', desc: 'Bien aireado y con buen drenaje', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato nutritivo para leguminosas', desc: 'Bien aireado y con buen drenaje', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono fosfórico y potásico', desc: 'Favorece la formación de vainas', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -818,7 +818,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Patatas de siembra certificadas', desc: 'Variedades tempranas para maceta', tag: 'imagu90-21' },
       maceta:   { nombre: 'Saco de cultivo patatas con ventana', desc: 'Cosecha sin remover toda la tierra', tag: 'imagu90-21', url: 'https://amzn.to/4f2nGAo' },
-      sustrato:  { nombre: 'Sustrato suelto para tubérculos', desc: 'Textura esponjosa para tubérculos grandes', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato suelto para tubérculos', desc: 'Textura esponjosa para tubérculos grandes', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono fosfórico para tubérculos', desc: 'Engrosa los tubérculos bajo tierra', tag: 'imagu90-21', url: 'https://amzn.to/4uRmrc4' }
     },
     tips: {
@@ -845,7 +845,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas calabaza cacahuete', desc: 'Variedad Butternut, muy sabrosa', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Contenedor grande 60L', desc: 'La calabaza necesita mucho sustrato', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
-      sustrato:  { nombre: 'Sustrato con abono incorporado', desc: 'Muy nutritivo para cucurbitáceas grandes', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato con abono incorporado', desc: 'Muy nutritivo para cucurbitáceas grandes', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado líquido', desc: 'Estimula el crecimiento vigoroso', tag: 'imagu90-21', url: 'https://amzn.to/4esOFFj' }
     },
     tips: {
@@ -928,7 +928,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas sandía mini Sugar Baby', desc: 'Frutos pequeños, perfectos para maceta', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Contenedor 50L con drenaje', desc: 'Para variedades mini en terraza', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
-      sustrato:  { nombre: 'Sustrato rico cucurbitáceas', desc: 'Mezcla nutritiva para frutos grandes', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato rico cucurbitáceas', desc: 'Mezcla nutritiva para frutos grandes', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono potásico para melón y sandía', desc: 'Aumenta el dulzor del fruto', tag: 'imagu90-21', url: 'https://amzn.to/44qRmBb' }
     },
     tips: {
@@ -955,7 +955,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas melón piel de sapo', desc: 'La variedad española más fácil y dulce', tag: 'imagu90-21', url: 'https://amzn.to/44wMIlf' },
       maceta:   { nombre: 'Contenedor 40L rectangular', desc: 'Espacio mínimo para melón en terraza', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
-      sustrato:  { nombre: 'Sustrato nutritivo cucurbitáceas', desc: 'Alta fertilidad para frutos grandes', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato nutritivo cucurbitáceas', desc: 'Alta fertilidad para frutos grandes', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono potásico dulzor melón', desc: 'Aumenta el azúcar en el fruto', tag: 'imagu90-21', url: 'https://amzn.to/44qRmBb' }
     },
     tips: {
@@ -982,7 +982,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta higuera en maceta', desc: 'Lista para plantar, variedad Brown Turkey', tag: 'imagu90-21', url: 'https://amzn.to/4oLYAck' },
       maceta:   { nombre: 'Maceta 50L para árboles frutales', desc: 'Tamaño mínimo para higuera en terraza', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
-      sustrato:  { nombre: 'Sustrato frutal con perlita', desc: 'Buen drenaje para árboles en maceta', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato frutal con perlita', desc: 'Buen drenaje para árboles en maceta', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono frutal de lenta liberación', desc: 'Una aplicación al año en primavera', tag: 'imagu90-21', url: 'https://amzn.to/3QFLPU5' }
     },
     tips: {
@@ -1036,7 +1036,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta granado en maceta', desc: 'Variedad Mollar de Elche, la más dulce', tag: 'imagu90-21', url: 'https://amzn.to/4xScmOU' },
       maceta:   { nombre: 'Maceta 40L para arbustos frutales', desc: 'Tamaño adecuado para granado', tag: 'imagu90-21', url: 'https://amzn.to/3SGH39v' },
-      sustrato:  { nombre: 'Sustrato frutal mediterráneo', desc: 'Bien drenado y con cal', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato frutal mediterráneo', desc: 'Bien drenado y con cal', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono frutal primaveral', desc: 'Una aplicación al inicio de la temporada', tag: 'imagu90-21', url: 'https://amzn.to/3QFLPU5' }
     },
     tips: {
@@ -1092,7 +1092,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas cilantro lento a boltar', desc: 'Variedad de siembra escalonada', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta cerámica 20cm', desc: 'Ideal para cilantro en ventana', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
-      sustrato:  { nombre: 'Sustrato ligero aromáticas', desc: 'Drenaje excelente para cilantro', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato ligero aromáticas', desc: 'Drenaje excelente para cilantro', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado suave hojas', desc: 'Potencia el crecimiento de hojas', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -1119,7 +1119,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta hierbabuena en maceta', desc: 'Lista para usar, aroma suave y fresco', tag: 'imagu90-21', url: 'https://amzn.to/43ZYc0n' },
       maceta:   { nombre: 'Maceta 20cm con plato', desc: 'Contener la expansión es obligatorio', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
-      sustrato:  { nombre: 'Sustrato húmedo para mentas', desc: 'Le gusta más humedad que otras aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato húmedo para mentas', desc: 'Le gusta más humedad que otras aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado hojas', desc: 'Para hojas más grandes y aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -1146,7 +1146,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas cebollino fino', desc: 'El clásico para ensaladas y tortillas', tag: 'imagu90-21', url: 'https://amzn.to/4w9KFzj' },
       maceta:   { nombre: 'Maceta cerámica 15cm', desc: 'Compacto, ideal para ventana de cocina', tag: 'imagu90-21', url: 'https://amzn.to/4agS4o5' },
-      sustrato:  { nombre: 'Sustrato aromáticas y hierbas', desc: 'Ligero y bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato aromáticas y hierbas', desc: 'Ligero y bien drenado', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado líquido suave', desc: 'Aplicar cada mes en primavera-verano', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -1173,7 +1173,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Planta laurel en maceta 20cm', desc: 'Lista para usar, hojas ya aromáticas', tag: 'imagu90-21', url: 'https://amzn.to/44tqzUW' },
       maceta:   { nombre: 'Maceta 30L para laurel', desc: 'El laurel crece bastante: maceta generosa', tag: 'imagu90-21', url: 'https://amzn.to/4oIlYYd' },
-      sustrato:  { nombre: 'Sustrato universal bien drenado', desc: 'Al laurel no le gustan los pies húmedos', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato universal bien drenado', desc: 'Al laurel no le gustan los pies húmedos', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono anual plantas perennes', desc: 'Una aplicación en primavera es suficiente', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     tips: {
@@ -1206,7 +1206,7 @@ const PLANTAS = {
     amazon: {
       semillas: { nombre: 'Semillas de rúcula', desc: 'Variedad estándar de hoja ciclo corto', tag: 'imagu90-21' },
       maceta:   { nombre: 'Jardinera balcón 60cm', desc: 'Ideal para rúcula en fila, raíz superficial', tag: 'imagu90-21', url: 'https://amzn.to/4vu8lyJ' },
-      sustrato:  { nombre: 'Sustrato para hortalizas de hoja', desc: 'Ligero y con buena retención', tag: 'imagu90-21', url: 'https://amzn.to/4w2949X' },
+      sustrato:  { nombre: 'Sustrato para hortalizas de hoja', desc: 'Ligero y con buena retención', tag: 'imagu90-21', url: 'https://amzn.to/3QCYh7l' },
       abono:    { nombre: 'Abono nitrogenado hoja verde', desc: 'Para rúcula y hojas en general', tag: 'imagu90-21', url: 'https://amzn.to/4vsSiRJ' }
     },
     calendar: {
