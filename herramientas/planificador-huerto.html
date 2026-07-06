@@ -935,6 +935,7 @@
         return `<div class="amazon-cat"><div class="amazon-cat-titulo">${titulo}</div>
           ${items.slice(0,max).map(({nombre,prod})=>`
             <div class="amazon-item">
+              ${prod.imagen ? `<img src="../${prod.imagen}" alt="${prod.nombre}" style="width:60px;height:60px;object-fit:contain;background:#f7f7f5;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : ''}
               <div class="amazon-item-info">
                 <div class="amazon-item-nombre">${prod.nombre}</div>
                 <div class="amazon-item-desc">${prod.desc}${nombre ? ' — para ' + nombre : ''}</div>
