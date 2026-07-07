@@ -142,7 +142,7 @@ function renderAffiliateProducts(productos) {
     <div class="affiliate-card">
       <div class="affiliate-card-label">Recomendado</div>
       <h4>${p.nombre}</h4>
-      <a href="${p.url}" target="_blank" rel="nofollow noopener" class="amazon-btn">Ver en Amazon</a>
+      <a href="${p.url}" target="_blank" rel="nofollow noopener" class="amazon-btn">🛒 Ver en Amazon</a>
     </div>`).join('');
 }
 
