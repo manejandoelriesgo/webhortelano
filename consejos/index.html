@@ -48,7 +48,7 @@
           </li>
           <li><a href="../herramientas/guia-principiantes.html">¿Cómo empezar?</a></li>
           <li><a href="../materiales-huerto-urbano.html">Materiales</a></li>
-          <li><a href="index.html">Consejos</a></li>
+          <li><a href="index.html">Guías para empezar</a></li>
         </ul>
       </nav>
 <div class="social-icons-desktop" style="display:flex;align-items:center;gap:12px;margin-left:12px;">
@@ -85,7 +85,7 @@
         </li>
         <li><a href="../herramientas/guia-principiantes.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">¿Cómo empezar?</a></li>
         <li><a href="../materiales-huerto-urbano.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--texto);text-decoration:none;">Materiales</a></li>
-        <li><a href="index.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--verde);text-decoration:none;">Consejos</a></li>
+        <li><a href="index.html" style="display:block;padding:12px 24px;font-size:15px;font-weight:600;color:var(--verde);text-decoration:none;">Guías para empezar</a></li>
         <li style="display:flex;gap:16px;padding:16px 24px;">
   <a href="https://www.facebook.com/profile.php?id=61591439676912" target="_blank" rel="noopener" aria-label="Facebook">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.17 2.1 15.95 2 14.66 2 11.97 2 10 3.66 10 6.7v2.8H7v4h3V22h4v-8.5z" fill="var(--texto-sec)"/></svg>
@@ -128,12 +128,22 @@
 
   <section style="padding:56px 0;">
     <div class="container">
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px;">
+      
+      <!-- Filtro de categorías -->
+      <div class="filter-tabs" style="margin-bottom:28px;">
+        <button class="filter-tab active" data-filter="Todas">Todas</button>
+        <button class="filter-tab" data-filter="Cultivo">Cultivo</button>
+        <button class="filter-tab" data-filter="Materiales">Materiales</button>
+        <button class="filter-tab" data-filter="Riego">Riego</button>
+        <button class="filter-tab" data-filter="Calendario">Calendario</button>
+        <button class="filter-tab" data-filter="Para principiantes">Para principiantes</button>
+      </div>
+      <div class="guias-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px;">
 
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;">
           <img src="../img/errores-comunes.jpg" alt="Planta marchita por error de cuidado" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Principiantes</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Para principiantes">Para principiantes</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="errores-comunes-huerto-urbano-principiantes.html" style="color:var(--texto);text-decoration:none;">Errores comunes al empezar un huerto urbano</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Los fallos más habituales al empezar (riego, sustrato, exceso de plantas) y cómo evitarlos con datos reales.</p>
             <a href="errores-comunes-huerto-urbano-principiantes.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -143,7 +153,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;">
           <img src="../img/kit-o-armarlo.jpg" alt="Kit de cultivo con macetas y semillas" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Materiales</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Materiales">Materiales</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="como-montar-tu-kit-de-huerto-urbano.html" style="color:var(--texto);text-decoration:none;">Cómo montar tu propio kit de huerto urbano</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué maceta, sustrato y herramientas necesitas, con productos verificados y sin gastar de más.</p>
             <a href="como-montar-tu-kit-de-huerto-urbano.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -153,7 +163,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;">
           <img src="../img/que-plantar-octubre.jpg" alt="Hortalizas de otoño en macetas de balcón" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Planificación</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Calendario">Calendario</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="que-plantar-en-octubre.html" style="color:var(--texto);text-decoration:none;">Qué plantar en octubre</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Ajo, fresas, guisantes y hortalizas de hoja: octubre es uno de los mejores meses del año.</p>
             <a href="que-plantar-en-octubre.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -163,7 +173,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;">
           <img src="../img/que-necesito-plantar.jpg" alt="Materiales básicos para empezar un huerto en casa" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Materiales</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Materiales">Materiales</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="que-necesito-para-plantar-en-casa.html" style="color:var(--texto);text-decoration:none;">Qué necesitas para empezar a plantar en casa</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">La lista completa de lo que necesitas comprar para montar tu primer huerto: maceta, sustrato, herramientas y riego, con precios reales.</p>
             <a href="que-necesito-para-plantar-en-casa.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -173,7 +183,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/arandanos-en-maceta.jpg" alt="Arándanos madurando en el arbusto" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="arandanos-en-maceta.html" style="color:var(--texto);text-decoration:none;">Cómo cultivar arándanos en maceta</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">El sustrato ácido que casi nadie te cuenta, el riego con agua sin cal y cuándo plantar según tu zona climática.</p>
             <a href="arandanos-en-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -183,7 +193,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/aromaticas-resistentes-maceta.jpg" alt="Aromáticas mediterráneas en macetas" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="aromaticas-resistentes-maceta.html" style="color:var(--texto);text-decoration:none;">Aromáticas resistentes para quien mata las plantas</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Romero, tomillo, orégano y laurel: aguantan sequía, sol y olvido. Casi imposibles de matar y las usas en la cocina.</p>
             <a href="aromaticas-resistentes-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -193,7 +203,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/limonero-en-maceta.jpg" alt="Higuera en maceta con frutos en terraza" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="higuera-en-maceta.html" style="color:var(--texto);text-decoration:none;">Higuera en maceta: cuidados, poda y dos cosechas al año</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Árbol mediterráneo perenne que produce brevas en junio e higos en agosto-octubre. Resistente y longevo.</p>
             <a href="higuera-en-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -203,7 +213,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/limonero-en-maceta.jpg" alt="Limonero con frutos en maceta" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="limonero-en-maceta.html" style="color:var(--texto);text-decoration:none;">Limonero en maceta: cuándo protegerlo del frío</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué maceta, sustrato y riego necesita, y lo más importante: cuándo protegerlo de las heladas según tu zona.</p>
             <a href="limonero-en-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -213,7 +223,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/cuanta-agua-necesita-maceta.jpg" alt="Regadera regando macetas en una terraza" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Riego</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Riego">Riego</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="cuanta-agua-necesita-maceta.html" style="color:var(--texto);text-decoration:none;">Por qué tu maceta necesita más agua que el jardín</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Una planta en maceta bebe un 30-50% más que en el suelo. Te explicamos por qué y cómo calcular los litros exactos.</p>
             <a href="cuanta-agua-necesita-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -223,7 +233,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/frutos-rojos-en-maceta.jpg" alt="Frambuesas maduras en la planta" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="frutos-rojos-en-maceta.html" style="color:var(--texto);text-decoration:none;">Frutos rojos en maceta: frambuesas y moras</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué variedades enanas elegir, cuánto sol según tu zona, riego y poda para tener frutos rojos en el balcón.</p>
             <a href="frutos-rojos-en-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -233,7 +243,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/cuantas-plantas-caben-maceta.jpg" alt="Jardinera con varias plantas de huerto" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Espacio</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="cuantas-plantas-caben-maceta.html" style="color:var(--texto);text-decoration:none;">Cuántas plantas caben en una maceta</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Las reglas del volumen, las familias, la altura y el riego para meter varias plantas sin que compitan entre ellas.</p>
             <a href="cuantas-plantas-caben-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -243,7 +253,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/markus-spiske-sFydXGrt5OA-unsplash.jpg" alt="Plantas en macetas en un balcón soleado en verano" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Riego</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Riego">Riego</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="regar-plantas-vacaciones.html" style="color:var(--texto);text-decoration:none;">Cómo regar las plantas cuando te vas de vacaciones (sin que se mueran)</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Trucos gratis para escapadas cortas y los mejores sistemas automáticos para una semana o más. Sin depender del vecino.</p>
             <a href="regar-plantas-vacaciones.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -253,7 +263,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/que-sustrato-necesita-cada-planta.jpg" alt="Tres macetas en sección mostrando distintos sustratos" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Materiales</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Materiales">Materiales</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="que-sustrato-necesita-cada-planta.html" style="color:var(--texto);text-decoration:none;">Qué sustrato necesita cada planta</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Muchas plantas no crecen por el sustrato equivocado, no por falta de agua. La mezcla correcta para cada caso.</p>
             <a href="que-sustrato-necesita-cada-planta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -263,7 +273,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/que-plantar-agosto.jpg" alt="Semilleros de hortalizas regados en agosto" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Planificación</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Calendario">Calendario</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="que-plantar-agosto.html" style="color:var(--texto);text-decoration:none;">Qué plantar en agosto</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Lo que siembres ahora es lo que cosecharás en otoño. Qué plantar y cómo hacerlo sin que el calor te lo estropee.</p>
             <a href="que-plantar-agosto.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -273,7 +283,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="../img/que-plantar-en-septiembre.jpg" alt="Qué plantar en septiembre" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Planificación</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Calendario">Calendario</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="que-plantar-en-septiembre.html" style="color:var(--texto);text-decoration:none;">Qué plantar en septiembre</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Septiembre es el mejor mes del año para sembrar en huerto urbano: qué plantar según tu zona climática con datos reales de siembra.</p>
             <a href="que-plantar-en-septiembre.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -283,7 +293,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1657411658751-942f204d5bb7?w=600&auto=format&fit=crop" alt="Tomatera con frutos rojos creciendo en maceta en un balcón" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Equipamiento</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Materiales">Materiales</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="mejores-macetas-tomate-balcon.html" style="color:var(--texto);text-decoration:none;">Las mejores macetas para cultivar tomates en balcón</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Tamaño mínimo, material y las mejores opciones: textil, autorriego y barandilla. Guía práctica para no equivocarte.</p>
             <a href="mejores-macetas-tomate-balcon.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -293,7 +303,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.pexels.com/photos/8911771/pexels-photo-8911771.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tomates rojos y verdes creciendo en la planta" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="tomates-en-balcon.html" style="color:var(--texto);text-decoration:none;">Cómo cultivar tomates en un balcón paso a paso</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Variedad, maceta, sustrato, riego y tutores. Todo lo que necesitas para cosechar tomates en casa este verano.</p>
             <a href="tomates-en-balcon.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -303,7 +313,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=75" alt="Calendario de siembra" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Planificación</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Calendario">Calendario</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="calendario-siembra-espana.html" style="color:var(--texto);text-decoration:none;">Calendario de siembra para España: qué plantar cada mes</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Guía mes a mes con las plantas que toca sembrar, trasplantar y cosechar según tu zona climática.</p>
             <a href="calendario-siembra-espana.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -313,7 +323,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=75" alt="Sustrato para huerto urbano" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Materiales</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Materiales">Materiales</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="sustratos-huerto-urbano.html" style="color:var(--texto);text-decoration:none;">Los mejores sustratos para huerto urbano en terraza</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué diferencia al sustrato de la tierra del jardín, cómo elegirlo y cuándo renovarlo para que tus plantas crezcan bien.</p>
             <a href="sustratos-huerto-urbano.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -323,7 +333,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=600&q=75" alt="Compost orgánico para abonar plantas en maceta" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Materiales</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Materiales">Materiales</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="abono-huerto-urbano.html" style="color:var(--texto);text-decoration:none;">Qué abono comprar para tu huerto urbano</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué abono usar según lo que cultives: para frutos, para hoja verde, para floración o para plantas ácidas.</p>
             <a href="abono-huerto-urbano.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -333,7 +343,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.pexels.com/photos/4503736/pexels-photo-4503736.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mujer regando plantas del huerto con regadera" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Riego</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Riego">Riego</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="riego-por-goteo-balcon.html" style="color:var(--texto);text-decoration:none;">Riego por goteo en balcón: guía completa</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Cómo instalar un sistema de riego automático por goteo en tu balcón o terraza sin obras y sin gastar mucho.</p>
             <a href="riego-por-goteo-balcon.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -343,7 +353,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=600&q=75" alt="Plantas fáciles huerto urbano" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Para empezar</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Para principiantes">Para principiantes</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="plantas-faciles-huerto-urbano.html" style="color:var(--texto);text-decoration:none;">10 plantas fáciles para tu primer huerto urbano</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Las 10 plantas con mayor tasa de éxito para principiantes: se adaptan a maceta, necesitan poco espacio y producen rápido.</p>
             <a href="plantas-faciles-huerto-urbano.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -353,7 +363,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.pexels.com/photos/30658652/pexels-photo-30658652.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Balcón soleado con macetas y plantas" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Espacio</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="aprovechar-balcon-pequeno.html" style="color:var(--texto);text-decoration:none;">Cómo aprovechar un balcón pequeño para cultivar</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Trucos de verticalidad, macetas apilables y selección inteligente de plantas para sacar el máximo partido a 2-4 m².</p>
             <a href="aprovechar-balcon-pequeno.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -364,7 +374,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=600&auto=format&fit=crop" alt="Manos plantando semillas en tierra" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Para empezar</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Para principiantes">Para principiantes</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="guia-siembra-principiantes.html" style="color:var(--texto);text-decoration:none;">Guía de siembra para principiantes: tu primer huerto paso a paso</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué necesitas, cómo elegir semillas, preparar el sustrato y sembrar con éxito desde el primer día. Sin tecnicismos.</p>
             <a href="guia-siembra-principiantes.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -374,7 +384,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=600&auto=format&fit=crop" alt="Plantas de huerto en macetas dentro de un piso" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="huerto-urbano-en-piso.html" style="color:var(--texto);text-decoration:none;">Huerto urbano en un piso: cómo cultivar sin jardín ni terraza</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Opciones para quien vive sin balcón: alféizares, luces LED, plantas de interior y los mejores kits para empezar.</p>
             <a href="huerto-urbano-en-piso.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -384,7 +394,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=600&auto=format&fit=crop" alt="Plántulas de verano listas para trasplantar en junio" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Planificación</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Calendario">Calendario</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="que-plantar-en-junio.html" style="color:var(--texto);text-decoration:none;">Qué plantar en junio: la guía mensual para no equivocarte</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué sembrar y trasplantar en junio según tu zona climática, qué evitar con el calor y cómo regar en verano.</p>
             <a href="que-plantar-en-junio.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -394,7 +404,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&auto=format&fit=crop" alt="Huerto de verano bajo el sol de julio" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Planificación</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Calendario">Calendario</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="que-plantar-en-julio.html" style="color:var(--texto);text-decoration:none;">Qué plantar en julio: la guía por zonas para no fallar con el calor</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué sembrar, trasplantar y cosechar en julio según tu zona climática. Con consejos de riego, sombra y acolchado para el calor.</p>
             <a href="que-plantar-en-julio.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -404,7 +414,7 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=600&auto=format&fit=crop" alt="Fresas maduras rojas creciendo en maceta" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo en maceta</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="fresas-en-maceta.html" style="color:var(--texto);text-decoration:none;">Cómo cultivar fresas en maceta: guía paso a paso</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">Qué maceta, sustrato y riego necesitan las fresas para producir bien en balcón o terraza. Con el truco de la corona y las mejores variedades.</p>
             <a href="fresas-en-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
@@ -414,16 +424,35 @@
         <article style="background:white;border:1px solid var(--borde);border-radius:var(--radio-card);overflow:hidden;transition:box-shadow .2s;">
           <img src="https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=600&auto=format&fit=crop" alt="Planta de albahaca fresca en maceta" style="width:100%;height:180px;object-fit:cover;">
           <div style="padding:20px;">
-            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Aromáticas</span>
+            <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;" data-cat="Cultivo">Cultivo</span>
             <h2 style="font-size:18px;margin:8px 0 10px;line-height:1.3;"><a href="albahaca-en-maceta.html" style="color:var(--texto);text-decoration:none;">Cómo cuidar la albahaca en maceta para que no se muera</a></h2>
             <p style="font-size:14px;color:var(--texto-sec);margin-bottom:16px;">El error que mata la albahaca del súper y cómo evitarlo. Riego, luz, poda y el secreto de las flores para tener albahaca fresca todo el verano.</p>
             <a href="albahaca-en-maceta.html" style="font-size:13px;font-weight:700;color:var(--verde);">Leer artículo →</a>
           </div>
         </article>
 
-      </div>
+      </div><!-- /guias-grid -->
     </div>
   </section>
+
+  <script>
+    (function(){
+      var tabs = document.querySelectorAll('.filter-tab[data-filter]');
+      var articles = document.querySelectorAll('.guias-grid article');
+      tabs.forEach(function(tab){
+        tab.addEventListener('click', function(){
+          tabs.forEach(function(t){ t.classList.remove('active'); });
+          tab.classList.add('active');
+          var filter = tab.getAttribute('data-filter');
+          articles.forEach(function(art){
+            var catSpan = art.querySelector('span[data-cat]');
+            var cat = catSpan ? catSpan.getAttribute('data-cat') : '';
+            art.style.display = (filter === 'Todas' || cat === filter) ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
 
   <footer class="site-footer">
   <div class="container">
