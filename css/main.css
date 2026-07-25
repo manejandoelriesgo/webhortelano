@@ -115,7 +115,8 @@ p:last-child { margin-bottom: 0; }
   color: var(--texto);
   text-decoration: none;
 }
-.nav-links a:hover { color: var(--verde); }
+.nav-links a.btn { color: white; }
+.nav-links a:not(.btn):hover { color: var(--verde); }
 .nav-dropdown-btn.btn {
   display: inline-flex;
   align-items: center;
