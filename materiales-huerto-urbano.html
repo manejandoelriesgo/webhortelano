@@ -155,6 +155,7 @@
       <button class="espacio-tab" onclick="mostrarCategoria('herramientas',this)">Herramientas</button>
       <button class="espacio-tab" onclick="mostrarCategoria('riego',this)">Riego</button>
       <button class="espacio-tab" onclick="mostrarCategoria('plagas',this)">Plagas</button>
+      <button class="espacio-tab" onclick="mostrarCategoria('compostaje',this)">Compostaje</button>
     </div>
   </div>
 </div>
@@ -620,6 +621,91 @@
     </div>
   </section>
 
+
+  <!-- ========== COMPOSTAJE ========== -->
+  <section class="kit-section" id="cat-compostaje" style="display:none;scroll-margin-top:80px;">
+    <div class="container">
+      <h2>Compostaje en balcón y terraza: los mejores sistemas</h2>
+      <p class="kit-desc">Convierte los restos de cocina en abono para tus macetas. Ordenados de más económico a más avanzado — elige según el espacio que tengas.</p>
+
+      <div class="kit-grid">
+
+        <a class="kit-item" href="https://amzn.to/4wnU5rG" target="_blank" rel="nofollow sponsored">
+          <div class="kit-photo-wrap">
+            <img src="img/compost-casero-balcon.jpg" alt="" class="kit-item-photo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="kit-item-fallback">♻️</span>
+          </div>
+          <h4>Saco de compostaje con velcro</h4>
+          <ul class="kit-specs">
+            <li>La opción de entrada si nunca has compostado</li>
+            <li>Se llena por arriba, se saca por la apertura de velcro de abajo</li>
+            <li>Ideal para balcones pequeños</li>
+          </ul>
+          <span class="btn-amazon">🛒 Ver en Amazon</span>
+        </a>
+
+        <a class="kit-item" href="https://amzn.to/4hwfYAi" target="_blank" rel="nofollow sponsored">
+          <div class="kit-photo-wrap">
+            <img src="img/compost-casero-balcon.jpg" alt="" class="kit-item-photo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="kit-item-fallback">♻️</span>
+          </div>
+          <h4>Compostador giratorio Outsunny</h4>
+          <ul class="kit-specs">
+            <li>Equilibrio entre precio y comodidad</li>
+            <li>Girando el tambor cada pocos días se airea solo</li>
+            <li>Para balcón grande o terraza</li>
+          </ul>
+          <span class="btn-amazon">🛒 Ver en Amazon</span>
+        </a>
+
+        <a class="kit-item" href="https://amzn.to/4h1Wkw1" target="_blank" rel="nofollow sponsored">
+          <div class="kit-photo-wrap">
+            <img src="img/compost-casero-balcon.jpg" alt="" class="kit-item-photo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="kit-item-fallback">♻️</span>
+          </div>
+          <h4>Compostador VOUNOT 300L</h4>
+          <ul class="kit-specs">
+            <li>Para terraza amplia o jardín con mucho residuo</li>
+            <li>Gran capacidad sin vaciarlo cada dos por tres</li>
+            <li>300 litros</li>
+          </ul>
+          <span class="btn-amazon">🛒 Ver en Amazon</span>
+        </a>
+
+        <a class="kit-item" href="https://amzn.to/3TjrO6U" target="_blank" rel="nofollow sponsored">
+          <div class="kit-photo-wrap">
+            <img src="img/compost-casero-balcon.jpg" alt="" class="kit-item-photo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="kit-item-fallback">♻️</span>
+          </div>
+          <h4>Bokashi Skaza Organko 2</h4>
+          <ul class="kit-specs">
+            <li>Fermentación en cubo cerrado: cero olores</li>
+            <li>Apto para usar dentro de casa</li>
+            <li>Ideal para balcones muy pequeños o sin sol</li>
+          </ul>
+          <span class="btn-amazon">🛒 Ver en Amazon</span>
+        </a>
+
+        <a class="kit-item" href="https://amzn.to/3RUMZvB" target="_blank" rel="nofollow sponsored">
+          <div class="kit-photo-wrap">
+            <img src="img/compost-casero-balcon.jpg" alt="" class="kit-item-photo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="kit-item-fallback">♻️</span>
+          </div>
+          <h4>Compostador eléctrico Ouaken 4L</h4>
+          <ul class="kit-specs">
+            <li>Convierte restos en compost en horas</li>
+            <li>Sin bichos, sin olor, filtro de carbón doble</li>
+            <li>La opción cómoda si el presupuesto no es problema</li>
+          </ul>
+          <span class="btn-amazon">🛒 Ver en Amazon</span>
+        </a>
+
+      </div>
+
+      <p style="margin-top:24px;"><a href="consejos/compost-casero-balcon.html" style="color:var(--verde);font-weight:700;">→ Guía completa: cómo hacer compost casero en el balcón</a></p>
+    </div>
+  </section>
+
 </main>
 
 <!-- ADSENSE MID -->
@@ -682,7 +768,7 @@
 </footer>
 
 <script>
-  var CATS = ['macetas','sustrato','herramientas','riego','plagas'];
+  var CATS = ['macetas','sustrato','herramientas','riego','plagas','compostaje'];
   function mostrarCategoria(cat, btn) {
     document.querySelectorAll('.espacio-tab').forEach(function(t){ t.classList.remove('active'); });
     btn.classList.add('active');
