@@ -159,53 +159,45 @@
         <h2>Guías que te pueden interesar</h2>
         <p>Artículos prácticos sobre cultivo en maceta, sin tecnicismos y con productos verificados.</p>
       </div>
-      <div class="tools-grid" style="margin-top:36px;">
+      <div class="tools-grid" id="guias-destacadas-grid" style="margin-top:36px;"></div>
 
-        <a href="consejos/aromaticas-resistentes-maceta.html" style="text-decoration:none;color:var(--texto);">
-          <div class="tool-card" style="padding:0;overflow:hidden;">
-            <img src="img/aromaticas-resistentes-maceta.jpg" alt="Aromáticas mediterráneas en macetas" style="width:100%;height:160px;object-fit:cover;">
-            <div style="padding:20px;">
-              <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
-              <h3 style="margin:8px 0 8px;font-size:17px;line-height:1.3;">Aromáticas resistentes en maceta</h3>
-              <p style="margin:0;">Las aromáticas mediterráneas que sobreviven aunque te olvides de regarlas.</p>
-            </div>
-          </div>
-        </a>
+      <script>
+      (function(){
+        var ARTICULOS = [
+          {fecha:'2026-07-25',cat:'Materiales',titulo:'Cómo hacer compost casero en el balcón',desc:'Qué sistemas funcionan en poco espacio, qué puedes echar y cómo usar el compost en tus macetas.',img:'img/compost-casero-balcon.jpg',imgAlt:'Compostador casero en balcón con restos de frutas y verduras',url:'consejos/compost-casero-balcon.html'},
+          {fecha:'2026-07-21',cat:'Cultivo',titulo:'Higuera en maceta: cuidados, poda y dos cosechas al año',desc:'Brevas en junio e higos en otoño: el frutal mediterráneo más agradecido en terraza.',img:'img/higuera-en-maceta.jpg',imgAlt:'Higuera en maceta con frutos en terraza',url:'consejos/higuera-en-maceta.html'},
+          {fecha:'2026-07-18',cat:'Materiales',titulo:'Cómo montar tu propio kit de huerto urbano',desc:'Qué maceta, sustrato y herramientas necesitas, con productos verificados y sin gastar de más.',img:'img/kit-o-armarlo.jpg',imgAlt:'Kit de cultivo con macetas y semillas',url:'consejos/como-montar-tu-kit-de-huerto-urbano.html'},
+          {fecha:'2026-07-10',cat:'Para principiantes',titulo:'Errores comunes al empezar un huerto urbano',desc:'Los fallos más habituales al empezar (riego, sustrato, exceso de plantas) y cómo evitarlos.',img:'img/errores-comunes.jpg',imgAlt:'Planta marchita por error de cuidado',url:'consejos/errores-comunes-huerto-urbano-principiantes.html'},
+          {fecha:'2026-07-10',cat:'Materiales',titulo:'Qué necesitas para empezar a plantar en casa',desc:'La lista completa: maceta, sustrato, herramientas y riego, con precios reales.',img:'img/que-necesito-plantar.jpg',imgAlt:'Materiales básicos para empezar un huerto en casa',url:'consejos/que-necesito-para-plantar-en-casa.html'},
+          {fecha:'2026-07-10',cat:'Calendario',titulo:'Qué plantar en octubre',desc:'Ajo, fresas, guisantes y hortalizas de hoja: octubre es uno de los mejores meses del año.',img:'img/que-plantar-octubre.jpg',imgAlt:'Hortalizas de otoño en macetas de balcón',url:'consejos/que-plantar-en-octubre.html'},
+          {fecha:'2026-07-01',cat:'Cultivo',titulo:'Aromáticas resistentes para quien mata las plantas',desc:'Romero, tomillo, orégano y laurel: aguantan sequía, sol y olvido. Casi imposibles de matar.',img:'img/aromaticas-resistentes-maceta.jpg',imgAlt:'Aromáticas mediterráneas en macetas',url:'consejos/aromaticas-resistentes-maceta.html'},
+          {fecha:'2026-07-01',cat:'Cultivo',titulo:'Cómo cultivar arándanos en maceta',desc:'El sustrato ácido que casi nadie te cuenta y cuándo plantar según tu zona climática.',img:'img/arandanos-en-maceta.jpg',imgAlt:'Arándanos madurando en el arbusto',url:'consejos/arandanos-en-maceta.html'},
+          {fecha:'2026-07-01',cat:'Riego',titulo:'Por qué tu maceta necesita más agua que el jardín',desc:'Una planta en maceta bebe un 30-50% más que en el suelo. Cómo calcular los litros exactos.',img:'img/cuanta-agua-necesita-maceta.jpg',imgAlt:'Regadera regando macetas en una terraza',url:'consejos/cuanta-agua-necesita-maceta.html'},
+          {fecha:'2026-07-01',cat:'Cultivo',titulo:'Limonero en maceta: cuándo protegerlo del frío',desc:'Qué maceta, sustrato y riego necesita, y cuándo protegerlo de las heladas según tu zona.',img:'img/limonero-en-maceta.jpg',imgAlt:'Limonero con frutos en maceta',url:'consejos/limonero-en-maceta.html'},
+          {fecha:'2026-06-10',cat:'Cultivo',titulo:'Cómo cultivar tomates en un balcón paso a paso',desc:'Variedad, maceta, sustrato y riego. Todo para cosechar tomates en casa este verano.',img:'https://images.pexels.com/photos/8911771/pexels-photo-8911771.jpeg?auto=compress&cs=tinysrgb&w=600',imgAlt:'Tomates rojos y verdes creciendo en la planta',url:'consejos/tomates-en-balcon.html'},
+          {fecha:'2026-06-10',cat:'Para principiantes',titulo:'10 plantas fáciles para tu primer huerto urbano',desc:'Las plantas con mayor tasa de éxito: se adaptan a maceta y producen rápido.',img:'https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=600&q=75',imgAlt:'Plantas fáciles huerto urbano',url:'consejos/plantas-faciles-huerto-urbano.html'}
+        ];
 
-        <a href="consejos/errores-comunes-huerto-urbano-principiantes.html" style="text-decoration:none;color:var(--texto);">
-          <div class="tool-card" style="padding:0;overflow:hidden;">
-            <img src="img/errores-comunes.jpg" alt="Planta marchita por error de cuidado" style="width:100%;height:160px;object-fit:cover;">
-            <div style="padding:20px;">
-              <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Principiantes</span>
-              <h3 style="margin:8px 0 8px;font-size:17px;line-height:1.3;">Errores comunes en huerto urbano para principiantes</h3>
-              <p style="margin:0;">Los fallos más frecuentes al empezar y cómo evitarlos desde el principio.</p>
-            </div>
-          </div>
-        </a>
+        ARTICULOS.sort(function(a,b){ return a.fecha < b.fecha ? 1 : a.fecha > b.fecha ? -1 : 0; });
 
-        <a href="consejos/tomates-en-balcon.html" style="text-decoration:none;color:var(--texto);">
-          <div class="tool-card" style="padding:0;overflow:hidden;">
-            <img src="https://images.pexels.com/photos/8911771/pexels-photo-8911771.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tomates rojos y verdes creciendo en la planta" style="width:100%;height:160px;object-fit:cover;">
-            <div style="padding:20px;">
-              <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
-              <h3 style="margin:8px 0 8px;font-size:17px;line-height:1.3;">Tomates en balcón</h3>
-              <p style="margin:0;">Variedad, maceta, sustrato y riego. Todo para cosechar tomates en casa este verano.</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="consejos/higuera-en-maceta.html" style="text-decoration:none;color:var(--texto);">
-          <div class="tool-card" style="padding:0;overflow:hidden;">
-            <img src="img/limonero-en-maceta.jpg" alt="Frutal mediterráneo en maceta en terraza" style="width:100%;height:160px;object-fit:cover;">
-            <div style="padding:20px;">
-              <span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">Cultivo</span>
-              <h3 style="margin:8px 0 8px;font-size:17px;line-height:1.3;">Higuera en maceta</h3>
-              <p style="margin:0;">Brevas en junio e higos en otoño: el frutal mediterráneo más agradecido en terraza.</p>
-            </div>
-          </div>
-        </a>
-
-      </div>
+        var grid = document.getElementById('guias-destacadas-grid');
+        ARTICULOS.slice(0,4).forEach(function(a){
+          var el = document.createElement('a');
+          el.href = a.url;
+          el.style.cssText = 'text-decoration:none;color:var(--texto);';
+          el.innerHTML =
+            '<div class="tool-card" style="padding:0;overflow:hidden;">'+
+              '<img src="'+a.img+'" alt="'+a.imgAlt+'" style="width:100%;height:160px;object-fit:cover;" loading="lazy">'+
+              '<div style="padding:20px;">'+
+                '<span style="font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.06em;">'+a.cat+'</span>'+
+                '<h3 style="margin:8px 0 8px;font-size:17px;line-height:1.3;">'+a.titulo+'</h3>'+
+                '<p style="margin:0;">'+a.desc+'</p>'+
+              '</div>'+
+            '</div>';
+          grid.appendChild(el);
+        });
+      })();
+      </script>
     </div>
   </section>
 
