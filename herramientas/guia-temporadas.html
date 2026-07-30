@@ -563,9 +563,11 @@
     /* Clasificar plantas por actividad en este mes/zona */
     const porActividad = { siembra: [], trasplante: [], cosecha: [] };
     Object.entries(PLANTAS).forEach(([id, planta]) => {
-      const cal = getCalendarioCompleto(id, zonaId);
-      const tipo = cal[mes];
-      if (tipo && porActividad[tipo]) porActividad[tipo].push({ id, planta });
+      const cal = getCalendarioDetallado(id, zonaId);
+      const tipos = cal[mes];
+      tipos.forEach(tipo => {
+        if (porActividad[tipo]) porActividad[tipo].push({ id, planta });
+      });
     });
 
     const total = porActividad.siembra.length + porActividad.trasplante.length + porActividad.cosecha.length;

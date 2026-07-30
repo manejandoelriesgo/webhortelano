@@ -1298,3 +1298,16 @@ function getCalendarioCompleto(plantaId, zonaId) {
     return null;
   });
 }
+
+/* Devuelve array de 12 posiciones, cada una con un array de los tipos que aplican ese mes: ['siembra'], ['trasplante','cosecha'], etc. Array vacío si no aplica nada. */
+function getCalendarioDetallado(plantaId, zonaId) {
+  const cal = getCalendario(plantaId, zonaId);
+  if (!cal) return null;
+  return MESES.map((_, i) => {
+    const tipos = [];
+    if (cal.siembra.includes(i)) tipos.push('siembra');
+    if (cal.trasplante.includes(i)) tipos.push('trasplante');
+    if (cal.cosecha.includes(i)) tipos.push('cosecha');
+    return tipos;
+  });
+}

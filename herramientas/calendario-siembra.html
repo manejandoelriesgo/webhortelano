@@ -389,7 +389,7 @@
 
       const zona   = ZONAS[zonaId];
       const planta = PLANTAS[plantaId];
-      const cal    = getCalendarioCompleto(plantaId, zonaId);
+      const cal    = getCalendarioDetallado(plantaId, zonaId);
 
       resultado.classList.remove('hidden');
       resultado.innerHTML = `
@@ -406,9 +406,12 @@
         </div>
 
         <div class="months-grid">
-          ${cal.map((tipo, i) => {
-            const cls = tipo ? `month-${tipo}` : 'month-vacio';
-            const etiqueta = tipo === 'siembra' ? 'Siembra' : tipo === 'trasplante' ? 'Traspl.' : tipo === 'cosecha' ? 'Cosecha' : '—';
+          ${cal.map((tipos, i) => {
+            const prioridad = ['cosecha', 'trasplante', 'siembra'];
+            const principal = prioridad.find(p => tipos.includes(p));
+            const cls = principal ? `month-${principal}` : 'month-vacio';
+            const nombres = { siembra: 'Siembra', trasplante: 'Traspl.', cosecha: 'Cosecha' };
+            const etiqueta = tipos.length ? tipos.map(t => nombres[t]).join(' + ') : '—';
             return `<div class="month-cell ${cls}">
               <span class="month-name">${MESES[i]}</span>
               ${etiqueta}
